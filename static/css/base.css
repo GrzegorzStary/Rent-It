@@ -34,6 +34,15 @@ body {
 
 /* NAV BAR styling */
 
+.navbar {
+    background-color: var(--secondary);
+    border-bottom: var(--border);
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 form.d-flex .form-control {
     border-radius: 0 !important;  
 }
