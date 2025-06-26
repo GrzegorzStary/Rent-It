@@ -8,7 +8,7 @@
     /* Colors */
 
     /* Google Blue */
-    --primary: #1a73e8;
+    --primary: #043E82;
     /* Light Google Blue */
     --secondary: #e8f0fe;
     /* Dark Text */
@@ -126,15 +126,15 @@ footer {
     display: flex;
     flex-wrap: wrap;
     gap: 1rem;
-    /* space between cards */
+    /* for pace between cards */
     justify-content: center;
     padding: 1rem;
+    cursor: pointer !important;
 }
 
 .card {
     width: 18rem;
     flex: 1 0 calc(20% - 1rem);
-    /* 5 cards per row */
     box-sizing: border-box;
 }
 

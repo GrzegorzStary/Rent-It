@@ -32,12 +32,12 @@ if os.path.exists('env.py'):
 SECRET_KEY = 'django-insecure-ga#k8&o23-ll2-p12n+=l3hpz((u7@x-=0qjh8ryd(^_(doj!k'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
-    '.herokuapp.com',  # Allow all Heroku subdomains
-    '.127.0.0.1',  # Allow local development
-    'localhost',  # Allow localhost
+    '.herokuapp.com',  # Allow Heroku
+    '.127.0.0.1',  # Local development
+    'localhost',  # Localhost
     ]
 
 
