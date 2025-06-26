@@ -1,6 +1,160 @@
-body {
-    background-color: #17e347;
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend+Deca:wght@100..900&display=swap');
+
+:root {
+    /* Font Families */
+    --title: 'Lexend Deca', Arial, sans-serif;
+    --body: 'Inter', Arial, sans-serif;
+
+    /* Colors */
+
+    /* Google Blue */
+    --primary: #0348B0;
+    /* Light Google Blue */
+    --secondary: #e8f0fe;
+    /* Dark Text */
+    --text: #202124;
+    /* White Background */
+    --background: #ffffff;
+    /* Light Border */
+    --border: #b6c6e6;
+    /* Light Hover Effect */
+    --hover: #aecbda;
+    
+
+
 }
-h1 {
-    color: rgb(236, 14, 14);
+
+body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    font-family: var(--body);
+    font-weight: 500;
+}
+
+/* NAV BAR styling */
+
+.navbar {
+    background-color: var(--secondary);
+    border-bottom: var(--border);
+    padding: 0.5rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+form.d-flex .form-control {
+    border-radius: 0 !important;  
+}
+form.d-flex .btn {
+    border-radius: 0 !important;  
+    border-color: var(--primary) !important;
+    color: var(--primary) !important;
+}
+
+form.d-flex .btn:hover {
+    background-color: var(--hover) !important;
+    border-color: var(--hover) !important;
+    color: var(--background) !important;
+    transition: all 0.3s ease-in-out !important;
+}
+
+/* Headings */
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-family: var(--title);
+    padding: 5px;
+}
+
+/* Footer */
+
+footer {
+    background-color: var(--secondary);
+    border-top: var(--border);
+    padding: 1rem 0;
+    text-align: center;
+    font-family: var(--title);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.social-icons {
+    margin-bottom: 0.5rem;
+}
+
+.social-icon {
+    font-size: 1.5rem;
+    margin: 0 10px;
+    color: var(--text);
+    transition: color 0.3s;
+    text-decoration: none;
+}
+
+.social-icon:hover {
+    color: var(--primary);
+}
+
+/* Custom-carousel CSS for styling carousel */
+
+.custom-carousel {
+    height: 400px;
+    /* To adjusting height of the images */
+    overflow: hidden;
+}
+
+.custom-carousel .carousel-inner,
+.custom-carousel .carousel-item,
+.custom-carousel img {
+    height: 100%;
+}
+
+.custom-carousel img {
+    object-fit: cover;
+}
+
+/* recently added items styling */
+
+.card-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    /* for pace between cards */
+    justify-content: center;
+    padding: 1rem;
+    cursor: pointer !important;
+}
+
+.card {
+    width: 18rem;
+    flex: 1 0 calc(20% - 1rem);
+    box-sizing: border-box;
+}
+
+@media (max-width: 1200px) {
+    .card {
+        flex: 1 0 calc(33.33% - 1rem);
+        /* 3 cards per row on medium screens */
+    }
+}
+
+@media (max-width: 768px) {
+    .card {
+        flex: 1 0 calc(50% - 1rem);
+        /* 2 cards per row on small screens */
+    }
+}
+
+@media (max-width: 576px) {
+    .card {
+        flex: 1 0 100%;
+        /* 1 card per row on mobile */
+    }
 }
