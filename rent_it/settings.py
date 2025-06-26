@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sites',
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
@@ -89,13 +90,34 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
-                'django.template.context_processors.request',
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request', # For allauth
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],
         },
     },
 ]
+
+AUTHENTICATION_BACKENDS = [
+    # Needed to login by username in Django admin, regardless of `allauth`
+    'django.contrib.auth.backends.ModelBackend',
+
+    # Specific authentication methods, such as login by e-mail
+    'allauth.account.auth_backends.AuthenticationBackend',
+]
+
+SITE_ID = 1  # For allauth
+
+EAMIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development, use console backend
+
+ACCOUNT_AUTHENTICATION_METHOD = 'username_email' # Allows login with either username or email
+ACCOUNT_EMAIL_REQUIRED = True # Requires email for account creation
+ACCOUNT_EMAIL_VERIFICATION = 'mandatory' # Requires email verification
+ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True # Requires user to enter email twice during signup
+ACCOUNT_USERNAME_MIN_LENGTH = 4 # Minimum length for username
+LOGIN_URL = '/accounts/login/' # URL to redirect to for login
+LOGIN_REDIRECT_URL = '/' # URL to redirect to after login
 
 WSGI_APPLICATION = 'rent_it.wsgi.application'
 
