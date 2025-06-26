@@ -17,7 +17,7 @@
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Items</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -32,14 +32,25 @@
               <li><a class="dropdown-item" href="#">Something else here</a></li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-          </li>
         </ul>
-        <form class="d-flex" role="search" method="get" action="{% url 'search' %}">
-          <input class="form-control me-2" type="search" name="q" placeholder="Search" aria-label="Search" />
-          <button class="btn btn-outline-primary" type="submit">Search</button>
-        </form>
+        <div class="container d-flex justify-content-center">
+          <form class="d-flex w-100 justify-content-center" role="search" method="get" action="{% url 'search' %}" style="max-width: 600px;">
+            <input class="form-control me-2 flex-grow-1" type="search" name="q" placeholder="Search" aria-label="Search" />
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+          </form>
+        </div>  
+        <div class="dropdown-menu border-0" aria-labelledby="user-options">
+          {% if request.user.is_authenticated %}
+              {% if request.user.is_superuser %}
+                  <a href="{% url 'add_product' %}" class="dropdown-item">Product Management</a>
+              {% endif %}
+              <a href="{% url 'profile' %}" class="dropdown-item">My Profile</a>
+              <a href="{% url 'account_logout' %}" class="dropdown-item">Logout</a>
+          {% else %}
+              <a href="{% url 'account_signup' %}" class="dropdown-item">Register</a>
+              <a href="{% url 'account_login' %}" class="dropdown-item">Login</a>
+          {% endif %}
+      </div>      
       </div>
     </div>
   </nav>
