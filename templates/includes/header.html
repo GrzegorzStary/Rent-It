@@ -1,56 +1,74 @@
 {% load static %}
 
 <header>
-  <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <nav class="navbar navbar-expand-lg bg-body-tertiary py-3 shadow-sm">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
-        <img src="{% static 'images/rent_it_nav_logo.webp' %}" alt="Logo" width="70" height="66"
-          class="d-inline-block align-text-top">
+      <!-- Logo -->
+      <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
+        <img src="{% static 'images/rent_it_nav_logo.webp' %}" alt="Rent It Logo" width="70" height="66"
+          class="d-inline-block align-text-top me-2">
+        <span class="fw-semibold fs-4">Rent It</span>
       </a>
+
+      <!-- Mobile toggle button -->
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
+
+      <!-- Navbar content -->
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <!-- Left menu -->
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="{% url 'index' %}">Home</a>
+            <a class="nav-link{% if request.path == '/' %} active{% endif %}" href="{% url 'index' %}">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'items' %}">Items</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
+              Browse
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Recentrly added</a></li>
+              <li><a class="dropdown-item" href="#">Recently Added</a></li>
               <li><a class="dropdown-item" href="#">Category</a></li>
               <li><a class="dropdown-item" href="#">Rating</a></li>
               <li><a class="dropdown-item" href="#">Distance</a></li>
             </ul>
           </li>
         </ul>
-        <div class="container d-flex justify-content-center">
-          <form class="d-flex w-100 justify-content-center" role="search" method="get" action="{% url 'search' %}"
-            style="max-width: 600px;">
-            <input class="form-control me-2 flex-grow-1" type="search" name="q" placeholder="Search"
-              aria-label="Search" />
-            <button class="btn btn-outline-primary" type="submit">Search</button>
-          </form>
-        </div>
-        <div class="dropdown-menu border-0" aria-labelledby="user-options">
+
+        <!-- Search form -->
+        <form class="d-flex mx-auto w-100 justify-content-center" method="get" action="{% url 'search' %}"
+          style="max-width: 500px;">
+          <input class="form-control me-2" type="search" name="q" placeholder="Search..." aria-label="Search">
+          <button class="btn btn-outline-primary" type="submit">Search</button>
+        </form>
+
+        <!-- Account section -->
+
+        <li class="nav-item dropdown list-unstyled ms-3">
+          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            My Account
+          </a>
+        <ul class="dropdown-menu dropdown-menu-end">
           {% if request.user.is_authenticated %}
           {% if request.user.is_superuser %}
-          <a href="#" class="dropdown-item">Product Management</a>
+          <li><a class="dropdown-item py-2 px-3" href="#">Product Management</a></li>
+          <li>
+            <hr class="dropdown-divider">
+          </li>
           {% endif %}
-          <a href="#" class="dropdown-item">My Profile</a>
-          <a href="#" class="dropdown-item">Logout</a>
+          <li><a class="dropdown-item py-2 px-3" href="#">My Profile</a></li>
+          <li><a class="dropdown-item py-2 px-3" href="#">Logout</a></li>
           {% else %}
-          <a href="#" class="dropdown-item">Register</a>
-          <a href="#" class="dropdown-item">Login</a>
+          <li><a class="dropdown-item py-2 px-3" href="#">Register</a></li>
+          <li><a class="dropdown-item py-2 px-3" href="#">Login</a></li>
           {% endif %}
-        </div>
+        </ul>
+        </ul>
+        </li>
       </div>
     </div>
   </nav>
