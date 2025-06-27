@@ -1,5 +1,5 @@
 function updateCardVisibility() {
-    const cards = document.querySelectorAll('.card-container .card');
+    const cards = document.querySelectorAll('.recent-products .card');
     const isMax1200 = window.matchMedia("(max-width: 1200px)").matches;
     const isMax768 = window.matchMedia("(max-width: 768px)").matches;
 

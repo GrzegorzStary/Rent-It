@@ -1,16 +1,18 @@
 function updateCardVisibility() {
-    const cards = document.querySelectorAll('.card-container .card');
-    const isMax1200 = window.matchMedia("(max-width: 1200px)").matches;
-    const isMax768 = window.matchMedia("(max-width: 768px)").matches;
+    const cards = document.querySelectorAll('.recent-products .card');
+    const screenWidth = window.innerWidth;
+    let maxVisible = cards.length; 
+
+    if (screenWidth >= 1440) {
+        maxVisible = 8;
+    } else if (screenWidth >= 1024) {
+        maxVisible = 6; 
+    } else if (screenWidth >= 768) {
+        maxVisible = 8; 
+    }
 
     cards.forEach((card, index) => {
-        if (isMax1200 && !isMax768 && index >= 9) {
-            // Hide 10th card when between 769px and 1200px
-            card.style.display = 'none';
-        } else {
-            // Show all cards on >1200px or ≤768px
-            card.style.display = '';
-        }
+        card.style.display = index < maxVisible ? '' : 'none';
     });
 }
 

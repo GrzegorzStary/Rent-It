@@ -22,6 +22,6 @@ def search_view(request):
     
 def home(request):
     
-    recent_products = Product.objects.order_by('-id')[:10]
+    recent_products = Product.objects.order_by('-id')[:12]
     
     return render(request, 'home/index.html', {'recent_products': recent_products})

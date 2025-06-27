@@ -19,7 +19,7 @@
     --border: #b6c6e6;
     /* Light Hover Effect */
     --hover: #aecbda;
-    
+
 
 
 }
@@ -30,6 +30,15 @@ body {
     flex-direction: column;
     font-family: var(--body);
     font-weight: 500;
+}
+
+/* from Bulma */
+.icon {
+    align-items: center;
+    display: inline-flex;
+    justify-content: center;
+    height: 1.5rem;
+    width: 1.5rem;
 }
 
 /* NAV BAR styling */
@@ -44,10 +53,11 @@ body {
 }
 
 form.d-flex .form-control {
-    border-radius: 0 !important;  
+    border-radius: 0 !important;
 }
+
 form.d-flex .btn {
-    border-radius: 0 !important;  
+    border-radius: 0 !important;
     border-color: var(--primary) !important;
     color: var(--primary) !important;
 }
@@ -156,5 +166,25 @@ footer {
     .card {
         flex: 1 0 100%;
         /* 1 card per row on mobile */
+    }
+
+    .custom-carousel img {
+        height: 200px;
+        /* Adjust height for mobile */
+    }
+
+    .custom-carousel {
+        height: 200px;
+        /* Adjust height for mobile */
+    }
+
+    .dropdown-menu {
+        border-radius: 0;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    .form-control,
+    .btn {
+        font-size: 0.9rem;
     }
 }

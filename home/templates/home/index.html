@@ -41,45 +41,38 @@
     </button>
 </div>
 
-<!-- NEW ITEMS ADDITION CARDs-->
+
+<!-- Recently Added Items Title -->
 <div class="container mt-4">
-    <h2 class="mb-4">Recently added items:</h2>
-    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-        {% for product in products %}
-        <div class="col">
-            <div class="card h-100 shadow-sm rounded-4">
-                <div class="text-center p-3">
-                    {% if product.image %}
-                    <img src="{{ product.image.url }}" class="card-img-top img-fluid rounded" alt="{{ product.name }}"
-                        style="max-height: 250px; object-fit: cover;">
-                    {% else %}
-                    <img src="{% static 'images/noimage.png' %}" class="card-img-top img-fluid rounded"
-                        alt="{{ product.name }}" style="max-height: 250px; object-fit: cover;">
-                    {% endif %}
-                </div>
-                <div class="card-body d-flex flex-column">
-                    <h5 class="card-title">{{ product.name }}</h5>
-                    <p class="card-text text-muted mb-2">${{ product.price }}</p>
-                    {% if product.rating %}
-                    <p class="mb-2 text-warning"><i class="fas fa-star"></i> {{ product.rating }} / 5</p>
-                    {% else %}
-                    <p class="mb-2 text-muted">No Rating</p>
-                    {% endif %}
-                    <p class="card-text text-truncate">{{ product.description }}</p>
-                    <a href="{% url 'item_detail' product.id %}" class="btn btn-outline-primary mt-auto">View</a>
-                </div>
+    <h1 class="mb-4">Recently added items</h1>
+</div>
+<!-- Card Container -->
+<div class="card-container d-flex flex-wrap justify-content-center gap-3 px-3">
+    {% for product in recent_products|slice:":8" %}
+    <a href="{% url 'item_detail' product.id %}" class="product-card-link border-0 text-decoration-none">
+        <div class="card product-card">
+            {% if product.image %}
+            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+            {% else %}
+            <img src="{% static 'images/noimage.png' %}" class="card-img-top" alt="{{ product.name }}">
+            {% endif %}
+            <div class="card-body">
+                <h6 class="card-title text-truncate">{{ product.name }}</h6>
+                <p class="card-text text-muted mb-1">${{ product.price }}</p>
+                {% if product.rating %}
+                <small class="text-warning"><i class="fas fa-star"></i> {{ product.rating }} / 5</small>
+                {% else %}
+                <small class="text-muted">No Rating</small>
+                {% endif %}
+                <p class="card-text small text-truncate">{{ product.description }}</p>
             </div>
         </div>
-        {% empty %}
-        <p>No recent items found.</p>
-        {% endfor %}
-    </div>
-</div>
-
-
+    </a>
+    {% empty %}
+    <p>No recent items found.</p>
+    {% endfor %}
 </div>
 
 <script src="{% static 'js/card_index.js' %}"></script>
-
 
 {% endblock %}

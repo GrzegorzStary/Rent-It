@@ -148,6 +148,36 @@ footer {
     box-sizing: border-box;
 }
 
+.product-card-link {
+    text-decoration: none;
+    color: inherit;
+    display: inline-block;
+    transition: transform 0.2s;
+}
+
+.product-card {
+    width: 200px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+    border: none !important;
+    box-shadow: none !important;
+}
+
+.product-card .card-img-top {
+    height: 160px;
+    object-fit: cover;
+}
+
+.product-card-link:hover .product-card {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+
 @media (max-width: 1200px) {
     .card {
         flex: 1 0 calc(33.33% - 1rem);
