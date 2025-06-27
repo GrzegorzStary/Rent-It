@@ -1,4 +1,5 @@
 from django.shortcuts import render
+from .models import Product
 
 # Create your views here.
 
@@ -6,4 +7,8 @@ from django.shortcuts import render
 # Here we will render items page later on
 def items_view(request):
     
-    return render(request, 'items/items.html', {})
+    products = Product.objects.all()
+
+    context = {'products': products}
+
+    return render(request, 'items/items.html', context)

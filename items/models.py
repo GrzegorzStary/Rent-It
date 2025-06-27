@@ -2,8 +2,10 @@ from django.db import models
 
 # Create your models here.
 
+# Category models
 class Category(models.Model):
     
+    # This meta is changing wrong django spelling of plural name
     class Meta:
         verbose_name_plural = 'Categories'
             
@@ -16,6 +18,7 @@ class Category(models.Model):
     def get_friendly_name(self):
         return self.friendly_name
     
+# Product models 
 class Product(models.Model):
     category = models.ForeignKey(
         'Category', null=True, on_delete=models.SET_NULL)
