@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.views.generic import TemplateView
-from .models import Items
+from items.models import Product
 
 # Create your views here.
 
@@ -10,11 +10,18 @@ class Index(TemplateView):
 def search_view(request):
     query = request.GET.get('q', '')
     results = []
-    
+
     if query:
-        results = Items.objects.filter(name__icontains=query)
-        
-    return render(request, 'search_results.html', {
-        query: query,
+        results = Product.objects.filter(name__icontains=query)
+
+    return render(request, 'home/search_results.html', {
+        'query': query,
         'results': results
     })
+
+    
+def home(request):
+    
+    recent_products = Product.objects.order_by('-id')[:10]
+    
+    return render(request, 'home/index.html', {'recent_products': recent_products})

@@ -1,0 +1,38 @@
+{% load static %}
+
+{% load static %}
+
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+        {% for product in products %}
+            <div class="col">
+                <div class="card h-100 shadow-sm border-0">
+                    {% if product.image %}
+                        <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}">
+                    {% else %}
+                        <img src="{% static 'images/noimage.png' %}" class="card-img-top" alt="{{ product.name }}">
+                    {% endif %}
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ product.name }}</h5>
+                        <p class="card-text text-muted">{{ product.description|truncatewords:20 }}</p>
+                        <div class="mt-auto">
+                            <p class="mb-1 text-success fw-bold">${{ product.price }}</p>
+                            {% if product.rating %}
+                                <small class="text-warning"><i class="fas fa-star"></i> {{ product.rating }} / 5</small>
+                            {% else %}
+                                <small class="text-muted">No rating</small>
+                            {% endif %}
+                            <br>
+                            <a href="{% url 'item_detail' product.id %}" class="btn btn-outline-primary btn-sm mt-2">View Item</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% empty %}
+            <p>No items found.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<script src="{% static 'js/card_index.js' %}"></script>
+

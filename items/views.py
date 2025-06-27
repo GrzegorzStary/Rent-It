@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from .models import Product
 
 # Create your views here.
@@ -12,3 +12,14 @@ def items_view(request):
     context = {'products': products}
 
     return render(request, 'items/items.html', context)
+
+
+"""This view will render item detail page of individual product."""
+def items_detail(request, product_id):
+    product = get_object_or_404(Product, pk=product_id)
+
+    context = {
+        'product': product,
+    }
+
+    return render(request, 'items/item_detail.html', context)
