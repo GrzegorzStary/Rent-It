@@ -1,0 +1,842 @@
+[
+  {
+    "pk": 1,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000001",
+      "name": "LED Panel Lights - Neewer",
+      "description": "Perfect for studio or video shoots.",
+      "price": 12.11,
+      "category": 31,
+      "rating": 4.9,
+      "image_url": "https://example.com/images/led_panel_lights__neewer.jpg",
+      "image": "led_panel_lights__neewer.jpg"
+    }
+  },
+  {
+    "pk": 2,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000002",
+      "name": "Tripod - Manfrotto Compact",
+      "description": "Adjustable lightweight tripod for cameras or phones.",
+      "price": 26.88,
+      "category": 5,
+      "rating": 4.5,
+      "image_url": "https://example.com/images/tripod__manfrotto_compact.jpg",
+      "image": "tripod__manfrotto_compact.jpg"
+    }
+  },
+  {
+    "pk": 3,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000003",
+      "name": "Ice Cream Maker - Electric",
+      "description": "Great for parties. Makes up to 1.5 quarts.",
+      "price": 11.68,
+      "category": 10,
+      "rating": 4.9,
+      "image_url": "https://example.com/images/ice_cream_maker__electric.jpg",
+      "image": "ice_cream_maker__electric.jpg"
+    }
+  },
+  {
+    "pk": 4,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000004",
+      "name": "High Chair - Foldable",
+      "description": "Clean and safe high chair for infants. Adjustable height.",
+      "price": 29.21,
+      "category": 7,
+      "rating": 5.0,
+      "image_url": "https://example.com/images/high_chair__foldable.jpg",
+      "image": "high_chair__foldable.jpg"
+    }
+  },
+  {
+    "pk": 5,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000005",
+      "name": "Treadmill - Foldable",
+      "description": "Compact design with digital display.",
+      "price": 6.26,
+      "category": 4,
+      "rating": 4.8,
+      "image_url": "https://example.com/images/treadmill__foldable.jpg",
+      "image": "treadmill__foldable.jpg"
+    }
+  },
+  {
+    "pk": 6,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000006",
+      "name": "Mirrorless Camera - Sony Alpha a6000",
+      "description": "Compact camera with 16\u201350mm lens.",
+      "price": 10.36,
+      "category": 5,
+      "rating": 4.4,
+      "image_url": "https://example.com/images/mirrorless_camera__sony_alpha_a6000.jpg",
+      "image": "mirrorless_camera__sony_alpha_a6000.jpg"
+    }
+  },
+  {
+    "pk": 7,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000007",
+      "name": "Ice Cream Maker - Electric #7",
+      "description": "Great for parties. Makes up to 1.5 quarts.",
+      "price": 14.63,
+      "category": 10,
+      "rating": 4.6,
+      "image_url": "https://example.com/images/ice_cream_maker__electric_7.jpg",
+      "image": "ice_cream_maker__electric_7.jpg"
+    }
+  },
+  {
+    "pk": 8,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000008",
+      "name": "High Chair - Foldable #8",
+      "description": "Clean and safe high chair for infants. Adjustable height.",
+      "price": 20.39,
+      "category": 7,
+      "rating": 4.5,
+      "image_url": "https://example.com/images/high_chair__foldable_8.jpg",
+      "image": "high_chair__foldable_8.jpg"
+    }
+  },
+  {
+    "pk": 9,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000009",
+      "name": "Soccer Goal - Portable",
+      "description": "Foldable goal for backyard games or practice.",
+      "price": 12.62,
+      "category": 4,
+      "rating": 4.7,
+      "image_url": "https://example.com/images/soccer_goal__portable.jpg",
+      "image": "soccer_goal__portable.jpg"
+    }
+  },
+  {
+    "pk": 10,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000010",
+      "name": "Camping Chairs - Set of 2",
+      "description": "Folding chairs with cup holders.",
+      "price": 10.38,
+      "category": 6,
+      "rating": 4.6,
+      "image_url": "https://example.com/images/camping_chairs__set_of_2.jpg",
+      "image": "camping_chairs__set_of_2.jpg"
+    }
+  },
+  {
+    "pk": 11,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000011",
+      "name": "Camping Chairs - Set of 2 #11",
+      "description": "Folding chairs with cup holders.",
+      "price": 13.58,
+      "category": 6,
+      "rating": 4.6,
+      "image_url": "https://example.com/images/camping_chairs__set_of_2_11.jpg",
+      "image": "camping_chairs__set_of_2_11.jpg"
+    }
+  },
+  {
+    "pk": 12,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000012",
+      "name": "Ladder - 6ft Aluminum",
+      "description": "Lightweight but strong. Great for home tasks.",
+      "price": 26.22,
+      "category": 3,
+      "rating": 4.9,
+      "image_url": "https://example.com/images/ladder__6ft_aluminum.jpg",
+      "image": "ladder__6ft_aluminum.jpg"
+    }
+  },
+  {
+    "pk": 13,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000013",
+      "name": "FPV Racing Drone",
+      "description": "High-speed drone for racing enthusiasts. Includes goggles.",
+      "price": 8.83,
+      "category": 14,
+      "rating": 5.0,
+      "image_url": "https://example.com/images/fpv_racing_drone.jpg",
+      "image": "fpv_racing_drone.jpg"
+    }
+  },
+  {
+    "pk": 14,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000014",
+      "name": "Camping Stove - Dual Burner",
+      "description": "Portable gas stove for outdoor cooking. Fuel not included.",
+      "price": 10.41,
+      "category": 6,
+      "rating": 4.7,
+      "image_url": "https://example.com/images/camping_stove__dual_burner.jpg",
+      "image": "camping_stove__dual_burner.jpg"
+    }
+  },
+  {
+    "pk": 15,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000015",
+      "name": "Bookshelf - 5-Tier",
+      "description": "Wooden bookshelf, easy to assemble. Great for storage.",
+      "price": 13.48,
+      "category": 9,
+      "rating": 4.7,
+      "image_url": "https://example.com/images/bookshelf__5tier.jpg",
+      "image": "bookshelf__5tier.jpg"
+    }
+  },
+  {
+    "pk": 16,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000016",
+      "name": "Mirrorless Camera - Sony Alpha a6000 #16",
+      "description": "Compact camera with 16\u201350mm lens.",
+      "price": 7.72,
+      "category": 5,
+      "rating": 4.4,
+      "image_url": "https://example.com/images/mirrorless_camera__sony_alpha_a6000_16.jpg",
+      "image": "mirrorless_camera__sony_alpha_a6000_16.jpg"
+    }
+  },
+  {
+    "pk": 17,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000017",
+      "name": "Bookshelf - 5-Tier #17",
+      "description": "Wooden bookshelf, easy to assemble. Great for storage.",
+      "price": 25.37,
+      "category": 9,
+      "rating": 5.0,
+      "image_url": "https://example.com/images/bookshelf__5tier_17.jpg",
+      "image": "bookshelf__5tier_17.jpg"
+    }
+  },
+  {
+    "pk": 18,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000018",
+      "name": "Inflatable Movie Screen",
+      "description": "Huge outdoor screen for projector setups.",
+      "price": 6.75,
+      "category": 18,
+      "rating": 4.9,
+      "image_url": "https://example.com/images/inflatable_movie_screen.jpg",
+      "image": "inflatable_movie_screen.jpg"
+    }
+  },
+  {
+    "pk": 19,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000019",
+      "name": "Ice Cream Maker - Electric #19",
+      "description": "Great for parties. Makes up to 1.5 quarts.",
+      "price": 16.16,
+      "category": 10,
+      "rating": 4.4,
+      "image_url": "https://example.com/images/ice_cream_maker__electric_19.jpg",
+      "image": "ice_cream_maker__electric_19.jpg"
+    }
+  },
+  {
+    "pk": 20,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000020",
+      "name": "DJ Mixer - Pioneer",
+      "description": "Professional DJ controller with USB input.",
+      "price": 22.62,
+      "category": 30,
+      "rating": 4.5,
+      "image_url": "https://example.com/images/dj_mixer__pioneer.jpg",
+      "image": "dj_mixer__pioneer.jpg"
+    }
+  },
+  {
+    "pk": 21,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000021",
+      "name": "PA Speaker - Bluetooth",
+      "description": "Loud wireless speaker for events.",
+      "price": 5.81,
+      "category": 30,
+      "rating": 4.9,
+      "image_url": "https://example.com/images/pa_speaker__bluetooth.jpg",
+      "image": "pa_speaker__bluetooth.jpg"
+    }
+  },
+  {
+    "pk": 22,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000022",
+      "name": "Camping Chairs - Set of 2 #22",
+      "description": "Folding chairs with cup holders.",
+      "price": 11.8,
+      "category": 6,
+      "rating": 4.8,
+      "image_url": "https://example.com/images/camping_chairs__set_of_2_22.jpg",
+      "image": "camping_chairs__set_of_2_22.jpg"
+    }
+  },
+  {
+    "pk": 23,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000023",
+      "name": "Tripod - Manfrotto Compact #23",
+      "description": "Adjustable lightweight tripod for cameras or phones.",
+      "price": 27.69,
+      "category": 5,
+      "rating": 4.5,
+      "image_url": "https://example.com/images/tripod__manfrotto_compact_23.jpg",
+      "image": "tripod__manfrotto_compact_23.jpg"
+    }
+  },
+  {
+    "pk": 24,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000024",
+      "name": "PA Speaker - Bluetooth #24",
+      "description": "Loud wireless speaker for events.",
+      "price": 24.21,
+      "category": 30,
+      "rating": 5.0,
+      "image_url": "https://example.com/images/pa_speaker__bluetooth_24.jpg",
+      "image": "pa_speaker__bluetooth_24.jpg"
+    }
+  },
+  {
+    "pk": 25,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000025",
+      "name": "DJ Mixer - Pioneer #25",
+      "description": "Professional DJ controller with USB input.",
+      "price": 29.23,
+      "category": 30,
+      "rating": 4.7,
+      "image_url": "https://example.com/images/dj_mixer__pioneer_25.jpg",
+      "image": "dj_mixer__pioneer_25.jpg"
+    }
+  },
+  {
+    "pk": 26,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000026",
+      "name": "Soccer Goal - Portable #26",
+      "description": "Foldable goal for backyard games or practice.",
+      "price": 25.22,
+      "category": 4,
+      "rating": 4.6,
+      "image_url": "https://example.com/images/soccer_goal__portable_26.jpg",
+      "image": "soccer_goal__portable_26.jpg"
+    }
+  },
+  {
+    "pk": 27,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000027",
+      "name": "Tripod - Manfrotto Compact #27",
+      "description": "Adjustable lightweight tripod for cameras or phones.",
+      "price": 24.05,
+      "category": 5,
+      "rating": 4.3,
+      "image_url": "https://example.com/images/tripod__manfrotto_compact_27.jpg",
+      "image": "tripod__manfrotto_compact_27.jpg"
+    }
+  },
+  {
+    "pk": 28,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000028",
+      "name": "Bookshelf - 5-Tier #28",
+      "description": "Wooden bookshelf, easy to assemble. Great for storage.",
+      "price": 29.96,
+      "category": 9,
+      "rating": 4.6,
+      "image_url": "https://example.com/images/bookshelf__5tier_28.jpg",
+      "image": "bookshelf__5tier_28.jpg"
+    }
+  },
+  {
+    "pk": 29,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000029",
+      "name": "Treadmill - Foldable #29",
+      "description": "Compact design with digital display.",
+      "price": 14.76,
+      "category": 4,
+      "rating": 4.9,
+      "image_url": "https://example.com/images/treadmill__foldable_29.jpg",
+      "image": "treadmill__foldable_29.jpg"
+    }
+  },
+  {
+    "pk": 30,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000030",
+      "name": "Cotton Candy Machine",
+      "description": "Make cotton candy at parties or events. Easy cleanup.",
+      "price": 9.51,
+      "category": 10,
+      "rating": 4.6,
+      "image_url": "https://example.com/images/cotton_candy_machine.jpg",
+      "image": "cotton_candy_machine.jpg"
+    }
+  },
+  {
+    "pk": 31,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000031",
+      "name": "LED Video Projector",
+      "description": "Mini projector for indoor movie nights.",
+      "price": 22.61,
+      "category": 18,
+      "rating": 4.8,
+      "image_url": "https://example.com/images/led_video_projector.jpg",
+      "image": "led_video_projector.jpg"
+    }
+  },
+  {
+    "pk": 32,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000032",
+      "name": "Folding Table - 6ft",
+      "description": "Sturdy plastic table for events or garage sales.",
+      "price": 19.35,
+      "category": 9,
+      "rating": 4.8,
+      "image_url": "https://example.com/images/folding_table__6ft.jpg",
+      "image": "folding_table__6ft.jpg"
+    }
+  },
+  {
+    "pk": 33,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000033",
+      "name": "Digital Piano - Yamaha P45",
+      "description": "88 weighted keys, great for practice or events.",
+      "price": 22.5,
+      "category": 2,
+      "rating": 4.6,
+      "image_url": "https://example.com/images/digital_piano__yamaha_p45.jpg",
+      "image": "digital_piano__yamaha_p45.jpg"
+    }
+  },
+  {
+    "pk": 34,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000034",
+      "name": "Ice Cream Maker - Electric #34",
+      "description": "Great for parties. Makes up to 1.5 quarts.",
+      "price": 16.03,
+      "category": 10,
+      "rating": 4.7,
+      "image_url": "https://example.com/images/ice_cream_maker__electric_34.jpg",
+      "image": "ice_cream_maker__electric_34.jpg"
+    }
+  },
+  {
+    "pk": 35,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000035",
+      "name": "DJ Mixer - Pioneer #35",
+      "description": "Professional DJ controller with USB input.",
+      "price": 10.32,
+      "category": 30,
+      "rating": 5.0,
+      "image_url": "https://example.com/images/dj_mixer__pioneer_35.jpg",
+      "image": "dj_mixer__pioneer_35.jpg"
+    }
+  },
+  {
+    "pk": 36,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000036",
+      "name": "FPV Racing Drone #36",
+      "description": "High-speed drone for racing enthusiasts. Includes goggles.",
+      "price": 29.41,
+      "category": 14,
+      "rating": 4.9,
+      "image_url": "https://example.com/images/fpv_racing_drone_36.jpg",
+      "image": "fpv_racing_drone_36.jpg"
+    }
+  },
+  {
+    "pk": 37,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000037",
+      "name": "Digital Piano - Yamaha P45 #37",
+      "description": "88 weighted keys, great for practice or events.",
+      "price": 16.42,
+      "category": 2,
+      "rating": 4.5,
+      "image_url": "https://example.com/images/digital_piano__yamaha_p45_37.jpg",
+      "image": "digital_piano__yamaha_p45_37.jpg"
+    }
+  },
+  {
+    "pk": 38,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000038",
+      "name": "Treadmill - Foldable #38",
+      "description": "Compact design with digital display.",
+      "price": 17.71,
+      "category": 4,
+      "rating": 4.3,
+      "image_url": "https://example.com/images/treadmill__foldable_38.jpg",
+      "image": "treadmill__foldable_38.jpg"
+    }
+  },
+  {
+    "pk": 39,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000039",
+      "name": "Fog Machine - 400W",
+      "description": "Adds cool effects for parties or performances.",
+      "price": 13.55,
+      "category": 10,
+      "rating": 4.4,
+      "image_url": "https://example.com/images/fog_machine__400w.jpg",
+      "image": "fog_machine__400w.jpg"
+    }
+  },
+  {
+    "pk": 40,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000040",
+      "name": "PA Speaker - Bluetooth #40",
+      "description": "Loud wireless speaker for events.",
+      "price": 28.56,
+      "category": 30,
+      "rating": 4.4,
+      "image_url": "https://example.com/images/pa_speaker__bluetooth_40.jpg",
+      "image": "pa_speaker__bluetooth_40.jpg"
+    }
+  },
+  {
+    "pk": 41,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000041",
+      "name": "Soccer Goal - Portable #41",
+      "description": "Foldable goal for backyard games or practice.",
+      "price": 5.49,
+      "category": 4,
+      "rating": 4.5,
+      "image_url": "https://example.com/images/soccer_goal__portable_41.jpg",
+      "image": "soccer_goal__portable_41.jpg"
+    }
+  },
+  {
+    "pk": 42,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000042",
+      "name": "Ladder - 6ft Aluminum #42",
+      "description": "Lightweight but strong. Great for home tasks.",
+      "price": 29.72,
+      "category": 3,
+      "rating": 4.4,
+      "image_url": "https://example.com/images/ladder__6ft_aluminum_42.jpg",
+      "image": "ladder__6ft_aluminum_42.jpg"
+    }
+  },
+  {
+    "pk": 43,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000043",
+      "name": "LED Panel Lights - Neewer #43",
+      "description": "Perfect for studio or video shoots.",
+      "price": 13.15,
+      "category": 31,
+      "rating": 4.4,
+      "image_url": "https://example.com/images/led_panel_lights__neewer_43.jpg",
+      "image": "led_panel_lights__neewer_43.jpg"
+    }
+  },
+  {
+    "pk": 44,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000044",
+      "name": "Treadmill - Foldable #44",
+      "description": "Compact design with digital display.",
+      "price": 23.31,
+      "category": 4,
+      "rating": 4.6,
+      "image_url": "https://example.com/images/treadmill__foldable_44.jpg",
+      "image": "treadmill__foldable_44.jpg"
+    }
+  },
+  {
+    "pk": 45,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000045",
+      "name": "FPV Racing Drone #45",
+      "description": "High-speed drone for racing enthusiasts. Includes goggles.",
+      "price": 24.81,
+      "category": 14,
+      "rating": 4.6,
+      "image_url": "https://example.com/images/fpv_racing_drone_45.jpg",
+      "image": "fpv_racing_drone_45.jpg"
+    }
+  },
+  {
+    "pk": 46,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000046",
+      "name": "FPV Racing Drone #46",
+      "description": "High-speed drone for racing enthusiasts. Includes goggles.",
+      "price": 28.21,
+      "category": 14,
+      "rating": 4.7,
+      "image_url": "https://example.com/images/fpv_racing_drone_46.jpg",
+      "image": "fpv_racing_drone_46.jpg"
+    }
+  },
+  {
+    "pk": 47,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000047",
+      "name": "Chainsaw - Electric",
+      "description": "Corded electric chainsaw. For yard cleanup or tree trimming.",
+      "price": 21.76,
+      "category": 3,
+      "rating": 4.4,
+      "image_url": "https://example.com/images/chainsaw__electric.jpg",
+      "image": "chainsaw__electric.jpg"
+    }
+  },
+  {
+    "pk": 48,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000048",
+      "name": "Bookshelf - 5-Tier #48",
+      "description": "Wooden bookshelf, easy to assemble. Great for storage.",
+      "price": 15.74,
+      "category": 9,
+      "rating": 4.5,
+      "image_url": "https://example.com/images/bookshelf__5tier_48.jpg",
+      "image": "bookshelf__5tier_48.jpg"
+    }
+  },
+  {
+    "pk": 49,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000049",
+      "name": "Camping Chairs - Set of 2 #49",
+      "description": "Folding chairs with cup holders.",
+      "price": 13.7,
+      "category": 6,
+      "rating": 4.8,
+      "image_url": "https://example.com/images/camping_chairs__set_of_2_49.jpg",
+      "image": "camping_chairs__set_of_2_49.jpg"
+    }
+  },
+  {
+    "pk": 50,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000050",
+      "name": "Mirrorless Camera - Sony Alpha a6000 #50",
+      "description": "Compact camera with 16\u201350mm lens.",
+      "price": 10.65,
+      "category": 5,
+      "rating": 4.7,
+      "image_url": "https://example.com/images/mirrorless_camera__sony_alpha_a6000_50.jpg",
+      "image": "mirrorless_camera__sony_alpha_a6000_50.jpg"
+    }
+  },
+  {
+    "pk": 51,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000051",
+      "name": "PA Speaker - Bluetooth #51",
+      "description": "Loud wireless speaker for events.",
+      "price": 9.63,
+      "category": 30,
+      "rating": 4.7,
+      "image_url": "https://example.com/images/pa_speaker__bluetooth_51.jpg",
+      "image": "pa_speaker__bluetooth_51.jpg"
+    }
+  },
+  {
+    "pk": 52,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000052",
+      "name": "Cotton Candy Machine #52",
+      "description": "Make cotton candy at parties or events. Easy cleanup.",
+      "price": 20.43,
+      "category": 10,
+      "rating": 4.8,
+      "image_url": "https://example.com/images/cotton_candy_machine_52.jpg",
+      "image": "cotton_candy_machine_52.jpg"
+    }
+  },
+  {
+    "pk": 53,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000053",
+      "name": "Portable Heater - Ceramic",
+      "description": "Compact ceramic heater for chilly spaces.",
+      "price": 7.64,
+      "category": 8,
+      "rating": 4.8,
+      "image_url": "https://example.com/images/portable_heater__ceramic.jpg",
+      "image": "portable_heater__ceramic.jpg"
+    }
+  },
+  {
+    "pk": 54,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000054",
+      "name": "PA Speaker - Bluetooth #54",
+      "description": "Loud wireless speaker for events.",
+      "price": 22.76,
+      "category": 30,
+      "rating": 4.4,
+      "image_url": "https://example.com/images/pa_speaker__bluetooth_54.jpg",
+      "image": "pa_speaker__bluetooth_54.jpg"
+    }
+  },
+  {
+    "pk": 55,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000055",
+      "name": "LED Video Projector #55",
+      "description": "Mini projector for indoor movie nights.",
+      "price": 22.01,
+      "category": 18,
+      "rating": 4.4,
+      "image_url": "https://example.com/images/led_video_projector_55.jpg",
+      "image": "led_video_projector_55.jpg"
+    }
+  },
+  {
+    "pk": 56,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000056",
+      "name": "Cordless Vacuum - Dyson V7",
+      "description": "Lightweight and powerful for quick cleanups.",
+      "price": 17.63,
+      "category": 8,
+      "rating": 4.4,
+      "image_url": "https://example.com/images/cordless_vacuum__dyson_v7.jpg",
+      "image": "cordless_vacuum__dyson_v7.jpg"
+    }
+  },
+  {
+    "pk": 57,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000057",
+      "name": "Camping Stove - Dual Burner #57",
+      "description": "Portable gas stove for outdoor cooking. Fuel not included.",
+      "price": 14.34,
+      "category": 6,
+      "rating": 5.0,
+      "image_url": "https://example.com/images/camping_stove__dual_burner_57.jpg",
+      "image": "camping_stove__dual_burner_57.jpg"
+    }
+  },
+  {
+    "pk": 58,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000058",
+      "name": "Cotton Candy Machine #58",
+      "description": "Make cotton candy at parties or events. Easy cleanup.",
+      "price": 25.77,
+      "category": 10,
+      "rating": 4.8,
+      "image_url": "https://example.com/images/cotton_candy_machine_58.jpg",
+      "image": "cotton_candy_machine_58.jpg"
+    }
+  },
+  {
+    "pk": 59,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000059",
+      "name": "High Chair - Foldable #59",
+      "description": "Clean and safe high chair for infants. Adjustable height.",
+      "price": 13.02,
+      "category": 7,
+      "rating": 4.7,
+      "image_url": "https://example.com/images/high_chair__foldable_59.jpg",
+      "image": "high_chair__foldable_59.jpg"
+    }
+  },
+  {
+    "pk": 60,
+    "model": "items.product",
+    "fields": {
+      "sku": "rt10000060",
+      "name": "Bookshelf - 5-Tier #60",
+      "description": "Wooden bookshelf, easy to assemble. Great for storage.",
+      "price": 19.88,
+      "category": 9,
+      "rating": 4.7,
+      "image_url": "https://example.com/images/bookshelf__5tier_60.jpg",
+      "image": "bookshelf__5tier_60.jpg"
+    }
+  }
+]
