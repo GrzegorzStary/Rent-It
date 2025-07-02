@@ -37,3 +37,45 @@ def items_detail(request, pk):
     }
 
     return render(request, 'items/item_detail.html', context)
+
+def edit_item (request, pk):
+    product = get_object_or_404(Product, pk=pk)
+
+    if request.method == 'POST':
+        product.name = request.POST.get('name')
+        product.description = request.POST.get('description')
+        product.price = request.POST.get('price')
+        product.save()
+        messages.success(request, 'Item updated successfully!')
+        return redirect(reverse('items_detail', args=[pk]))
+
+    context = {
+        'product': product,
+    }
+
+    return render(request, 'items/edit_item.html', context)
+
+def delete_item(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+
+    if request.method == 'POST':
+        product.delete()
+        messages.success(request, 'Item deleted successfully!')
+        return redirect(reverse('items'))
+
+    context = {
+        'product': product,
+    }
+
+    return render(request, 'items/delete_item.html', context)
+
+def add_to_basket(request, pk):
+    product = get_object_or_404(Product, pk=pk)
+    basket = request.session.get('basket', {})
+    if pk in basket:
+        basket[pk] += 1
+    else:
+        basket[pk] = 1
+    request.session['basket'] = basket
+    messages.success(request, f'Added {product.name} to your basket!')
+    return redirect(reverse('items_detail', args=[pk]))
