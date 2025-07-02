@@ -22,6 +22,9 @@ class Category(models.Model):
 class Product(models.Model):
     category = models.ForeignKey(
         'Category', null=True, on_delete=models.SET_NULL)
+    # This is to link product with user who created it
+    user = models.ForeignKey(
+        'auth.User', null=True, on_delete=models.SET_NULL, related_name='products')
     sku = models.CharField(max_length=254, unique=True)
     name = models.CharField(max_length=254)
     description = models.TextField()
