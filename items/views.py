@@ -23,10 +23,10 @@ def items_view(request):
         products = products.filter(queries)
 
     # Handle sorting functionality
-    if sort == 'category_asc':
-        products = products.order_by('category__name')
-    elif sort == 'category_desc':
-        products = products.order_by('-category__name')
+    if sort == 'name_asc':
+        products = products.order_by('name')
+    elif sort == 'name_desc':
+        products = products.order_by('-name')
     elif sort == 'rating_asc':
         products = products.order_by('rating')
     elif sort == 'rating_desc':
@@ -35,7 +35,10 @@ def items_view(request):
         products = products.order_by('price')
     elif sort == 'price_desc':
         products = products.order_by('-price')
-
+    elif sort == 'category_asc':
+        products = products.order_by('category__name')
+    elif sort == 'category_desc':
+        products = products.order_by('-category__name')
 
     context = {
         'products': products,
