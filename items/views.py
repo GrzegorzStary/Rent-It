@@ -9,23 +9,42 @@ from django.contrib import messages
 # Here we will render items page later on
 def items_view(request):
     query = None
+    sort = request.GET.get('sort')
     products = Product.objects.all()
 
-    if request.GET and 'q' in request.GET:
+    # Handle search functionality
+    if request.GET.get('q'):
         query = request.GET['q']
         if not query:
             messages.error(request, "You didn't enter any search criteria!")
             return redirect(reverse('items'))
 
         queries = Q(name__icontains=query) | Q(description__icontains=query)
-        products = Product.objects.filter(queries)
+        products = products.filter(queries)
+
+    # Handle sorting functionality
+    if sort == 'category_asc':
+        products = products.order_by('category__name')
+    elif sort == 'category_desc':
+        products = products.order_by('-category__name')
+    elif sort == 'rating_asc':
+        products = products.order_by('rating')
+    elif sort == 'rating_desc':
+        products = products.order_by('-rating')
+    elif sort == 'price_asc':
+        products = products.order_by('price')
+    elif sort == 'price_desc':
+        products = products.order_by('-price')
+
 
     context = {
         'products': products,
         'search_term': query,
+        'current_sorting': sort if sort else 'None_None',
     }
 
     return render(request, 'items/items.html', context)
+
 
 
 """This view will render item detail page of individual product."""
