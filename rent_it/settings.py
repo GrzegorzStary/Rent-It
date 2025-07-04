@@ -55,6 +55,10 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'allauth.socialaccount.providers.google',  # Google provider for allauth
+    'allauth.socialaccount.providers.facebook',  # Facebook provider for allauth
+    'allauth.socialaccount.providers.github',  # GitHub provider for allauth
+    
     
     
     # MY APPS
@@ -67,17 +71,21 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'allauth.account.middleware.AccountMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',  # For serving static files in production
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'allauth.account.middleware.AccountMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     
 ]
+
+SOCIALACCOUNT_PROVIDERS = {}
+
+SOCIALACCOUNT_LOGIN_ON_GET = True  # Automatically log in users when they access the site after social login
 
 ROOT_URLCONF = 'rent_it.urls'
 
@@ -112,13 +120,17 @@ SITE_ID = 1  # For allauth
 
 EAMIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development, use console backend
 
-ACCOUNT_AUTHENTICATION_METHOD = 'username_email' # Allows login with either username or email
-ACCOUNT_EMAIL_REQUIRED = True # Requires email for account creation
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory' # Requires email verification
-ACCOUNT_SIGNUP_EMAIL_ENTER_TWICE = True # Requires user to enter email twice during signup
 ACCOUNT_USERNAME_MIN_LENGTH = 4 # Minimum length for username
+ACCOUNT_LOGIN_METHODS = {'username', 'email'} # Allows login with either username or email
+ACCOUNT_SIGNUP_FIELDS = [
+    'email*', 'email2*', 'username*', 'password1*', 'password2*'
+]
+
 LOGIN_URL = '/accounts/login/' # URL to redirect to for login
 LOGIN_REDIRECT_URL = '/' # URL to redirect to after login
+LOGOUT_REDIRECT_URL = '/' # URL to redirect to after logout
+
 
 WSGI_APPLICATION = 'rent_it.wsgi.application'
 
