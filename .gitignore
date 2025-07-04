@@ -193,3 +193,18 @@ cython_debug/
 #  refer to https://docs.cursor.com/context/ignore-files
 .cursorignore
 .cursorindexingignore
+
+# Django DB dump files
+*.sql
+*.dump
+
+# Django migration artifacts
+*.pot
+*.mo
+
+# Heroku local config
+.heroku/
+
+# Static & media (optional if you build in CI/CD)
+staticfiles/
+media/
