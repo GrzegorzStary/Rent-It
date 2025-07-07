@@ -34,7 +34,8 @@ class Product(models.Model):
     rating = models.DecimalField(max_digits=2, decimal_places=1, null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
+    
+# This is creating random SKU for each product if not provided number of characters is 10 so that stays unique.
     def save(self, *args, **kwargs):
         if not self.sku:
             self.sku = str(uuid.uuid4()).replace('-', '')[:10]

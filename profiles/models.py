@@ -8,6 +8,12 @@ class Profile(models.Model):
     bio = models.TextField(blank=True)
     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+    first_name = models.CharField(max_length=50, blank=False, default='Unknown')
+    last_name = models.CharField(max_length=50, blank=False, default='Unknown')
+    house_number = models.CharField(max_length=50, blank=False, default='Unknown')
+    street_name = models.CharField(max_length=100, blank=False, default='Unknown')
+    city = models.CharField(max_length=100, blank=False, default='Unknown')
+    postal_code = models.CharField(max_length=20, blank=False, default='Unknown')
 
     def __str__(self):
         return f'{self.user.username} Profile'

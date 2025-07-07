@@ -5,9 +5,10 @@
 
 {% block content %}
 <div class="container my-4">
-  <h1>{{ profile.user.username }}'s Profile</h1>
+  <h1>{{ profile.first_name }} {{ profile.last_name }}'s Profile</h1>
   <p>{{ profile.bio }}</p>
 
+  <a href="{% url 'edit_profile' %}" class="btn btn-secondary mb-3">Edit Profile</a>
   <a href="{% url 'create_listing' %}" class="btn btn-primary mb-3">Create a Listing</a>
 
   <h2>Items for Rent:</h2>
@@ -23,7 +24,7 @@
         {% endif %}
         <div class="card-body">
           <h6 class="card-title text-truncate">{{ product.name }}</h6>
-          <p class="card-text text-muted mb-1">${{ product.price }}</p>
+          <p class="card-text text-muted mb-1">£{{ product.price }}</p>
           {% if product.rating %}
           <small class="text-warning"><i class="fas fa-star"></i> {{ product.rating }} / 5</small>
           {% else %}

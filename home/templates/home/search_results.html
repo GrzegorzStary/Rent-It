@@ -24,7 +24,7 @@
                             <h5 class="card-title">{{ product.name }}</h5>
                             <p class="card-text text-muted">{{ product.description|truncatewords:20 }}</p>
                             <div class="mt-auto">
-                                <p class="mb-1 text-success fw-bold">${{ product.price }}</p>
+                                <p class="mb-1 text-success fw-bold">£{{ product.price }}</p>
                                 {% if product.rating %}
                                     <small class="text-warning"><i class="fas fa-star"></i> {{ product.rating }} / 5</small>
                                 {% else %}
