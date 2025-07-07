@@ -62,6 +62,7 @@ def items_detail(request, pk):
 
     return render(request, 'items/item_detail.html', context)
 
+@login_required
 def edit_item (request, pk):
     product = get_object_or_404(Product, pk=pk)
 
@@ -79,6 +80,7 @@ def edit_item (request, pk):
 
     return render(request, 'items/edit_item.html', context)
 
+@login_required
 def delete_item(request, pk):
     product = get_object_or_404(Product, pk=pk)
 
@@ -93,6 +95,7 @@ def delete_item(request, pk):
 
     return render(request, 'items/delete_item.html', context)
 
+@login_required
 def add_to_basket(request, pk):
     product = get_object_or_404(Product, pk=pk)
     basket = request.session.get('basket', {})
