@@ -71,7 +71,7 @@
                   <hr class="dropdown-divider">
                 </li>
                 {% endif %}
-                <li><a class="dropdown-item" href="#">My Profile</a></li>
+                <li><a class="dropdown-item" href="{% url 'user_profile' %}">My Profile</a></li>
                 <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
                 {% else %}
                 <li><a class="dropdown-item" href="{% url 'account_signup' %}">Register</a></li>

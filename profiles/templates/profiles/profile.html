@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>{{ profile.user.username }}’s Profile</h1>
+
+<p>Bio: {{ profile.bio }}</p>
+
+{% if profile.profile_picture %}
+    <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" width="150">
+{% endif %}
+
+<h2>Items</h2>
+<ul>
+    {% for item in items %}
+        <li>{{ item.name }} - {{ item.price }}<br>{{ item.description }}</li>
+    {% empty %}
+        <li>No items listed.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

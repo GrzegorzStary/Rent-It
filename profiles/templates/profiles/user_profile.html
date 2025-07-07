@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+{% endblock %}
+
+
+{% block title %} -Profile{% endblock %}
+
+<h1>{{ profile.user.username }}'s Profile</h1>
+<p>{{ profile.bio }}</p>
+
+<h2>Items for rent:</h2>
+<ul>
+  {% for item in items %}
+    <li>{{ item.name }} - {{ item.price }}</li>
+  {% empty %}
+    <li>No items listed yet.</li>
+  {% endfor %}
+</ul>
+
+{% block content %}
+
+{% endblock %}
