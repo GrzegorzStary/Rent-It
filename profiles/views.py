@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from .models import Profile
+from items.models import Product
 
 # Create your views here.
 
@@ -7,7 +9,7 @@ from django.contrib.auth.decorators import login_required
 def profile_view(request):
     user = request.user
     profile = user.profile
-    items = user.items.all()
+    items = request.user.products.all()
     
     context = {
         'profile': profile,

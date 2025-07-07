@@ -1,21 +1,41 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} - Profile{% endblock %}
 
 {% block content %}
-<h1>{{ profile.user.username }}’s Profile</h1>
+<div class="container my-4">
+  <h1>{{ profile.user.username }}'s Profile</h1>
+  <p>{{ profile.bio }}</p>
 
-<p>Bio: {{ profile.bio }}</p>
+  <a href="{% url 'create_listing' %}" class="btn btn-primary mb-3">Create a Listing</a>
 
-{% if profile.profile_picture %}
-    <img src="{{ profile.profile_picture.url }}" alt="Profile Picture" width="150">
-{% endif %}
+  <h2>Items for Rent:</h2>
 
-<h2>Items</h2>
-<ul>
-    {% for item in items %}
-        <li>{{ item.name }} - {{ item.price }}<br>{{ item.description }}</li>
+  <div class="card-container d-flex flex-wrap justify-content-center gap-3 px-3">
+    {% for product in items %}
+    <a href="{% url 'item_detail' product.id %}" class="product-card-link border-0 text-decoration-none">
+      <div class="card product-card">
+        {% if product.images.first %}
+        <img src="{{ product.images.first.image.url }}" class="card-img-top" alt="{{ product.name }}">
+        {% else %}
+        <img src="{% static 'images/noimage.png' %}" class="card-img-top" alt="{{ product.name }}">
+        {% endif %}
+        <div class="card-body">
+          <h6 class="card-title text-truncate">{{ product.name }}</h6>
+          <p class="card-text text-muted mb-1">${{ product.price }}</p>
+          {% if product.rating %}
+          <small class="text-warning"><i class="fas fa-star"></i> {{ product.rating }} / 5</small>
+          {% else %}
+          <small class="text-muted">No Rating</small>
+          {% endif %}
+          <p class="card-text small text-truncate">{{ product.description }}</p>
+        </div>
+      </div>
+    </a>
     {% empty %}
-        <li>No items listed.</li>
+    <p>No items listed yet.</p>
     {% endfor %}
-</ul>
-<a href="{% url 'create_listing' %}" class="btn btn-primary">Create a Listing</a>
+  </div>
+</div>
 {% endblock %}
