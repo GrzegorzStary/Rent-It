@@ -2,11 +2,13 @@ from django.shortcuts import render, redirect, reverse, get_object_or_404
 from .models import Product
 from django.db.models import Q
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
+from .forms import ProductForm
 
 # Create your views here.
 
 
-# Here we will render items page later on
+# Here we will render items page
 def items_view(request):
     query = None
     sort = request.GET.get('sort')
@@ -101,3 +103,16 @@ def add_to_basket(request, pk):
     request.session['basket'] = basket
     messages.success(request, f'Added {product.name} to your basket!')
     return redirect(reverse('items_detail', args=[pk]))
+
+@login_required
+def create_listing(request):
+    if request.method == 'POST':
+        form = ProductForm(request.POST, request.FILES)
+        if form.is_valid():
+            product = form.save(commit=False)
+            product.user = request.user
+            product.save()
+            return redirect('user_profile')
+    else:
+        form = ProductForm()
+    return render(request, 'items/create_listing.html', {'form': form})
