@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
-from .models import Product
+from .models import Product, ProductImage
 from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -63,22 +63,28 @@ def items_detail(request, pk):
     return render(request, 'items/item_detail.html', context)
 
 @login_required
-def edit_item (request, pk):
-    product = get_object_or_404(Product, pk=pk)
-
+def edit_item(request, pk):
+    item = get_object_or_404(Product, pk=pk, user=request.user)
     if request.method == 'POST':
-        product.name = request.POST.get('name')
-        product.description = request.POST.get('description')
-        product.price = request.POST.get('price')
-        product.save()
-        messages.success(request, 'Item updated successfully!')
-        return redirect(reverse('items_detail', args=[pk]))
-
-    context = {
-        'product': product,
-    }
-
-    return render(request, 'items/edit_item.html', context)
+        form = ProductForm(request.POST, instance=item)
+        files = request.FILES.getlist('images')
+        if form.is_valid():
+            form.save()
+            # Save additional images if any
+            for f in files:
+                ProductImage.objects.create(product=item, image=f)
+            messages.success(request, 'Item updated successfully!')
+            return redirect('user_profile')
+    else:
+        form = ProductForm(instance=item)
+        
+# Get existing images for the item
+    existing_images = item.images.all()
+    return render(request, 'items/edit_item.html', {
+        'form': form,
+        'item': item,
+        'existing_images': existing_images,
+    })
 
 @login_required
 def delete_item(request, pk):
@@ -111,11 +117,22 @@ def add_to_basket(request, pk):
 def create_listing(request):
     if request.method == 'POST':
         form = ProductForm(request.POST, request.FILES)
+        files = request.FILES.getlist('images')
         if form.is_valid():
             product = form.save(commit=False)
             product.user = request.user
             product.save()
+            for f in files:
+                ProductImage.objects.create(product=product, image=f)
             return redirect('user_profile')
     else:
         form = ProductForm()
     return render(request, 'items/create_listing.html', {'form': form})
+
+@login_required
+def delete_image(request, image_id):
+    image = get_object_or_404(ProductImage, id=image_id, product__user=request.user)
+    product_id = image.product.id
+    image.delete()
+    messages.success(request, "Image deleted.")
+    return redirect('edit_item', pk=product_id)
