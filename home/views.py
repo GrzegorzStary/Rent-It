@@ -25,3 +25,6 @@ def home(request):
     recent_products = Product.objects.order_by('-id')[:12]
     
     return render(request, 'home/index.html', {'recent_products': recent_products})
+
+def privacy_policy(request):
+    return render(request, 'home/privacy_policy.html')

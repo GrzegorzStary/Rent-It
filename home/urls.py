@@ -1,8 +1,9 @@
 from django.urls import path
-from .views import Index, search_view
+from .views import Index, search_view, privacy_policy
 from home.views import home
 
 urlpatterns = [
     path('home/', home, name='home'),
     path('search/', search_view, name='search'),
+    path('privacy-policy/', privacy_policy, name='privacy_policy'),
 ]
