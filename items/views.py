@@ -111,7 +111,7 @@ def add_to_basket(request, pk):
         basket[pk] = 1
     request.session['basket'] = basket
     messages.success(request, f'Added {product.name} to your basket!')
-    return redirect(reverse('items_detail', args=[pk]))
+    return redirect(reverse('item_detail', args=[pk]))
 
 @login_required
 def create_listing(request):

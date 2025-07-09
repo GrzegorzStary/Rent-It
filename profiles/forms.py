@@ -14,13 +14,12 @@ class ProfileForm(forms.ModelForm):
             'city',
             'postal_code'
         ]
-        widgets = {
-            'bio': forms.Textarea(attrs={'rows': 4, 'cols': 40}),
-            'profile_picture': forms.ClearableFileInput(attrs={'class': 'form-control'}),
-            'first_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'last_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'house_number': forms.TextInput(attrs={'class': 'form-control'}),
-            'street_name': forms.TextInput(attrs={'class': 'form-control'}),
-            'city': forms.TextInput(attrs={'class': 'form-control'}),
-            'postal_code': forms.TextInput(attrs={'class': 'form-control'}),
-        }
+widgets = {
+    'bio': forms.Textarea(attrs={'rows': 4, 'cols': 40, 'placeholder': 'Tell us something about yourself'}),
+    'first_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'First Name'}),
+    'last_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Last Name'}),
+    'house_number': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'House/Flat Number'}),
+    'street_name': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Street Name'}),
+    'city': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'City'}),
+    'postal_code': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Postal Code'}),
+}

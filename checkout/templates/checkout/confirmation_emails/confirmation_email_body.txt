@@ -1,0 +1,1 @@
+Rent-It Confirmation for Rental Number {{ order.order_number }}

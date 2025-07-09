@@ -6,7 +6,7 @@ from django.contrib import messages
 from .forms import ProfileForm
 
 
-#This view handles the shection where user can edit his profile.
+#This view handles the section where user can edit his profile.
 @login_required
 def profile_view(request):
     profile = request.user.profile
@@ -32,3 +32,4 @@ def edit_profile(request):
 
     return render(request, 'profiles/edit_profile.html', {'form': form})
 
+ 
