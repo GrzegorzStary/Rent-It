@@ -33,7 +33,7 @@ if os.path.isfile('env.py'):
 SECRET_KEY = os.environ.get("DATABASE_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '.herokuapp.com',  # Allow Heroku
@@ -216,3 +216,14 @@ STATICFILES_DIRS = (
 # All uploaded files are stored in the 'media' directory
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Social account settings
+
+# Google OAuth2 settings
+GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID', '')
+GOOGLE_SECRET_KEY = os.environ.get('GOOGLE_SECRET_KEY', '')
+
+# GitHub OAuth2 settings
+
+GITHUB_CLIENT_ID = os.environ.get('GITHUB_CLIENT_ID', '')
+GITHUB_SECRET_KEY = os.environ.get('GITHUB_SECRET_KEY', '')
