@@ -10,7 +10,7 @@ from .models import Order, OrderLineItem
 from items.models import Product
 from profiles.forms import ProfileForm
 from profiles.models import Profile
-from checkout.contexts import checkout_contents 
+from reservation.contexts import checkout_contents 
 
 import stripe
 import json
