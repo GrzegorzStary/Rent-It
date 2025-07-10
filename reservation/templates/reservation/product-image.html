@@ -1,0 +1,6 @@
+{% if item.product.image %}
+<img class="img-fluid rounded shadow-sm" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+{% else %}
+<img class="img-fluid rounded shadow-sm" src="{{ MEDIA_URL }}noimage.png"
+    alt="No image available for {{ item.product.name }}">
+{% endif %}
