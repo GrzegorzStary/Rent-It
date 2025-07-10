@@ -198,7 +198,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-if 'USE_AWS' is os.environ:
+USE_AWS = os.environ.get('USE_AWS', 'False').lower() in ('true', '1', 't', 'y', 'yes')
+
+if os.environ.get('USE_AWS'):
     # AWS S3 settings
     AWS_STORAGE_BUCKET_NAME = 'rent-it-greg'
     AWS_S3_REGION_NAME = 'eu-north-1'
