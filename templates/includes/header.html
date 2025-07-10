@@ -66,7 +66,7 @@
               <ul class="dropdown-menu dropdown-menu-end">
                 {% if request.user.is_authenticated %}
                 {% if request.user.is_superuser %}
-                <li><a class="dropdown-item" href="{% url 'listed_items' %}">Listing Management</a></li>
+                <li><a class="dropdown-item" href="{% url 'listed_items' %}">Listed Items</a></li>
                 <li>
                   <hr class="dropdown-divider">
                 </li>
