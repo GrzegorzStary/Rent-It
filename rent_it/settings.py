@@ -86,10 +86,20 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     
 ]
-
+# Social account settings
 SOCIALACCOUNT_PROVIDERS = {}
 
 SOCIALACCOUNT_LOGIN_ON_GET = True  # Automatically log in users when they access the site after social login
+
+# Google OAuth2 settings
+GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
+GOOGLE_SECRET_KEY = os.environ.get('GOOGLE_SECRET_KEY')
+
+# GitHub OAuth2 settings
+
+GITHUB_CLIENT_ID = os.environ.get('GITHUB_CLIENT_ID')
+GITHUB_SECRET_KEY = os.environ.get('GITHUB_SECRET_KEY')
+
 
 ROOT_URLCONF = 'rent_it.urls'
 
@@ -237,14 +247,3 @@ STATICFILES_DIRS = (
 # All uploaded files are stored in the 'media' directory
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
-# Social account settings
-
-# Google OAuth2 settings
-GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID')
-GOOGLE_SECRET_KEY = os.environ.get('GOOGLE_SECRET_KEY')
-
-# GitHub OAuth2 settings
-
-GITHUB_CLIENT_ID = os.environ.get('GITHUB_CLIENT_ID')
-GITHUB_SECRET_KEY = os.environ.get('GITHUB_SECRET_KEY')
