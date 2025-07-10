@@ -204,6 +204,11 @@ USE_TZ = True
 USE_AWS =environ_env.bool('USE_AWS', default=False)
 
 if os.environ.get('USE_AWS'):
+    AWS_S3_OBJECT_PARAMETERS = {
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT', # Set an expiration date for S3 objects
+        'CacheControl': 'max-age=94608000',  # Cache for 3 years
+    }
+    
     # AWS S3 settings
     AWS_STORAGE_BUCKET_NAME = 'rent-it-greg'
     AWS_S3_REGION_NAME = 'eu-north-1'
