@@ -10,12 +10,15 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
 
-import os
 from pathlib import Path
+import os
+import environ
 import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+environ_env = environ.Env()
+environ.Env.read_env(BASE_DIR / '.env')
 
 STATIC_URL = 'static/'
 STATICFILES_DIRS = [
@@ -23,8 +26,8 @@ STATICFILES_DIRS = [
 ]
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-if os.path.isfile('env.py'):
-    import env
+if (BASE_DIR / 'env.py').is_file():
+    import env 
     
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
@@ -198,7 +201,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-USE_AWS = os.environ.get('USE_AWS', 'False').lower() in ('true', '1', 't', 'y', 'yes')
+USE_AWS =environ_env.bool('USE_AWS', default=False)
 
 if os.environ.get('USE_AWS'):
     # AWS S3 settings
