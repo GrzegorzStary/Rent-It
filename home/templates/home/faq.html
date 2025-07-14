@@ -1,0 +1,182 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} -FAQ{% endblock %}
+
+{% block content %}
+
+<div class="terms-container">
+    <h1>Frequently Asked Questions</h1>
+</div>
+<div class="accordion" id="faqAccordion">
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="heading1">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse1"
+                aria-expanded="true" aria-controls="collapse1">
+                What is Rent It and how does it work?
+            </button>
+        </h2>
+        <div id="collapse1" class="accordion-collapse collapse show" aria-labelledby="heading1"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+                Rent It is a peer-to-peer rental marketplace where owners can list items for rent and renters can
+                book them for a fee. Once the owner accepts the request, payment is made through the platform, and
+                both parties arrange pickup or delivery. After the rental period, the item is returned and reviews
+                can be left.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="heading2">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapse2" aria-expanded="false" aria-controls="collapse2">
+                Who can use Rent It?
+            </button>
+        </h2>
+        <div id="collapse2" class="accordion-collapse collapse" aria-labelledby="heading2"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+                Anyone 18+ with a valid email, phone number, and payment method can use Rent It. Businesses can also
+                list items as long as they comply with local laws and our terms.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="heading3">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapse3" aria-expanded="false" aria-controls="collapse3">
+                How do I rent an item?
+            </button>
+        </h2>
+        <div id="collapse3" class="accordion-collapse collapse" aria-labelledby="heading3"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+                Browse or search for an item, request a booking for your desired dates, wait for the owner to
+                confirm, pay through the platform, arrange pickup/delivery, use the item, then return it and leave a
+                review.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="heading4">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapse4" aria-expanded="false" aria-controls="collapse4">
+                How do I list an item for rent?
+            </button>
+        </h2>
+        <div id="collapse4" class="accordion-collapse collapse" aria-labelledby="heading4"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+                After signing up, go to “Create listing” fill in the details, upload photos, set a price and
+                availability, then publish it. Your item will appear in search results for renters.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="heading5">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapse5" aria-expanded="false" aria-controls="collapse5">
+                Is it free to join Rent It?
+            </button>
+        </h2>
+        <div id="collapse5" class="accordion-collapse collapse" aria-labelledby="heading5"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+                Yes! Signing up, browsing, and listing items are free. Rent It charges a small service fee per
+                transaction when a rental occurs, which is clearly shown at checkout.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="heading6">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapse6" aria-expanded="false" aria-controls="collapse6">
+                How do payments work?
+            </button>
+        </h2>
+        <div id="collapse6" class="accordion-collapse collapse" aria-labelledby="heading6"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+                Payments are handled securely through Rent It. Renters pay when the booking is confirmed, and owners
+                receive payment after the rental ends, minus our small service fee.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="heading7">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapse7" aria-expanded="false" aria-controls="collapse7">
+                What if an item gets damaged during a rental?
+            </button>
+        </h2>
+        <div id="collapse7" class="accordion-collapse collapse" aria-labelledby="heading7"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+                Renters are responsible for returning items in the same condition they received them. If an item is
+                damaged, owners can report the issue and request compensation through Rent It. Compensation is
+                provided up to the deposit amount specified by the owner during the listing process.
+                Additionally, renters have the option to purchase their own third-party insurance for extra
+                protection.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="heading8">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapse8" aria-expanded="false" aria-controls="collapse8">
+                Can I cancel a booking?
+            </button>
+        </h2>
+        <div id="collapse8" class="accordion-collapse collapse" aria-labelledby="heading8"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+                Yes. Renters and owners can cancel bookings through the platform. Refunds depend on the timing of
+                cancellation and the listing’s cancellation policy (Flexible, Moderate, Strict).
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="heading9">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapse9" aria-expanded="false" aria-controls="collapse9">
+                Is Rent It safe to use?
+            </button>
+        </h2>
+        <div id="collapse9" class="accordion-collapse collapse" aria-labelledby="heading9"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+                Yes. Rent It verifies users, uses secure payment processing, provides damage protection programs,
+                and has a review system to build trust between owners and renters.
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion-item">
+        <h2 class="accordion-header" id="heading10">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                data-bs-target="#collapse10" aria-expanded="false" aria-controls="collapse10">
+                How do I contact customer support?
+            </button>
+        </h2>
+        <div id="collapse10" class="accordion-collapse collapse" aria-labelledby="heading10"
+            data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+                You can reach our support team by email at example.support@rentit.com, or phone
+                during business hours. We’re here to help with any questions or issues.
+            </div>
+        </div>
+    </div>
+
+</div>
+</div>
+
+{% endblock %}

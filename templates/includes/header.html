@@ -1,0 +1,95 @@
+{% load static %}
+{% load i18n %}
+{% load account %}
+{% load socialaccount %}
+
+<header>
+  <div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex justify-content-between align-items-center">
+    <nav class="navbar navbar-expand-lg bg-white border-bottom shadow-sm py-2">
+      <div class="container-fluid">
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
+          <img src="{% static 'images/rent_it_nav_logo.webp' %}" alt="Rent It Logo" width="70" height="66" class="me-2">
+          <span class="fw-bold fs-4">Rent-It</span>
+        </a>
+
+        <!-- Mobile toggle button -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar content -->
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- Left menu -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link{% if request.path == '/' %} active{% endif %}" href="{% url 'index' %}">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'items' %}">Items</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Browse
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{% url 'items' %}">All products</a></li>
+                <li><a class="dropdown-item" href="{% url 'items' %}?sort=name_asc">Name (A–Z)</a></li>
+                <li><a class="dropdown-item" href="{% url 'items' %}?sort=name_desc">Name (Z–A)</a></li>
+                <li><a class="dropdown-item" href="{% url 'items' %}?sort=category_asc">Category (A–Z)</a></li>
+                <li><a class="dropdown-item" href="{% url 'items' %}?sort=category_desc">Category (Z–A)</a></li>
+                <li><a class="dropdown-item" href="{% url 'items' %}?sort=rating_desc">Rating (High to Low)</a></li>
+                <li><a class="dropdown-item" href="{% url 'items' %}?sort=rating_asc">Rating (Low to High)</a></li>
+                <li><a class="dropdown-item" href="{% url 'items' %}?sort=price_desc">Price (High to Low)</a></li>
+                <li><a class="dropdown-item" href="{% url 'items' %}?sort=price_asc">Price (Low to High)</a></li>
+                <li><a class="dropdown-item" href="#">Distance</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <!-- Search form -->
+          <form class="d-flex mx-auto w-100 justify-content-center" method="get" action="{% url 'search' %}">
+            <input class="form-control me-2 border rounded-1" type="text" name="q" placeholder="Search..."
+              aria-label="Search">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+          </form>
+
+          <!-- Account section -->
+          <ul class="navbar-nav ms-3">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                My Account
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                {% if request.user.is_authenticated %}
+                {% if request.user.is_superuser %}
+                <li><a class="dropdown-item" href="{% url 'listed_items' %}">Listed Items</a></li>
+                <li>
+                  <hr class="dropdown-divider">
+                </li>
+                {% endif %}
+                <li><a class="dropdown-item" href="{% url 'user_profile' %}">My Profile</a></li>
+                <li><a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a></li>
+                {% else %}
+                <li><a class="dropdown-item" href="{% url 'account_signup' %}">Register</a></li>
+                <li><a class="dropdown-item" href="{% url 'account_login' %}">Login</a></li>
+                {% endif %}
+              </ul>
+            </li>
+
+            <!-- Cart -->
+            <li class="nav-item ms-3">
+              <a class="nav-link position-relative {% if grand_total %}text-primary fw-bold{% else %}text-dark{% endif %}"
+                href="{% url 'reservation' %}">
+                <span class="ms-1">{% if grand_total %}${{ grand_total|floatformat:2 }}{% else %}£0.00{% endif %}</span>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</header>

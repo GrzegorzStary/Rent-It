@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %} - Create Listing{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <h1>Create a Listing</h1>
+
+  <form method="post" enctype="multipart/form-data" class="create-item-form">
+      {% csrf_token %}
+
+      {{ form.as_p }}
+
+      <h4>Upload Images</h4>
+      <input type="file" name="images" id="id_images" multiple>
+
+      <div class="new-image-preview">
+        <img id="image-preview" 
+             src="" 
+             alt="Image preview">
+      </div>
+
+      <button type="submit" class="btn btn-primary mt-3">Create</button>
+      <a href="{% url 'user_profile' %}" class="btn btn-secondary mt-3">Back to Profile</a>
+  </form>
+</div>
+{% endblock %}
+
+{% block extra_js %}
+<script src="{% static 'items/image_preview.js' %}"></script>
+{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'items/create_item.css' %}">
+{% endblock %}

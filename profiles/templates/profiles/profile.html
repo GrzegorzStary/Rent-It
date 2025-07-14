@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %} -Profile{% endblock %}
+
+{% block content %}
+<div class="container my-4">
+  <div class="text-center mb-4">
+    {% if profile.profile_picture %}
+    <img src="{{ profile.profile_picture.url }}" alt="{{ profile.first_name }}'s profile picture"
+      class="profile-picture">
+    {% else %}
+    <img src="{% static 'images/default_profile.png' %}" alt="Default profile picture" class="profile-picture">
+    {% endif %}
+  
+
+  <h1>{{ profile.first_name }} {{ profile.last_name }}'s Profile</h1>
+  <p>{{ profile.bio }}</p>
+</div>
+
+  <a href="{% url 'edit_profile' %}" class="btn btn-secondary mb-3">Edit Profile</a>
+  <a href="{% url 'create_listing' %}" class="btn btn-primary mb-3">Create a Listing</a>
+  <a href="{% url 'listed_items' %}" class="btn btn-info mb-3">View Your Listings</a>
+
+</div>
+{% endblock %}

@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_css %}
+{% endblock %}
+
+
+{% block title %} -Home{% endblock %}
+
+{% block content %}
+
+<!-- Hero Carousel Section -->
+<div id="carouselExampleIndicators" class="carousel slide custom-carousel">
+    <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active"
+            aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+            aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+            aria-label="Slide 3"></button>
+    </div>
+    <div class="carousel-inner">
+        <div class="carousel-item active">
+            <img src="{% static 'images/dj.webp' %}" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'images/dslr.webp' %}" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+            <img src="{% static 'images/projector.webp' %}" class="d-block w-100" alt="...">
+        </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+        data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+    </button>
+</div>
+
+
+<!-- Recently Added Items Title -->
+<div class="container mt-4">
+    <h1 class="mb-4">Recently added items</h1>
+</div>
+<!-- Card Container -->
+<div class="card-container d-flex flex-wrap justify-content-center gap-3 px-3">
+    {% for product in recent_products|slice:":8" %}
+    <a href="{% url 'item_detail' product.id %}" class="product-card-link border-0 text-decoration-none">
+        <div class="card product-card">
+
+            {% if product.images.all %}
+            <div id="productCarousel{{ product.id }}" class="carousel slide">
+                <div class="carousel-inner">
+                    {% for img in product.images.all %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ img.image.url }}" class="card-img-top img-fluid" alt="{{ product.name }}">
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel{{ product.id }}"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel{{ product.id }}"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+            {% else %}
+            <img src="{% static 'images/noimage.png' %}" class="card-img-top img-fluid" alt="{{ product.name }}">
+            {% endif %}
+
+            <div class="card-body">
+                <h6 class="card-title text-truncate">{{ product.name }}</h6>
+                <p class="card-text text-muted mb-1">£{{ product.price }}</p>
+
+                {% if product.rating %}
+                <small class="text-warning">
+                    <i class="fas fa-star"></i> {{ product.rating }} / 5
+                </small>
+                {% else %}
+                <small class="text-muted">No Rating</small>
+                {% endif %}
+
+                <p class="card-text small text-truncate">{{ product.description }}</p>
+            </div>
+
+        </div>
+    </a>
+    {% empty %}
+    <p>No recent items found.</p>
+    {% endfor %}
+</div>
+
+<script src="{% static 'js/card_index.js' %}"></script>
+
+{% endblock %}
