@@ -204,7 +204,3 @@ cython_debug/
 
 # Heroku local config
 .heroku/
-
-# Static & media (optional if you build in CI/CD)
-staticfiles/
-media/
