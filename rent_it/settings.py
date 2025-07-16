@@ -33,7 +33,7 @@ if os.path.isfile('env.py'):
 SECRET_KEY = os.environ.get("DATABASE_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = [
     '.herokuapp.com',  # Allow Heroku
@@ -125,6 +125,10 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 SITE_ID = 1  # For allauth
+
+# Social authentication settings
+SOCIAL_AUTH_GITHUB_KEY = os.environ.get('SOCIAL_AUTH_GITHUB_KEY', '')
+SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('SOCIAL_AUTH_GITHUB_SECRET', '')
 
 EAMIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development, use console backend
 
@@ -253,7 +257,3 @@ STORAGES = {
         },
     },
 }
-
-# Social authentication settings
-SOCIAL_AUTH_GITHUB_KEY = os.environ.get('SOCIAL_AUTH_GITHUB_KEY', '')
-SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('SOCIAL_AUTH_GITHUB_SECRET', '')
