@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+    'social_django',  # For social authentication
     'allauth.socialaccount.providers.google',  # Google provider for allauth
     'allauth.socialaccount.providers.facebook',  # Facebook provider for allauth
     'allauth.socialaccount.providers.github',  # GitHub provider for allauth
@@ -84,6 +85,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',  # Middleware for social authentication
     
 ]
 
@@ -118,6 +120,8 @@ AUTHENTICATION_BACKENDS = [
 
     # Specific authentication methods, such as login by e-mail
     'allauth.account.auth_backends.AuthenticationBackend',
+    
+    'social_core.backends.github.GithubOAuth2',  # GitHub OAuth2 backend
 ]
 
 SITE_ID = 1  # For allauth
@@ -249,3 +253,7 @@ STORAGES = {
         },
     },
 }
+
+# Social authentication settings
+SOCIAL_AUTH_GITHUB_KEY = os.environ.get('SOCIAL_AUTH_GITHUB_KEY', '')
+SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('SOCIAL_AUTH_GITHUB_SECRET', '')
