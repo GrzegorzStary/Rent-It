@@ -33,7 +33,7 @@ if os.path.isfile('env.py'):
 SECRET_KEY = os.environ.get("DATABASE_SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '.herokuapp.com',  # Allow Heroku
@@ -68,6 +68,9 @@ INSTALLED_APPS = [
     'checkout',
     'reservation',
     'profiles',
+    
+    # OTHER APPS
+    'storages', # For AWS S3 storage
     
 ]
 
@@ -216,3 +219,33 @@ STATICFILES_DIRS = (
 # All uploaded files are stored in the 'media' directory
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# AWS S3 settings
+
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID', '')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY', '')
+
+# BASIC STORAGE CONFIGURATION
+
+AWS_STORAGE_BUCKET_NAME = os.environ.get('AWS_STORAGE_BUCKET_NAME', '')
+AWS_S3_FILE_OVERWRITE = False # Prevents overwriting files with the same name
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME # Custom domain for S3 bucket
+
+STORAGES = {
+    # Default storage configuration for static and media files
+    "default": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    },
+    # Static files storage configuration
+    "staticfiles": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+    },
+    # Media files storage configuration
+    "mediafiles": {
+        "BACKEND": "storages.backends.s3boto3.S3Boto3Storage",
+        "AWS_S3_OBJECT_PARAMETERS": {
+            # Cache control settings for media files
+            "CacheControl": "max-age=86400", # 1 day
+        },
+    },
+}
