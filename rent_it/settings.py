@@ -127,8 +127,13 @@ AUTHENTICATION_BACKENDS = [
 SITE_ID = 1  # For allauth
 
 # Social authentication settings
+# GITHUB
 SOCIAL_AUTH_GITHUB_KEY = os.environ.get('SOCIAL_AUTH_GITHUB_KEY', '')
 SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('SOCIAL_AUTH_GITHUB_SECRET', '')
+
+# GOOGLE
+GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID', '')
+GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET', '')
 
 EAMIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development, use console backend
 
