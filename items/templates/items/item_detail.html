@@ -75,25 +75,31 @@
 
                             <div class="mb-3">
                                 <label for="start-date" class="form-label">Start Date:</label>
-                                <div class="input-group" id="start-date-picker" data-td-target-input="nearest" data-td-target-toggle="nearest">
-                                    <input id="start-date" name="start_date" type="text" class="form-control" data-td-target="#start-date-picker" />
-                                    <span class="input-group-text" data-td-target="#start-date-picker" data-td-toggle="datetimepicker">
+                                <div class="input-group" id="start-date-picker" data-td-target-input="nearest"
+                                    data-td-target-toggle="nearest">
+                                    <input id="start-date" name="start_date" type="text" class="form-control"
+                                        data-td-target="#start-date-picker" />
+                                    <span class="input-group-text" data-td-target="#start-date-picker"
+                                        data-td-toggle="datetimepicker">
                                         <i class="fa fa-calendar"></i>
                                     </span>
                                 </div>
                             </div>
-                            
+
                             <div class="mb-3">
                                 <label for="end-date" class="form-label">End Date:</label>
-                                <div class="input-group" id="end-date-picker" data-td-target-input="nearest" data-td-target-toggle="nearest">
-                                    <input id="end-date" name="end_date" type="text" class="form-control" data-td-target="#end-date-picker" />
-                                    <span class="input-group-text" data-td-target="#end-date-picker" data-td-toggle="datetimepicker">
+                                <div class="input-group" id="end-date-picker" data-td-target-input="nearest"
+                                    data-td-target-toggle="nearest">
+                                    <input id="end-date" name="end_date" type="text" class="form-control"
+                                        data-td-target="#end-date-picker" />
+                                    <span class="input-group-text" data-td-target="#end-date-picker"
+                                        data-td-toggle="datetimepicker">
                                         <i class="fa fa-calendar"></i>
                                     </span>
                                 </div>
                             </div>
-                            
-                            
+
+
                             <div id="price-breakdown" class="mt-3">
                                 <p>Select dates to see the price breakdown.</p>
                             </div>
@@ -101,13 +107,20 @@
 
                         <div class="col-12 mt-4">
                             <a href="{% url 'items' %}" class="btn btn-outline-black rounded-0 mt-3">
-                                <span class="icon">
-                                    <i class="fas fa-chevron-left"></i>
-                                </span>
-                                <span class="btn btn-outline-secondary rounded-0 text-uppercase">Keep Browsing</span>
+                              <span class="icon">
+                                <i class="fas fa-chevron-left"></i>
+                              </span>
+                              <span class="btn btn-outline-secondary rounded-0 text-uppercase">Keep Browsing</span>
                             </a>
-                            <input type="submit" class="btn btn-outline-primary rounded-0 text-uppercase mt-3" value="RENT IT!">
-                        </div>
+                          
+                            <a href="{% url 'checkout' %}" class="btn btn-outline-primary text-uppercase mt-3">
+                              RENT IT! 
+                              <span class="icon">
+                                <i class="fas fa-shopping-bag"></i>
+                              </span>
+                            </a>
+                          </div>
+                          
 
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
                     </div>

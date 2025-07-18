@@ -68,6 +68,20 @@ form.d-flex .btn:hover {
     transition: all 0.3s ease-in-out;
 }
 
+/* General button styling */
+.btn.btn-outline-primary {
+    border-radius: 0;
+    border-color: var(--primary);
+    color: var(--primary);
+}
+
+.btn.btn-outline-primary:hover {
+    background-color: var(--hover);
+    border-color: var(--hover);
+    color: var(--background);
+    transition: all 0.3s ease-in-out;
+}
+
 /* Footer */
 
 main {
