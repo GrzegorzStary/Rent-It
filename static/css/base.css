@@ -69,6 +69,11 @@ form.d-flex .btn:hover {
 }
 
 /* Footer */
+
+main {
+    flex: 1;
+}
+
 footer {
     background-color: var(--secondary);
     border-top: 1px solid var(--border);
@@ -79,6 +84,7 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    position: relative;
 }
 
 .social-icons {

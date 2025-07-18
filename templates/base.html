@@ -16,9 +16,11 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/fav32x32.ico' %}">
     <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/fav60x60.ico' %}">
 
-    <!-- CSS: Bootstrap first, then custom -->
+    <!-- CSS: Bootstrap first Tempus Dominus CSS second, then my custom -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
         integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@v6.7.7/dist/css/tempus-dominus.min.css"
+        rel="stylesheet">
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
     <!-- FONT AWESOME ICONS -->
@@ -43,7 +45,7 @@
     {% include 'includes/mobile_header.html' %}
 
     <!-- MAIN CONTENT -->
-    <main class="container">
+    <main>
         {% block content %}
         {% endblock %}
     </main>
@@ -55,6 +57,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
         crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@v6.7.7/dist/js/tempus-dominus.min.js"></script>        
     {% endblock %}
 </body>
 

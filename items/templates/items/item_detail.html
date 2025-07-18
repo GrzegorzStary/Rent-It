@@ -9,23 +9,25 @@
     <div class="row">
         <div class="col-12 col-md-6 col-lg-4 offset-lg-2">
             <div class="image-container my-5">
-
                 {% if product.images.all %}
                 <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         {% for img in product.images.all %}
                         <div class="carousel-item {% if forloop.first %}active{% endif %}">
                             <a href="{{ img.image.url }}" target="_blank">
-                                <img src="{{ img.image.url }}" class="d-block w-100 card-img-top img-fluid" alt="{{ product.name }}">
+                                <img src="{{ img.image.url }}" class="d-block w-100 card-img-top img-fluid"
+                                    alt="{{ product.name }}">
                             </a>
                         </div>
                         {% endfor %}
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
+                        data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel"
+                        data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
@@ -35,7 +37,6 @@
                     <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
                 </a>
                 {% endif %}
-
             </div>
         </div>
 
@@ -54,77 +55,72 @@
 
                 {% if request.user.is_superuser %}
                 <small class="ml-3">
-                    <a href="{% url 'edit_item' product.id %}">Edit</a> | 
+                    <a href="{% url 'edit_item' product.id %}">Edit</a> |
                     <a class="text-danger" href="{% url 'delete_item' product.id %}">Delete</a>
                 </small>
                 {% endif %}
 
                 <p class="mt-3">{{ product.description }}</p>
 
-                <form class="form" action="{% url 'add_to_basket' product.id %}" method="POST">
+                <form id="rent-form" class="form" action="{% url 'checkout' %}" method="POST">
                     {% csrf_token %}
-                    <div class="form-row">
-                        {% with product.has_sizes as s %}
-                        {% if s %}
-                        <div class="col-12">
-                            <p><strong>Size:</strong></p>
-                            <select class="form-control rounded-0 w-50" name="product_size" id='id_product_size'>
-                                <option value="xs">XS</option>
-                                <option value="s">S</option>
-                                <option value="m" selected>M</option>
-                                <option value="l">L</option>
-                                <option value="xl">XL</option>
-                            </select>
-                        </div>
-                        {% endif %}
+                    <input type="hidden" name="product_id" value="{{ product.id }}">
 
+                    <!-- Price data -->
+                    <div id="price-data" data-price="{{ product.price }}" data-deposit="{{ product.deposit }}"></div>
+
+                    <div class="form-row">
                         <div class="col-12">
                             <p class="mt-3"><strong>Reservation Dates:</strong></p>
-                            <div class="form-group w-50">
-                                <div class="input-group mb-2">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-calendar-alt"></i>
-                                        </span>
-                                    </div>
-                                    <input class="form-control" type="date"
-                                        name="start_date_{{ product.id }}"
-                                        data-item_id="{{ product.id }}"
-                                        required>
-                                </div>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="fas fa-calendar-alt"></i>
-                                        </span>
-                                    </div>
-                                    <input class="form-control" type="date"
-                                        name="end_date_{{ product.id }}"
-                                        data-item_id="{{ product.id }}"
-                                        required>
+
+                            <div class="mb-3">
+                                <label for="start-date" class="form-label">Start Date:</label>
+                                <div class="input-group" id="start-date-picker" data-td-target-input="nearest" data-td-target-toggle="nearest">
+                                    <input id="start-date" name="start_date" type="text" class="form-control" data-td-target="#start-date-picker" />
+                                    <span class="input-group-text" data-td-target="#start-date-picker" data-td-toggle="datetimepicker">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
                                 </div>
                             </div>
+                            
+                            <div class="mb-3">
+                                <label for="end-date" class="form-label">End Date:</label>
+                                <div class="input-group" id="end-date-picker" data-td-target-input="nearest" data-td-target-toggle="nearest">
+                                    <input id="end-date" name="end_date" type="text" class="form-control" data-td-target="#end-date-picker" />
+                                    <span class="input-group-text" data-td-target="#end-date-picker" data-td-toggle="datetimepicker">
+                                        <i class="fa fa-calendar"></i>
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            
+                            <div id="price-breakdown" class="mt-3">
+                                <p>Select dates to see the price breakdown.</p>
+                            </div>
                         </div>
-                        
 
-                        <div class="col{% if s %}-12 mt-2{% endif %}">
-                            <a href="{% url 'items' %}" class="btn btn-outline-black rounded-0 mt-5">
+                        <div class="col-12 mt-4">
+                            <a href="{% url 'items' %}" class="btn btn-outline-black rounded-0 mt-3">
                                 <span class="icon">
                                     <i class="fas fa-chevron-left"></i>
                                 </span>
-                                <span class="text-uppercase">Keep Browsing</span>
+                                <span class="btn btn-outline-secondary rounded-0 text-uppercase">Keep Browsing</span>
                             </a>
-                            <input type="submit" class="btn btn-black rounded-0 text-uppercase mt-5" value="RENT IT!">
+                            <input type="submit" class="btn btn-outline-primary rounded-0 text-uppercase mt-3" value="RENT IT!">
                         </div>
+
                         <input type="hidden" name="redirect_url" value="{{ request.path }}">
-                        {% endwith %}
                     </div>
                 </form>
-
             </div>
         </div>
     </div>
 </div>
 {% endblock %}
 
+<!-- JavaScript -->
+{% block onload_js %}
+{{ block.super }}
+<script src="{% static 'js/price_calculator.js' %}"></script>
 <script src="{% static 'js/card_index.js' %}"></script>
+{% endblock %}
