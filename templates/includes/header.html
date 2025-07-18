@@ -69,6 +69,7 @@
                 <li><a class="dropdown-item" href="{% url 'listed_items' %}">Listed Items</a></li>
                 <li>
                   <hr class="dropdown-divider">
+                  <a class="dropdown-item" href="#">Rented Items</a>
                 </li>
                 {% endif %}
                 <li><a class="dropdown-item" href="{% url 'user_profile' %}">My Profile</a></li>
@@ -83,7 +84,7 @@
             <!-- Cart -->
             <li class="nav-item ms-3">
               <a class="nav-link position-relative {% if grand_total %}text-primary fw-bold{% else %}text-dark{% endif %}"
-                href="{% url 'reservation' %}">
+                href="{% url 'view_bag' %}">
                 <span class="ms-1">{% if grand_total %}${{ grand_total|floatformat:2 }}{% else %}£0.00{% endif %}</span>
               </a>
             </li>

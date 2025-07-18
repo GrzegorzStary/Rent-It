@@ -13,7 +13,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const startDatePicker = new tempusDominus.TempusDominus(
         document.getElementById('start-date-picker'),
         {
-            restrictions: { minDate: today },
+            restrictions: {
+                minDate: today,
+                disabledDates: unavailableDates
+            },
             display: { components: { useTwentyfourHour: true, clock: false } },
             localization: {
                 format: 'dd/MM/yyyy'
@@ -24,7 +27,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const endDatePicker = new tempusDominus.TempusDominus(
         document.getElementById('end-date-picker'),
         {
-            restrictions: { minDate: today },
+            restrictions: {
+                minDate: today,
+                disabledDates: unavailableDates
+            },
             display: { components: { useTwentyfourHour: true, clock: false } },
             localization: {
                 format: 'dd/MM/yyyy'

@@ -62,9 +62,9 @@
 
                 <p class="mt-3">{{ product.description }}</p>
 
-                <form id="rent-form" class="form" action="{% url 'checkout' %}" method="POST">
+                <form method="post" id="rent-form" class="form" action="{% url 'add_to_bag' product.id %}">
                     {% csrf_token %}
-                    <input type="hidden" name="product_id" value="{{ product.id }}">
+                    <input type="hidden" name="redirect_url" value="{% url 'view_bag' %}">
 
                     <!-- Price data -->
                     <div id="price-data" data-price="{{ product.price }}" data-deposit="{{ product.deposit }}"></div>
@@ -107,22 +107,19 @@
 
                         <div class="col-12 mt-4">
                             <a href="{% url 'items' %}" class="btn btn-outline-black rounded-0 mt-3">
-                              <span class="icon">
-                                <i class="fas fa-chevron-left"></i>
-                              </span>
-                              <span class="btn btn-outline-secondary rounded-0 text-uppercase">Keep Browsing</span>
+                                <span class="icon">
+                                    <i class="fas fa-chevron-left"></i>
+                                </span>
+                                <span class="btn btn-outline-secondary rounded-0 text-uppercase">Keep Browsing</span>
                             </a>
-                          
-                            <a href="{% url 'checkout' %}" class="btn btn-outline-primary text-uppercase mt-3">
-                              RENT IT! 
-                              <span class="icon">
-                                <i class="fas fa-shopping-bag"></i>
-                              </span>
+                            <button type="submit" class="btn btn-outline-primary text-uppercase mt-3">
+                                RENT IT!
+                                <span class="icon">
+                                    <i class="fas fa-shopping-bag"></i>
+                                </span>
+                            </button>
                             </a>
-                          </div>
-                          
-
-                        <input type="hidden" name="redirect_url" value="{{ request.path }}">
+                        </div>
                     </div>
                 </form>
             </div>
@@ -134,6 +131,13 @@
 <!-- JavaScript -->
 {% block onload_js %}
 {{ block.super }}
+
+<script>
+    const unavailableDates = {{ unavailable_dates| safe }};
+    console.log("Unavailable Dates:", unavailableDates);
+</script>
+
 <script src="{% static 'js/price_calculator.js' %}"></script>
 <script src="{% static 'js/card_index.js' %}"></script>
+
 {% endblock %}

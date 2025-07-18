@@ -28,5 +28,5 @@ urlpatterns = [
     path('checkout/', include('checkout.urls'), name='checkout_urls'),
     path('items/', include('items.urls'), name='items_urls'),
     path('profiles/', include('profiles.urls'), name='profiles_urls'),
-    path('reservation/', include('reservation.urls'), name='reservation_urls'),
+    path('reservation/', include('reservation.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

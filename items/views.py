@@ -1,9 +1,12 @@
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from .models import Product, ProductImage
+from reservation.models import Reservation
 from django.db.models import Q
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import ProductForm
+from django.http import JsonResponse
+from datetime import timedelta
 
 # Create your views here.
 
@@ -56,11 +59,22 @@ def items_view(request):
 def items_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
 
+    booked_ranges = Reservation.objects.filter(product=product).values('start_date', 'end_date')
+
+    unavailable_dates = []
+    for r in booked_ranges:
+        current = r['start_date']
+        while current <= r['end_date']:
+            unavailable_dates.append(current.strftime('%d-%m-%Y'))
+            current += timedelta(days=1)
+
     context = {
         'product': product,
+        'unavailable_dates': unavailable_dates,
     }
 
     return render(request, 'items/item_detail.html', context)
+
 
 @login_required
 def edit_item(request, pk):
