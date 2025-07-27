@@ -1,6 +1,7 @@
-{% if item.product.image %}
-<img class="img-fluid rounded shadow-sm" src="{{ item.product.image.url }}" alt="{{ item.product.name }}">
+{% if item.product.images.all %}
+    {% for img in item.product.images.all %}
+        <img src="{{ img.image.url }}" class="img-fluid" alt="{{ item.product.name }}">
+    {% endfor %}
 {% else %}
-<img class="img-fluid rounded shadow-sm" src="{{ MEDIA_URL }}noimage.png"
-    alt="No image available for {{ item.product.name }}">
+    <img class="img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="No image">
 {% endif %}

@@ -10,7 +10,7 @@ from .models import Order, OrderLineItem
 from items.models import Product
 from profiles.forms import ProfileForm
 from profiles.models import Profile
-from reservation.contexts import checkout_contents 
+from reservation.context_processors import cart_context
 
 import stripe
 import json
@@ -102,7 +102,7 @@ def checkout(request):
             messages.error(request, "There's nothing in your checkout at the moment")
             return redirect(reverse('items'))
 
-        current_checkout = checkout_contents(request)
+        current_checkout = cart_context(request)
         total = current_checkout['grand_total']
         stripe_total = round(total * 100)
         stripe.api_key = stripe_secret_key
