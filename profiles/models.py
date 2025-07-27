@@ -14,6 +14,7 @@ class Profile(models.Model):
     street_name = models.CharField(max_length=100, blank=False, default='Unknown')
     city = models.CharField(max_length=100, blank=False, default='Unknown')
     postal_code = models.CharField(max_length=20, blank=False, default='Unknown')
+    phone_number = models.CharField(max_length=15, blank=False, default='Unknown')
 
     def __str__(self):
         return f'{self.user.username} Profile'

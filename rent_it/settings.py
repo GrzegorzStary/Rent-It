@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     'allauth.socialaccount.providers.google',  # Google provider for allauth
     'allauth.socialaccount.providers.facebook',  # Facebook provider for allauth
     'allauth.socialaccount.providers.github',  # GitHub provider for allauth
+    'crispy_forms',  # For better form rendering
+    'crispy_bootstrap5',  # For Bootstrap 5 support in crispy forms
     
     
     
@@ -263,3 +265,6 @@ STORAGES = {
         },
     },
 }
+
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"  # Use Bootstrap 5 for crispy forms
+CRISPY_TEMPLATE_PACK = "bootstrap5"  # Set the default template pack for crispy forms
