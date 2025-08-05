@@ -11,17 +11,15 @@
 {% block content %}
 <div class="container">
     <div class="row justify-content-center mt-5 mb-5">
-        <div class="col-lg-6 col-md-8 col-sm-12 p-5 shadow-sm rounded-0"
-            style="background-color: var(--secondary); border: 1px solid var(--border);">
+        <div class="col-lg-6 col-md-8 col-sm-12 p-5 shadow-sm rounded-0 signup-card">
 
-            <h1 class="fw-bold mb-3 text-center fs-1" style="font-family: var(--title); color: var(--text);">
+            <h1 class="fw-bold mb-3 text-center fs-1 signup-title">
                 {% trans "Create Account" %}
             </h1>
 
-            <p class="text-center mb-4 fs-6" style="color: var(--text); font-family: var(--body);">
+            <p class="text-center mb-4 fs-6 signup-subtext">
                 {% trans "Already have an account?" %}
-                <a href="{{ login_url }}" class="fw-semibold"
-                    style="color: var(--primary); text-decoration: underline;">
+                <a href="{{ login_url }}" class="fw-semibold signup-link">
                     {% trans "Sign in" %}
                 </a>.
             </p>
@@ -33,7 +31,7 @@
             {% csrf_token %}
             {% for field in form %}
             <div class="mb-4">
-                <label for="{{ field.id_for_label }}" class="form-label fw-semibold" style="color: var(--text);">
+                <label for="{{ field.id_for_label }}" class="form-label fw-semibold text-dark">
                     {{ field.label }}
                 </label>
                 {{ field|add_class:"form-control form-control-lg rounded-0" }}
@@ -49,7 +47,7 @@
 
             {% slot actions %}
             <div class="d-grid mb-4">
-                <button type="submit" class="btn btn-primary btn-lg text-uppercase fw-bold py-2 rounded-0">
+                <button type="submit" class="btn btn-outline-primary btn-lg text-uppercase fw-bold py-2">
                     {% trans "Sign Up" %}
                 </button>
             </div>
@@ -62,7 +60,6 @@
                 <hr>
             </div>
             <div class="d-flex flex-column gap-3">
-
                 <!-- Google Button -->
                 <a href="{% provider_login_url 'google' process='signup' %}"
                     class="btn btn-outline-primary btn-lg d-flex align-items-center justify-content-center gap-2">
@@ -82,11 +79,12 @@
             {% if PASSKEY_SIGNUP_ENABLED %}
             <hr class="my-4">
             <div class="d-grid">
-                <a href="{{ signup_by_passkey_url }}" class="btn btn-outline-primary btn-lg fw-bold py-2">
+                <a href="{{ signup_by_passkey_url }}" class="btn btn-outline-primary btn-lg fw-bold py-2 rounded-0">
                     {% trans "Sign up using a passkey" %}
                 </a>
             </div>
             {% endif %}
+
         </div>
     </div>
 </div>

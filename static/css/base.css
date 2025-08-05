@@ -209,6 +209,27 @@ footer {
     text-align: center;
 }
 
+.signup-card {
+    background-color: var(--secondary);
+    border: 1px solid var(--border);
+}
+
+.signup-title {
+    color: var(--text);
+    font-family: var(--title);
+}
+
+.signup-subtext {
+    color: var(--text);
+    font-family: var(--body);
+}
+
+.signup-link {
+    color: var(--primary);
+    text-decoration: underline;
+}
+
+
 /* Responsiveness */
 @media (max-width: 1200px) {
     .card {
