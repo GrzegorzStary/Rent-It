@@ -2,51 +2,66 @@
 {% load static %}
 {% load i18n %}
 {% load allauth %}
+
 {% block head_title %}
-    {% trans "Change Phone" %}
+{% trans "Change Phone" %}
 {% endblock head_title %}
+
 {% block content %}
-    {% element h1 %}
-        {% trans "Change Phone" %}
-    {% endelement %}
-    {% url 'account_change_phone' as action_url %}
-    {% element form method="post" action=action_url %}
-        {% slot body %}
-            {% csrf_token %}
-            {% if phone %}
-                {% element field id="current_phone" disabled=True type="tel" value=phone %}
-                    {% slot label %}
-                        {% translate "Current phone" %}:
-                    {% endslot %}
-                    {% if not phone_verified %}
-                        {% slot help_text %}
-                            {% blocktranslate %}Your phone number is still pending verification.{% endblocktranslate %}
-                            {% element button form="verify-phone" type="submit" tags="minor,secondary" %}
-                                {% trans 'Re-send Verification' %}
-                            {% endelement %}
-                        {% endslot %}
-                    {% endif %}
-                {% endelement %}
-            {% endif %}
-            {% element field id=form.phone.auto_id name="phone" value=form.phone.value errors=form.phone.errors type="tel" %}
-                {% slot label %}
-                    {% translate "Change to" %}:
-                {% endslot %}
-            {% endelement %}
-        {% endslot %}
-        {% slot actions %}
-            {% element button name="action_add" type="submit" %}
+<div class="container">
+    <div class="row justify-content-center mt-5 mb-5">
+        <div class="col-lg-6 col-md-8 col-sm-12 p-5 shadow-sm rounded-0 signup-card">
+
+            <h1 class="fw-bold mb-3 text-center fs-1 signup-title">
                 {% trans "Change Phone" %}
-            {% endelement %}
-        {% endslot %}
-    {% endelement %}
-    {% if not phone_verified %}
-        <form style="display: none"
-              id="verify-phone"
-              method="post"
-              action="{{ action_url }}">
+            </h1>
+
+            {% url 'account_change_phone' as action_url %}
+            {% element form method="post" action=action_url %}
+            {% slot body %}
             {% csrf_token %}
-            <input type="hidden" name="action" value="verify">
-        </form>
-    {% endif %}
+
+            {% if phone %}
+            {% element field id="current_phone" disabled=True type="tel" value=phone %}
+            {% slot label %}
+            {% translate "Current phone" %}:
+            {% endslot %}
+            {% if not phone_verified %}
+            {% slot help_text %}
+            {% blocktranslate %}Your phone number is still pending verification.{% endblocktranslate %}
+            {% element button form="verify-phone" type="submit" tags="minor,secondary" %}
+            {% trans 'Re-send Verification' %}
+            {% endelement %}
+            {% endslot %}
+            {% endif %}
+            {% endelement %}
+            {% endif %}
+
+            {% element field id=form.phone.auto_id name="phone" value=form.phone.value errors=form.phone.errors
+            type="tel" %}
+            {% slot label %}
+            {% translate "Change to" %}:
+            {% endslot %}
+            {% endelement %}
+
+            {% endslot %}
+            {% slot actions %}
+            <div class="d-grid mb-4">
+                <button type="submit" name="action_add"
+                    class="btn btn-primary btn-lg text-uppercase fw-bold py-2 rounded-0">
+                    {% trans "Change Phone" %}
+                </button>
+            </div>
+            {% endslot %}
+            {% endelement %}
+
+            {% if not phone_verified %}
+            <form style="display: none" id="verify-phone" method="post" action="{{ action_url }}">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="verify">
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock content %}

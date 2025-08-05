@@ -2,22 +2,43 @@
 {% load static %}
 {% load allauth %}
 {% load i18n %}
-{% block reauthenticate_content %}
-    {% element p %}
-        {% blocktranslate %}Enter your password:{% endblocktranslate %}
-    {% endelement %}
-    {% url 'account_reauthenticate' as action_url %}
-    {% element form form=form method="post" action=action_url %}
-        {% slot body %}
+
+{% block head_title %}
+{% trans "Confirm Access" %}
+{% endblock head_title %}
+
+{% block content %}
+<div class="container">
+    <div class="row justify-content-center mt-5 mb-5">
+        <div class="col-lg-6 col-md-8 col-sm-12 p-5 shadow-sm rounded-0 signup-card">
+
+            <h1 class="fw-bold mb-3 text-center fs-1 signup-title">
+                {% trans "Confirm Access" %}
+            </h1>
+
+            {% block reauthenticate_content %}
+            <p class="text-center fs-6 text-dark">
+                {% blocktranslate %}Enter your password:{% endblocktranslate %}
+            </p>
+
+            {% url 'account_reauthenticate' as action_url %}
+            {% element form form=form method="post" action=action_url %}
+            {% slot body %}
             {% csrf_token %}
             {% element fields form=form unlabeled=True %}
             {% endelement %}
             {{ redirect_field }}
-        {% endslot %}
-        {% slot actions %}
-            {% element button type="submit" tags="primary,reauthenticate" %}
-                {% trans "Confirm" %}
+            {% endslot %}
+            {% slot actions %}
+            <div class="d-grid mb-4">
+                <button type="submit" class="btn btn-primary btn-lg text-uppercase fw-bold py-2 rounded-0">
+                    {% trans "Confirm" %}
+                </button>
+            </div>
+            {% endslot %}
             {% endelement %}
-        {% endslot %}
-    {% endelement %}
-{% endblock %}
+            {% endblock %}
+        </div>
+    </div>
+</div>
+{% endblock content %}

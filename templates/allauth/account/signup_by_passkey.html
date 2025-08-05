@@ -1,39 +1,58 @@
 {% extends "account/base.html" %}
 {% load static %}
 {% load allauth i18n %}
+
 {% block head_title %}
-    {% trans "Signup" %}
+{% trans "Signup" %}
 {% endblock head_title %}
+
 {% block content %}
-    {% element h1 %}
-        {% trans "Passkey Sign Up" %}
-    {% endelement %}
-    {% setvar link %}
-        <a href="{{ login_url }}">
-        {% endsetvar %}
-        {% setvar end_link %}
-        </a>
-    {% endsetvar %}
-    {% element p %}
-        {% blocktranslate %}Already have an account? Then please {{ link }}sign in{{ end_link }}.{% endblocktranslate %}
-    {% endelement %}
-    {% url 'account_signup_by_passkey' as action_url %}
-    {% element form form=form method="post" action=action_url tags="entrance,signup" %}
-        {% slot body %}
+<div class="container">
+    <div class="row justify-content-center mt-5 mb-5">
+        <div class="col-lg-6 col-md-8 col-sm-12 p-5 shadow-sm rounded-0 signup-card">
+
+            <h1 class="fw-bold mb-3 text-center fs-1 signup-title">
+                {% trans "Passkey Sign Up" %}
+            </h1>
+
+            {% setvar link %}
+            <a href="{{ login_url }}" class="fw-semibold signup-link">
+                {% endsetvar %}
+                {% setvar end_link %}
+            </a>
+            {% endsetvar %}
+
+            <p class="text-center mb-4 fs-6 signup-subtext">
+                {% blocktranslate %}Already have an account? Then please {{ link }}sign in{{ end_link }}.{%
+                endblocktranslate %}
+            </p>
+
+            {% url 'account_signup_by_passkey' as action_url %}
+            {% element form form=form method="post" action=action_url tags="entrance,signup" %}
+            {% slot body %}
             {% csrf_token %}
             {% element fields form=form unlabeled=True %}
             {% endelement %}
             {{ redirect_field }}
-        {% endslot %}
-        {% slot actions %}
-            {% element button tags="prominent,signup" type="submit" %}
-                {% trans "Sign Up" %}
+            {% endslot %}
+            {% slot actions %}
+            <div class="d-grid mb-4">
+                <button type="submit" class="btn btn-primary btn-lg text-uppercase fw-bold py-2 rounded-0">
+                    {% trans "Sign Up" %}
+                </button>
+            </div>
+            {% endslot %}
             {% endelement %}
-        {% endslot %}
-    {% endelement %}
-    {% element hr %}
-    {% endelement %}
-    {% element button href=signup_url tags="prominent,signup,outline,primary" %}
-        {% trans "Other options" %}
-    {% endelement %}
+
+            <hr class="my-4">
+
+            <div class="text-center">
+                <a href="{{ signup_url }}" class="btn btn-outline-primary btn-lg fw-bold py-2 rounded-0">
+                    {% trans "Other options" %}
+                </a>
+            </div>
+
+        </div>
+    </div>
+</div>
 {% endblock content %}
