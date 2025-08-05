@@ -2,94 +2,115 @@
 {% load static %}
 {% load i18n %}
 {% load allauth account %}
+
 {% block content %}
-    {% setvar title_ %}
-        {% block title %}{% endblock %}
-    {% endsetvar %}
-    {% setvar action_url %}
-        {% block action_url %}{% endblock %}
-    {% endsetvar %}
-    {% setvar extra_tags %}
-        {% block extra_tags %}{% endblock %}
-    {% endsetvar %}
-    {% setvar form_tags %}
-        entrance,{{ extra_tags }}
-    {% endsetvar %}
-    {% setvar submit_button_tags %}
-        confirm,{{ extra_tags }}
-    {% endsetvar %}
-    {% setvar recipient %}
-        {% block recipient %}{% endblock %}
-    {% endsetvar %}
-    {% element h1 %}
-        {{ title_ }}
-    {% endelement %}
-    {% element p %}
-        {% blocktranslate %}We've sent a code to {{ recipient }}. The code expires shortly, so please enter it soon.{% endblocktranslate %}
-    {% endelement %}
-    {% element form form=verify_form method="post" action=action_url tags=form_tags %}
-        {% slot body %}
+<div class="container">
+    <div class="row justify-content-center mt-5 mb-5">
+        <div class="col-lg-6 col-md-8 col-sm-12 p-5 shadow-sm rounded-0 signup-card">
+
+            {% setvar title_ %}
+            {% block title %}{% endblock %}
+            {% endsetvar %}
+            {% setvar action_url %}
+            {% block action_url %}{% endblock %}
+            {% endsetvar %}
+            {% setvar extra_tags %}
+            {% block extra_tags %}{% endblock %}
+            {% endsetvar %}
+            {% setvar form_tags %}
+            entrance,{{ extra_tags }}
+            {% endsetvar %}
+            {% setvar submit_button_tags %}
+            confirm,{{ extra_tags }}
+            {% endsetvar %}
+            {% setvar recipient %}
+            {% block recipient %}{% endblock %}
+            {% endsetvar %}
+
+            <h1 class="fw-bold mb-3 text-center fs-1 signup-title">
+                {{ title_ }}
+            </h1>
+
+            <p class="text-center mb-4 fs-6 signup-subtext">
+                {% blocktranslate %}We've sent a code to {{ recipient }}. The code expires shortly, so please enter it
+                soon.{% endblocktranslate %}
+            </p>
+
+            {% element form form=verify_form method="post" action=action_url tags=form_tags %}
+            {% slot body %}
             {% csrf_token %}
             {% element fields form=verify_form unlabeled=True %}
             {% endelement %}
             {{ redirect_field }}
-        {% endslot %}
-        {% slot actions %}
-            {% element button_group %}
-                {% element button type="submit" tags=submit_button_tags %}
-                    {% translate "Confirm" %}
+            {% endslot %}
+            {% slot actions %}
+            <div class="d-grid gap-2">
+                {% element button type="submit" tags=submit_button_tags class="btn btn-primary btn-lg text-uppercase
+                fw-bold py-2 rounded-0" %}
+                {% translate "Confirm" %}
                 {% endelement %}
+
                 {% if can_resend %}
-                    {% element button form="resend" tags="outline,resend" %}
-                        {% translate "Request new code" %}
-                    {% endelement %}
+                {% element button form="resend" tags="outline,resend" class="btn btn-outline-primary btn-lg
+                text-uppercase fw-bold py-2 rounded-0" %}
+                {% translate "Request new code" %}
+                {% endelement %}
                 {% endif %}
+
                 {% if cancel_url %}
-                    {% element button href=cancel_url tags="outline,cancel" %}
-                        {% translate "Cancel" %}
-                    {% endelement %}
+                {% element button href=cancel_url tags="outline,cancel" class="btn btn-outline-primary btn-lg
+                text-uppercase fw-bold py-2 rounded-0" %}
+                {% translate "Cancel" %}
+                {% endelement %}
                 {% else %}
-                    {% element button type="submit" form="logout-from-stage" tags="outline,cancel" %}
-                        {% translate "Cancel" %}
-                    {% endelement %}
+                {% element button type="submit" form="logout-from-stage" tags="outline,cancel" class="btn
+                btn-outline-primary btn-lg text-uppercase fw-bold py-2 rounded-0" %}
+                {% translate "Cancel" %}
+                {% endelement %}
                 {% endif %}
+            </div>
+            {% endslot %}
             {% endelement %}
-        {% endslot %}
-    {% endelement %}
-    <form id="resend" method="post" action="{{ action_url }}">
-        <input type="hidden" name="action" value="resend">
-        {% csrf_token %}
-    </form>
-    {% if not cancel_url %}
-        <form id="logout-from-stage"
-              method="post"
-              action="{% url 'account_logout' %}">
-            <input type="hidden" name="next" value="{% url 'account_login' %}">
-            {% csrf_token %}
-        </form>
-    {% endif %}
-    {% setvar summary_ %}
-        {% block change_title %}{% endblock %}
-    {% endsetvar %}
-    {% if can_change %}
-        {% element details open=change_form.errors %}
+
+            <form id="resend" method="post" action="{{ action_url }}">
+                <input type="hidden" name="action" value="resend">
+                {% csrf_token %}
+            </form>
+
+            {% if not cancel_url %}
+            <form id="logout-from-stage" method="post" action="{% url 'account_logout' %}">
+                <input type="hidden" name="next" value="{% url 'account_login' %}">
+                {% csrf_token %}
+            </form>
+            {% endif %}
+
+            {% setvar summary_ %}
+            {% block change_title %}{% endblock %}
+            {% endsetvar %}
+            {% if can_change %}
+            <hr class="my-4">
+            {% element details open=change_form.errors %}
             {% slot summary %}
-                {{ summary_ }}
+            {{ summary_ }}
             {% endslot %}
             {% slot body %}
-                {% element form form=change_form method="post" action=action_url %}
-                    {% slot body %}
-                        {% csrf_token %}
-                        {% element fields form=change_form unlabeled=True %}
-                        {% endelement %}
-                    {% endslot %}
-                    {% slot actions %}
-                        {% element button name="action" value="change" type="submit" %}
-                            Change
-                        {% endelement %}
-                    {% endslot %}
-                {% endelement %}
+            {% element form form=change_form method="post" action=action_url %}
+            {% slot body %}
+            {% csrf_token %}
+            {% element fields form=change_form unlabeled=True %}
+            {% endelement %}
             {% endslot %}
-        {% endelement %}
-    {% endif %}
+            {% slot actions %}
+            <button type="submit" name="action" value="change"
+                class="btn btn-outline-primary btn-lg text-uppercase fw-bold py-2 rounded-0">
+                {% trans "Change" %}
+            </button>
+            {% endslot %}
+            {% endelement %}
+            {% endslot %}
+            {% endelement %}
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock content %}
