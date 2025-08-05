@@ -1,46 +1,93 @@
 {% extends "account/base.html" %}
 {% load static %}
 {% load allauth i18n %}
+{% load widget_tweaks %}
+{% load socialaccount %}
+
 {% block head_title %}
-    {% trans "Signup" %}
+{% trans "Signup" %}
 {% endblock head_title %}
+
 {% block content %}
-    {% element h1 %}
-        {% trans "Sign Up" %}
-    {% endelement %}
-    {% setvar link %}
-        <a href="{{ login_url }}">
-        {% endsetvar %}
-        {% setvar end_link %}
-        </a>
-    {% endsetvar %}
-    {% element p %}
-        {% blocktranslate %}Already have an account? Then please {{ link }}sign in{{ end_link }}.{% endblocktranslate %}
-    {% endelement %}
-    {% if not SOCIALACCOUNT_ONLY %}
-        {% url 'account_signup' as action_url %}
-        {% element form form=form method="post" action=action_url tags="entrance,signup" %}
+<div class="container">
+    <div class="row justify-content-center mt-5 mb-5">
+        <div class="col-lg-6 col-md-8 col-sm-12 p-5 shadow-sm rounded-0"
+            style="background-color: var(--secondary); border: 1px solid var(--border);">
+
+            <h1 class="fw-bold mb-3 text-center fs-1" style="font-family: var(--title); color: var(--text);">
+                {% trans "Create Account" %}
+            </h1>
+
+            <p class="text-center mb-4 fs-6" style="color: var(--text); font-family: var(--body);">
+                {% trans "Already have an account?" %}
+                <a href="{{ login_url }}" class="fw-semibold"
+                    style="color: var(--primary); text-decoration: underline;">
+                    {% trans "Sign in" %}
+                </a>.
+            </p>
+
+            {% if not SOCIALACCOUNT_ONLY %}
+            {% url 'account_signup' as action_url %}
+            {% element form form=form method="post" action=action_url tags="entrance,signup" %}
             {% slot body %}
-                {% csrf_token %}
-                {% element fields form=form unlabeled=True %}
-                {% endelement %}
-                {{ redirect_field }}
+            {% csrf_token %}
+            {% for field in form %}
+            <div class="mb-4">
+                <label for="{{ field.id_for_label }}" class="form-label fw-semibold" style="color: var(--text);">
+                    {{ field.label }}
+                </label>
+                {{ field|add_class:"form-control form-control-lg rounded-0" }}
+                {% if field.errors %}
+                <div class="text-danger small mt-1">
+                    {{ field.errors }}
+                </div>
+                {% endif %}
+            </div>
+            {% endfor %}
+            {{ redirect_field }}
             {% endslot %}
+
             {% slot actions %}
-                {% element button tags="prominent,signup" type="submit" %}
+            <div class="d-grid mb-4">
+                <button type="submit" class="btn btn-primary btn-lg text-uppercase fw-bold py-2 rounded-0">
                     {% trans "Sign Up" %}
-                {% endelement %}
+                </button>
+            </div>
             {% endslot %}
-        {% endelement %}
-    {% endif %}
-    {% if PASSKEY_SIGNUP_ENABLED %}
-        {% element hr %}
-        {% endelement %}
-        {% element button href=signup_by_passkey_url tags="prominent,signup,outline,primary" %}
-            {% trans "Sign up using a passkey" %}
-        {% endelement %}
-    {% endif %}
-    {% if SOCIALACCOUNT_ENABLED %}
-        {% include "socialaccount/snippets/login.html" with page_layout="entrance" %}
-    {% endif %}
+            {% endelement %}
+            {% endif %}
+
+            {% if SOCIALACCOUNT_ENABLED %}
+            <div class="mb-3">
+                <hr>
+            </div>
+            <div class="d-flex flex-column gap-3">
+
+                <!-- Google Button -->
+                <a href="{% provider_login_url 'google' process='signup' %}"
+                    class="btn btn-outline-primary btn-lg d-flex align-items-center justify-content-center gap-2">
+                    <i class="fab fa-google social-icon"></i>
+                    <span class="fw-semibold">Sign up with Google</span>
+                </a>
+
+                <!-- GitHub Button -->
+                <a href="{% provider_login_url 'github' process='signup' %}"
+                    class="btn btn-outline-primary btn-lg d-flex align-items-center justify-content-center gap-2">
+                    <i class="fab fa-github social-icon"></i>
+                    <span class="fw-semibold">Sign up with GitHub</span>
+                </a>
+            </div>
+            {% endif %}
+
+            {% if PASSKEY_SIGNUP_ENABLED %}
+            <hr class="my-4">
+            <div class="d-grid">
+                <a href="{{ signup_by_passkey_url }}" class="btn btn-outline-primary btn-lg fw-bold py-2">
+                    {% trans "Sign up using a passkey" %}
+                </a>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
 {% endblock content %}

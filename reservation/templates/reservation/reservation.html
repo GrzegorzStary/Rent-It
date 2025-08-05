@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load reservation_tools %}
+{% load math_filters %}
 
 
 {% block title %} -Rental Bag{% endblock %}
@@ -74,8 +75,8 @@
                         <tr>
                             <th scope="col">Item</th>
                             <th scope="col"></th>
-                            <th scope="col">Price/Day</th>
-                            <th scope="col">Days</th>
+                            <th scope="col">Price per Day</th>
+                            <th scope="col">Dates</th>
                             <th scope="col">Subtotal</th>
                         </tr>
                     </thead>
@@ -156,4 +157,7 @@
             });
     });
 </script>
+
+<script src="{% static 'js/price_calculator.js' %}"></script>
 {% endblock %}
+

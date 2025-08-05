@@ -1,10 +1,6 @@
-<h6><strong>Rental Total: £{{ total|floatformat:2 }}</strong></h6>
-<h6>Deposit: £{{ deposit|floatformat:2 }}</h6>
-<h6>Optional Delivery Fee: £{{ delivery|floatformat:2 }}</h6>
-<h4 class="mt-4"><strong>Grand Total: £{{ grand_total|floatformat:2 }}</strong></h4>
+{% load math_filters %}
 
-{% if free_delivery_delta > 0 %}
-<p class="mb-1 text-danger">
-    Spend just <strong>£{{ free_delivery_delta }}</strong> more on your rental to qualify for free delivery!
-</p>
-{% endif %}
+<h6><strong>Rental Total: £{{ bag_total|floatformat:2 }}</strong></h6>
+<h6>Deposit Total: £{{ deposit_total|floatformat:2 }}</h6>
+<h6>Site Fee (5%): £{{ bag_total|floatformat:2|multiply:"0.05"|floatformat:2 }}</h6>
+<h4 class="mt-4"><strong>Grand Total: £{{ grand_total|floatformat:2 }}</strong></h4>

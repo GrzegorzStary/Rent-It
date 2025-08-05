@@ -74,6 +74,7 @@ INSTALLED_APPS = [
     
     # OTHER APPS
     'storages', # For AWS S3 storage
+    'widget_tweaks', # For customizing form widgets
     
 ]
 
