@@ -50,7 +50,7 @@
 <div class="card-container d-flex flex-wrap justify-content-center gap-3 px-3">
     {% for product in recent_products|slice:":8" %}
     <a href="{% url 'item_detail' product.id %}" class="product-card-link border-0 text-decoration-none">
-        <div class="card product-card">
+        <div class="card product-card rounded-0">
 
             {% if product.images.all %}
             <div id="productCarousel{{ product.id }}" class="carousel slide">
