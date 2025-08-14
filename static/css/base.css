@@ -1,26 +1,29 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Lexend+Deca:wght@100..900&display=swap');
 
+/* Design Values */
 :root {
-    /* Font Families */
     --title: 'Lexend Deca', Arial, sans-serif;
     --body: 'Inter', Arial, sans-serif;
 
-    /* Colors */
-
-    /* Google Blue */
     --primary: #0348B0;
-    /* Google Light Blue */
     --secondary: #e8f0fe;
-    /* Dark Text */
     --text: #202124;
-    /* White Background */
     --background: #ffffff;
-    /* Light Border */
     --border: #b6c6e6;
-    /* Light Hover Effect */
     --hover: #aecbda;
 }
 
+input,
+select,
+textarea,
+button,
+.btn,
+img,
+.form-control {
+    border-radius: 0 !important;
+}
+
+/* Base */
 body {
     height: 100%;
     display: flex;
@@ -29,7 +32,6 @@ body {
     font-weight: 500;
 }
 
-/* Headings */
 h1,
 h2,
 h3,
@@ -68,22 +70,31 @@ form.d-flex .btn:hover {
     transition: all 0.3s ease-in-out;
 }
 
-/* General button styling */
+/* BUTTONS */
+
+/* Outline-primary button */
 .btn.btn-outline-primary {
     border-radius: 0;
     border-color: var(--primary);
     color: var(--primary);
-}
-
-.btn.btn-outline-primary:hover {
+  }
+  .btn.btn-outline-primary:hover {
     background-color: var(--hover);
     border-color: var(--hover);
     color: var(--background);
     transition: all 0.3s ease-in-out;
-}
-
+  }
+  
+  /* Keep Browsing */
+  .btn.btn-outline-black {
+    border-radius: 0;
+  }
+  .btn.btn-outline-black:hover {
+    color: var(--hover);
+    transition: all 0.3s ease-in-out;
+  }  
+  
 /* Footer */
-
 main {
     flex: 1;
 }
@@ -117,7 +128,7 @@ footer {
     color: var(--primary);
 }
 
-/* Carousel */
+/* Hero Custom Carousel*/
 .custom-carousel {
     height: 400px;
     overflow: hidden;
@@ -133,7 +144,7 @@ footer {
     object-fit: cover;
 }
 
-/* Change colour of carousel icon */
+/*Carousel Arrows (uses theme primary automatically)*/
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     background-size: 100% 100%;
@@ -143,27 +154,48 @@ footer {
     color: var(--bs-primary);
 }
 
+/* Prev arrow */
 .carousel-control-prev-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%230348B0' viewBox='0 0 16 16'%3E%3Cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='currentColor'%3E%3Cpath d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3E%3C/svg%3E");
 }
 
+/* Next arrow */
 .carousel-control-next-icon {
-    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%230348B0' viewBox='0 0 16 16'%3E%3Cpath d='M4.646 1.646a.5.5 0 0 0 0 .708L10.293 8l-5.647 5.646a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708l-6-6a.5.5 0 0 0-.708 0z'/%3E%3C/svg%3E");
+    background-image: url("data:image/svg+xml;charset=utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='currentColor'%3E%3Cpath d='M4.646 1.646a.5.5 0 0 0 0 .708L10.293 8l-5.647 5.646a.5.5 0 0 0 .708.708l6-6a.5.5 0 0 0 0-.708l-6-6a.5.5 0 0 0-.708 0z'/%3E%3C/svg%3E");
 }
 
-/* Responsive fixed ratio to prevent arrows from jumping if the image is shorter / taller */
+/*Prevent Arrow "Jumping"*/
+
+/* Detail page main carousel */
 #productCarousel .carousel-inner {
     aspect-ratio: 4 / 3;
     height: auto;
-  }
-  
-  #productCarousel .carousel-item { height: 100%; }
-  #productCarousel .carousel-item img {
+}
+
+#productCarousel .carousel-item {
+    height: 100%;
+}
+
+#productCarousel .carousel-item img {
     width: 100%;
     height: 100%;
     object-fit: contain;
-  }
-  
+}
+
+/* mini carousels */
+.product-card .carousel-inner {
+    aspect-ratio: 4 / 3;
+}
+
+.product-card .carousel-item {
+    height: 100%;
+}
+
+.product-card .carousel-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 /* Card Layout */
 .card-container {
@@ -199,7 +231,7 @@ footer {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-/* Image Preview */
+/*Image Preview (create / edit form)*/
 #image-preview {
     max-width: 200px;
     margin-top: 10px;
@@ -213,7 +245,6 @@ footer {
     display: block;
 }
 
-/* Icon */
 .icon {
     align-items: center;
     display: inline-flex;
@@ -262,8 +293,61 @@ footer {
     text-decoration: underline;
 }
 
+/* Edit Item Page, Uniform Thumbs, Delete Button */
+.existing-images {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
 
-/* Responsiveness */
+.image-card {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    background: #fff;
+}
+
+.thumb-wrap {
+    width: 220px;
+    height: 165px;
+    border-radius: 0.5rem;
+    overflow: hidden;
+    flex: 0 0 auto;
+    background: #f8f9fa;
+}
+
+.image-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    display: block;
+}
+
+.delete-btn {
+    margin-left: auto;
+    white-space: nowrap;
+}
+
+.new-image-preview {
+    margin-top: 0.75rem;
+    max-width: 420px;
+}
+
+#image-preview {
+    width: 100%;
+    height: 260px;
+    object-fit: contain;
+    background: #f8f9fa;
+    border: 1px dashed #dcdcdc;
+    border-radius: 0.5rem;
+}
+
+/* RESPONSIVE DESIFN */
 @media (max-width: 1200px) {
     .card {
         flex: 1 0 calc(33.33% - 1rem);
@@ -275,7 +359,6 @@ footer {
         flex: 1 0 calc(50% - 1rem);
     }
 }
-
 
 @media (max-width: 576px) {
     .card {
@@ -295,5 +378,20 @@ footer {
     .form-control,
     .btn {
         font-size: 0.9rem;
+    }
+
+    /* Edit page mobile tweaks */
+    .image-card {
+        flex-wrap: wrap;
+    }
+
+    .thumb-wrap {
+        width: 100%;
+        height: 200px;
+    }
+
+    .delete-btn {
+        margin-left: 0;
+        margin-top: 0.5rem;
     }
 }

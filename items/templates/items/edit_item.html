@@ -4,40 +4,47 @@
 {% block title %} - Edit Item{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-  <h1>Edit Item: {{ item.name }}</h1>
+<div class="container mt-4 rounded-0">
+  <h1 class="rounded-0">Edit Item: {{ item.name }}</h1>
 
-  <form method="post" enctype="multipart/form-data" class="edit-item-form">
-      {% csrf_token %}
+  <form method="post" enctype="multipart/form-data" class="edit-item-form rounded-0">
+    {% csrf_token %}
+    
+    <div class="rounded-0">
       {{ form.as_p }}
+    </div>
 
-      <h4>Existing Images</h4>
-      <div class="existing-images">
-        {% if existing_images %}
-          {% for img in existing_images %}
-            <div class="image-card">
-              <img src="{{ img.image.url }}" alt="Image" class="image-thumb">
-              <a href="{% url 'delete_image' img.id %}" class="btn btn-sm btn-danger delete-btn">Delete</a>
-            </div>
-          {% endfor %}
-        {% else %}
-          <p>No images uploaded yet.</p>
-        {% endif %}
+    <h4 class="rounded-0">Existing Images</h4>
+    <div class="existing-images rounded-0">
+      {% if existing_images %}
+      {% for img in existing_images %}
+      <div class="image-card rounded-0">
+        <div class="thumb-wrap rounded-0">
+          <img src="{{ img.image.url }}" alt="Image {{ forloop.counter }}" class="image-thumb rounded-0">
+        </div>
+        <a href="{% url 'delete_image' img.id %}" class="btn btn-outline-danger btn-sm delete-btn rounded-0">
+          Delete
+        </a>
       </div>
+      {% endfor %}
+      {% else %}
+      <p class="rounded-0">No images uploaded yet.</p>
+      {% endif %}
+    </div>
 
-      <h4>Add More Images</h4>
-      <input type="file" name="images" id="id_images" multiple>
+    <h4 class="rounded-0">Add More Images</h4>
+    <input type="file" name="images" id="id_images" multiple class="form-control rounded-0">
 
-      <div class="new-image-preview">
-        <img id="image-preview" 
-             src="" 
-             alt="New image preview">
-      </div>
+    <div class="new-image-preview rounded-0">
+      <img id="image-preview" src="" alt="New image preview" class="rounded-0">
+    </div>
 
-      <button type="submit" class="btn btn-primary mt-3">Save Changes</button>
-      <a href="{% url 'user_profile' %}" class="btn btn-secondary mt-3">Cancel</a>
+    <button type="submit" class="btn btn-primary mt-3 rounded-0">Save Changes</button>
+    <a href="{% url 'user_profile' %}" class="btn btn-secondary mt-3 rounded-0">Cancel</a>
   </form>
 </div>
+<br>
+<br>
 {% endblock %}
 
 {% block extra_js %}
