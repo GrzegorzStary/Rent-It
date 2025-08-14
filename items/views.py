@@ -88,7 +88,7 @@ def edit_item(request, pk):
             for f in files:
                 ProductImage.objects.create(product=item, image=f)
             messages.success(request, 'Item updated successfully!')
-            return redirect('user_profile')
+            return redirect('item_detail', pk=item.pk)
     else:
         form = ProductForm(instance=item)
         

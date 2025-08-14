@@ -4,15 +4,38 @@
 {% block title %} - Items{% endblock %}
 
 {% block content %}
-<div class="card-container d-flex flex-wrap justify-content-center gap-3 px-3">
+<div class="card-container d-flex flex-wrap justify-content-center gap-3 px-3 rounded-0">
     {% for product in products %}
     <a href="{% url 'item_detail' product.id %}" class="product-card-link border-0 text-decoration-none">
         <div class="card product-card rounded-0">
-            {% if product.images.first %}
-            <img src="{{ product.images.first.image.url }}" class="card-img-top" alt="{{ product.name }}">
+
+            {% if product.images.all %}
+            <div id="productCarousel{{ product.id }}" class="carousel slide">
+                <div class="carousel-inner">
+                    {% for img in product.images.all %}
+                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                        <img src="{{ img.image.url }}" class="card-img-top img-fluid" alt="{{ product.name }}">
+                    </div>
+                    {% endfor %}
+                </div>
+
+                {% if product.images.all|length > 1 %}
+                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel{{ product.id }}"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel{{ product.id }}"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+                {% endif %}
+            </div>
             {% else %}
-            <img src="{% static 'images/noimage.png' %}" class="card-img-top" alt="{{ product.name }}">
+            <img src="{% static 'images/noimage.png' %}" class="card-img-top img-fluid" alt="{{ product.name }}">
             {% endif %}
+
             <div class="card-body">
                 <h6 class="card-title text-truncate">{{ product.name }}</h6>
                 <p class="card-text text-muted mb-1">£{{ product.price }}</p>
@@ -23,13 +46,13 @@
                 {% endif %}
                 <p class="card-text small text-truncate">{{ product.description }}</p>
             </div>
+
         </div>
     </a>
     {% empty %}
     <p>No items listed yet.</p>
     {% endfor %}
 </div>
-
 {% endblock %}
 
 {% block extra_js %}
