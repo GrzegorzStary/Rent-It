@@ -2,6 +2,8 @@
 {% load i18n %}
 {% load account %}
 {% load socialaccount %}
+{% load math_filters %}
+{% load reservation_tools %}
 
 <header>
   <div id="topnav" class="row bg-white pt-lg-2 d-none d-lg-flex justify-content-between align-items-center">
@@ -84,7 +86,7 @@
             <!-- Cart -->
             <li class="nav-item ms-3">
               <a class="nav-link position-relative {% if grand_total %}text-primary fw-bold{% else %}text-dark{% endif %}"
-                href="{% url 'view_bag' %}">
+                href="{% url 'reservation:view_bag' %}">
                 <span class="ms-1">{% if grand_total %}£{{ grand_total|floatformat:2 }}{% else %}£0.00{% endif %}</span>
               </a>
             </li>

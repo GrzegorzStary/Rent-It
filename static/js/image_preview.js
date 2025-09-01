@@ -1,3 +1,5 @@
+// This script provides a live preview of an image file selected in a file input field.
+
 document.addEventListener("DOMContentLoaded", function () {
     const fileInput = document.querySelector('#id_images');
     const preview = document.querySelector('#image-preview');

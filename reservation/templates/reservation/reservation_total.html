@@ -1,6 +1,11 @@
 {% load math_filters %}
-
+{% load static %}
 <h6><strong>Rental Total: £{{ bag_total|floatformat:2 }}</strong></h6>
-<h6>Deposit Total: £{{ deposit_total|floatformat:2 }}</h6>
-<h6>Site Fee (5%): £{{ bag_total|floatformat:2|multiply:"0.05"|floatformat:2 }}</h6>
+<h6 class="mb-2">
+    <strong>Deposit:</strong> £{{ deposit|default_if_none:"0.00"|floatformat:2 }}
+</h6>
+<h6>Site Fee (10%): £{{ bag_total|floatformat:2|multiply:"0.10"|floatformat:2 }}</h6>
 <h4 class="mt-4"><strong>Grand Total: £{{ grand_total|floatformat:2 }}</strong></h4>
+
+
+<script src="{% static 'js/price_calculator.js' %}"></script>

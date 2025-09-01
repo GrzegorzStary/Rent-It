@@ -13,10 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const startDatePicker = new tempusDominus.TempusDominus(
         document.getElementById('start-date-picker'),
         {
-            restrictions: {
-                minDate: today,
-                disabledDates: unavailableDates
-            },
+            restrictions: { minDate: today },
             display: { components: { useTwentyfourHour: true, clock: false } },
             localization: {
                 format: 'dd/MM/yyyy'
@@ -27,10 +24,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const endDatePicker = new tempusDominus.TempusDominus(
         document.getElementById('end-date-picker'),
         {
-            restrictions: {
-                minDate: today,
-                disabledDates: unavailableDates
-            },
+            restrictions: { minDate: today },
             display: { components: { useTwentyfourHour: true, clock: false } },
             localization: {
                 format: 'dd/MM/yyyy'
@@ -69,14 +63,14 @@ document.addEventListener("DOMContentLoaded", () => {
         const days = Math.ceil((end - start) / msPerDay);
 
         const basePrice = pricePerDay * days;
-        const siteFee = 0.05 * basePrice;
+        const siteFee = 0.10 * basePrice;
         const total = basePrice + deposit + siteFee;
 
         breakdownDiv.innerHTML = `
             <p>Price per day: £${pricePerDay.toFixed(2)}</p>
             <p>Days: ${days}</p>
             <p>Deposit: £${deposit.toFixed(2)}</p>
-            <p>Site Fee (5%): £${siteFee.toFixed(2)}</p>
+            <p>Site Fee (10%): £${siteFee.toFixed(2)}</p>
             <hr>
             <p><strong>Total: £${total.toFixed(2)}</strong></p>
         `;

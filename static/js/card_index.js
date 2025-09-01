@@ -1,3 +1,5 @@
+// This script dynamically adjusts the visibility of product cards based on the screen width.
+
 function updateCardVisibility() {
     const cards = document.querySelectorAll('.recent-products .card');
     const screenWidth = window.innerWidth;

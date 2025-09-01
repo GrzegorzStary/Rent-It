@@ -1,7 +1,22 @@
-{% if item.product.images.all %}
-    {% for img in item.product.images.all %}
-        <img src="{{ img.image.url }}" class="img-fluid" alt="{{ item.product.name }}">
-    {% endfor %}
+{% load static %}
+
+{% if item.product.images.all|length %}
+{# unikalny sufiks: preferuj item.item_id, w przeciwnym wypadku użyj forloop.counter #}
+{% with unique=item.item_id|default:forloop.counter %}
+{% with cid="miniCarousel-"|add:item.product.id|stringformat:"s"|add:"-"|add:unique|stringformat:"s" %}
+<div class="product-card">
+    <div id="{{ cid }}" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            {% for img in item.product.images.all %}
+            <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                <img src="{{ img.image.url }}" class="d-block w-100" alt="{{ item.product.name }}">
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endwith %}
+{% endwith %}
 {% else %}
-    <img class="img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="No image">
+<img class="img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="No image">
 {% endif %}
