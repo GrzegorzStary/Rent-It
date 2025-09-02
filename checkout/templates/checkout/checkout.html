@@ -27,7 +27,7 @@
 
     <div class="row">
         <div class="col-12 col-lg-6 order-lg-last mb-5">
-            <p class="text-muted">Order Summary ({{ product_count }})</p>
+            <p class="text-muted">Order Summary ({{ checkout_product_count }})</p>
             <div class="row">
                 <div class="col-7 offset-2">
                     <p class="mb-1 mt-0 small text-muted">Item</p>
@@ -40,7 +40,7 @@
             <div class="row mb-3">
                 <div class="col-2">
                     <a href="{% url 'item_detail' item.product.id %}">
-                        {% if item.product.images.all %}
+                        {% if item.product.images.exists %}
                             <img src="{{ item.product.images.first.image.url }}" class="img-fluid" alt="{{ item.product.name }}">
                         {% else %}
                             <img class="img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="No image">
@@ -49,7 +49,10 @@
                 </div>
                 <div class="col-7">
                     <p class="my-0"><strong>{{ item.product.name }}</strong></p>
-                    <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
+                    <p class="my-0 small text-muted">Start: {{ item.start_date|date:"d/m/Y" }}</p>
+                    <p class="my-0 small text-muted">End: {{ item.end_date|date:"d/m/Y" }}</p>
+                    <p class="my-0 small text-muted">Duration: {{ item.duration }} day{{ item.duration|pluralize }}</p>
+                    <p class="my-0 small text-muted">Deposit: £{{ item.deposit|floatformat:2 }}</p>
                 </div>
                 <div class="col-3 text-right">
                     <p class="my-0 small text-muted">£{{ item.subtotal|floatformat:2 }}</p>
@@ -59,12 +62,16 @@
             <hr class="my-0">
             <div class="row text-black text-right">
                 <div class="col-7 offset-2">
-                    <p class="my-0">Order Total:</p>
+                    <p class="my-0">Rental Total:</p>
+                    <p class="my-0">Deposit Total:</p>
+                    <p class="my-0">Site Fee (10%):</p>
                     <p class="my-0">Delivery (optional):</p>
                     <p class="my-0">Checkout Total:</p>
                 </div>
                 <div class="col-3">
-                    <p class="my-0">£{{ total|floatformat:2 }}</p>
+                    <p class="my-0">£{{ checkout_total|floatformat:2 }}</p>
+                    <p class="my-0">£{{ deposit_total|floatformat:2 }}</p>
+                    <p class="my-0">£{{ site_fee|floatformat:2 }}</p>
                     <p class="my-0">£{{ delivery|floatformat:2 }}</p>
                     <p class="my-0"><strong>£{{ checkout_grand_total|floatformat:2 }}</strong></p>
                 </div>

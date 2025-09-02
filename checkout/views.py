@@ -66,9 +66,9 @@ def checkout(request):
                 try:
                     product = Product.objects.get(id=item_id)
 
-                    start_date = request.POST.get(f'start_date_{item_id}')
-                    end_date = request.POST.get(f'end_date_{item_id}')
-                    duration = request.POST.get(f'duration_{item_id}') or 1
+                    start_date = item_data.get('start_date')
+                    end_date = item_data.get('end_date')
+                    duration = item_data.get('duration', 1)
 
                     if not start_date or not end_date:
                         messages.error(request, f"Rental dates for {product.name} are required.")
@@ -98,9 +98,9 @@ def checkout(request):
             messages.error(request, 'There was an error with your form. Please double check your information.')
 
     else:
-        
-        if 'checkout' not in request.session and 'bag' in request.session:
-         request.session['checkout'] = request.session['bag']
+        if 'bag' in request.session:
+            request.session['checkout'] = request.session['bag']
+            request.session.modified = True
 
         checkout_data = request.session.get('checkout', {})
         if not checkout_data:
@@ -108,6 +108,7 @@ def checkout(request):
             return redirect(reverse('items'))
 
         current_checkout = checkout_context(request)
+        checkout_items = current_checkout.get('checkout_items', [])
         total = current_checkout.get('checkout_grand_total', Decimal('0.00'))
         stripe_total = int(total * 100)
 
@@ -144,13 +145,22 @@ def checkout(request):
             messages.warning(request, 'Stripe public key is missing. Did you forget to set it in your environment?')
 
         template = 'checkout/checkout.html'
+        current_checkout = checkout_context(request)
+        checkout_items = current_checkout.get('checkout_items', [])
+
         context = {
             'order_form': order_form,
             'stripe_public_key': stripe_public_key,
             'client_secret': intent.client_secret,
+            'checkout_items': checkout_items,
             'checkout': checkout_data,
-            'checkout_grand_total': total,
-        }
+            'checkout_total': current_checkout.get('checkout_total'),
+            'deposit_total': current_checkout.get('deposit_total'),
+            'checkout_grand_total': current_checkout.get('checkout_grand_total'),
+            'checkout_product_count': current_checkout.get('checkout_product_count'),
+            'delivery': Decimal('0.00'),
+            }
+
 
         return render(request, template, context)
 
