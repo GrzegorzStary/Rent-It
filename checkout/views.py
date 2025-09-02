@@ -11,6 +11,7 @@ from items.models import Product
 from profiles.forms import ProfileForm
 from profiles.models import Profile
 from reservation.context_processors import cart_context
+from decimal import Decimal
 
 import stripe
 import json
@@ -102,15 +103,24 @@ def checkout(request):
             messages.error(request, "There's nothing in your bag at the moment")
             return redirect(reverse('items'))
 
+        # Get checkout totals from context processor
         current_checkout = cart_context(request)
-        total = current_checkout['grand_total']
-        stripe_total = round(total * 100)
+        total = current_checkout.get('checkout_grand_total', Decimal('0.00'))
+        stripe_total = int(total * 100)  # Stripe works in pence
+
+        # Stripe minimum: 30p 
+        if stripe_total < 30:
+            messages.error(request, "Total must be at least £0.30 to proceed with payment.")
+            return redirect(reverse('reservation:view_bag'))
+
+        # Stripe setup
         stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
         )
 
+        # Pre-fill form if user is logged in
         if request.user.is_authenticated:
             try:
                 profile = Profile.objects.get(user=request.user)
@@ -139,6 +149,7 @@ def checkout(request):
             'stripe_public_key': stripe_public_key,
             'client_secret': intent.client_secret,
             'bag': bag,
+            'checkout_grand_total': total,
         }
 
         return render(request, template, context)

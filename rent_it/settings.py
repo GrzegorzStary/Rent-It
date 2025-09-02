@@ -109,8 +109,9 @@ TEMPLATES = [
         'OPTIONS': {
             'context_processors': [
                 'django.template.context_processors.debug',
-                'django.template.context_processors.request', # For allauth
-                'reservation.context_processors.cart_context',  # Custom context processor for cart
+                'django.template.context_processors.request',  # For allauth
+                'reservation.context_processors.cart_context',  # For cart in reservation app
+                'checkout.checkout_context.checkout_context',   # Checkout context
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
             ],

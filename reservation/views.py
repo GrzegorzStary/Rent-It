@@ -34,7 +34,7 @@ def view_bag(request):
         start_date = item_data.get('start_date')
         end_date = item_data.get('end_date')
 
-        # Recalculate duration if possible
+        # Recalculate duration
         parsed_duration = _parse_duration_from_dates(start_date, end_date)
         if parsed_duration:
             duration = parsed_duration

@@ -85,9 +85,9 @@
 
             <!-- Cart -->
             <li class="nav-item ms-3">
-              <a class="nav-link position-relative {% if grand_total %}text-primary fw-bold{% else %}text-dark{% endif %}"
+              <a class="nav-link position-relative {% if bag_grand_total %}text-primary fw-bold{% else %}text-dark{% endif %}"
                 href="{% url 'reservation:view_bag' %}">
-                <span class="ms-1">{% if grand_total %}£{{ grand_total|floatformat:2 }}{% else %}£0.00{% endif %}</span>
+                <span class="ms-1">{% if bag_grand_total %}£{{ bag_grand_total|floatformat:2 }}{% else %}£0.00{% endif %}</span>
               </a>
             </li>
           </ul>

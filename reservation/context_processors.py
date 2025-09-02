@@ -30,12 +30,11 @@ def cart_context(request):
         else:
             start_date = item_data.get("start_date")
             end_date = item_data.get("end_date")
-
-            # Calculate duration safely
+            
             try:
                 if start_date and end_date:
-                    start = datetime.strptime(start_date, "%Y-%m-%d")
-                    end = datetime.strptime(end_date, "%Y-%m-%d")
+                    start = datetime.strptime(start_date, "%d/%m/%Y")
+                    end = datetime.strptime(end_date, "%d/%m/%Y")
                     duration = max((end - start).days, 1)
                 else:
                     duration = 1
@@ -61,7 +60,7 @@ def cart_context(request):
             'end_date': end_date,
         })
 
-    grand_total = (bag_total + bag_deposit_total).quantize(Decimal("0.01"))
+    bag_grand_total = (bag_total + bag_deposit_total).quantize(Decimal("0.01"))
 
     # CHECKOUT 
     checkout_items = []
@@ -100,7 +99,7 @@ def cart_context(request):
         'bag_total': bag_total.quantize(Decimal("0.01")),
         'bag_deposit_total': bag_deposit_total.quantize(Decimal("0.01")),
         'bag_product_count': bag_product_count,
-        'grand_total': grand_total,
+        'bag_grand_total': bag_grand_total,
 
         # CHECKOUT
         'checkout_items': checkout_items,
