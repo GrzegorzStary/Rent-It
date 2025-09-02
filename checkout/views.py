@@ -10,7 +10,7 @@ from .models import Order, OrderLineItem
 from items.models import Product
 from profiles.forms import ProfileForm
 from profiles.models import Profile
-from reservation.context_processors import cart_context
+from checkout.checkout_context import checkout_context
 from decimal import Decimal
 
 import stripe
@@ -23,7 +23,7 @@ def cache_checkout_data(request):
         pid = request.POST.get('client_secret').split('_secret')[0]
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
-            'bag': json.dumps(request.session.get('bag', {})),
+            'checkout': json.dumps(request.session.get('checkout', {})),
             'save_info': request.POST.get('save_info'),
             'username': request.user.username,
         })
@@ -38,7 +38,7 @@ def checkout(request):
     stripe_secret_key = settings.STRIPE_SECRET_KEY
 
     if request.method == 'POST':
-        bag = request.session.get('bag', {})
+        checkout_data = request.session.get('checkout', {})
 
         form_data = {
             'full_name': request.POST['full_name'],
@@ -59,10 +59,10 @@ def checkout(request):
             order = order_form.save(commit=False)
             pid = request.POST.get('client_secret').split('_secret')[0]
             order.stripe_pid = pid
-            order.original_checkout = json.dumps(bag)
+            order.original_checkout = json.dumps(checkout_data)
             order.save()
 
-            for item_id, item_data in bag.items():
+            for item_id, item_data in checkout_data.items():
                 try:
                     product = Product.objects.get(id=item_id)
 
@@ -98,29 +98,29 @@ def checkout(request):
             messages.error(request, 'There was an error with your form. Please double check your information.')
 
     else:
-        bag = request.session.get('bag', {})
-        if not bag:
-            messages.error(request, "There's nothing in your bag at the moment")
+        
+        if 'checkout' not in request.session and 'bag' in request.session:
+         request.session['checkout'] = request.session['bag']
+
+        checkout_data = request.session.get('checkout', {})
+        if not checkout_data:
+            messages.error(request, "There's nothing in your checkout at the moment")
             return redirect(reverse('items'))
 
-        # Get checkout totals from context processor
-        current_checkout = cart_context(request)
+        current_checkout = checkout_context(request)
         total = current_checkout.get('checkout_grand_total', Decimal('0.00'))
-        stripe_total = int(total * 100)  # Stripe works in pence
+        stripe_total = int(total * 100)
 
-        # Stripe minimum: 30p 
         if stripe_total < 30:
             messages.error(request, "Total must be at least £0.30 to proceed with payment.")
             return redirect(reverse('reservation:view_bag'))
 
-        # Stripe setup
         stripe.api_key = stripe_secret_key
         intent = stripe.PaymentIntent.create(
             amount=stripe_total,
             currency=settings.STRIPE_CURRENCY,
         )
 
-        # Pre-fill form if user is logged in
         if request.user.is_authenticated:
             try:
                 profile = Profile.objects.get(user=request.user)
@@ -148,7 +148,7 @@ def checkout(request):
             'order_form': order_form,
             'stripe_public_key': stripe_public_key,
             'client_secret': intent.client_secret,
-            'bag': bag,
+            'checkout': checkout_data,
             'checkout_grand_total': total,
         }
 
@@ -156,9 +156,6 @@ def checkout(request):
 
 
 def checkout_success(request, order_number):
-    """
-    Handle successful checkouts
-    """
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
 
@@ -182,8 +179,8 @@ def checkout_success(request, order_number):
     messages.success(request, f'Order successfully processed! '
         f'Your order number is {order_number}. A confirmation email will be sent to {order.email}.')
 
-    if 'bag' in request.session:
-        del request.session['bag']
+    if 'checkout' in request.session:
+        del request.session['checkout']
 
     template = 'checkout/checkout_success.html'
     context = {

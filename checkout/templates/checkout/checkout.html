@@ -37,19 +37,16 @@
                 </div>
             </div>
             {% for item in checkout_items %}
-            <div class="row">
-                <div class="col-2 mb-1">
-                    <a href="{% url 'product_detail' item.product.id %}">
+            <div class="row mb-3">
+                <div class="col-2">
+                    <a href="{% url 'item_detail' item.product.id %}">
                         {% if item.product.images.all %}
-                            {% for img in item.product.images.all %}
-                                <img src="{{ img.image.url }}" class="img-fluid" alt="{{ item.product.name }}">
-                            {% endfor %}
+                            <img src="{{ item.product.images.first.image.url }}" class="img-fluid" alt="{{ item.product.name }}">
                         {% else %}
                             <img class="img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="No image">
                         {% endif %}
                     </a>
                 </div>
-            </div>
                 <div class="col-7">
                     <p class="my-0"><strong>{{ item.product.name }}</strong></p>
                     <p class="my-0 small text-muted">Qty: {{ item.quantity }}</p>
@@ -116,17 +113,17 @@
                 </fieldset>
 
                 <div class="submit-button text-right mt-5 mb-2">
-                    {% url 'reservation:view_bag' %}
+                    <a href="{% url 'reservation:view_bag' %}" class="btn btn-outline-secondary rounded-0">
                         <span class="icon"><i class="fas fa-chevron-left"></i></span>
                         <span class="font-weight-bold">Adjust Checkout</span>
                     </a>
-                    <button id="submit-button" class="btn btn-black rounded-0">
+                    <button id="submit-button" class="btn btn-outline-primary rounded-0">
                         <span class="font-weight-bold">Complete Order</span>
                         <span class="icon"><i class="fas fa-lock"></i></span>
                     </button>
-                    <p class="small text-danger my-0">
+                    <p class="small text-danger my-0 mt-2">
                         <span class="icon"><i class="fas fa-exclamation-circle"></i></span>
-                        <span>Your card will be charged <strong>£{{ checout_grand_total|floatformat:2 }}</strong></span>
+                        <span>Your card will be charged <strong>£{{ checkout_grand_total|floatformat:2 }}</strong></span>
                     </p>
                 </div>
             </form>
