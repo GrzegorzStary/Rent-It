@@ -34,39 +34,49 @@
         </div>
 
         <hr>
-        <h6 class="mb-3">Items rented</h6>
+        <h6 class="mb-3">Items rented & pickup contacts</h6>
+
         {% for item in order.lineitems.all %}
-          <div class="row align-items-center py-2 border-bottom">
-            <div class="col-12 col-md-6">
-              <strong>{{ item.product.name }}</strong>
-              <div class="small text-muted">
-                From <strong>{{ item.start_date|date:"d/m/Y" }}</strong>
-                to <strong>{{ item.end_date|date:"d/m/Y" }}</strong>
-                ({{ item.rental_duration }} day{{ item.rental_duration|pluralize }})
+          {% with owner=item.product.user %}
+          <div class="py-3 border-bottom">
+            <div class="row align-items-start">
+              <div class="col-12 col-md-6">
+                <strong>{{ item.product.name }}</strong>
+                <div class="small text-muted">
+                  From <strong>{{ item.start_date|date:"d/m/Y" }}</strong>
+                  to <strong>{{ item.end_date|date:"d/m/Y" }}</strong>
+                  ({{ item.rental_duration }} day{{ item.rental_duration|pluralize }})
+                </div>
+              </div>
+              <div class="col-12 col-md-6 text-md-end">
+                <div class="small">Price per day: £{{ item.product.price }}</div>
+                <div class="fw-semibold">Line total: £{{ item.lineitem_total }}</div>
               </div>
             </div>
-            <div class="col-12 col-md-6 text-md-end">
-              <div class="small">Price per day: £{{ item.product.price }}</div>
-              <div class="fw-semibold">Line total: £{{ item.lineitem_total }}</div>
+
+            <!-- Pickup contact (owner) -->
+            <div class="mt-3">
+              <div class="small text-muted mb-1">Pickup from</div>
+              <div><strong>{{ owner.get_full_name|default:owner.username }}</strong></div>
+              {% if owner.email %}<div>Email: {{ owner.email }}</div>{% endif %}
+              {% if owner.profile and owner.profile.phone_number %}
+                <div>Phone: {{ owner.profile.phone_number }}</div>
+              {% endif %}
+              {% if owner.profile and (owner.profile.house_number or owner.profile.street_name or owner.profile.city or owner.profile.postal_code) %}
+                <div>
+                  Address:
+                  {% if owner.profile.house_number %}{{ owner.profile.house_number }} {% endif %}
+                  {% if owner.profile.street_name %}{{ owner.profile.street_name }}{% endif %}
+                  {% if owner.profile.city %}, {{ owner.profile.city }}{% endif %}
+                  {% if owner.profile.postal_code %}, {{ owner.profile.postal_code }}{% endif %}
+                </div>
+              {% endif %}
             </div>
           </div>
+          {% endwith %}
         {% empty %}
           <p class="text-muted">No items found on this order.</p>
         {% endfor %}
-
-        <hr>
-        <h6 class="mb-3">Delivery / pickup details</h6>
-        <div class="row">
-          <div class="col-12 col-md-6">
-            <div><strong>{{ order.full_name }}</strong></div>
-            <div>{{ order.street_address1 }}</div>
-            {% if order.street_address2 %}<div>{{ order.street_address2 }}</div>{% endif %}
-            {% if order.county %}<div>{{ order.county }}</div>{% endif %}
-            <div>{{ order.town_or_city }}{% if order.postcode %}, {{ order.postcode }}{% endif %}</div>
-            <div>{{ order.country }}</div>
-            {% if order.phone_number %}<div>Phone: {{ order.phone_number }}</div>{% endif %}
-          </div>
-        </div>
 
         <hr>
         <h6 class="mb-3">Payment summary</h6>
@@ -97,8 +107,9 @@
       <div class="border rounded p-4 shadow-sm h-100">
         <h6 class="mb-3">What’s next?</h6>
         <ul class="small mb-4">
-          <li>We’ll notify the owner about your rental.</li>
-          <li>Keep your order number for any questions.</li>
+          <li>We’ve notified the owner about your rental.</li>
+          <li>Use the pickup contact details above to arrange collection.</li>
+          <li>Keep your order number handy for any questions.</li>
         </ul>
 
         <div class="d-grid gap-2">
