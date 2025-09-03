@@ -12,7 +12,7 @@ class OrderAdmin(admin.ModelAdmin):
 
     readonly_fields = (
         'order_number', 'date',
-        'delivery_cost', 'order_total',
+        'order_total', 'deposit_total', 'site_fee',
         'grand_total', 'original_checkout',
         'stripe_pid',
     )
@@ -21,14 +21,17 @@ class OrderAdmin(admin.ModelAdmin):
         'order_number', 'user_profile', 'date', 'full_name',
         'email', 'phone_number', 'country',
         'postcode', 'town_or_city', 'street_address1',
-        'street_address2', 'county', 'delivery_cost',
-        'deposit_total', 'order_total', 'grand_total',
-        'original_checkout', 'stripe_pid', 'order_status', 'notes',
+        'street_address2', 'county',
+        'delivery_cost', 'deposit_total', 'site_fee',
+        'order_total', 'grand_total',
+        'original_checkout', 'stripe_pid',
+        'order_status', 'notes',
     )
 
     list_display = (
         'order_number', 'date', 'full_name',
-        'order_status', 'order_total', 'delivery_cost',
+        'order_status', 'order_total',
+        'deposit_total', 'site_fee', 'delivery_cost',
         'grand_total',
     )
 

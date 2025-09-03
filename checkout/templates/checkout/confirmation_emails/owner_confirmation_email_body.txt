@@ -1,0 +1,35 @@
+Hello {{ item.product.user.get_full_name|default:item.product.user.username }},
+
+Good news! Your item has just been rented on Rent-It.  
+Here are the details of the rental:
+
+Rental Number: {{ order.order_number }}  
+Rental Date: {{ order.date|date:"d/m/Y H:i" }}
+
+Rented Item:
+- {{ item.product.name }}
+- Rental period: {{ item.start_date|date:"d/m/Y" }} to {{ item.end_date|date:"d/m/Y" }} ({{ item.rental_duration }} day{{ item.rental_duration|pluralize }})
+
+Renter Information:
+- Name: {{ order.full_name }}
+- Email: {{ order.email }}
+- Phone: {{ order.phone_number }}
+- Address:  
+  {{ order.street_address1 }}{% if order.street_address2 %}, {{ order.street_address2 }}{% endif %}  
+  {{ order.town_or_city }}{% if order.county %}, {{ order.county }}{% endif %}  
+  {{ order.postcode }}, {{ order.country }}
+
+Payment Summary (for reference):
+- Rental Total: £{{ order.order_total }}
+- Deposit Total: £{{ order.deposit_total }}
+- Site Fee: £{{ order.site_fee }}
+- Delivery: £{{ order.delivery_cost|default:"0.00" }}
+- Grand Total: £{{ order.grand_total }}
+
+Please prepare your item for the rental period.  
+You can log in to your Rent-It account to view all rental details.
+
+Thanks for being part of Rent-It!
+
+Best regards,  
+The Rent-It Team

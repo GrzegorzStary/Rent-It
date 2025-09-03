@@ -1,24 +1,37 @@
-Hello {{ order.full_name }}!
+Hello {{ order.full_name }},
 
-This is a confirmation of your rental at Rent-It.  
-Your rental information is below:
+Thank you for renting with Rent-It! 
+Here are the details of your rental:
 
 Rental Number: {{ order.order_number }}  
-Rental Date: {{ order.date }}
+Rental Date: {{ order.date|date:"d/m/Y H:i" }}
 
-Rental Total: £{{ order.order_total }}  
-Delivery (if applicable): £{{ order.delivery_cost|default:"0.00" }}  
-Grand Total: £{{ order.grand_total }}
+Items Rented:
+{% for item in order.lineitems.all %}
+- {{ item.product.name }}  
+  From {{ item.start_date|date:"d/m/Y" }} to {{ item.end_date|date:"d/m/Y" }} ({{ item.rental_duration }} day{{ item.rental_duration|pluralize }})  
+  Price per day: £{{ item.product.price }}  
+  Line total: £{{ item.lineitem_total }}
+{% endfor %}
 
-We will deliver your item(s) to:  
+Payment Summary:
+- Rental Total: £{{ order.order_total }}
+- Deposit Total: £{{ order.deposit_total }}
+- Site Fee: £{{ order.site_fee }}
+- Delivery: £{{ order.delivery_cost|default:"0.00" }}
+- Grand Total: £{{ order.grand_total }}
+
+Delivery / Pickup Address:
 {{ order.street_address1 }}{% if order.street_address2 %}, {{ order.street_address2 }}{% endif %}  
-{{ order.town_or_city }}, {{ order.county }} {{ order.postcode }}, {{ order.country }}
+{{ order.town_or_city }}{% if order.county %}, {{ order.county }}{% endif %}  
+{{ order.postcode }}, {{ order.country }}
 
-We’ve noted your contact number as: {{ order.phone_number }}
+Contact Number: {{ order.phone_number }}
 
-If you have any questions or need assistance, feel free to contact us at {{ contact_email }}.
+If you have any questions, simply reply to this email or contact us at {{ contact_email }}.  
+We’ll be in touch if we need to coordinate delivery or pickup.
 
-Thank you for choosing Rent-It — enjoy your rental!
+Thanks again for choosing Rent-It - enjoy your rental!
 
 Best regards,  
 The Rent-It Team

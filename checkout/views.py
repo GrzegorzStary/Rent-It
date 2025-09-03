@@ -1,9 +1,10 @@
-from django.shortcuts import (
-    render, redirect, reverse, get_object_or_404, HttpResponse
-)
-from django.views.decorators.http import require_POST
-from django.contrib import messages
+from decimal import Decimal
+from datetime import datetime
+
 from django.conf import settings
+from django.contrib import messages
+from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.views.decorators.http import require_POST
 
 from .forms import OrderForm
 from .models import Order, OrderLineItem
@@ -11,53 +12,97 @@ from items.models import Product
 from profiles.forms import ProfileForm
 from profiles.models import Profile
 from checkout.checkout_context import checkout_context
-from decimal import Decimal
 
 import stripe
 import json
+from stripe.error import InvalidRequestError
 
 
 @require_POST
 def cache_checkout_data(request):
+    """
+    Save checkout data into the PaymentIntent metadata for webhook recovery.
+    """
     try:
-        pid = request.POST.get('client_secret').split('_secret')[0]
+        client_secret = request.POST.get('client_secret', '')
+        pid = client_secret.split('_secret')[0] if client_secret else ''
+        if not pid:
+            return HttpResponse(content='Missing client_secret', status=400)
+
         stripe.api_key = settings.STRIPE_SECRET_KEY
         stripe.PaymentIntent.modify(pid, metadata={
             'checkout': json.dumps(request.session.get('checkout', {})),
             'save_info': request.POST.get('save_info'),
-            'username': request.user.username,
+            'username': request.user.username if request.user.is_authenticated else 'anon',
         })
         return HttpResponse(status=200)
     except Exception as e:
         messages.error(request, 'Sorry, your payment cannot be processed right now. Please try again later.')
-        return HttpResponse(content=e, status=400)
+        return HttpResponse(content=str(e), status=400)
+
+
+def _get_or_create_payment_intent(stripe_secret_key: str, amount_pennies: int, currency: str, session):
+    """
+    Reuse an existing PaymentIntent from the session if possible.
+    Create a new one if amount changed or status isn’t reusable.
+    """
+    stripe.api_key = stripe_secret_key
+    intent = None
+    reusable_statuses = {'requires_payment_method', 'requires_confirmation', 'requires_action'}
+
+    pi_info = session.get('stripe_pi')
+    if pi_info:
+        try:
+            existing = stripe.PaymentIntent.retrieve(pi_info['id'])
+            if (existing and existing.status in reusable_statuses
+                    and existing.amount == amount_pennies
+                    and existing.currency == currency):
+                intent = existing
+        except InvalidRequestError:
+            intent = None  # fall through to create new
+
+    if intent is None:
+        intent = stripe.PaymentIntent.create(amount=amount_pennies, currency=currency)
+
+    session['stripe_pi'] = {'id': intent.id, 'amount': intent.amount}
+    session.modified = True
+    return intent
 
 
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
+    DATE_FMT = "%d/%m/%Y"  # UK format
 
     if request.method == 'POST':
         checkout_data = request.session.get('checkout', {})
 
         form_data = {
-            'full_name': request.POST['full_name'],
-            'email': request.POST['email'],
-            'phone_number': request.POST['phone_number'],
-            'country': request.POST['country'],
-            'postcode': request.POST['postcode'],
-            'town_or_city': request.POST['town_or_city'],
-            'street_address1': request.POST['street_address1'],
-            'street_address2': request.POST['street_address2'],
-            'county': request.POST['county'],
+            'full_name': request.POST.get('full_name', ''),
+            'email': request.POST.get('email', ''),
+            'phone_number': request.POST.get('phone_number', ''),
+            'country': request.POST.get('country', ''),
+            'postcode': request.POST.get('postcode', ''),
+            'town_or_city': request.POST.get('town_or_city', ''),
+            'street_address1': request.POST.get('street_address1', ''),
+            'street_address2': request.POST.get('street_address2', ''),
+            'county': request.POST.get('county', ''),
             'notes': request.POST.get('notes', ''),
             'delivery_cost': request.POST.get('delivery_cost') or 0,
         }
 
+        if not checkout_data:
+            messages.error(request, "There's nothing to check out.")
+            return redirect(reverse('items'))
+
         order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save(commit=False)
-            pid = request.POST.get('client_secret').split('_secret')[0]
+            client_secret = request.POST.get('client_secret', '')
+            pid = client_secret.split('_secret')[0] if client_secret else ''
+            if not pid:
+                # Fallback to the PI we stored in session during GET
+                pid = request.session.get('stripe_pi', {}).get('id', '')
             order.stripe_pid = pid
             order.original_checkout = json.dumps(checkout_data)
             order.save()
@@ -66,103 +111,109 @@ def checkout(request):
                 try:
                     product = Product.objects.get(id=item_id)
 
-                    start_date = item_data.get('start_date')
-                    end_date = item_data.get('end_date')
-                    duration = item_data.get('duration', 1)
+                    raw_start = item_data.get('start_date')
+                    raw_end = item_data.get('end_date')
+                    duration = int(item_data.get('duration', 1))
 
-                    if not start_date or not end_date:
+                    if not raw_start or not raw_end:
                         messages.error(request, f"Rental dates for {product.name} are required.")
                         order.delete()
                         return redirect(reverse('checkout'))
 
-                    line_item = OrderLineItem(
+                    try:
+                        start_date = datetime.strptime(raw_start, DATE_FMT).date()
+                        end_date = datetime.strptime(raw_end, DATE_FMT).date()
+                    except ValueError:
+                        messages.error(request, f"Invalid date format for {product.name}. Use DD/MM/YYYY.")
+                        order.delete()
+                        return redirect(reverse('checkout'))
+
+                    OrderLineItem.objects.create(
                         order=order,
                         product=product,
                         start_date=start_date,
                         end_date=end_date,
                         rental_duration=duration,
                     )
-                    line_item.save()
 
                 except Product.DoesNotExist:
-                    messages.error(request, (
-                        "One of the products in your checkout wasn't found in our database. Please call us for assistance!")
-                    )
+                    messages.error(request, "A product in your checkout wasn't found. Please try again.")
                     order.delete()
                     return redirect(reverse('checkout'))
 
             request.session['save_info'] = 'save-info' in request.POST
             return redirect(reverse('checkout_success', args=[order.order_number]))
-
         else:
             messages.error(request, 'There was an error with your form. Please double check your information.')
+            return redirect(reverse('checkout'))
 
-    else:
-        if 'bag' in request.session:
-            request.session['checkout'] = request.session['bag']
-            request.session.modified = True
+    # ---------- GET ----------
+    # Mirror bag → checkout once
+    if 'bag' in request.session and 'checkout' not in request.session:
+        request.session['checkout'] = request.session['bag']
+        request.session.modified = True
 
-        checkout_data = request.session.get('checkout', {})
-        if not checkout_data:
-            messages.error(request, "There's nothing in your checkout at the moment")
-            return redirect(reverse('items'))
+    checkout_data = request.session.get('checkout', {})
+    if not checkout_data:
+        messages.error(request, "There's nothing in your checkout at the moment")
+        return redirect(reverse('items'))
 
-        current_checkout = checkout_context(request)
-        checkout_items = current_checkout.get('checkout_items', [])
-        total = current_checkout.get('checkout_grand_total', Decimal('0.00'))
-        stripe_total = int(total * 100)
+    current_checkout = checkout_context(request)
+    checkout_items = current_checkout.get('checkout_items', [])
+    checkout_total = current_checkout.get('checkout_total', Decimal('0.00'))
+    deposit_total = current_checkout.get('deposit_total', Decimal('0.00'))
+    site_fee = (checkout_total * Decimal('0.10')).quantize(Decimal("0.01"))
+    grand_total = (checkout_total + deposit_total + site_fee).quantize(Decimal("0.01"))
+    stripe_total = int(grand_total * 100)
 
-        if stripe_total < 30:
-            messages.error(request, "Total must be at least £0.30 to proceed with payment.")
-            return redirect(reverse('reservation:view_bag'))
+    if stripe_total < 30:
+        messages.error(request, "Total must be at least £0.30 to proceed with payment.")
+        return redirect(reverse('reservation:view_bag'))
 
-        stripe.api_key = stripe_secret_key
-        intent = stripe.PaymentIntent.create(
-            amount=stripe_total,
-            currency=settings.STRIPE_CURRENCY,
-        )
+    # Reuse or create the PI (prevents new PI on every refresh)
+    intent = _get_or_create_payment_intent(
+        stripe_secret_key=stripe_secret_key,
+        amount_pennies=stripe_total,
+        currency=settings.STRIPE_CURRENCY,
+        session=request.session,
+    )
 
-        if request.user.is_authenticated:
-            try:
-                profile = Profile.objects.get(user=request.user)
-                order_form = OrderForm(initial={
-                    'full_name': profile.user.get_full_name(),
-                    'email': profile.user.email,
-                    'phone_number': profile.phone_number,
-                    'postcode': profile.postal_code,
-                    'town_or_city': profile.city,
-                    'street_address1': profile.house_number,
-                    'street_address2': profile.street_name,
-                    'country': '',
-                    'county': '',
-                })
-            except Profile.DoesNotExist:
-                order_form = OrderForm()
-        else:
+    if request.user.is_authenticated:
+        try:
+            profile = Profile.objects.get(user=request.user)
+            order_form = OrderForm(initial={
+                'full_name': profile.user.get_full_name(),
+                'email': profile.user.email,
+                'phone_number': profile.phone_number,
+                'postcode': profile.postal_code,
+                'town_or_city': profile.city,
+                'street_address1': profile.house_number,
+                'street_address2': profile.street_name,
+                'country': '',
+                'county': '',
+            })
+        except Profile.DoesNotExist:
             order_form = OrderForm()
+    else:
+        order_form = OrderForm()
 
-        if not stripe_public_key:
-            messages.warning(request, 'Stripe public key is missing. Did you forget to set it in your environment?')
+    if not stripe_public_key:
+        messages.warning(request, 'Stripe public key is missing. Did you forget to set it in your environment?')
 
-        template = 'checkout/checkout.html'
-        current_checkout = checkout_context(request)
-        checkout_items = current_checkout.get('checkout_items', [])
-
-        context = {
-            'order_form': order_form,
-            'stripe_public_key': stripe_public_key,
-            'client_secret': intent.client_secret,
-            'checkout_items': checkout_items,
-            'checkout': checkout_data,
-            'checkout_total': current_checkout.get('checkout_total'),
-            'deposit_total': current_checkout.get('deposit_total'),
-            'checkout_grand_total': current_checkout.get('checkout_grand_total'),
-            'checkout_product_count': current_checkout.get('checkout_product_count'),
-            'delivery': Decimal('0.00'),
-            }
-
-
-        return render(request, template, context)
+    context = {
+        'order_form': order_form,
+        'stripe_public_key': stripe_public_key,
+        'client_secret': intent.client_secret,
+        'checkout_items': checkout_items,
+        'checkout': checkout_data,
+        'checkout_total': checkout_total,
+        'deposit_total': deposit_total,
+        'site_fee': site_fee,
+        'checkout_grand_total': grand_total,
+        'checkout_product_count': current_checkout.get('checkout_product_count', 0),
+        'delivery': Decimal('0.00'),
+    }
+    return render(request, 'checkout/checkout.html', context)
 
 
 def checkout_success(request, order_number):
@@ -170,31 +221,34 @@ def checkout_success(request, order_number):
     order = get_object_or_404(Order, order_number=order_number)
 
     if request.user.is_authenticated:
-        profile = Profile.objects.get(user=request.user)
-        order.user_profile = profile
-        order.save()
+        try:
+            profile = Profile.objects.get(user=request.user)
+            order.user_profile = profile
+            order.save()
 
-        if save_info:
-            profile_data = {
-                'phone_number': order.phone_number,
-                'postal_code': order.postcode,
-                'city': order.town_or_city,
-                'house_number': order.street_address1,
-                'street_name': order.street_address2,
-            }
-            user_profile_form = ProfileForm(profile_data, instance=profile)
-            if user_profile_form.is_valid():
-                user_profile_form.save()
+            if save_info:
+                profile_data = {
+                    'phone_number': order.phone_number,
+                    'postal_code': order.postcode,
+                    'city': order.town_or_city,
+                    'house_number': order.street_address1,
+                    'street_name': order.street_address2,
+                }
+                user_profile_form = ProfileForm(profile_data, instance=profile)
+                if user_profile_form.is_valid():
+                    user_profile_form.save()
+        except Profile.DoesNotExist:
+            pass
 
-    messages.success(request, f'Order successfully processed! '
-        f'Your order number is {order_number}. A confirmation email will be sent to {order.email}.')
+    messages.success(
+        request,
+        f'Order successfully processed! Your order number is {order_number}. '
+        f'A confirmation email will be sent to {order.email}.'
+    )
 
-    if 'checkout' in request.session:
-        del request.session['checkout']
+    # Clean up session
+    request.session.pop('checkout', None)
+    request.session.pop('stripe_pi', None)
+    request.session.modified = True
 
-    template = 'checkout/checkout_success.html'
-    context = {
-        'order': order,
-    }
-
-    return render(request, template, context)
+    return render(request, 'checkout/checkout_success.html', {'order': order})

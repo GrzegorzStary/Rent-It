@@ -1,0 +1,1 @@
+Your item "{{ item.product.name }}" has been rented - Order {{ order.order_number }}

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
+{% load reservation_tools %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
@@ -26,6 +27,7 @@
     </div>
 
     <div class="row">
+        <!-- Order Summary -->
         <div class="col-12 col-lg-6 order-lg-last mb-5">
             <p class="text-muted">Order Summary ({{ checkout_product_count }})</p>
             <div class="row">
@@ -41,9 +43,10 @@
                 <div class="col-2">
                     <a href="{% url 'item_detail' item.product.id %}">
                         {% if item.product.images.exists %}
-                            <img src="{{ item.product.images.first.image.url }}" class="img-fluid" alt="{{ item.product.name }}">
+                        <img src="{{ item.product.images.first.image.url }}" class="img-fluid"
+                             alt="{{ item.product.name }}">
                         {% else %}
-                            <img class="img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="No image">
+                        <img class="img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="No image">
                         {% endif %}
                     </a>
                 </div>
@@ -78,10 +81,12 @@
             </div>
         </div>
 
+        <!-- Checkout Form -->
         <div class="col-12 col-lg-6">
             <p class="text-muted">Please fill out the form below to complete your rental</p>
             <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                 {% csrf_token %}
+
                 <fieldset class="rounded px-3 mb-5">
                     <legend class="fieldset-label small text-black px-2 w-auto">Your Details</legend>
                     {{ order_form.full_name | as_crispy_field }}
@@ -102,10 +107,11 @@
                         <label class="form-check-label" for="id-save-info">
                             Save this delivery information to my profile
                         </label>
-                        <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info" checked>
+                        <input class="form-check-input ml-2 mr-0" type="checkbox"
+                               id="id-save-info" name="save-info" checked>
                         {% else %}
                         <label class="form-check-label" for="id-save-info">
-                            <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or 
+                            <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or
                             <a class="text-info" href="{% url 'account_login' %}">login</a> to save your details
                         </label>
                         {% endif %}
@@ -114,7 +120,11 @@
 
                 <fieldset class="px-3">
                     <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
-                    <div class="mb-3" id="card-element"></div>
+
+                    <!-- Stripe Card Element mount point -->
+                    <div id="card-element" class="StripeElement"></div>
+
+                    <!-- Used to display form errors -->
                     <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
                     <input type="hidden" value="{{ client_secret }}" name="client_secret">
                 </fieldset>
@@ -146,8 +156,8 @@
 {% endblock %}
 
 {% block postloadjs %}
-{{ block.super }}
-{{ stripe_public_key|json_script:"id_stripe_public_key" }}
-{{ client_secret|json_script:"id_client_secret" }}
-<script src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+  {{ block.super }}
+  {{ stripe_public_key|json_script:"id_stripe_public_key" }}
+  {{ client_secret|json_script:"id_client_secret" }}
+  <script defer src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}

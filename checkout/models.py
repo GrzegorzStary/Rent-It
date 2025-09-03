@@ -1,4 +1,5 @@
 import uuid
+from decimal import Decimal
 from datetime import timedelta
 
 from django.db import models
@@ -38,11 +39,17 @@ class Order(models.Model):
         max_digits=6, decimal_places=2, null=False, default=0,
         help_text="Security deposit total"
     )
+    site_fee = models.DecimalField(
+        max_digits=6, decimal_places=2, null=False, default=0,
+        help_text="Platform fee (10% of rental total)"
+    )
     order_total = models.DecimalField(
-        max_digits=10, decimal_places=2, null=False, default=0
+        max_digits=10, decimal_places=2, null=False, default=0,
+        help_text="Rental subtotal (excluding deposit/site fee)"
     )
     grand_total = models.DecimalField(
-        max_digits=10, decimal_places=2, null=False, default=0
+        max_digits=10, decimal_places=2, null=False, default=0,
+        help_text="Final total including delivery, deposit, site fee"
     )
 
     original_checkout = models.TextField(
@@ -69,17 +76,19 @@ class Order(models.Model):
 
     def update_total(self):
         """
-        Update grand total each time a line item is added,
-        including optional delivery & deposit.
+        Update grand total each time a line item is added or removed.
         """
         self.order_total = self.lineitems.aggregate(
             Sum('lineitem_total')
-        )['lineitem_total__sum'] or 0
+        )['lineitem_total__sum'] or Decimal('0.00')
 
         total = self.order_total
+
         if self.delivery_cost:
             total += self.delivery_cost
-        total += self.deposit_total
+
+        total += (self.deposit_total or Decimal('0.00'))
+        total += (self.site_fee or Decimal('0.00'))
 
         self.grand_total = total
         self.save()
@@ -108,7 +117,7 @@ class OrderLineItem(models.Model):
     )
 
     lineitem_total = models.DecimalField(
-        max_digits=6, decimal_places=2,
+        max_digits=9, decimal_places=2,
         null=False, blank=False, editable=False
     )
 
@@ -120,10 +129,10 @@ class OrderLineItem(models.Model):
         if not self.rental_duration:
             self.rental_duration = (self.end_date - self.start_date).days or 1
 
-        self.lineitem_total = self.product.price * self.rental_duration
+        price = Decimal(str(self.product.price)) if self.product.price else Decimal('0.00')
+        self.lineitem_total = (price * Decimal(self.rental_duration)).quantize(Decimal('0.01'))
 
         super().save(*args, **kwargs)
-
         self.order.update_total()
 
     def __str__(self):

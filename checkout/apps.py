@@ -8,6 +8,7 @@ class CheckoutConfig(AppConfig):
 
     def ready(self):
         """
-        Import signal handlers when the app is ready.
+        Load signal handlers when the app is ready.
         """
-        import checkout.signals
+        
+        from checkout import signals  
