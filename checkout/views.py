@@ -3,7 +3,8 @@ from datetime import datetime
 
 from django.conf import settings
 from django.contrib import messages
-from django.shortcuts import render, redirect, reverse, get_object_or_404, HttpResponse
+from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 
 from .forms import OrderForm
@@ -98,15 +99,39 @@ def checkout(request):
         order_form = OrderForm(form_data)
         if order_form.is_valid():
             order = order_form.save(commit=False)
+
+            # Stripe PI linkage
             client_secret = request.POST.get('client_secret', '')
             pid = client_secret.split('_secret')[0] if client_secret else ''
             if not pid:
-                # Fallback to the PI we stored in session during GET
+            # Fallback to the PI we stored in session during GET
                 pid = request.session.get('stripe_pi', {}).get('id', '')
             order.stripe_pid = pid
             order.original_checkout = json.dumps(checkout_data)
+
+            # Totals on the Order so success page can render them
+            current = checkout_context(request)
+            checkout_total = current.get('checkout_total', Decimal('0.00'))
+            deposit_total = current.get('deposit_total', Decimal('0.00'))
+            site_fee = (checkout_total * Decimal('0.10')).quantize(Decimal('0.01'))
+
+            # delivery_cost comes from the form (or default 0)
+            try:
+                delivery_cost = Decimal(str(form_data.get('delivery_cost') or 0)).quantize(Decimal('0.01'))
+            except Exception:
+                delivery_cost = Decimal('0.00')
+
+            grand_total = (checkout_total + deposit_total + site_fee + delivery_cost).quantize(Decimal('0.01'))
+
+            order.order_total = checkout_total
+            order.deposit_total = deposit_total
+            order.site_fee = site_fee
+            order.delivery_cost = delivery_cost
+            order.grand_total = grand_total
+
             order.save()
 
+            # Create line items from checkout data
             for item_id, item_data in checkout_data.items():
                 try:
                     product = Product.objects.get(id=item_id)
@@ -147,8 +172,8 @@ def checkout(request):
             messages.error(request, 'There was an error with your form. Please double check your information.')
             return redirect(reverse('checkout'))
 
-    # ---------- GET ----------
-    # Mirror bag → checkout once
+    # GET
+    # Mirror bag to checkout if not already done
     if 'bag' in request.session and 'checkout' not in request.session:
         request.session['checkout'] = request.session['bag']
         request.session.modified = True
@@ -163,14 +188,18 @@ def checkout(request):
     checkout_total = current_checkout.get('checkout_total', Decimal('0.00'))
     deposit_total = current_checkout.get('deposit_total', Decimal('0.00'))
     site_fee = (checkout_total * Decimal('0.10')).quantize(Decimal("0.01"))
-    grand_total = (checkout_total + deposit_total + site_fee).quantize(Decimal("0.01"))
+
+    # Delivery not included
+    delivery = Decimal('0.00')
+
+    grand_total = (checkout_total + deposit_total + site_fee + delivery).quantize(Decimal("0.01"))
     stripe_total = int(grand_total * 100)
 
     if stripe_total < 30:
         messages.error(request, "Total must be at least £0.30 to proceed with payment.")
         return redirect(reverse('reservation:view_bag'))
 
-    # Reuse or create the PI (prevents new PI on every refresh)
+    # Reuse or create the PaymentIntent
     intent = _get_or_create_payment_intent(
         stripe_secret_key=stripe_secret_key,
         amount_pennies=stripe_total,
@@ -204,6 +233,8 @@ def checkout(request):
         'order_form': order_form,
         'stripe_public_key': stripe_public_key,
         'client_secret': intent.client_secret,
+
+        # For the page preview/summary
         'checkout_items': checkout_items,
         'checkout': checkout_data,
         'checkout_total': checkout_total,
@@ -211,7 +242,7 @@ def checkout(request):
         'site_fee': site_fee,
         'checkout_grand_total': grand_total,
         'checkout_product_count': current_checkout.get('checkout_product_count', 0),
-        'delivery': Decimal('0.00'),
+        'delivery': delivery,
     }
     return render(request, 'checkout/checkout.html', context)
 
@@ -219,6 +250,8 @@ def checkout(request):
 def checkout_success(request, order_number):
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
+    
+    request.session.pop('bag', None)
 
     if request.user.is_authenticated:
         try:
@@ -251,4 +284,5 @@ def checkout_success(request, order_number):
     request.session.pop('stripe_pi', None)
     request.session.modified = True
 
+    # Template reads totals from order fields
     return render(request, 'checkout/checkout_success.html', {'order': order})

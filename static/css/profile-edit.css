@@ -1,0 +1,99 @@
+:root{
+    /* already defined in base.css; kept for reference */
+    --primary: #0348B0;
+    --secondary: #e8f0fe;
+    --text: #202124;
+    --background: #ffffff;
+    --border: #b6c6e6;
+    --hover: #aecbda;
+  }
+  
+  /* Card */
+  .profile-edit .card{
+    border: 1px solid var(--border);
+    border-radius: 0;
+    box-shadow: none;
+    background: var(--background);
+  }
+  
+  .profile-edit .card-header{
+    border-bottom: 1px solid var(--border);
+    background: var(--secondary);
+    border-radius: 0;
+  }
+  
+  /* Profile avatar */
+  .pe-avatar{
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin: 0;
+    background: #f8f9fa;
+    border: 4px solid var(--background);
+    box-shadow: 0 6px 16px rgba(0,0,0,.08);
+  }
+  .pe-avatar img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+  
+  /* Form */
+  .profile-edit .form-label{
+    font-weight: 600;
+    color: var(--text);
+  }
+  
+  .profile-edit .form-control{
+    border-color: var(--border);
+    background: var(--background);
+    color: var(--text);
+  }
+  .profile-edit .form-control:focus{
+    border-color: var(--primary);
+    box-shadow: 0 0 0 .2rem color-mix(in srgb, var(--primary) 15%, transparent);
+    outline: none;
+  }
+  
+  .profile-edit .form-text{
+    color: #6c757d;
+  }
+  
+  .invalid-feedback{
+    font-size: .875rem;
+  }
+  
+  /* Actions */
+  .profile-edit .btn-primary{
+    background-color: var(--primary);
+    border-color: var(--primary);
+    border-radius: 0;
+    font-weight: 600;
+  }
+  .profile-edit .btn-primary:hover{
+    background-color: #023a8e; 
+    border-color: #023a8e;
+  }
+  
+  .profile-edit .btn-outline-secondary{
+    border-color: var(--border);
+    color: var(--text);
+    border-radius: 0;
+  }
+  .profile-edit .btn-outline-secondary:hover{
+    background-color: var(--hover);
+    border-color: var(--hover);
+    color: var(--background);
+  }
+  
+  /* Layout polish */
+  .profile-edit h1{
+    margin-bottom: 1rem;
+  }
+  
+  @media (min-width: 992px){
+    .pe-avatar{ width: 180px; height: 180px; }
+  }
+  

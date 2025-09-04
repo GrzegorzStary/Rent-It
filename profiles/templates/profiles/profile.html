@@ -1,28 +1,49 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %} -Profile{% endblock %}
+{% block title %} · Profile{% endblock %}
 
 {% block content %}
-<div class="container my-4">
-  <div class="text-center mb-4">
-    {% if profile.profile_picture %}
-    <img src="{{ profile.profile_picture.url }}" alt="{{ profile.first_name }}'s profile picture"
-      class="profile-picture">
-    {% else %}
-    <img src="{% static 'images/default_profile.png' %}" alt="Default profile picture" class="profile-picture">
-    {% endif %}
-  
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <!-- Header -->
+      <div class="text-center mb-4">
+        {% if profile.profile_picture %}
+          <img
+            src="{{ profile.profile_picture.url }}"
+            alt="{{ profile.first_name }}'s profile picture"
+            class="rounded-circle shadow profile-avatar"
+          >
+        {% else %}
+          <img
+            src="{% static 'images/default_profile.png' %}"
+            alt="Default profile picture"
+            class="rounded-circle shadow profile-avatar"
+          >
+        {% endif %}
 
-  <h1>{{ profile.first_name }} {{ profile.last_name }}'s Profile</h1>
-  <p>{{ profile.bio }}</p>
-</div class="d-flex justify-content-center mb-4">
+        <h1 class="h3 mt-3">{{ profile.first_name }} {{ profile.last_name }}’s Profile</h1>
+        {% if profile.bio %}<p class="text-muted mb-0">{{ profile.bio }}</p>{% endif %}
+      </div>
 
-  <a href="{% url 'edit_profile' %}" class="btn btn-outline-secondary rounded-0">Edit Profile</a>
-  <a href="{% url 'create_listing' %}" class="btn btn-outline-primary rounded-0">Create a Listing</a>
-  <a href="{% url 'listed_items' %}" class="btn btn-outline-info rounded-0">View Your Listings</a>
-  <a href="#" class="btn btn-outline-info rounded-0">Rented Items</a>
-
-
+      <!-- Action buttons -->
+      <div class="action-bar">
+        <a href="{% url 'edit_profile' %}" class="btn action-btn btn-edit">
+          <i class="fa-solid fa-user-pen"></i><span>Edit Profile</span>
+        </a>     
+        <a href="{% url 'create_listing' %}" class="btn action-btn btn-create">
+          <i class="fa-solid fa-square-plus"></i><span>Create a Listing</span>
+        </a>    
+        <a href="{% url 'listed_items' %}" class="btn action-btn btn-listings">
+          <i class="fa-solid fa-layer-group"></i><span>Your Listings</span>
+        </a>
+        <a href="{% url 'rented_items' %}" class="btn action-btn">My Rentals
+          <i class="fa-solid fa-box-open"></i><span>Rented Items</span>
+        </a> 
+      </div>
+      
+    </div>
+  </div>
 </div>
 {% endblock %}

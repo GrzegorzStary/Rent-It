@@ -1,18 +1,82 @@
 {% extends "base.html" %}
 {% load static %}
+{% load widget_tweaks %}
 
-{% block title %} -Edit Profile{% endblock %}
+
+{% block title %}· Edit Profile{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/profile-edit.css' %}">
+{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-  <h1>Edit Your Profile</h1>
+<div class="container my-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-9 col-xl-8">
+      <div class="card border-0 shadow-sm">
+        <div class="card-header bg-white border-0 py-3">
+          <h1 class="h4 mb-0">Edit your profile</h1>
+        </div>
 
-  <form method="post" enctype="multipart/form-data">
-    {% csrf_token %}
-    {{ form.as_p }}
+        <div class="card-body">
+          <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
 
-    <button type="submit" class="btn btn-primary mt-3">Save</button>
-    <a href="{% url 'user_profile' %}" class="btn btn-secondary mt-3">Cancel</a>
-  </form>
+            <div class="row g-4 align-items-start">
+              <!-- Avatar + uploader -->
+              <div class="col-md-4">
+                <div class="pe-avatar mb-3">
+                  {% if form.instance.profile_picture %}
+                    <img id="avatarPreview" src="{{ form.instance.profile_picture.url }}" alt="Profile picture">
+                  {% else %}
+                    <img id="avatarPreview" src="{% static 'images/default_profile.png' %}" alt="Default profile picture">
+                  {% endif %}
+                </div>
+
+                <label class="form-label" for="id_profile_picture">Profile picture</label>
+                {{ form.profile_picture|add_class:"form-control" }}
+                {% if form.profile_picture.errors %}
+                  <div class="invalid-feedback d-block">{{ form.profile_picture.errors }}</div>
+                {% endif %}
+                {% if form.profile_picture.help_text %}
+                  <div class="form-text">{{ form.profile_picture.help_text }}</div>
+                {% endif %}
+              </div>
+
+              <!-- Fields -->
+              <div class="col-md-8">
+                <div class="row g-3">
+                  {% for field in form %}
+                    {% if field.name != 'profile_picture' %}
+                      <div class="col-12 col-md-6">
+                        <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                        {{ field|add_class:"form-control" }}
+                        {% if field.errors %}
+                          <div class="invalid-feedback d-block">{{ field.errors }}</div>
+                        {% endif %}
+                        {% if field.help_text %}
+                          <div class="form-text">{{ field.help_text }}</div>
+                        {% endif %}
+                      </div>
+                    {% endif %}
+                  {% endfor %}
+                </div>
+
+                <div class="d-flex flex-wrap gap-2 mt-4">
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+                  <a href="{% url 'profile' %}" class="btn btn-outline-secondary">Cancel</a>
+                </div>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
+{% endblock %}
+
+{% block onload_js %}
+<script src="{% static 'js/profile-edit.js' %}"></script>
 {% endblock %}

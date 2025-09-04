@@ -366,7 +366,7 @@ footer {
     border-radius: 0.5rem;
 }
 
-/* RESPONSIVE DESIFN */
+/* RESPONSIVE DESIGN */
 @media (max-width: 1200px) {
     .card {
         flex: 1 0 calc(33.33% - 1rem);

@@ -9,8 +9,10 @@
 <div class="container header-container">
   <div class="row">
     <div class="col">
-      <h1 class="logo-font mt-4">Thank you for your order 🎉</h1>
-      <p class="text-muted mb-0">A confirmation email was sent to <strong>{{ order.email }}</strong>.</p>
+      <h1 class="logo-font mt-4">Thank you for your order</h1>
+      <p class="text-muted mb-0">
+        A confirmation email was sent to <strong>{{ order.email }}</strong>.
+      </p>
     </div>
   </div>
 </div>
@@ -36,6 +38,7 @@
         <hr>
         <h6 class="mb-3">Items rented & pickup contacts</h6>
 
+        {# If your related_name differs, use order.orderlineitem_set.all instead #}
         {% for item in order.lineitems.all %}
           {% with owner=item.product.user %}
           <div class="py-3 border-bottom">
@@ -57,19 +60,29 @@
             <!-- Pickup contact (owner) -->
             <div class="mt-3">
               <div class="small text-muted mb-1">Pickup from</div>
-              <div><strong>{{ owner.get_full_name|default:owner.username }}</strong></div>
-              {% if owner.email %}<div>Email: {{ owner.email }}</div>{% endif %}
-              {% if owner.profile and owner.profile.phone_number %}
-                <div>Phone: {{ owner.profile.phone_number }}</div>
+
+              <div>
+                <strong>{{ owner.get_full_name|default:owner.username }}</strong>
+              </div>
+
+              {% if owner.email %}
+                <div>Email: {{ owner.email }}</div>
               {% endif %}
-              {% if owner.profile and (owner.profile.house_number or owner.profile.street_name or owner.profile.city or owner.profile.postal_code) %}
-                <div>
-                  Address:
-                  {% if owner.profile.house_number %}{{ owner.profile.house_number }} {% endif %}
-                  {% if owner.profile.street_name %}{{ owner.profile.street_name }}{% endif %}
-                  {% if owner.profile.city %}, {{ owner.profile.city }}{% endif %}
-                  {% if owner.profile.postal_code %}, {{ owner.profile.postal_code }}{% endif %}
-                </div>
+
+              {% if owner.profile %}
+                {% if owner.profile.phone_number %}
+                  <div>Phone: {{ owner.profile.phone_number }}</div>
+                {% endif %}
+
+                {% if owner.profile.house_number or owner.profile.street_name or owner.profile.city or owner.profile.postal_code %}
+                  <div>
+                    Address:
+                    {% if owner.profile.house_number %}{{ owner.profile.house_number }} {% endif %}
+                    {% if owner.profile.street_name %}{{ owner.profile.street_name }}{% endif %}
+                    {% if owner.profile.city %}, {{ owner.profile.city }}{% endif %}
+                    {% if owner.profile.postal_code %}, {{ owner.profile.postal_code }}{% endif %}
+                  </div>
+                {% endif %}
               {% endif %}
             </div>
           </div>
@@ -82,32 +95,31 @@
         <h6 class="mb-3">Payment summary</h6>
         <div class="row mb-1">
           <div class="col-7 text-muted">Rental total</div>
-          <div class="col-5 text-end">£{{ order.order_total }}</div>
+          <div class="col-5 text-end">£{{ order.order_total|floatformat:2 }}</div>
         </div>
         <div class="row mb-1">
           <div class="col-7 text-muted">Deposit total</div>
-          <div class="col-5 text-end">£{{ order.deposit_total }}</div>
+          <div class="col-5 text-end">£{{ order.deposit_total|floatformat:2 }}</div>
         </div>
         <div class="row mb-1">
           <div class="col-7 text-muted">Site fee (10%)</div>
-          <div class="col-5 text-end">£{{ order.site_fee }}</div>
+          <div class="col-5 text-end">£{{ order.site_fee|floatformat:2 }}</div>
         </div>
         <div class="row mb-1">
           <div class="col-7 text-muted">Delivery</div>
-          <div class="col-5 text-end">£{{ order.delivery_cost|default_if_none:"0.00" }}</div>
+          <div class="col-5 text-end">£{{ order.delivery_cost|default_if_none:"0.00"|floatformat:2 }}</div>
         </div>
         <div class="row mt-2 pt-2 border-top">
           <div class="col-7 fw-bold">Grand total</div>
-          <div class="col-5 text-end fw-bold">£{{ order.grand_total }}</div>
-        </div>
+          <div class="col-5 text-end fw-bold">£{{ order.grand_total|floatformat:2 }}</div>
+        </div>        
       </div>
     </div>
-
     <div class="col-lg-4 mt-4 mt-lg-0">
       <div class="border rounded p-4 shadow-sm h-100">
-        <h6 class="mb-3">What’s next?</h6>
+        <h6 class="mb-3">Whats next?</h6>
         <ul class="small mb-4">
-          <li>We’ve notified the owner about your rental.</li>
+          <li>We have notified the owner about your rental.</li>
           <li>Use the pickup contact details above to arrange collection.</li>
           <li>Keep your order number handy for any questions.</li>
         </ul>
