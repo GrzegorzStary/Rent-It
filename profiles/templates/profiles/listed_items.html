@@ -1,36 +1,72 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %} -Listed Items{% endblock %}
+{% block title %} - Listed Items{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'profiles/css/listed_items_toggle.css' %}">
+{% endblock %}
 
 {% block content %}
 
-<h2>Your Listed Items</h2>
+<h2 class="mb-3">Your Listed Items</h2>
 
 <div class="card-container d-flex flex-wrap justify-content-center gap-3 px-3">
   {% for product in items %}
-  <a href="{% url 'item_detail' product.id %}" class="product-card-link border-0 text-decoration-none">
-    <div class="card product-card">
+    <div class="card product-card rounded-0 position-relative" style="width: 18rem;">
       {% if product.images.first %}
-      <img src="{{ product.images.first.image.url }}" class="card-img-top" alt="{{ product.name }}">
+        <img src="{{ product.images.first.image.url }}" class="card-img-top img-fluid" alt="{{ product.name }}">
       {% else %}
-      <img src="{% static 'images/noimage.png' %}" class="card-img-top" alt="{{ product.name }}">
+        <img src="{% static 'images/noimage.png' %}" class="card-img-top img-fluid" alt="{{ product.name }}">
       {% endif %}
+
       <div class="card-body">
-        <h6 class="card-title text-truncate">{{ product.name }}</h6>
+        <h6 class="card-title text-truncate mb-1">
+          <a href="{% url 'item_detail' product.id %}" class="text-decoration-none">{{ product.name }}</a>
+        </h6>
         <p class="card-text text-muted mb-1">£{{ product.price }}</p>
+
         {% if product.rating %}
-        <small class="text-warning"><i class="fas fa-star"></i> {{ product.rating }} / 5</small>
+          <small class="text-warning"><i class="fas fa-star"></i> {{ product.rating }} / 5</small>
         {% else %}
-        <small class="text-muted">No Rating</small>
+          <small class="text-muted">No Rating</small>
         {% endif %}
-        <p class="card-text small text-truncate">{{ product.description }}</p>
+
+        <p class="card-text small text-truncate mt-2">{{ product.description }}</p>
+      </div>
+
+       <!-- Bottom-left iOS toggle + status -->
+      <div class="card-toggle">
+        <form method="post" action="{% url 'toggle_listing' product.id %}" class="toggle-form">
+          {% csrf_token %}
+          <input type="hidden" name="next" value="{{ request.get_full_path }}">
+
+          <div class="toggle-wrap" data-product="{{ product.id }}">
+            <input
+              type="checkbox"
+              id="ios-toggle-{{ product.id }}"
+              class="ios-checkbox"
+              name="is_listed"
+              {% if product.is_listed %}checked{% endif %}
+            >
+            <label class="ios-switch" for="ios-toggle-{{ product.id }}"></label>
+
+            <span class="toggle-text">
+              <span class="txt-hidden">Hidden from renters</span>
+              <span class="txt-visible">Visible to renters</span>
+            </span>
+          </div>
+        </form>
       </div>
     </div>
-  </a>
   {% empty %}
-  <p>No items listed yet.</p>
+    <p>No items listed yet.</p>
   {% endfor %}
 </div>
 
+{% endblock %}
+
+{% block onload_js %}
+  {{ block.super }}
+  <script src="{% static 'profiles/js/listed_items_toggle.js' %}"></script>
 {% endblock %}
