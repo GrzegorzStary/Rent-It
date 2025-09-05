@@ -4,69 +4,103 @@
 {% block title %} - Items{% endblock %}
 
 {% block content %}
-<div class="card-container d-flex flex-wrap justify-content-center gap-3 px-3 rounded-0">
-    {% for product in products %}
-    <a href="{% url 'item_detail' product.id %}" class="product-card-link border-0 text-decoration-none">
-        <div class="card product-card rounded-0">
+<div class="container my-3">
 
-            {% if product.images.all %}
-            <div id="productCarousel{{ product.id }}" class="carousel slide">
-                <div class="carousel-inner">
-                    {% for img in product.images.all %}
-                    <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                        <img src="{{ img.image.url }}" class="card-img-top img-fluid" alt="{{ product.name }}">
+    {% if user.is_authenticated %}
+    <form method="get" class="row g-2 align-items-center mb-3">
+        <div class="col-auto">
+            <label for="max_km" class="col-form-label">Max distance (km)</label>
+        </div>
+        <div class="col-auto">
+            <input type="number" id="max_km" name="max_km" class="form-control" min="1" max="100"
+                   value="{{ max_km|default:10 }}">
+        </div>
+        {% if search_term %}
+            <input type="hidden" name="q" value="{{ search_term }}">
+        {% endif %}
+        {% if current_sorting and current_sorting != 'None_None' %}
+            <input type="hidden" name="sort" value="{{ current_sorting }}">
+        {% endif %}
+        <div class="col-auto">
+            <button type="submit" class="btn btn-primary">Filter near me</button>
+        </div>
+        {% if radius_active %}
+        <div class="col-auto">
+            <a class="btn btn-outline-secondary"
+               href="{% url 'items' %}{% if search_term or current_sorting %}?{% endif %}{% if search_term %}q={{ search_term }}{% endif %}{% if search_term and current_sorting %}&{% endif %}{% if current_sorting and current_sorting != 'None_None' %}sort={{ current_sorting }}{% endif %}">
+               Clear filter
+            </a>
+        </div>
+        {% endif %}
+    </form>
+    {% endif %}
+
+    {% if radius_active %}
+        <p class="text-muted small mb-2">Showing items within {{ max_km }} km of your postcode.</p>
+    {% endif %}
+
+    <div class="card-container d-flex flex-wrap justify-content-center gap-3 px-3 rounded-0">
+        {% for product in products %}
+        <a href="{% url 'item_detail' product.id %}" class="product-card-link border-0 text-decoration-none">
+            <div class="card product-card rounded-0">
+
+                {% if product.images.all %}
+                <div id="productCarousel{{ product.id }}" class="carousel slide">
+                    <div class="carousel-inner">
+                        {% for img in product.images.all %}
+                        <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                            <img src="{{ img.image.url }}" class="card-img-top img-fluid" alt="{{ product.name }}">
+                        </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
+
+                    {% if product.images.all|length > 1 %}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel{{ product.id }}"
+                        data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel{{ product.id }}"
+                        data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                    {% endif %}
+                </div>
+                {% else %}
+                <img src="{% static 'images/noimage.png' %}" class="card-img-top img-fluid" alt="{{ product.name }}">
+                {% endif %}
+
+                <div class="card-body">
+                    <div class="d-flex justify-content-between align-items-start">
+                        <h6 class="card-title text-truncate mb-1">{{ product.name }}</h6>
+
+                        {# Distance badge #}
+                        {% if product.distance_km %}
+                        <span class="badge bg-info text-dark ms-2">{{ product.distance_km }} km</span>
+                        {% endif %}
+                    </div>
+
+                    <p class="card-text text-muted mb-1">£{{ product.price }}</p>
+
+                    {% if product.rating %}
+                        <small class="text-warning"><i class="fas fa-star"></i> {{ product.rating }} / 5</small>
+                    {% else %}
+                        <small class="text-muted">No Rating</small>
+                    {% endif %}
+
+                    <p class="card-text small text-truncate mt-1">{{ product.description }}</p>
                 </div>
 
-                {% if product.images.all|length > 1 %}
-                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel{{ product.id }}"
-                    data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel{{ product.id }}"
-                    data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-                {% endif %}
             </div>
-            {% else %}
-            <img src="{% static 'images/noimage.png' %}" class="card-img-top img-fluid" alt="{{ product.name }}">
-            {% endif %}
-
-            <div class="card-body">
-                <h6 class="card-title text-truncate">{{ product.name }}</h6>
-                <p class="card-text text-muted mb-1">£{{ product.price }}</p>
-                {% if product.rating %}
-                <small class="text-warning"><i class="fas fa-star"></i> {{ product.rating }} / 5</small>
-                {% else %}
-                <small class="text-muted">No Rating</small>
-                {% endif %}
-                <p class="card-text small text-truncate">{{ product.description }}</p>
-            </div>
-
-        </div>
-    </a>
-    {% empty %}
-    <p>No items listed yet.</p>
-    {% endfor %}
+        </a>
+        {% empty %}
+        <p>No items listed yet.</p>
+        {% endfor %}
+    </div>
 </div>
 {% endblock %}
 
 {% block extra_js %}
-<script>
-    document.getElementById('sort-selector').addEventListener('change', function () {
-        const selected = this.value;
-        let url = new URL(window.location.href);
-        if (selected === 'reset') {
-            url.searchParams.delete('sort');
-        } else {
-            url.searchParams.set('sort', selected);
-        }
-        window.location.href = url.toString();
-    });
-</script>
-
+  <script src="{% static 'items/js/items_list.js' %}"></script>
 {% endblock %}
