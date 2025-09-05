@@ -44,7 +44,7 @@
                     <a href="{% url 'item_detail' item.product.id %}">
                         {% if item.product.images.exists %}
                         <img src="{{ item.product.images.first.image.url }}" class="img-fluid"
-                             alt="{{ item.product.name }}">
+                            alt="{{ item.product.name }}">
                         {% else %}
                         <img class="img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="No image">
                         {% endif %}
@@ -107,8 +107,8 @@
                         <label class="form-check-label" for="id-save-info">
                             Save this delivery information to my profile
                         </label>
-                        <input class="form-check-input ml-2 mr-0" type="checkbox"
-                               id="id-save-info" name="save-info" checked>
+                        <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info"
+                            checked>
                         {% else %}
                         <label class="form-check-label" for="id-save-info">
                             <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or
@@ -130,18 +130,34 @@
                 </fieldset>
 
                 <div class="submit-button text-right mt-5 mb-2">
-                    <a href="{% url 'reservation:view_bag' %}" class="btn btn-outline-secondary rounded-0">
-                        <span class="icon"><i class="fas fa-chevron-left"></i></span>
-                        <span class="font-weight-bold">Adjust Checkout</span>
-                    </a>
-                    <button id="submit-button" class="btn btn-outline-primary rounded-0">
-                        <span class="font-weight-bold">Complete Order</span>
-                        <span class="icon"><i class="fas fa-lock"></i></span>
-                    </button>
-                    <p class="small text-danger my-0 mt-2">
-                        <span class="icon"><i class="fas fa-exclamation-circle"></i></span>
-                        <span>Your card will be charged <strong>£{{ checkout_grand_total|floatformat:2 }}</strong></span>
-                    </p>
+                    <!-- Mobile only layout -->
+                    <div class="d-flex flex-column d-sm-none gap-3">
+                        <a href="{% url 'reservation:view_bag' %}" class="btn btn-outline-secondary w-100">
+                            <span class="icon"><i class="fas fa-chevron-left"></i></span>
+                            <span>Adjust Checkout</span>
+                        </a>
+                        <button id="submit-button" class="btn btn-outline-primary w-100">
+                            <span>Complete Order</span>
+                            <span class="icon"><i class="fas fa-lock"></i></span>
+                        </button>
+                        <p class="small text-danger my-0 mt-2"> <span class="icon"><i
+                                    class="fas fa-exclamation-circle"></i></span> <span>Your card will be charged
+                                <strong>£{{ checkout_grand_total|floatformat:2 }}</strong></span> </p>
+                    </div>
+
+                    <!-- Tablet & Desktop layout -->
+                    <div class="d-none d-sm-block">
+                        <a href="{% url 'reservation:view_bag' %}" class="btn btn-outline-secondary rounded-0">
+                            <span class="icon"><i class="fas fa-chevron-left"></i></span>
+                            <span>Adjust Checkout</span>
+                        </a> <button id="submit-button" class="btn btn-outline-primary rounded-0">
+                            <span>Complete Order</span>
+                            <span class="icon"><i class="fas fa-lock"></i></span>
+                        </button>
+                        <p class="small text-danger my-0 mt-2"> <span class="icon"><i
+                                    class="fas fa-exclamation-circle"></i></span> <span>Your card will be charged
+                                <strong>£{{ checkout_grand_total|floatformat:2 }}</strong></span> </p>
+                    </div>
                 </div>
             </form>
         </div>
@@ -151,8 +167,8 @@
 {% endblock %}
 
 {% block postloadjs %}
-  {{ block.super }}
-  {{ stripe_public_key|json_script:"id_stripe_public_key" }}
-  {{ client_secret|json_script:"id_client_secret" }}
-  <script defer src="{% static 'checkout/js/stripe_elements.js' %}"></script>
+{{ block.super }}
+{{ stripe_public_key|json_script:"id_stripe_public_key" }}
+{{ client_secret|json_script:"id_client_secret" }}
+<script defer src="{% static 'checkout/js/stripe_elements.js' %}"></script>
 {% endblock %}
