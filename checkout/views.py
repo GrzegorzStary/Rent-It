@@ -4,6 +4,7 @@ from datetime import datetime
 from django.conf import settings
 from django.contrib import messages
 from django.shortcuts import render, redirect, reverse, get_object_or_404
+from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.views.decorators.http import require_POST
 
@@ -19,7 +20,6 @@ import json
 from stripe.error import InvalidRequestError
 
 
-@require_POST
 def cache_checkout_data(request):
     """
     Save checkout data into the PaymentIntent metadata for webhook recovery.
@@ -40,7 +40,6 @@ def cache_checkout_data(request):
     except Exception as e:
         messages.error(request, 'Sorry, your payment cannot be processed right now. Please try again later.')
         return HttpResponse(content=str(e), status=400)
-
 
 def _get_or_create_payment_intent(stripe_secret_key: str, amount_pennies: int, currency: str, session):
     """
@@ -68,7 +67,6 @@ def _get_or_create_payment_intent(stripe_secret_key: str, amount_pennies: int, c
     session['stripe_pi'] = {'id': intent.id, 'amount': intent.amount}
     session.modified = True
     return intent
-
 
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
@@ -245,7 +243,6 @@ def checkout(request):
         'delivery': delivery,
     }
     return render(request, 'checkout/checkout.html', context)
-
 
 def checkout_success(request, order_number):
     save_info = request.session.get('save_info')
