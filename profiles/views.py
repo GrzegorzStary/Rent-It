@@ -1,4 +1,3 @@
-# profiles/views.py
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -48,7 +47,7 @@ def listed_items(request):
     """
     Displays a separate page with all products listed by the logged-in user.
     """
-    items = request.user.products.all()  # assumes Product.user has related_name="products"
+    items = request.user.products.all()  # Product.user has related_name="products"
     return render(request, 'profiles/listed_items.html', {
         'items': items,
     })
@@ -61,7 +60,7 @@ def rented_items(request):
     Assumes:
       - Order has a FK to Profile named `user_profile`
       - OrderLineItem has related_name="lineitems" back to Order
-      - OrderLineItem has FK `product` -> Product, and Product has related images via `images`
+      - OrderLineItem has FK `product` Product, and Product has related images via `images`
     """
     profile = request.user.profile
 

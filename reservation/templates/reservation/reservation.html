@@ -3,141 +3,131 @@
 {% load reservation_tools %}
 {% load math_filters %}
 
-{% block title %} -Rental Bag{% endblock %}
+{% block title %} - Rental Bag{% endblock %}
 
-{% block page_header %}
-<div class="container header-container">
-  <div class="row">
-    <div class="col"></div>
-  </div>
-</div>
-{% endblock %}
 
 {% block content %}
-<div class="overlay"></div>
-<div class="container mb-2">
-  <div class="row">
-    <div class="col">
-      <hr>
-      <h2 class="logo-font mb-4">Your Rental Bag</h2>
-      <hr>
+<div class="overlay">
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <h2 class="logo-font mt-2 mb-2">Your Rental Bag</h2>
+      </div>
     </div>
-  </div>
 
-  <div class="row">
-    <div class="col">
-      {% if bag_items %}
-      <!-- Mobile layout -->
+    <div class="row">
+      <div class="col">
+        {% if bag_items %}
+        <!-- Mobile layout -->
+      </div>
     </div>
-  </div>
 
-  {% for item in bag_items %}
-  <!-- Mobile only -->
-  <div class="row d-block d-sm-none">
-    <div class="col-12 col-sm-6 mb-2">
-      {% include "reservation/product-image.html" %}
+    {% for item in bag_items %}
+    <!-- Mobile only -->
+    <div class="row d-block d-sm-none">
+      <div class="col-12 col-sm-6 mb-2">
+        {% include "reservation/product-image.html" %}
+      </div>
+      <div class="col-12 col-sm-6 mb-2">
+        {% include "reservation/product-info.html" %}
+      </div>
+      <div class="col-12 col-sm-6 order-sm-last">
+        <p class="my-0">Price per day: £{{ item.product.price }}</p>
+        <p class="my-0">Subtotal: £ {% calc_subtotal item.product.price item.duration 0 %}</p>
+      </div>
+      <br>
+      <br>
+      <br>
+      <div class="col-12 col-sm-6">
+        {% include "reservation/duration-form.html" with row=item %}
+      </div>
     </div>
-    <div class="col-12 col-sm-6 mb-2">
-      {% include "reservation/product-info.html" %}
+    <div class="row">
+      <div class="col">
+        <hr>
+      </div>
     </div>
-    <div class="col-12 col-sm-6 order-sm-last">
-      <p class="my-0">Price per day: £{{ item.product.price }}</p>
-      <p class="my-0">Subtotal: £ {% calc_subtotal item.product.price item.duration 0 %}</p>
-    </div>
-    <br>
-    <br>
-    <br>
-    <div class="col-12 col-sm-6">
-      {% include "reservation/duration-form.html" with row=item %}
-    </div>
-  </div>
-  <div class="row">
-    <div class="col">
-      <hr>
-    </div>
-  </div>
-  {% endfor %}
+    {% endfor %}
 
-  <!-- Mobile only -->
-  <div class="d-block d-sm-none">
-    <div class="container-fluid">
-      <div class="row gy-3">
-        <div class="col-12">
-          <!-- Totals -->
-          <div class="card-body p-3">
-            {% include "reservation/reservation_total.html" %}
-          </div>
-          <div class="row">
-            <div class="col">
-              <hr>
+    <!-- Mobile only -->
+    <div class="d-block d-sm-none">
+      <div class="container-fluid">
+        <div class="row gy-3">
+          <div class="col-12">
+            <!-- Totals -->
+            <div class="card-body p-3">
+              {% include "reservation/reservation_total.html" %}
             </div>
-          </div>
-          <!-- Checkout buttons -->
-          <div class="d-grid gap-2">
-            {% include "reservation/checkout-buttons.html" %}
+            <div class="row">
+              <div class="col">
+                <hr>
+              </div>
+            </div>
+            <!-- Checkout buttons -->
+            <div class="d-grid gap-2 mb-3">
+              {% include "reservation/checkout-buttons.html" %}
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <!-- Tablet and Desktop -->
-  <div class="table-responsive rounded d-none d-sm-block">
-    <table class="table table-sm table-borderless">
-      <thead class="text-black">
+    <!-- Tablet and Desktop -->
+    <div class="table-responsive rounded d-none d-sm-block">
+      <table class="table table-sm table-borderless">
+        <thead class="text-black">
+          <tr>
+            <th scope="col">Item</th>
+            <th scope="col">Details</th>
+            <th scope="col">Price per Day</th>
+            <th scope="col">Dates</th>
+            <th scope="col">Subtotal</th>
+          </tr>
+        </thead>
+
+        {% for item in bag_items %}
         <tr>
-          <th scope="col">Item</th>
-          <th scope="col">Details</th>
-          <th scope="col">Price per Day</th>
-          <th scope="col">Dates</th>
-          <th scope="col">Subtotal</th>
+          <td class="p-3 w-25">
+            {% include "reservation/product-image.html" with item=item uid=forloop.counter %}
+          </td>
+          <td class="py-3">
+            <p class="my-0 fw-semibold">{{ item.product.name }}</p>
+            {% include "reservation/product-info.html" %}
+          </td>
+          <td class="py-3">
+            <p class="my-0">£{{ item.product.price }}</p>
+          </td>
+          <td class="py-3 w-25">
+            {% include "reservation/duration-form.html" with row=item %}
+          </td>
+          <td class="py-3">
+            <p>£ {% calc_subtotal item.product.price item.duration 0 %}</p>
+          </td>
         </tr>
-      </thead>
+        {% endfor %}
 
-      {% for item in bag_items %}
-      <tr>
-        <td class="p-3 w-25">
-          {% include "reservation/product-image.html" with item=item uid=forloop.counter %}
-        </td>
-        <td class="py-3">
-          <p class="my-0 fw-semibold">{{ item.product.name }}</p>
-          {% include "reservation/product-info.html" %}
-        </td>
-        <td class="py-3">
-          <p class="my-0">£{{ item.product.price }}</p>
-        </td>
-        <td class="py-3 w-25">
-          {% include "reservation/duration-form.html" with row=item %}
-        </td>
-        <td class="py-3">
-          <p>£ {% calc_subtotal item.product.price item.duration 0 %}</p>
-        </td>
-      </tr>
-      {% endfor %}
-
-      <tr>
-        <td colspan="5" class="pt-5 text-right">
-          {% include "reservation/reservation_total.html" %}
-        </td>
-      </tr>
-      <tr>
-        <td colspan="5" class="text-right">
-          {% include "reservation/checkout-buttons.html" %}
-        </td>
-      </tr>
-    </table>
+        <tr>
+          <td colspan="5" class="pt-5 text-right">
+            {% include "reservation/reservation_total.html" %}
+          </td>
+        </tr>
+        <tr>
+          <td colspan="5" class="text-right">
+            {% include "reservation/checkout-buttons.html" %}
+          </td>
+        </tr>
+      </table>
+    </div>
+    {% else %}
+    <p class="lead mb-5">Your rental bag is empty.</p>
+    <a href="{% url 'items' %}" class="btn btn-outline-black rounded-0 mt-3">
+      <a href="{% url 'items' %}" class="btn btn-outline-secondary rounded-0 text-uppercase mt-3">
+        <span class="icon">
+          <i class="fas fa-chevron-left"></i>
+        </span>
+        <span class="text-uppercase">Keep Browsing</span>
+      </a>
+      {% endif %}
   </div>
-  {% else %}
-  <p class="lead mb-5">Your rental bag is empty.</p>
-  <a href="{% url 'items' %}" class="btn btn-outline-black rounded-0 mt-3">
-    <a href="{% url 'items' %}" class="btn btn-outline-secondary rounded-0 text-uppercase mt-3">
-      <span class="icon">
-        <i class="fas fa-chevron-left"></i>
-      </span>
-      <span class="text-uppercase">Keep Browsing</span>
-    </a>
-  {% endif %}
-</div>
-</div>
 </div>
 {% endblock %}

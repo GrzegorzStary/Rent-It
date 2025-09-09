@@ -1,7 +1,6 @@
 {% load static %}
 
 {% if item.product.images.all|length %}
-{# unikalny sufiks: preferuj item.item_id, w przeciwnym wypadku użyj forloop.counter #}
 {% with unique=item.item_id|default:forloop.counter %}
 {% with cid="miniCarousel-"|add:item.product.id|stringformat:"s"|add:"-"|add:unique|stringformat:"s" %}
 <div class="product-card">

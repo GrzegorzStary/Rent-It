@@ -4,12 +4,13 @@
 {% block title %} - Listed Items{% endblock %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="{% static 'profiles/css/listed_items_toggle.css' %}">
+<link rel="stylesheet" href="{% static 'profiles/css/listed_items_toggle.css' %}">
 {% endblock %}
 
 {% block content %}
-
-<h2 class="mb-3">Your Listed Items</h2>
+<div class="container mt-4">
+  <h1>Your Listed Items</h1>
+</div>
 
 <div class="card-container d-flex flex-wrap justify-content-center gap-3 px-3">
   {% for product in items %}
@@ -35,20 +36,14 @@
         <p class="card-text small text-truncate mt-2">{{ product.description }}</p>
       </div>
 
-       <!-- Bottom-left iOS toggle + status -->
+      <!-- Bottom-left iOS toggle + status -->
       <div class="card-toggle">
         <form method="post" action="{% url 'toggle_listing' product.id %}" class="toggle-form">
           {% csrf_token %}
           <input type="hidden" name="next" value="{{ request.get_full_path }}">
 
           <div class="toggle-wrap" data-product="{{ product.id }}">
-            <input
-              type="checkbox"
-              id="ios-toggle-{{ product.id }}"
-              class="ios-checkbox"
-              name="is_listed"
-              {% if product.is_listed %}checked{% endif %}
-            >
+            <input type="checkbox" id="ios-toggle-{{ product.id }}" class="ios-checkbox" name="is_listed" {% if product.is_listed %}checked{% endif %}>
             <label class="ios-switch" for="ios-toggle-{{ product.id }}"></label>
 
             <span class="toggle-text">
@@ -60,13 +55,18 @@
       </div>
     </div>
   {% empty %}
-    <p>No items listed yet.</p>
+    <div class="text-center my-5 w-100">
+      <p class="mb-4 fs-5">No items listed yet.</p>
+      <a href="{% url 'create_listing' %}" class="btn btn-outline-primary">
+        <i class="fa-solid fa-square-plus me-2"></i>
+        Create your first listing!
+      </a>
+    </div>
   {% endfor %}
 </div>
-
 {% endblock %}
 
 {% block onload_js %}
-  {{ block.super }}
-  <script src="{% static 'profiles/js/listed_items_toggle.js' %}"></script>
+{{ block.super }}
+<script defer src="{% static 'js/listed_items_toggle.js' %}"></script>
 {% endblock %}

@@ -4,25 +4,35 @@
 {% block title %} - Create Listing{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-  <h1>Create a Listing</h1>
+<div class="container mt-4 mb-5"> 
+  <h1 class="mb-4">Create a Listing</h1>
 
   <form method="post" enctype="multipart/form-data" class="create-item-form">
-      {% csrf_token %}
+    {% csrf_token %}
 
-      {{ form.as_p }}
+    {{ form.as_p }}
 
-      <h4>Upload Images</h4>
-      <input type="file" name="images" id="id_images" multiple>
+    <h4 class="mt-4">Upload Images</h4>
+    <input type="file" name="images" id="id_images" multiple>
 
-      <div class="new-image-preview">
-        <img id="image-preview" 
-             src="" 
-             alt="Image preview">
-      </div>
+    <div class="new-image-preview mt-3 mb-4">
+      <img id="image-preview" src="" alt="Image preview">
+    </div>
 
-      <button type="submit" class="btn btn-primary mt-3">Create</button>
-      <a href="{% url 'user_profile' %}" class="btn btn-secondary mt-3">Back to Profile</a>
+    <div class="d-flex flex-wrap gap-2">
+      <a href="{% url 'user_profile' %}" class="btn btn-outline-secondary">
+        <span class="icon">
+          <i class="fas fa-chevron-left"></i>
+      </span>
+      <span class="text-uppercase">Go back</span>
+      </a>
+      <button type="submit" class="btn btn-outline-primary">
+        CREATE LISTING
+        <span class="icon">
+          <i class="fas fa-square-plus"></i>
+      </span>
+      </button>
+    </div>
   </form>
 </div>
 {% endblock %}

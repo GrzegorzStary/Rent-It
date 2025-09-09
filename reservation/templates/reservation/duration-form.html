@@ -59,3 +59,8 @@
 </form>
 
 {% endwith %}
+
+{% block onload_js %}
+<script src="{% static 'js/tempus_dominus_init.js' %}"></script>
+<script src="{% static 'js/tempus_dominus_update.js' %}"></script>
+{% endblock %}

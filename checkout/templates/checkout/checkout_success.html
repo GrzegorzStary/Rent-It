@@ -123,17 +123,10 @@
           <li>Use the pickup contact details above to arrange collection.</li>
           <li>Keep your order number handy for any questions.</li>
         </ul>
-
         <div class="d-grid gap-2">
-          {% if from_profile %}
-            <a href="{% url 'profile' %}" class="btn btn-outline-primary">
-              <i class="fas fa-user-circle me-2"></i>Back to Profile
+            <a href="{% url 'rented_items' %}" class="btn btn-outline-primary">
+              <i class="fas fa-arrow-right me-2"></i>Go to Rented Items
             </a>
-          {% else %}
-            <a href="{% url 'items' %}" class="btn btn-outline-primary">
-              <i class="fas fa-arrow-right me-2"></i>Browse more rentals
-            </a>
-          {% endif %}
         </div>
       </div>
     </div>

@@ -9,7 +9,6 @@ DATE_FMT = "%d/%m/%Y"        # UK format DD/MM/YYYY
 def _parse_duration(item_data):
     """
     Prefer start/end dates; fall back to provided duration.
-    Always return int >= 1.
     """
     start = item_data.get("start_date")
     end   = item_data.get("end_date")
@@ -35,8 +34,6 @@ def _parse_duration(item_data):
 def checkout_context(request):
     """
     Build checkout summary from session['checkout'].
-    Expected session shape:
-      {'1': {'start_date':'01/09/2025','end_date':'03/09/2025','duration':2}, ...}
     """
     checkout = request.session.get('checkout', {}) or {}
 
@@ -47,7 +44,7 @@ def checkout_context(request):
 
     for item_id, item_data in checkout.items():
         
-        product = get_object_or_404(Product, pk=item_id)
+        product = get_object_or_404(Product, pk=int(item_id))
 
         duration = _parse_duration(item_data)
 

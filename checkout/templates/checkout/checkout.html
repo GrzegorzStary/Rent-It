@@ -4,7 +4,7 @@
 {% load reservation_tools %}
 
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
+<link rel="stylesheet" href="{% static 'css/checkout.css' %}">
 {% endblock %}
 
 {% block page_header %}
@@ -16,13 +16,15 @@
 {% endblock %}
 
 {% block content %}
-<div class="overlay"></div>
+<div id="loading-overlay"></div>
+<div class="loading-spinner">
+    <i class="fas fa-spinner fa-spin"></i>
+</div>
+
 <div class="container">
-    <div class="row">
+    <div class="row px-3">
         <div class="col">
-            <hr>
             <h2 class="logo-font mb-4">Checkout</h2>
-            <hr>
         </div>
     </div>
 
@@ -52,8 +54,8 @@
                 </div>
                 <div class="col-7">
                     <p class="my-0"><strong>{{ item.product.name }}</strong></p>
-                    <p class="my-0 small text-muted">Start: {{ item.start_date|date:"d/m/Y" }}</p>
-                    <p class="my-0 small text-muted">End: {{ item.end_date|date:"d/m/Y" }}</p>
+                    <p class="my-0 small text-muted">Start: {{ item.start_date}}</p>
+                    <p class="my-0 small text-muted">End: {{ item.end_date}}</p>
                     <p class="my-0 small text-muted">Duration: {{ item.duration }} day{{ item.duration|pluralize }}</p>
                     <p class="my-0 small text-muted">Deposit: £{{ item.deposit|floatformat:2 }}</p>
                 </div>
@@ -83,7 +85,7 @@
 
         <!-- Checkout Form -->
         <div class="col-12 col-lg-6">
-            <p class="text-muted">Please fill out the form below to complete your rental</p>
+            <p class="text-muted px-3">Please fill out the form below to complete your rental</p>
             <form action="{% url 'checkout' %}" method="POST" id="payment-form">
                 {% csrf_token %}
 
@@ -118,8 +120,8 @@
                     </div>
                 </fieldset>
 
+                <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
                 <fieldset class="px-3">
-                    <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
                     {% csrf_token %}
                     <!-- Stripe Card Element mount point -->
                     <div id="card-element" class="StripeElement"></div>
@@ -131,7 +133,7 @@
 
                 <div class="submit-button text-right mt-5 mb-2">
                     <!-- Mobile only layout -->
-                    <div class="d-flex flex-column d-sm-none gap-3">
+                    <div class="d-flex flex-column d-sm-none gap-3 px-3">
                         <a href="{% url 'reservation:view_bag' %}" class="btn btn-outline-secondary w-100">
                             <span class="icon"><i class="fas fa-chevron-left"></i></span>
                             <span>Adjust Checkout</span>
@@ -146,7 +148,7 @@
                     </div>
 
                     <!-- Tablet & Desktop layout -->
-                    <div class="d-none d-sm-block">
+                    <div class="d-none d-sm-block px-3">
                         <a href="{% url 'reservation:view_bag' %}" class="btn btn-outline-secondary rounded-0">
                             <span class="icon"><i class="fas fa-chevron-left"></i></span>
                             <span>Adjust Checkout</span>
@@ -163,7 +165,6 @@
         </div>
     </div>
 </div>
-
 {% endblock %}
 
 {% block corejs %}
