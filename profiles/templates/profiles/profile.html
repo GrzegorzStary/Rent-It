@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %} · Profile{% endblock %}
+{% block extra_css %}
+    <link rel="stylesheet" href="{% static 'css/profile-edit.css' %}">
+{% endblock %}
+
+{% block title %} - Profile{% endblock %}
 
 {% block content %}
 <div class="container my-5">
@@ -17,8 +21,8 @@
           >
         {% else %}
           <img
-            src="{% static 'images/default_profile.png' %}"
-            alt="Default profile picture"
+            src="{% static 'images/no_image_human.png' %}"
+            alt="No profile image available"
             class="rounded-circle shadow profile-avatar"
           >
         {% endif %}

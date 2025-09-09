@@ -2,14 +2,15 @@
 {% load static %}
 {% load widget_tweaks %}
 
-
-{% block title %}· Edit Profile{% endblock %}
-
 {% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/profile-edit.css' %}">
+    <link rel="stylesheet" href="{% static 'css/profile-edit.css' %}">
 {% endblock %}
 
-{% block content %}
+
+
+{% block title %} - Edit Profile{% endblock %}
+
+{% block content %} 
 <div class="container my-5">
   <div class="row justify-content-center">
     <div class="col-lg-9 col-xl-8">
@@ -29,7 +30,7 @@
                   {% if form.instance.profile_picture %}
                     <img id="avatarPreview" src="{{ form.instance.profile_picture.url }}" alt="Profile picture">
                   {% else %}
-                    <img id="avatarPreview" src="{% static 'images/default_profile.png' %}" alt="Default profile picture">
+                    <img id="avatarPreview" src="{% static 'images/no_image_human.png' %}" alt="Default profile picture - user did not provide profile picture">
                   {% endif %}
                 </div>
 
