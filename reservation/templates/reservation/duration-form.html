@@ -31,6 +31,17 @@
     </div>
   </div>
 
+<!-- Tablet & Desktop inline layout -->
+<div class="d-none d-sm-flex align-items-center gap-2 text-nowrap mt-2">
+  <button class="btn btn-outline-warning" type="submit" name="update">
+    <i class="fas fa-chevron-up"></i> Update
+  </button>
+  <button id="remove_desktop_{{ ctx.item_id }}" class="btn btn-outline-danger remove-item"
+    type="button" data-item="{{ ctx.item_id }}">
+    Remove <i class="fas fa-trash-alt"></i>
+  </button>
+</div>
+
 <!-- Phones only buttons split far apart -->
 <div class="d-flex justify-content-between d-sm-none mt-3">
   <button class="btn btn-outline-warning me-2 flex-fill" type="submit" name="update">
@@ -45,24 +56,12 @@
   </button>
 </div>
 
-<!-- Tablet & Desktop inline layout -->
-<div class="d-none d-sm-flex align-items-center gap-2 text-nowrap mt-2">
-  <button class="btn btn-outline-warning" type="submit" name="update">
-    <i class="fas fa-chevron-up"></i> Update
-  </button>
-  <button id="remove_desktop_{{ ctx.item_id }}" class="btn btn-outline-danger remove-item"
-    type="button" data-item="{{ ctx.item_id }}">
-    Remove <i class="fas fa-trash-alt"></i>
-  </button>
-</div>
-
-
 </form>
 
 {% endwith %}
 
 {% block onload_js %}
-<script src="{% static 'js/tempus_dominus_init.js' %}"></script>
 <script src="{% static 'js/tempus_dominus_update.js' %}"></script>
+<script src="{% static 'js/tempus_dominus_init.js' %}"></script>
 <script src="{% static 'js/item_removal.js' %}"></script>
 {% endblock %}

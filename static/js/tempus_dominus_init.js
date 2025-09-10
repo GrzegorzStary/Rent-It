@@ -1,29 +1,42 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const options = {
-      display: {
-        format: 'dd/MM/yyyy',
-        components: {
-          useTwentyfourHour: true,
-          decades: false,
-          year: true,
-          month: true,
-          date: true,
-          hours: false,
-          minutes: false,
-          seconds: false
-        }
-      },
-      localization: {
-        locale: 'en-GB'
+  const today = new Date();
+  today.setHours(0, 0, 0, 0); // remove time component
+
+  const options = {
+    localization: {
+      locale: 'en-GB',
+      format: 'dd/MM/yyyy',
+      hourCycle: 'h23'
+    },
+    display: {
+      components: {
+        decades: false,
+        year: true,
+        month: true,
+        date: true,
+        hours: false,
+        minutes: false,
+        seconds: false
       }
-    };
-  
-    document.querySelectorAll('[id^="start-date-picker-"]').forEach(picker => {
+    },
+    restrictions: {
+      minDate: today
+    }
+  };
+
+  // Init specific single start date picker
+  document.querySelectorAll('#start-date-picker').forEach(picker => {
+    if (!picker.dataset.tdLoaded) {
       new tempusDominus.TempusDominus(picker, options);
-    });
-  
-    document.querySelectorAll('[id^="end-date-picker-"]').forEach(picker => {
-      new tempusDominus.TempusDominus(picker, options);
-    });
+      picker.dataset.tdLoaded = "true";
+    }
   });
-  
+
+  // Init specific single end date picker
+  document.querySelectorAll('#end-date-picker').forEach(picker => {
+    if (!picker.dataset.tdLoaded) {
+      new tempusDominus.TempusDominus(picker, options);
+      picker.dataset.tdLoaded = "true";
+    }
+  });
+});

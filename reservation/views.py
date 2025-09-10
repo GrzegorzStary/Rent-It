@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import datetime, date
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.urls import reverse
@@ -68,6 +68,7 @@ def view_bag(request):
         'site_fee': round(site_fee, 2),
         'deposit': round(deposit_total, 2),
         'grand_total': round(grand_total, 2),
+        'today': date.today(),
     }
 
     return render(request, 'reservation/reservation.html', context)

@@ -98,7 +98,7 @@
             <p class="my-0">£{{ item.product.price }}</p>
           </td>
           <td class="py-3 w-25">
-            {% include "reservation/duration-form.html" with row=item %}
+            {% include "reservation/duration-form.html" with row=item uid=forloop.counter %}
           </td>
           <td class="py-3">
             <p>£ {% calc_subtotal item.product.price item.duration 0 %}</p>
@@ -120,8 +120,7 @@
     </div>
     {% else %}
     <p class="lead mb-5">Your rental bag is empty.</p>
-    <a href="{% url 'items' %}" class="btn btn-outline-black rounded-0 mt-3">
-      <a href="{% url 'items' %}" class="btn btn-outline-secondary rounded-0 text-uppercase mt-3">
+      <a href="{% url 'items' %}" class="btn btn-outline-secondary rounded-0 text-uppercase mb-3 mt-3 px-3">
         <span class="icon">
           <i class="fas fa-chevron-left"></i>
         </span>
