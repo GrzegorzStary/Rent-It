@@ -1,52 +1,60 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block extra_css %}
-    <link rel="stylesheet" href="{% static 'css/profile-edit.css' %}">
-{% endblock %}
-
 {% block title %} - Profile{% endblock %}
 
 {% block content %}
 <div class="container my-5">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-12 col-md-10 col-lg-8">
       <!-- Header -->
       <div class="text-center mb-4">
         {% if profile.profile_picture %}
-          <img
-            src="{{ profile.profile_picture.url }}"
-            alt="{{ profile.first_name }}'s profile picture"
-            class="rounded-circle shadow profile-avatar"
-          >
+        <img src="{{ profile.profile_picture.url }}"
+          alt="{{ profile.first_name }} {{ profile.last_name }} profile picture"
+          class="rounded-circle shadow-sm img-fluid" style="width: 160px; height: 160px; object-fit: cover;"
+          loading="lazy">
         {% else %}
-          <img
-            src="{% static 'images/no_image_human.png' %}"
-            alt="No profile image available"
-            class="rounded-circle shadow profile-avatar"
-          >
+        <img src="{% static 'images/no_image_human.png' %}" alt="No profile image available"
+          class="rounded-circle shadow-sm img-fluid" style="width: 160px; height: 160px; object-fit: cover;"
+          loading="lazy">
         {% endif %}
 
-        <h1 class="h3 mt-3">{{ profile.first_name }} {{ profile.last_name }}’s Profile</h1>
-        {% if profile.bio %}<p class="text-muted mb-0">{{ profile.bio }}</p>{% endif %}
+        <h1 class="h3 mt-3 mb-1">
+          {{ profile.first_name }} {{ profile.last_name }}’s Profile
+        </h1>
+        {% if profile.bio %}
+        <p class="text-muted mb-0">{{ profile.bio }}</p>
+        {% endif %}
       </div>
 
       <!-- Action buttons -->
-      <div class="action-bar">
-        <a href="{% url 'edit_profile' %}" class="btn action-btn btn-edit">
-          <i class="fa-solid fa-user-pen"></i><span>Edit Profile</span>
-        </a>     
-        <a href="{% url 'create_listing' %}" class="btn action-btn btn-create">
-          <i class="fa-solid fa-square-plus"></i><span>Create a Listing</span>
-        </a>    
-        <a href="{% url 'listed_items' %}" class="btn action-btn btn-listings">
-          <i class="fa-solid fa-layer-group"></i><span>Your Listings</span>
-        </a>
-        <a href="{% url 'rented_items' %}" class="btn action-btn">
-          <i class="fa-solid fa-box-open"></i><span>Rented Items</span>
-        </a> 
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-xl-4 g-3 g-xl-4">
+        <div class="col d-grid">
+          <a href="{% url 'edit_profile' %}"
+            class="btn btn-outline-primary btn-lg h-100 d-flex align-items-center justify-content-center gap-2">
+            <i class="fa-solid fa-user-pen" aria-hidden="true"></i><span>Edit Profile</span>
+          </a>
+        </div>
+        <div class="col d-grid">
+          <a href="{% url 'create_listing' %}"
+            class="btn btn-outline-primary btn-lg h-100 d-flex align-items-center justify-content-center gap-2">
+            <i class="fa-solid fa-square-plus" aria-hidden="true"></i><span>Create a Listing</span>
+          </a>
+        </div>
+        <div class="col d-grid">
+          <a href="{% url 'listed_items' %}"
+            class="btn btn-outline-primary btn-lg h-100 d-flex align-items-center justify-content-center gap-2">
+            <i class="fa-solid fa-layer-group" aria-hidden="true"></i><span>Your Listings</span>
+          </a>
+        </div>
+        <div class="col d-grid">
+          <a href="{% url 'rented_items' %}"
+            class="btn btn-outline-primary btn-lg h-100 d-flex align-items-center justify-content-center gap-2">
+            <i class="fa-solid fa-box-open" aria-hidden="true"></i><span>Rented Items</span>
+          </a>
+        </div>
       </div>
-      
     </div>
   </div>
 </div>
