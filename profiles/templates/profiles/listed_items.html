@@ -55,8 +55,8 @@
             <p class="card-text small text-truncate mt-1">{{ product.description }}</p>
           </div>
 
-          <!-- Footer: Edit (left) | switch (center) | Open (right) -->
-          <div class="card-footer bg-white">
+          
+          <div class="bg-white">
             <form method="post" action="{% url 'toggle_listing' product.id %}" class="m-0 w-100">
               {% csrf_token %}
               <input type="hidden" name="next" value="{{ request.get_full_path }}">
@@ -76,7 +76,7 @@
                       </label>
                     </div>
                   </div>
-                  <!-- BUTTONS BELOW: Edit left | Open right -->
+                  <!-- BUTTONS BELOW-->
                   <div class="row g-2 align-items-center">
                     <div class="col-12 col-md-auto">
                       <a href="{% url 'edit_item' product.id %}" class="btn btn-sm btn-outline-secondary w-100">
