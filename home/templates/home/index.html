@@ -49,6 +49,7 @@
 <!-- Card Container -->
 <div class="card-container d-flex flex-wrap justify-content-center gap-3 px-3">
     {% for product in recent_products|slice:":8" %}
+    {% if product.is_listed %}
     <a href="{% url 'item_detail' product.id %}" class="product-card-link border-0 text-decoration-none">
         <div class="card product-card rounded-0">
 
@@ -83,17 +84,14 @@
                 <h6 class="card-title text-truncate">{{ product.name }}</h6>
                 <p class="card-text text-muted mb-1">£{{ product.price }}</p>
 
-                {% if product.rating %}
-                <small class="text-warning"><i class="fas fa-star"></i> {{ product.rating }} / 5</small>
-                {% else %}
-                <small class="text-muted">No Rating</small>
-                {% endif %}
+                {# RATING REMOVED #}
 
                 <p class="card-text small text-truncate">{{ product.description }}</p>
             </div>
 
         </div>
     </a>
+    {% endif %}
     {% empty %}
     <p>No recent items found.</p>
     {% endfor %}
