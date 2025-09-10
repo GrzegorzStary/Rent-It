@@ -8,6 +8,7 @@ from django.db.models import Q
 from django.http import JsonResponse
 from django.shortcuts import render, redirect, reverse, get_object_or_404
 from django.views.decorators.http import require_POST
+from django.db import transaction
 
 from .forms import ProductForm
 from .models import Product, ProductImage
@@ -171,43 +172,78 @@ def items_detail(request, pk):
 
 
 @login_required
+@transaction.atomic
 def edit_item(request, pk):
-    item = get_object_or_404(Product, pk=pk, user=request.user)
-    if request.method == 'POST':
-        form = ProductForm(request.POST, instance=item)
-        files = request.FILES.getlist('images')
+    """
+    Superusers can edit ANY item.
+    Regular users can edit ONLY their own item.
+    """
+    # Build a performant base queryset
+    base_qs = Product.objects.select_related("user", "category").prefetch_related("images")
+
+    # Fetch object with proper permissions
+    if request.user.is_superuser:
+        item = get_object_or_404(base_qs, pk=pk)
+    else:
+        item = get_object_or_404(base_qs, pk=pk, user=request.user)
+
+    if request.method == "POST":
+        form = ProductForm(request.POST, request.FILES, instance=item)
+        files = request.FILES.getlist("images")  # multiple extra images
+
         if form.is_valid():
-            form.save()
-            # Save additional images if any
+            item = form.save()
+
+            # Save additional images
             for f in files:
-                ProductImage.objects.create(product=item, image=f)
-            messages.success(request, 'Item updated successfully!')
-            return redirect('item_detail', pk=item.pk)
+                if f:
+                    ProductImage.objects.create(product=item, image=f)
+
+            messages.success(request, "Item updated successfully!")
+            return redirect("item_detail", pk=item.pk)
         else:
-            messages.error(request, 'Please correct the errors below.')
+            messages.error(request, "Please correct the errors below.")
     else:
         form = ProductForm(instance=item)
 
-    # Get existing images for the item
     existing_images = item.images.all()
-    return render(request, 'items/edit_item.html', {
-        'form': form,
-        'item': item,
-        'existing_images': existing_images,
-    })
+
+    return render(
+        request,
+        "items/edit_item.html",
+        {
+            "form": form,
+            "item": item,
+            "existing_images": existing_images,
+        },
+    )
+
+
+
+from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404, render, redirect
+from django.contrib import messages
+
+from .models import Product
 
 
 @login_required
 def delete_item(request, pk):
-    product = get_object_or_404(Product, pk=pk, user=request.user)
+    # Superuser: fetch by pk; Regular user: fetch by pk + owner
+    if request.user.is_superuser:
+        product = get_object_or_404(Product, pk=pk)
+    else:
+        product = get_object_or_404(Product, pk=pk, user=request.user)
 
     if request.method == 'POST':
         product.delete()
         messages.success(request, 'Item deleted successfully!')
-        return redirect(reverse('items'))
+        return redirect('items')  # Redirect to item list
 
+    # Show confirm page
     context = {'product': product}
     return render(request, 'items/delete_item.html', context)
+
 
 
 @login_required
