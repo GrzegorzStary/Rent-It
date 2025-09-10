@@ -23,7 +23,6 @@
         </a>
         <div class="dropdown-menu dropdown-menu-end border-0" aria-labelledby="user-options">
           {% if request.user.is_authenticated %}
-            {% if request.user.is_superuser %}
               <a class="dropdown-item" href="{% url 'items' %}">Items</a>
               <hr class="dropdown-divider">
             {% endif %}
