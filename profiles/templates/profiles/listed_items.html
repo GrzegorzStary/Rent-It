@@ -3,70 +3,104 @@
 
 {% block title %} - Listed Items{% endblock %}
 
-{% block extra_css %}
-<link rel="stylesheet" href="{% static 'css/listed_items_toggle.css' %}">
-{% endblock %}
-
 {% block content %}
-<div class="container mt-4">
-  <h1>Your Listed Items</h1>
-</div>
+<div class="container my-3">
+  <h1 class="mb-3">Your Listed Items</h1>
 
-<div class="card-container d-flex flex-wrap justify-content-center gap-3 px-3">
-  {% for product in items %}
-    <div class="card product-card rounded-0 position-relative" style="width: 18rem;">
-      {% if product.images.first %}
-        <img src="{{ product.images.first.image.url }}" class="card-img-top img-fluid" alt="{{ product.name }}">
-      {% else %}
-        <img src="{% static 'images/noimage.png' %}" class="card-img-top img-fluid" alt="{{ product.name }}">
-      {% endif %}
+  <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 g-lg-4">
+    {% for product in items %}
+      <div class="col">
+        <div class="card h-100 rounded-0">
 
-      <div class="card-body">
-        <h6 class="card-title text-truncate mb-1">
-          <a href="{% url 'item_detail' product.id %}" class="text-decoration-none">{{ product.name }}</a>
-        </h6>
-        <p class="card-text text-muted mb-1">£{{ product.price }}</p>
+          {% if product.images.all %}
+            <div id="productCarousel{{ product.id }}" class="carousel slide">
+              <div class="carousel-inner">
+                {% for img in product.images.all %}
+                  <div class="carousel-item {% if forloop.first %}active{% endif %}">
+                    <div class="ratio ratio-4x3">
+                      <img src="{{ img.image.url }}" alt="{{ product.name }}"
+                           class="w-100 h-100 object-fit-contain" loading="lazy">
+                    </div>
+                  </div>
+                {% endfor %}
+              </div>
+              {% if product.images.all|length > 1 %}
+                <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel{{ product.id }}" data-bs-slide="prev">
+                  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#productCarousel{{ product.id }}" data-bs-slide="next">
+                  <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                  <span class="visually-hidden">Next</span>
+                </button>
+              {% endif %}
+            </div>
+          {% else %}
+            <div class="ratio ratio-4x3">
+              <img src="{% static 'images/noimage.png' %}" alt="{{ product.name }}" class="w-100 h-100 object-fit-contain" loading="lazy">
+            </div>
+          {% endif %}
 
-        {% if product.rating %}
-          <small class="text-warning"><i class="fas fa-star"></i> {{ product.rating }} / 5</small>
-        {% else %}
-          <small class="text-muted">No Rating</small>
-        {% endif %}
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-start">
+              <h6 class="card-title text-truncate mb-1">
+                <a href="{% url 'item_detail' product.id %}" class="text-decoration-none">{{ product.name }}</a>
+              </h6>
+              {% if product.distance_km %}
+                <span class="badge bg-info text-dark ms-2">{{ product.distance_km }} km</span>
+              {% endif %}
+            </div>
 
-        <p class="card-text small text-truncate mt-2">{{ product.description }}</p>
-      </div>
-
-      <!-- Bottom-left iOS toggle + status -->
-      <div class="card-toggle">
-        <form method="post" action="{% url 'toggle_listing' product.id %}" class="toggle-form">
-          {% csrf_token %}
-          <input type="hidden" name="next" value="{{ request.get_full_path }}">
-
-          <div class="toggle-wrap" data-product="{{ product.id }}">
-            <input type="checkbox" id="ios-toggle-{{ product.id }}" class="ios-checkbox" name="is_listed" {% if product.is_listed %}checked{% endif %}>
-            <label class="ios-switch" for="ios-toggle-{{ product.id }}"></label>
-
-            <span class="toggle-text">
-              <span class="txt-hidden">Hidden from renters</span>
-              <span class="txt-visible">Visible to renters</span>
-            </span>
+            <p class="card-text text-muted mb-1">£{{ product.price }}</p>
+            <p class="card-text small text-truncate mt-1">{{ product.description }}</p>
           </div>
-        </form>
-      </div>
-    </div>
-  {% empty %}
-    <div class="text-center my-5 w-100">
-      <p class="mb-4 fs-5">No items listed yet.</p>
-      <a href="{% url 'create_listing' %}" class="btn btn-outline-primary">
-        <i class="fa-solid fa-square-plus me-2"></i>
-        Create your first listing!
-      </a>
-    </div>
-  {% endfor %}
-</div>
-{% endblock %}
 
-{% block onload_js %}
-{{ block.super }}
-<script defer src="{% static 'js/listed_items_toggle.js' %}"></script>
+          <!-- Footer: Edit (left) | switch (center) | Open (right) -->
+          <div class="card-footer bg-white">
+            <form method="post" action="{% url 'toggle_listing' product.id %}" class="m-0 w-100">
+              {% csrf_token %}
+              <input type="hidden" name="next" value="{{ request.get_full_path }}">
+
+              <div class="card-footer bg-white">
+                <form method="post" action="{% url 'toggle_listing' product.id %}" class="m-0 w-100">
+                  {% csrf_token %}
+                  <input type="hidden" name="next" value="{{ request.get_full_path }}">
+              
+                  <!-- SWITCH ABOVE -->
+                  <div class="text-center mb-2">
+                    <div class="form-check form-switch d-inline-flex align-items-center m-0">
+                      <input class="form-check-input" type="checkbox" id="toggle-{{ product.id }}" name="is_listed"
+                             {% if product.is_listed %}checked{% endif %} onchange="this.form.submit()">
+                      <label class="form-check-label ms-2" for="toggle-{{ product.id }}">
+                        {% if product.is_listed %}Visible to renters{% else %}Hidden from renters{% endif %}
+                      </label>
+                    </div>
+                  </div>
+                  <!-- BUTTONS BELOW: Edit left | Open right -->
+                  <div class="row g-2 align-items-center">
+                    <div class="col-12 col-md-auto">
+                      <a href="{% url 'edit_item' product.id %}" class="btn btn-sm btn-outline-secondary w-100">
+                        <i class="fa-solid fa-pen-to-square me-1" aria-hidden="true"></i> Edit
+                      </a>
+                    </div>
+                    <div class="col-12 col-md-auto ms-md-auto text-md-end">
+                      <a href="{% url 'item_detail' product.id %}" class="btn btn-sm btn-outline-primary w-100">
+                        Open <i class="fa-solid fa-up-right-from-square ms-1" aria-hidden="true"></i>
+                      </a>
+                    </div>
+                  </div>
+                </form>
+              </div>
+        </div>
+      </div>
+    {% empty %}
+      <div class="text-center my-5">
+        <p class="mb-4 fs-5">No items listed yet.</p>
+        <a href="{% url 'create_listing' %}" class="btn btn-outline-primary">
+          <i class="fa-solid fa-square-plus me-2"></i> Create your first listing!
+        </a>
+      </div>
+    {% endfor %}
+  </div>
+</div>
 {% endblock %}
