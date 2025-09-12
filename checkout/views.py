@@ -70,7 +70,7 @@ def _get_or_create_payment_intent(stripe_secret_key: str, amount_pennies: int, c
     session.modified = True
     return intent
 
-
+@login_required
 def checkout(request):
     stripe_public_key = settings.STRIPE_PUBLIC_KEY
     stripe_secret_key = settings.STRIPE_SECRET_KEY
@@ -239,7 +239,7 @@ def checkout(request):
             messages.error(request, 'There was an error with your form. Please double check your information.')
             return redirect(reverse('checkout'))
 
-
+@login_required
 def checkout_success(request, order_number):
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)

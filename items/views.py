@@ -133,6 +133,7 @@ def items_view(request):
 
 
 # Item detail
+@login_required
 def items_detail(request, pk):
     product = get_object_or_404(Product, pk=pk)
 

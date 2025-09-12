@@ -65,6 +65,7 @@ INSTALLED_APPS = [
     
     
     
+    
     # MY APPS
     'home',
     'items',

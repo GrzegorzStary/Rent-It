@@ -6,6 +6,7 @@ from django.http import HttpResponse
 from items.models import Product
 from reservation.models import Reservation
 from django.views.decorators.http import require_POST
+from django.contrib.auth.decorators import login_required
 
 DATE_FMT = "%Y-%m-%d"
 
@@ -19,7 +20,7 @@ def _parse_duration_from_dates(start_date, end_date):
         print("DATE PARSE ERROR >>>", e)
         return 1
 
-
+@login_required
 def view_bag(request):
     bag = request.session.get('bag', {})
     bag_items = []
@@ -73,6 +74,7 @@ def view_bag(request):
 
     return render(request, 'reservation/reservation.html', context)
 
+@login_required
 def add_to_bag(request, item_id):
     product = get_object_or_404(Product, pk=item_id)
     bag = request.session.get('bag', {})
@@ -104,6 +106,7 @@ def add_to_bag(request, item_id):
     request.session.modified = True
     return redirect(redirect_url)
 
+@login_required
 def adjust_bag(request, item_id):
     product = get_object_or_404(Product, pk=item_id)
     bag = request.session.get('bag', {})
@@ -131,6 +134,7 @@ def adjust_bag(request, item_id):
     request.session.modified = True
     return redirect(reverse('reservation:view_bag'))
 
+@login_required
 @require_POST
 def remove_from_bag(request, item_id):
     product = get_object_or_404(Product, pk=item_id)
