@@ -12,6 +12,8 @@ from items.models import Product
 from profiles.forms import ProfileForm
 from profiles.models import Profile
 from checkout.checkout_context import checkout_context
+from django.core.mail import send_mail
+from django.template.loader import render_to_string
 import stripe
 import json
 from stripe.error import InvalidRequestError
@@ -242,8 +244,10 @@ def checkout_success(request, order_number):
     save_info = request.session.get('save_info')
     order = get_object_or_404(Order, order_number=order_number)
 
+    # Clear old bag
     request.session.pop('bag', None)
 
+    # Attach order to profile if logged in
     if request.user.is_authenticated:
         try:
             profile = Profile.objects.get(user=request.user)
@@ -264,14 +268,57 @@ def checkout_success(request, order_number):
         except Profile.DoesNotExist:
             pass
 
+    # Email renter confirmation
+    renter_subject = render_to_string(
+        "checkout/confirmation_emails/confirmation_email_subject.txt",
+        {"order": order}
+    ).strip()
+
+    renter_body = render_to_string(
+        "checkout/confirmation_emails/confirmation_email_body.txt",
+        {"order": order, "contact_email": settings.DEFAULT_FROM_EMAIL}
+    )
+
+    send_mail(
+        renter_subject,
+        renter_body,
+        settings.DEFAULT_FROM_EMAIL,
+        [order.email],
+        fail_silently=False,
+    )
+
+    # Email item owner
+    for lineitem in order.lineitems.all():
+        owner = lineitem.product.user
+        if owner and owner.email:
+            owner_subject = render_to_string(
+                "checkout/confirmation_emails/owner_confirmation_email_subject.txt",
+                {"order": order, "product": lineitem.product}
+            ).strip()
+
+            owner_body = render_to_string(
+                "checkout/confirmation_emails/owner_confirmation_email_body.txt",
+                {"order": order, "product": lineitem.product, "renter": order.full_name}
+            )
+
+            send_mail(
+                owner_subject,
+                owner_body,
+                settings.DEFAULT_FROM_EMAIL,
+                [owner.email],
+                fail_silently=False,
+            )
+
+    # Success message
     messages.success(
         request,
         f'Order successfully processed! Your order number is {order_number}. '
-        f'A confirmation email will be sent to {order.email}.'
+        f'A confirmation email has been sent to {order.email}.'
     )
 
+    # Cleanup session
     request.session.pop('checkout', None)
     request.session.pop('stripe_pi', None)
     request.session.modified = True
 
-    return render(request, 'checkout/checkout_success.html', {'order': order})
+    return render(request, "checkout/checkout_success.html", {"order": order})

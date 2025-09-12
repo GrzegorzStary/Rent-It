@@ -20,97 +20,98 @@
 <div class="overlay"></div>
 <div class="container my-5">
   {% if orders %}
-    {% for order in orders %}
-      <div class="border rounded p-4 shadow-sm mb-4">
-        <div class="d-flex justify-content-between align-items-center flex-wrap">
+  {% for order in orders %}
+  <div class="border rounded p-4 shadow-sm mb-4">
+    <div class="d-flex justify-content-between align-items-center flex-wrap">
+      <div>
+        <div class="small text-muted">Order number</div>
+        <div class="fw-semibold">{{ order.order_number }}</div>
+      </div>
+      <div class="text-md-end mt-2 mt-md-0">
+        <div class="small text-muted">Date</div>
+        <div>{{ order.date }}</div>
+      </div>
+    </div>
+
+    <hr class="my-3">
+
+    {% for item in order.lineitems.all %}
+    {% with product=item.product owner=item.product.user %}
+    <div class="row g-3 align-items-start py-2">
+      <div class="col-12 col-md-7">
+        <div class="d-flex gap-3">
+          <div style="width:80px; min-width:80px;">
+            {% if product.images.exists %}
+            <img src="{{ product.images.first.image.url }}" class="img-fluid rounded" alt="{{ product.name }}">
+            {% else %}
+            <img src="{{ MEDIA_URL }}noimage.png" class="img-fluid rounded" alt="{{ product.name }}">
+            {% endif %}
+          </div>
           <div>
-            <div class="small text-muted">Order number</div>
-            <div class="fw-semibold">{{ order.order_number }}</div>
-          </div>
-          <div class="text-md-end mt-2 mt-md-0">
-            <div class="small text-muted">Date</div>
-            <div>{{ order.date }}</div>
-          </div>
-        </div>
-
-        <hr class="my-3">
-
-        {% for item in order.lineitems.all %}
-          {% with product=item.product owner=item.product.user %}
-          <div class="row g-3 align-items-start py-2">
-            <div class="col-12 col-md-7">
-              <div class="d-flex gap-3">
-                <div style="width:80px; min-width:80px;">
-                  {% if product.images.exists %}
-                    <img src="{{ product.images.first.image.url }}" class="img-fluid rounded" alt="{{ product.name }}">
-                  {% else %}
-                    <img src="{{ MEDIA_URL }}noimage.png" class="img-fluid rounded" alt="{{ product.name }}">
-                  {% endif %}
-                </div>
-                <div>
-                  <div class="fw-semibold">{{ product.name }}</div>
-                  <div class="small text-muted">
-                    From <strong>{{ item.start_date|date:"d/m/Y" }}</strong>
-                    to <strong>{{ item.end_date|date:"d/m/Y" }}</strong>
-                    ({{ item.rental_duration }} day{{ item.rental_duration|pluralize }})
-                  </div>
-                  <div class="small">Price/day: £{{ product.price }}</div>
-                </div>
-              </div>
+            <div class="fw-semibold">{{ product.name }}</div>
+            <div class="small text-muted">
+              From <strong>{{ item.start_date|date:"d/m/Y" }}</strong>
+              to <strong>{{ item.end_date|date:"d/m/Y" }}</strong>
+              ({{ item.rental_duration }} day{{ item.rental_duration|pluralize }})
             </div>
-            <div class="col-12 col-md-5 text-md-end">
-              <div class="small text-muted mb-1">Pickup from</div>
-              <div class="fw-semibold">{{ owner.get_full_name|default:owner.username }}</div>
-              {% if owner.email %}<div class="small">Email: {{ owner.email }}</div>{% endif %}
-              {% if owner.profile %}
-                {% if owner.profile.phone_number %}
-                  <div class="small">Phone: {{ owner.profile.phone_number }}</div>
-                {% endif %}
-                {% if owner.profile.house_number or owner.profile.street_name or owner.profile.city or owner.profile.postal_code %}
-                  <div class="small">
-                    Address:
-                    {% if owner.profile.house_number %}{{ owner.profile.house_number }} {% endif %}
-                    {% if owner.profile.street_name %}{{ owner.profile.street_name }}{% endif %}
-                    {% if owner.profile.city %}, {{ owner.profile.city }}{% endif %}
-                    {% if owner.profile.postal_code %}, {{ owner.profile.postal_code }}{% endif %}
-                  </div>
-                {% endif %}
-              {% endif %}
-              <div class="mt-2 fw-semibold">Line total: £{{ item.lineitem_total }}</div>
-            </div>
+            <div class="small">Price/day: £{{ product.price }}</div>
           </div>
-          {% endwith %}
-          {% if not forloop.last %}<hr class="my-2">{% endif %}
-        {% empty %}
-          <p class="text-muted">No items on this order.</p>
-        {% endfor %}
-
-        <hr class="my-3">
-
-        <div class="row">
-          <div class="col-7 text-muted">Rental total</div>
-          <div class="col-5 text-end">£{{ order.order_total|floatformat:2 }}</div>
-        </div>
-        <div class="row">
-          <div class="col-7 text-muted">Deposit total</div>
-          <div class="col-5 text-end">£{{ order.deposit_total|floatformat:2 }}</div>
-        </div>
-        <div class="row">
-          <div class="col-7 text-muted">Site fee (10%)</div>
-          <div class="col-5 text-end">£{{ order.site_fee|floatformat:2 }}</div>
-        </div>
-        <div class="row">
-          <div class="col-7 text-muted">Delivery</div>
-          <div class="col-5 text-end">£{{ order.delivery_cost|default_if_none:"0.00"|floatformat:2 }}</div>
-        </div>
-        <div class="row border-top mt-2 pt-2">
-          <div class="col-7 fw-semibold">Grand total</div>
-          <div class="col-5 text-end fw-semibold">£{{ order.grand_total|floatformat:2 }}</div>
         </div>
       </div>
+      <div class="col-12 col-md-5 text-md-end">
+        <div class="small text-muted mb-1">Pickup from</div>
+        <div class="fw-semibold">{{ owner.get_full_name|default:owner.username }}</div>
+        {% if owner.email %}<div class="small">Email: {{ owner.email }}</div>{% endif %}
+        {% if owner.profile %}
+        {% if owner.profile.phone_number %}
+        <div class="small">Phone: {{ owner.profile.phone_number }}</div>
+        {% endif %}
+        {% if owner.profile.house_number or owner.profile.street_name or owner.profile.city or owner.profile.postal_code
+        %}
+        <div class="small">
+          Address:
+          {% if owner.profile.house_number %}{{ owner.profile.house_number }} {% endif %}
+          {% if owner.profile.street_name %}{{ owner.profile.street_name }}{% endif %}
+          {% if owner.profile.city %}, {{ owner.profile.city }}{% endif %}
+          {% if owner.profile.postal_code %}, {{ owner.profile.postal_code }}{% endif %}
+        </div>
+        {% endif %}
+        <div class="mt-2 fw-semibold">Line total: £{{ item.lineitem_total }}</div>
+      </div>
+    </div>
+    {% endwith %}
+    {% if not forloop.last %}
+    <hr class="my-2">{% endif %}
+    {% empty %}
+    <p class="text-muted">No items on this order.</p>
     {% endfor %}
+
+    <hr class="my-3">
+
+    <div class="row">
+      <div class="col-7 text-muted">Rental total</div>
+      <div class="col-5 text-end">£{{ order.order_total|floatformat:2 }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7 text-muted">Deposit total</div>
+      <div class="col-5 text-end">£{{ order.deposit_total|floatformat:2 }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7 text-muted">Site fee (10%)</div>
+      <div class="col-5 text-end">£{{ order.site_fee|floatformat:2 }}</div>
+    </div>
+    <div class="row">
+      <div class="col-7 text-muted">Delivery</div>
+      <div class="col-5 text-end">£{{ order.delivery_cost|default_if_none:"0.00"|floatformat:2 }}</div>
+    </div>
+    <div class="row border-top mt-2 pt-2">
+      <div class="col-7 fw-semibold">Grand total</div>
+      <div class="col-5 text-end fw-semibold">£{{ order.grand_total|floatformat:2 }}</div>
+    </div>
+  </div>
+  {% endfor %}
   {% else %}
-    <div class="text-center py-5 text-muted">You do not have any rentals yet.</div>
+  <div class="text-center py-5 text-muted">You do not have any rentals yet.</div>
   {% endif %}
 </div>
 {% endblock %}

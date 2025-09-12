@@ -1,4 +1,7 @@
-.profile-edit { max-width: 900px; margin: 0 auto; }
+.profile-edit {
+  max-width: 900px;
+  margin: 0 auto;
+}
 
 /* Card */
 .profile-edit .card,
@@ -11,6 +14,7 @@
   max-width: 900px;
   width: 100%;
 }
+
 .profile-edit .card-header,
 .card-edit .card-header {
   border-bottom: 1px solid var(--border);
@@ -18,7 +22,10 @@
   border-radius: 0;
 }
 
-.profile-edit .row.g-4 { flex-wrap: wrap; }
+.profile-edit .row.g-4 {
+  flex-wrap: wrap;
+}
+
 .profile-edit .col-md-4,
 .profile-edit .col-md-8 {
   position: static;
@@ -45,7 +52,7 @@
   margin: 0 auto 1rem;
   background: #f8f9fa;
   border: 4px solid var(--background);
-  box-shadow: 0 6px 16px rgba(0,0,0,.08);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, .08);
 }
 
 /* Circle image section */
@@ -59,7 +66,11 @@
 }
 
 /* Labels and fields */
-.profile-edit .form-label { font-weight: 600; color: var(--text); }
+.profile-edit .form-label {
+  font-weight: 600;
+  color: var(--text);
+}
+
 .profile-edit .form-control {
   border-color: var(--border);
   background: var(--background);
@@ -68,13 +79,21 @@
   font-size: 1.1rem;
   border-radius: 0;
 }
+
 .profile-edit .form-control:focus {
   border-color: var(--primary);
   box-shadow: 0 0 0 .2rem color-mix(in srgb, var(--primary) 15%, transparent);
   outline: none;
 }
-.profile-edit .form-text { color: #6c757d; }
-.profile-edit .invalid-feedback { font-size: .875rem; position: static; }
+
+.profile-edit .form-text {
+  color: #6c757d;
+}
+
+.profile-edit .invalid-feedback {
+  font-size: .875rem;
+  position: static;
+}
 
 /* Buttons centered */
 .profile-edit .actions {
@@ -84,22 +103,26 @@
   justify-content: center;
   margin-top: 1rem;
 }
+
 .profile-edit .btn-outline-primary {
   border-color: var(--primary);
   color: var(--primary);
   border-radius: 0;
   font-weight: 600;
 }
+
 .profile-edit .btn-outline-primary:hover {
   background-color: var(--primary);
   border-color: var(--primary);
   color: var(--background);
 }
+
 .profile-edit .btn-outline-secondary {
   border-color: var(--border);
   color: var(--text);
   border-radius: 0;
 }
+
 .profile-edit .btn-outline-secondary:hover {
   background-color: var(--hover);
   border-color: var(--hover);
@@ -107,10 +130,16 @@
 }
 
 /* Header spacing */
-.profile-edit h1 { margin-bottom: 1rem; }
+.profile-edit h1 {
+  margin-bottom: 1rem;
+}
 
 /* Mobile smaller avatar */
 @media (max-width: 576px) {
+
   .profile-edit .pe-avatar,
-  .rounded-circle-edit { width: 180px; height: 180px; }
+  .rounded-circle-edit {
+    width: 180px;
+    height: 180px;
+  }
 }

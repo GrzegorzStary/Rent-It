@@ -1,1 +1,1 @@
-Your item "{{ item.product.name }}" was rented by {{ order.full_name }} — Order {{ order.order_number }}
+THIS IS OWNERS TITLE EMAIL

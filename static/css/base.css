@@ -77,42 +77,46 @@ form.d-flex .btn:hover {
     border-radius: 0;
     border-color: var(--primary);
     color: var(--primary);
-  }
-  .btn.btn-outline-primary:hover {
+}
+
+.btn.btn-outline-primary:hover {
     background-color: var(--hover);
     border-color: var(--hover);
     color: var(--background);
     transition: all 0.3s ease-in-out;
-  }
-  
-  /* Keep Browsing */
-  .btn.btn-outline-black {
+}
+
+/* Keep Browsing */
+.btn.btn-outline-black {
     border-radius: 0;
-  }
-  .btn.btn-outline-black:hover {
+}
+
+.btn.btn-outline-black:hover {
     color: var(--primary);
     transition: all 0.3s ease-in-out;
-  }  
+}
 
-  /* Update button */
-  .btn.btn-outline-warning {
+/* Update button */
+.btn.btn-outline-warning {
     border-radius: 0;
-  }
-  .btn.btn-outline-warning:hover {
+}
+
+.btn.btn-outline-warning:hover {
 
     color: var(--background);
     transition: all 0.3s ease-in-out;
-  }
+}
 
-  /* Delete button */
-    .btn.btn-outline-danger {
-        border-radius: 0;
-    }
-    .btn.btn-outline-danger:hover {
-        color: var(--background);
-        transition: all 0.3s ease-in-out;
-    }
-  
+/* Delete button */
+.btn.btn-outline-danger {
+    border-radius: 0;
+}
+
+.btn.btn-outline-danger:hover {
+    color: var(--background);
+    transition: all 0.3s ease-in-out;
+}
+
 /* Footer */
 main {
     flex: 1;

@@ -140,8 +140,6 @@ SOCIAL_AUTH_GITHUB_SECRET = os.environ.get('SOCIAL_AUTH_GITHUB_SECRET', '')
 GOOGLE_CLIENT_ID = os.environ.get('GOOGLE_CLIENT_ID', '')
 GOOGLE_CLIENT_SECRET = os.environ.get('GOOGLE_CLIENT_SECRET', '')
 
-EAMIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # For development, use console backend
-
 ACCOUNT_EMAIL_VERIFICATION = 'mandatory' # Requires email verification
 ACCOUNT_USERNAME_MIN_LENGTH = 4 # Minimum length for username
 ACCOUNT_LOGIN_METHODS = {'username', 'email'} # Allows login with either username or email
@@ -214,19 +212,11 @@ STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
 
 import os
 
-if os.environ.get('DEVELOPMENT'):
-    # Emails just print to the console
-    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-    DEFAULT_FROM_EMAIL = 'rent-it@example.com'
-else:
-    # Production: use Gmail SMTP
-    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-    EMAIL_USE_TLS = True
-    EMAIL_PORT = 587
-    EMAIL_HOST = 'smtp.gmail.com'
-    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER', '')
-    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD', '')
-    DEFAULT_FROM_EMAIL = os.environ.get('DEFAULT_FROM_EMAIL', EMAIL_HOST_USER)
+# Emails just print to the console
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+EMAIL_FILE_PATH = BASE_DIR / 'sent_emails'  # Directory to store sent emails
+DEFAULT_FROM_EMAIL = 'rent-it@example.com'
+
 
 
 # Default primary key field type

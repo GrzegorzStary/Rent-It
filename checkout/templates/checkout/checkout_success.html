@@ -40,55 +40,55 @@
 
         {# If your related_name differs, use order.orderlineitem_set.all instead #}
         {% for item in order.lineitems.all %}
-          {% with owner=item.product.user %}
-          <div class="py-3 border-bottom">
-            <div class="row align-items-start">
-              <div class="col-12 col-md-6">
-                <strong>{{ item.product.name }}</strong>
-                <div class="small text-muted">
-                  From <strong>{{ item.start_date|date:"d/m/Y" }}</strong>
-                  to <strong>{{ item.end_date|date:"d/m/Y" }}</strong>
-                  ({{ item.rental_duration }} day{{ item.rental_duration|pluralize }})
-                </div>
-              </div>
-              <div class="col-12 col-md-6 text-md-end">
-                <div class="small">Price per day: £{{ item.product.price }}</div>
-                <div class="fw-semibold">Line total: £{{ item.lineitem_total }}</div>
+        {% with owner=item.product.user %}
+        <div class="py-3 border-bottom">
+          <div class="row align-items-start">
+            <div class="col-12 col-md-6">
+              <strong>{{ item.product.name }}</strong>
+              <div class="small text-muted">
+                From <strong>{{ item.start_date|date:"d/m/Y" }}</strong>
+                to <strong>{{ item.end_date|date:"d/m/Y" }}</strong>
+                ({{ item.rental_duration }} day{{ item.rental_duration|pluralize }})
               </div>
             </div>
-
-            <!-- Pickup contact (owner) -->
-            <div class="mt-3">
-              <div class="small text-muted mb-1">Pickup from</div>
-
-              <div>
-                <strong>{{ owner.get_full_name|default:owner.username }}</strong>
-              </div>
-
-              {% if owner.email %}
-                <div>Email: {{ owner.email }}</div>
-              {% endif %}
-
-              {% if owner.profile %}
-                {% if owner.profile.phone_number %}
-                  <div>Phone: {{ owner.profile.phone_number }}</div>
-                {% endif %}
-
-                {% if owner.profile.house_number or owner.profile.street_name or owner.profile.city or owner.profile.postal_code %}
-                  <div>
-                    Address:
-                    {% if owner.profile.house_number %}{{ owner.profile.house_number }} {% endif %}
-                    {% if owner.profile.street_name %}{{ owner.profile.street_name }}{% endif %}
-                    {% if owner.profile.city %}, {{ owner.profile.city }}{% endif %}
-                    {% if owner.profile.postal_code %}, {{ owner.profile.postal_code }}{% endif %}
-                  </div>
-                {% endif %}
-              {% endif %}
+            <div class="col-12 col-md-6 text-md-end">
+              <div class="small">Price per day: £{{ item.product.price }}</div>
+              <div class="fw-semibold">Line total: £{{ item.lineitem_total }}</div>
             </div>
           </div>
-          {% endwith %}
+
+          <!-- Pickup contact (owner) -->
+          <div class="mt-3">
+            <div class="small text-muted mb-1">Pickup from</div>
+
+            <div>
+              <strong>{{ owner.get_full_name|default:owner.username }}</strong>
+            </div>
+
+            {% if owner.email %}
+            <div>Email: {{ owner.email }}</div>
+            {% endif %}
+
+            {% if owner.profile %}
+            {% if owner.profile.phone_number %}
+            <div>Phone: {{ owner.profile.phone_number }}</div>
+            {% endif %}
+
+            {% if owner.profile.house_number or owner.profile.street_name or owner.profile.city or
+            owner.profile.postal_code %}
+            <div>
+              Address:
+              {% if owner.profile.house_number %}{{ owner.profile.house_number }} {% endif %}
+              {% if owner.profile.street_name %}{{ owner.profile.street_name }}{% endif %}
+              {% if owner.profile.city %}, {{ owner.profile.city }}{% endif %}
+              {% if owner.profile.postal_code %}, {{ owner.profile.postal_code }}{% endif %}
+            </div>
+            {% endif %}
+          </div>
+        </div>
+        {% endwith %}
         {% empty %}
-          <p class="text-muted">No items found on this order.</p>
+        <p class="text-muted">No items found on this order.</p>
         {% endfor %}
 
         <hr>
@@ -112,7 +112,7 @@
         <div class="row mt-2 pt-2 border-top">
           <div class="col-7 fw-bold">Grand total</div>
           <div class="col-5 text-end fw-bold">£{{ order.grand_total|floatformat:2 }}</div>
-        </div>        
+        </div>
       </div>
     </div>
     <div class="col-lg-4 mt-4 mt-lg-0">
@@ -124,9 +124,9 @@
           <li>Keep your order number handy for any questions.</li>
         </ul>
         <div class="d-grid gap-2">
-            <a href="{% url 'rented_items' %}" class="btn btn-outline-primary">
-              <i class="fas fa-arrow-right me-2"></i>Go to Rented Items
-            </a>
+          <a href="{% url 'rented_items' %}" class="btn btn-outline-primary">
+            <i class="fas fa-arrow-right me-2"></i>Go to Rented Items
+          </a>
         </div>
       </div>
     </div>

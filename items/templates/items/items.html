@@ -13,32 +13,32 @@
         </div>
         <div class="col-auto">
             <input type="number" id="max_km" name="max_km" class="form-control" min="1" max="99"
-                   value="{{ max_km|default:5 }}">
+                value="{{ max_km|default:5 }}">
         </div>
         {% if search_term %}
-            <input type="hidden" name="q" value="{{ search_term }}">
+        <input type="hidden" name="q" value="{{ search_term }}">
         {% endif %}
         {% if current_sorting and current_sorting != 'None_None' %}
-            <input type="hidden" name="sort" value="{{ current_sorting }}">
+        <input type="hidden" name="sort" value="{{ current_sorting }}">
         {% endif %}
         <div class="col-auto">
             <button type="submit" class="btn btn-outline-primary text-uppercase">
-              <i class="fa-solid fa-location-dot me-2"></i> Near Me
+                <i class="fa-solid fa-location-dot me-2"></i> Near Me
             </button>
-          </div>
+        </div>
         {% if radius_active %}
         <div class="col-auto">
             <a class="btn btn-outline-secondary text-uppercase"
-               href="{% url 'items' %}{% if search_term or current_sorting %}?{% endif %}{% if search_term %}q={{ search_term }}{% endif %}{% if search_term and current_sorting %}&{% endif %}{% if current_sorting and current_sorting != 'None_None' %}sort={{ current_sorting }}{% endif %}">
-              <i class="fa-solid fa-xmark me-2"></i> Clear
+                href="{% url 'items' %}{% if search_term or current_sorting %}?{% endif %}{% if search_term %}q={{ search_term }}{% endif %}{% if search_term and current_sorting %}&{% endif %}{% if current_sorting and current_sorting != 'None_None' %}sort={{ current_sorting }}{% endif %}">
+                <i class="fa-solid fa-xmark me-2"></i> Clear
             </a>
-          </div>
+        </div>
         {% endif %}
     </form>
     {% endif %}
 
     {% if radius_active %}
-        <p class="text-muted small mb-2">Showing items within {{ max_km }} km of your postcode.</p>
+    <p class="text-muted small mb-2">Showing items within {{ max_km }} km of your postcode.</p>
     {% endif %}
 
     <div class="card-container d-flex flex-wrap justify-content-center gap-3 px-3 rounded-0">
@@ -57,13 +57,13 @@
                     </div>
 
                     {% if product.images.all|length > 1 %}
-                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel{{ product.id }}"
-                        data-bs-slide="prev">
+                    <button class="carousel-control-prev" type="button"
+                        data-bs-target="#productCarousel{{ product.id }}" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel{{ product.id }}"
-                        data-bs-slide="next">
+                    <button class="carousel-control-next" type="button"
+                        data-bs-target="#productCarousel{{ product.id }}" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
@@ -98,5 +98,5 @@
 {% endblock %}
 
 {% block extra_js %}
-  <script src="{% static 'js/items_list.js' %}"></script>
+<script src="{% static 'js/items_list.js' %}"></script>
 {% endblock %}
