@@ -14,6 +14,8 @@ from .forms import ProductForm
 from .models import Product, ProductImage
 from reservation.models import Reservation
 
+import http.client
+
 
 # Distance helpers
 EARTH_RADIUS_KM = 6371.0088
@@ -312,23 +314,26 @@ def toggle_listing(request, pk):
     return redirect(request.POST.get('next') or 'listed_items')
 
 
-# Optional dedicated "near me" page (10 km by default)
+# Dedicated "near me" distance selector (10 km by default)
 @login_required
 def nearby_items(request):
     """
-    Separate endpoint that always applies the radius filter.
+    Show items within a given radius of the logged-in user's profile postcode.
     """
     profile = getattr(request.user, 'profile', None)
     if not profile or profile.lat is None or profile.lng is None:
         messages.info(request, "Add a valid postcode to your profile to see nearby items.")
         return redirect('items')
 
+    # Radius in km, fallback to 10 if missing/invalid
     try:
         max_km = float(request.GET.get('max_km', 10))
     except (TypeError, ValueError):
         max_km = 10.0
 
     user_lat, user_lng = float(profile.lat), float(profile.lng)
+
+    # Bounding box prefilter
     lat_min, lat_max, lng_min, lng_max = bbox_around(user_lat, user_lng, max_km)
 
     qs = (
@@ -343,14 +348,20 @@ def nearby_items(request):
     )
 
     results = []
-    for p in qs:
-        owner_prof = getattr(p.user, 'profile', None)
+    for product in qs:
+        owner_prof = getattr(product.user, 'profile', None)
         if owner_prof and owner_prof.lat is not None and owner_prof.lng is not None:
-            d = haversine_km(user_lat, user_lng, float(owner_prof.lat), float(owner_prof.lng))
-            if d <= max_km:
-                p.distance_km = round(d, 2)
-                results.append(p)
+            dist = haversine_km(
+                user_lat,
+                user_lng,
+                float(owner_prof.lat),
+                float(owner_prof.lng)
+            )
+            if dist <= max_km:
+                product.distance_km = round(dist, 2)
+                results.append(product)
 
+    # Default sort - nearest first
     results.sort(key=lambda x: x.distance_km)
 
     return render(request, 'items/nearby.html', {
