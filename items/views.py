@@ -1,4 +1,3 @@
-# items/views.py
 from datetime import timedelta
 from math import radians, sin, cos, asin, sqrt
 
@@ -29,7 +28,7 @@ def haversine_km(lat1, lng1, lat2, lng2):
 
 def bbox_around(lat, lng, km):
     """Quick bounding box for prefiltering."""
-    lat_delta = km / 110.574  # ~km per degree latitude
+    lat_delta = km / 110.574  # approx km per degree latitude
     # protect cos() near poles
     lng_delta = km / (111.320 * max(0.0001, cos(radians(lat))))
     return (lat - lat_delta, lat + lat_delta, lng - lng_delta, lng + lng_delta)
@@ -55,7 +54,7 @@ def items_view(request):
         queries = Q(name__icontains=query) | Q(description__icontains=query)
         products = products.filter(queries)
 
-    # Optional "near me" radius filter
+    # "near me" radius filter
     if request.user.is_authenticated and max_km_param:
         try:
             max_km = float(max_km_param)
@@ -100,10 +99,10 @@ def items_view(request):
 
     product_list = list(products)
 
-    # If radius filter is active, compute precise distance via Haversine and trim to <= max_km
+    # If radius filter is active, compute precise distance
     if radius_enabled and user_lat is not None and user_lng is not None:
         filtered = []
-        # Use same max_km as parsed above; default 10 if parsing failed
+        # Use same max_km as parsed above default 10 if parsing failed
         try:
             max_km_val = float(max_km_param)
         except (TypeError, ValueError):
@@ -180,7 +179,7 @@ def edit_item(request, pk):
     Superusers can edit ANY item.
     Regular users can edit ONLY their own item.
     """
-    # Build a performant base queryset
+    # Build a base queryset
     base_qs = Product.objects.select_related("user", "category").prefetch_related("images")
 
     # Fetch object with proper permissions
@@ -219,14 +218,6 @@ def edit_item(request, pk):
             "existing_images": existing_images,
         },
     )
-
-
-
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import get_object_or_404, render, redirect
-from django.contrib import messages
-
-from .models import Product
 
 
 @login_required
@@ -314,7 +305,7 @@ def toggle_listing(request, pk):
     return redirect(request.POST.get('next') or 'listed_items')
 
 
-# Dedicated "near me" distance selector (10 km by default)
+# Dedicated "near me" distance selector 10 km by default
 @login_required
 def nearby_items(request):
     """

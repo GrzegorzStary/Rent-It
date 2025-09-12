@@ -366,6 +366,10 @@ footer {
     border-radius: 0.5rem;
 }
 
+.text-primary {
+    color: var(--primary) !important;
+}
+
 /* RESPONSIVE DESIGN */
 @media (max-width: 1200px) {
     .card {
