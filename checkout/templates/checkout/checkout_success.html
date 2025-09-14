@@ -73,9 +73,6 @@
             {% if owner.profile.phone_number %}
             <div>Phone: {{ owner.profile.phone_number }}</div>
             {% endif %}
-
-            {% if owner.profile.house_number or owner.profile.street_name or owner.profile.city or
-            owner.profile.postal_code %}
             <div>
               Address:
               {% if owner.profile.house_number %}{{ owner.profile.house_number }} {% endif %}
