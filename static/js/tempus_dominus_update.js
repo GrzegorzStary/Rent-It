@@ -1,66 +1,39 @@
 document.addEventListener("DOMContentLoaded", function () {
-  const today = new Date();
-  today.setHours(0, 0, 0, 0); // Strip time
+  const today = new Date()
+  today.setHours(0, 0, 0, 0)
 
-  const options = {
-    localization: {
-      locale: 'en-GB',
-      format: 'dd/MM/yyyy',
-      hourCycle: 'h23'
-    },
+  const baseOptions = {
+    localization: { locale: "en-GB", format: "dd/MM/yyyy", hourCycle: "h23" },
     display: {
       components: {
-        decades: false,
-        year: true,
-        month: true,
-        date: true,
-        hours: false,
-        minutes: false,
-        seconds: false
-      }
+        decades: false, year: true, month: true, date: true,
+        hours: false, minutes: false, seconds: false
+      },
+      placement: "bottom"
     },
-    restrictions: {
-      minDate: today
-    }
-  };
+    restrictions: { minDate: today },
+    container: document.body,
+    allowInputToggle: true
+  }
 
-  // Handle both fixed ID and dynamic ID pickers
-  document.querySelectorAll('#start-date-picker, [id^="start-date-picker-"]').forEach(startPicker => {
-    const id = startPicker.id.includes('-') ? startPicker.id.replace('start-date-picker-', '') : null;
+  document.querySelectorAll('#start-date-picker, [id^="start-date-picker-"]').forEach(startGroup => {
+    const id = startGroup.id.replace("start-date-picker-", "")
+    const endGroup  = document.getElementById(`end-date-picker-${id}`)
+    const startInput = document.getElementById(`start-date-${id}`)
+    const endInput   = document.getElementById(`end-date-${id}`)
 
-    const endPicker = id
-      ? document.getElementById(`end-date-picker-${id}`)
-      : document.getElementById(`end-date-picker`);
+    if (!endGroup || !startInput || !endInput) return
 
-    const startInput = id
-      ? document.getElementById(`start-date-${id}`)
-      : document.getElementById(`start-date`);
+    new tempusDominus.TempusDominus(startGroup, baseOptions)
+    new tempusDominus.TempusDominus(endGroup, baseOptions)
 
-    const endInput = id
-      ? document.getElementById(`end-date-${id}`)
-      : document.getElementById(`end-date`);
-
-    if (!startInput || !endInput || !endPicker) {
-      console.warn(`Missing input or picker for ID: ${id ?? 'default'}`);
-      return;
-    }
-
-    // Initialize date pickers
-    new tempusDominus.TempusDominus(startPicker, options);
-    new tempusDominus.TempusDominus(endPicker, options);
-
-    // Auto-set end date = start date + 1 day
+    // Auto set end date = start date + 1 day
     startInput.addEventListener("change", () => {
-      const [day, month, year] = startInput.value.split('/');
-      const startDate = new Date(`${year}-${month}-${day}`);
-      if (isNaN(startDate)) return;
-
-      const nextDate = new Date(startDate.getTime() + 86400000);
-      const dayStr = String(nextDate.getDate()).padStart(2, '0');
-      const monthStr = String(nextDate.getMonth() + 1).padStart(2, '0');
-      const yearStr = nextDate.getFullYear();
-
-      endInput.value = `${dayStr}/${monthStr}/${yearStr}`;
-    });
-  });
-});
+      const [day, month, year] = startInput.value.split("/")
+      const startDate = new Date(`${year}-${month}-${day}`)
+      if (isNaN(startDate)) return
+      const nextDate = new Date(startDate.getTime() + 86400000)
+      endInput.value = `${String(nextDate.getDate()).padStart(2,"0")}/${String(nextDate.getMonth()+1).padStart(2,"0")}/${nextDate.getFullYear()}`
+    })
+  })
+})

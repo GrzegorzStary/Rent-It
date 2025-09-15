@@ -10,10 +10,13 @@
   <!-- Start Date Picker -->
   <div class="mb-3">
     <label class="form-label">Start Date:</label>
-    <div class="input-group" id="start-date-picker-{{ ctx.item_id }}">
-      <input id="start-date-{{ ctx.item_id }}" name="start_date" type="text" class="form-control"
-        value="{{ ctx.start_date }}" autocomplete="off" />
-      <span class="input-group-text">
+    <div class="input-group" id="start-date-picker-{{ ctx.item_id }}-{{ uid }}" data-td-target-input="nearest"
+      data-td-target-toggle="nearest">
+      <input id="start-date-{{ ctx.item_id }}-{{ uid }}" name="start_date" type="text" class="form-control"
+        value="{{ ctx.start_date }}" autocomplete="off"
+        data-td-target="#start-date-picker-{{ ctx.item_id }}-{{ uid }}" />
+      <span class="input-group-text" data-td-target="#start-date-picker-{{ ctx.item_id }}-{{ uid }}"
+        data-td-toggle="datetimepicker">
         <i class="fa fa-calendar"></i>
       </span>
     </div>
@@ -22,39 +25,40 @@
   <!-- End Date Picker -->
   <div class="mb-3">
     <label class="form-label">End Date:</label>
-    <div class="input-group" id="end-date-picker-{{ ctx.item_id }}">
-      <input id="end-date-{{ ctx.item_id }}" name="end_date" type="text" class="form-control"
-        value="{{ ctx.end_date }}" autocomplete="off" />
-      <span class="input-group-text">
+    <div class="input-group" id="end-date-picker-{{ ctx.item_id }}-{{ uid }}" data-td-target-input="nearest"
+      data-td-target-toggle="nearest">
+      <input id="end-date-{{ ctx.item_id }}-{{ uid }}" name="end_date" type="text" class="form-control"
+        value="{{ ctx.end_date }}" autocomplete="off" data-td-target="#end-date-picker-{{ ctx.item_id }}-{{ uid }}" />
+      <span class="input-group-text" data-td-target="#end-date-picker-{{ ctx.item_id }}-{{ uid }}"
+        data-td-toggle="datetimepicker">
         <i class="fa fa-calendar"></i>
       </span>
     </div>
   </div>
 
-<!-- Tablet & Desktop inline layout -->
-<div class="d-none d-sm-flex align-items-center gap-2 text-nowrap mt-2">
-  <button class="btn btn-outline-warning" type="submit" name="update">
-    <i class="fas fa-chevron-up"></i> Update
-  </button>
-  <button id="remove_desktop_{{ ctx.item_id }}" class="btn btn-outline-danger remove-item"
-    type="button" data-item="{{ ctx.item_id }}">
-    Remove <i class="fas fa-trash-alt"></i>
-  </button>
-</div>
 
-<!-- Phones only buttons split far apart -->
-<div class="d-flex justify-content-between d-sm-none mt-3">
-  <button class="btn btn-outline-warning me-2 flex-fill" type="submit" name="update">
-    <i class="fas fa-chevron-up"></i> Update
-  </button>
+  <!-- Tablet & Desktop inline layout -->
+  <div class="d-none d-sm-flex align-items-center gap-2 text-nowrap mt-2">
+    <button class="btn btn-outline-warning" type="submit" name="update">
+      <i class="fas fa-chevron-up"></i> Update
+    </button>
+    <button id="remove_desktop_{{ ctx.item_id }}" class="btn btn-outline-danger remove-item" type="button"
+      data-item="{{ ctx.item_id }}">
+      Remove <i class="fas fa-trash-alt"></i>
+    </button>
+  </div>
 
-  <div class="mx-2"></div>
-
-  <button id="remove_{{ ctx.item_id }}" class="btn btn-outline-danger remove-item ms-2 flex-fill"
-    type="button" data-item="{{ ctx.item_id }}">
-    Remove <i class="fas fa-trash-alt"></i>
-  </button>
-</div>
+  <!-- Phones only buttons -->
+  <div class="d-flex justify-content-between d-sm-none mt-3">
+    <button class="btn btn-outline-warning me-2 flex-fill" type="submit" name="update">
+      <i class="fas fa-chevron-up"></i> Update
+    </button>
+    <div class="mx-2"></div>
+    <button id="remove_{{ ctx.item_id }}" class="btn btn-outline-danger remove-item ms-2 flex-fill" type="button"
+      data-item="{{ ctx.item_id }}">
+      Remove <i class="fas fa-trash-alt"></i>
+    </button>
+  </div>
 
 </form>
 
@@ -62,6 +66,5 @@
 
 {% block onload_js %}
 <script src="{% static 'js/tempus_dominus_update.js' %}"></script>
-<script src="{% static 'js/tempus_dominus_init.js' %}"></script>
 <script src="{% static 'js/item_removal.js' %}"></script>
 {% endblock %}
