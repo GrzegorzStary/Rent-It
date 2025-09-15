@@ -7,6 +7,16 @@
 <div class="container my-3">
   <h1 class="mb-3">Your Listed Items</h1>
 
+  <!-- Go Back Button -->
+  <div class="d-flex flex-wrap gap-2 mb-3">
+    <a href="{% url 'user_profile' %}" class="btn btn-outline-secondary">
+      <span class="icon">
+        <i class="fas fa-chevron-left"></i>
+      </span>
+      <span class="text-uppercase">Go back</span>
+    </a>
+  </div>
+
   <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 g-lg-4">
     {% for product in items %}
     <div class="col">
@@ -98,14 +108,15 @@
           </form>
         </div>
         
-            {% empty %}
-            <div class="text-center my-5">
-              <p class="mb-4 fs-5">No items listed yet.</p>
-              <a href="{% url 'create_listing' %}" class="btn btn-outline-primary">
-                <i class="fa-solid fa-square-plus me-2"></i> Create your first listing!
-              </a>
-            </div>
-            {% endfor %}
-        </div>
+    {% empty %}
+      <div class="text-center my-5">
+        <p class="mb-4 fs-5">No items listed yet.</p>
+        <a href="{% url 'create_listing' %}" class="btn btn-outline-primary">
+          <i class="fa-solid fa-square-plus me-2"></i> Create your first listing!
+        </a>
       </div>
-      {% endblock %}
+    {% endfor %}
+    </div>
+  </div>
+</div>
+{% endblock %}

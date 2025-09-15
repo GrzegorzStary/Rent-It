@@ -19,6 +19,17 @@
 {% block content %}
 <div class="overlay"></div>
 <div class="container my-5">
+
+  <!-- Go Back Button -->
+  <div class="d-flex flex-wrap gap-2 mb-4">
+    <a href="{% url 'user_profile' %}" class="btn btn-outline-secondary">
+      <span class="icon">
+        <i class="fas fa-chevron-left"></i>
+      </span>
+      <span class="text-uppercase">Go back</span>
+    </a>
+  </div>
+
   {% if orders %}
   {% for order in orders %}
   <div class="border rounded p-4 shadow-sm mb-4">
