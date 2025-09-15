@@ -6,6 +6,15 @@
 <div class="d-flex flex-column align-items-center text-center my-5">
     <h1>403 Forbidden</h1>
     <p>You are not authorized to perform this action.</p>
-    <a href="{% url 'index' %}" class="btn my-button mt-3" aria-label="Click to be redirected to home page">Home</a>
+
+    <!-- Go Back Button -->
+    <div class="d-flex flex-wrap gap-2 mt-3">
+        <a href="{% url 'index' %}" class="btn btn-outline-secondary">
+            <span class="icon">
+                <i class="fas fa-chevron-left"></i>
+            </span>
+            <span class="text-uppercase">Go back</span>
+        </a>
+    </div>
 </div>
 {% endblock %}
