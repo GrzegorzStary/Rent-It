@@ -374,6 +374,30 @@ footer {
     color: var(--primary) !important;
 }
 
+/* --- Rental bag product carousel images for Safari browser--- */
+
+.bag-carousel-inner {
+    height: 200px; 
+  }
+  
+  .bag-carousel-inner .carousel-item {
+    height: 100%;
+  }
+  
+  .bag-carousel-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; 
+    object-position: center; 
+    display: block;
+  }
+  
+  /* Fallback "no image" */
+  .img-fluid.bag-carousel-img {
+    height: 200px;
+  }
+  
+  
 /* RESPONSIVE DESIGN */
 @media (max-width: 1200px) {
     .card {
