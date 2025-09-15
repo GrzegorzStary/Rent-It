@@ -97,7 +97,6 @@ def cart_context(request):
         # BAG
         'bag_items': bag_items,
         'bag_total': bag_total.quantize(Decimal("0.01")),
-        'bag_deposit_total': bag_deposit_total.quantize(Decimal("0.01")),
         'bag_product_count': bag_product_count,
         'bag_grand_total': bag_grand_total,
 
@@ -107,6 +106,9 @@ def cart_context(request):
         'deposit_total': deposit_total.quantize(Decimal("0.01")),
         'checkout_grand_total': checkout_grand_total,
         'checkout_product_count': checkout_product_count,
-    }
+
+        'grand_total': bag_grand_total or checkout_grand_total,
+}
+
 
     return context

@@ -36,12 +36,12 @@
 
   <!-- Cart -->
   <li class="list-inline-item">
-    <a class="nav-link {% if grand_total %}text-primary fw-bold{% else %}text-black{% endif %}" href="#">
+    <a class="nav-link {% if grand_total %}text-primary fw-bold{% else %}text-black{% endif %}" href="{% url 'reservation:view_bag' %}">
       <div class="text-center">
         <i class="fas fa-shopping-bag fa-lg"></i>
         <p class="my-0 small">
-          {% if grand_total %}
-          £{{ grand_total|floatformat:2 }}
+          {% if bag_grand_total %}
+          £{{ bag_grand_total|floatformat:2 }}
           {% else %}
           £0.00
           {% endif %}
