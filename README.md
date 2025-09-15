@@ -1,6 +1,9 @@
 RENT - IT 
 -----
 
+[MOCKUP](documentation/images/mockup.png)
+
+
 ## [CLICK HERE!](https://rent-it-705ae52973e4.herokuapp.com)
 
 
@@ -53,3 +56,27 @@ Our marketing strategy combines targeted social media campaigns, local advertisi
 - Partnerships: Collaborate with local businesses and repair shops to offer verified, high-quality rentals.
 - Premium Services: Provide insurance add-ons, delivery/pick-up options, or subscription-based membership benefits.
 
+## Agile Methodology User Stories
+
+The development of Rent-It followed Agile principles, ensuring that the project could evolve iteratively with constant feedback and incremental improvements. Instead of building everything at once, the application was divided into smaller deliverables  each representing a core area of functionality (e.g., authentication, rental bag, payments, account management).
+
+[All the User Stories are available here - please click.](https://github.com/users/GrzegorzStary/projects/6d)
+
+
+## UX
+
+- Design Philosophy
+The design philosophy of Rent-It focuses on creating a clean, modern, and user friendly interface. The website offers a smooth and intuitive flow, ensuring users can browse, list, and rent items without ever feeling lost or overwhelmed. Every element is structured to balance functionality with simplicity, making the rental journey straightforward and enjoyable.
+
+- Colour Scheme and Fonts
+The website features a primary color scheme of deep blue and light neutral tones, conveying trust, reliability, and clarity. Accent colors are used sparingly to highlight buttons, alerts, and key actions, guiding users effortlessly through the site.
+
+[COLOUR PALETTE](documentation/images/rentit_color_palette.png)
+
+- For typography, headings use a bold sans-serif font to emphasize clarity and modernity, while body text relies on a clean, legible serif/sans-serif pairing that ensures readability across all devices. This combination provides both a professional identity and a smooth reading experience.
+
+- Lexend Deca
+[FONT 1](documentation/images/Lexend_Deca.png)
+
+- INTER
+[FONT 2](documentation/images/inter.png)
