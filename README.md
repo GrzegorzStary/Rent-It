@@ -1,7 +1,7 @@
 RENT - IT 
 -----
 
-[MOCKUP](documentation/images/mockup.png)
+![MOCKUP](documentation/images/mockup.png)
 
 
 ## [CLICK HERE!](https://rent-it-705ae52973e4.herokuapp.com)
@@ -71,12 +71,67 @@ The design philosophy of Rent-It focuses on creating a clean, modern, and user f
 - Colour Scheme and Fonts
 The website features a primary color scheme of deep blue and light neutral tones, conveying trust, reliability, and clarity. Accent colors are used sparingly to highlight buttons, alerts, and key actions, guiding users effortlessly through the site.
 
-[COLOUR PALETTE](documentation/images/rentit_color_palette.png)
+![COLOUR PALETTE](documentation/images/rentit_color_palette.png)
 
 - For typography, headings use a bold sans-serif font to emphasize clarity and modernity, while body text relies on a clean, legible serif/sans-serif pairing that ensures readability across all devices. This combination provides both a professional identity and a smooth reading experience.
 
 - Lexend Deca
-[FONT 1](documentation/images/Lexend_Deca.png)
+![FONT 1](documentation/images/Lexend_Deca.png)
 
 - INTER
-[FONT 2](documentation/images/inter.png)
+![FONT 2](documentation/images/inter.png)
+
+# FEATURES
+
+<details>
+  <summary>WIREFRAMES</summary>
+
+### HOME PAGE
+![Home](documentation/wireframes/HOME_PAGE.png)
+
+### ITEM PAGE
+![ITEM PAGE](documentation/wireframes/ITEM_PAGE.png)
+
+### ITEM DETAIL
+![ITEM DETAIL](documentation/wireframes/ITEM_DETAIL.png)
+
+### YOUR RENTAL BAG
+![YOUR RENTAL BAG](documentation/wireframes/YOUR_RENTAL_BAG.png)
+
+### CHECKOUT
+![CHECKOUT](documentation/wireframes/CHECKOUT.png)
+
+### ORDER OVERVIEW
+![ORDER OVERVIEW](documentation/wireframes/ORDER_OVERVIEW.png)
+
+### PROFILE PAGE
+![PROFILE PAGE](documentation/wireframes/PROFILE_PAGE.png)
+
+### EDIT PROFILE
+![EDIT PROFILE](documentation/wireframes/EDIT_YOUR_PROFILE.png)
+
+### CREATE LISTING
+![CREATE LISTING](documentation/wireframes/CREATE_A_LISTING.png)
+
+### LISTED ITEMS
+![LISTED ITEMS](documentation/wireframes/YOUR_LISTED_ITEMS.png)
+
+### RENTED ITEMS
+![RENTED ITEMS](documentation/wireframes/RENTED_ITEMS.png)
+
+
+</details>
+
+
+<details>
+  <summary>EXISTING FEATURES</summary>
+![FONT 2](documentation/images/inter.png)
+
+</details>
+
+## Languages
+
+- HTML
+- CSS
+- Java Script
+- Python
