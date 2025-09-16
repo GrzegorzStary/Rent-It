@@ -376,3 +376,245 @@ Consistent Design:
 - CSS
 - Java Script
 - Python
+
+## Frameworks and Tools
+
+- Git
+- Github
+- Google Fonts
+- Visual Studio Code
+- Django
+- PostgreSQL
+- Heroku
+- Gunicorn
+- Bootstrap
+- sycopg2
+- Balsamiq
+- CodeInstitute Database
+- Mizframa - Mockup generator app
+- Tempus Dominus - Datepicker
+- postcodes.io - For distance badge and owner/renter postcode location
+
+## DATABASE DESIGN
+
+### USER AND PROFILES
+
+| Column                           | Type         | Description                              |
+| -------------------------------- | ------------ | ---------------------------------------- |
+| `id`                             | INT (PK)     | Unique identifier for each user.         |
+| `username`                       | VARCHAR(150) | Username (from Django’s default `User`). |
+| `email`                          | VARCHAR(255) | User email.                              |
+| `password`                       | VARCHAR(255) | Hashed password.                         |
+| `is_superuser`                   | BOOLEAN      | Marks admin/superuser status.            |
+| `is_active`                      | BOOLEAN      | Whether account is active.               |
+| **Profile Table (extends User)** |              |                                          |
+| `profile_id`                     | INT (PK)     | Profile ID.                              |
+| `user_id`                        | INT (FK)     | Linked to User.                          |
+| `first_name`                     | VARCHAR(100) | User’s first name.                       |
+| `last_name`                      | VARCHAR(100) | User’s last name.                        |
+| `avatar`                         | VARCHAR(255) | Profile picture URL.                     |
+| `bio`                            | TEXT         | Short description about the user.        |
+| `phone_number`                   | VARCHAR(20)  | Contact number.                          |
+| `address`                        | VARCHAR(255) | Street address.                          |
+| `city`                           | VARCHAR(100) | City.                                    |
+| `postal_code`                    | VARCHAR(20)  | Postcode.                                |
+| `latitude`                       | DECIMAL(9,6) | Geo latitude (for distance calc).        |
+| `longitude`                      | DECIMAL(9,6) | Geo longitude (for distance calc).       |
+
+
+### ITEMS / LISTINGS
+
+| Column                              | Type          | Description                             |
+| ----------------------------------- | ------------- | --------------------------------------- |
+| `item_id`                           | INT (PK)      | Unique identifier for item.             |
+| `owner_id`                          | INT (FK)      | Linked to Profile (item owner).         |
+| `name`                              | VARCHAR(255)  | Item name.                              |
+| `description`                       | TEXT          | Detailed description.                   |
+| `price_per_day`                     | DECIMAL(10,2) | Rental price per day.                   |
+| `deposit`                           | DECIMAL(10,2) | Refundable deposit.                     |
+| `sku`                               | VARCHAR(50)   | Stock keeping unit.                     |
+| `condition`                         | VARCHAR(100)  | Item condition (e.g., New, Used, Good). |
+| `category`                          | VARCHAR(100)  | Category or tag.                        |
+| `address`                           | VARCHAR(255)  | Pickup location.                        |
+| `city`                              | VARCHAR(100)  | City of item.                           |
+| `postal_code`                       | VARCHAR(20)   | Postcode of item.                       |
+| `latitude`                          | DECIMAL(9,6)  | Geo latitude.                           |
+| `longitude`                         | DECIMAL(9,6)  | Geo longitude.                          |
+| `created_at`                        | DATETIME      | Date listed.                            |
+| `updated_at`                        | DATETIME      | Last update.                            |
+| **Item Images (multiple per item)** |               |                                         |
+| `image_id`                          | INT (PK)      | Unique image identifier.                |
+| `item_id`                           | INT (FK)      | Linked to item.                         |
+| `image_url`                         | VARCHAR(255)  | Path to image file.                     |
+
+
+### RESERVATIONS / RENTALS
+
+| Column             | Type          | Description                                 |
+| ------------------ | ------------- | ------------------------------------------- |
+| `reservation_id`   | INT (PK)      | Unique reservation.                         |
+| `item_id`          | INT (FK)      | Linked to item.                             |
+| `renter_id`        | INT (FK)      | Linked to Profile (renter).                 |
+| `owner_id`         | INT (FK)      | Linked to Profile (owner).                  |
+| `start_date`       | DATE          | Rental start date.                          |
+| `end_date`         | DATE          | Rental end date.                            |
+| `duration_days`    | INT           | Total rental duration.                      |
+| `reservation_code` | VARCHAR(50)   | Unique confirmation code.                   |
+| `total_price`      | DECIMAL(10,2) | Total rental price.                         |
+| `deposit_amount`   | DECIMAL(10,2) | Deposit held.                               |
+| `status`           | VARCHAR(50)   | e.g. Pending, Confirmed, Active, Completed. |
+| `created_at`       | DATETIME      | Reservation created.                        |
+
+
+### CHECKOUT PAYMENT (STRIPE)
+
+| Column              | Type          | Description                  |
+| ------------------- | ------------- | ---------------------------- |
+| `payment_id`        | INT (PK)      | Payment record.              |
+| `reservation_id`    | INT (FK)      | Linked to Reservation.       |
+| `stripe_payment_id` | VARCHAR(255)  | Stripe transaction ID.       |
+| `amount`            | DECIMAL(10,2) | Amount charged.              |
+| `site_fee`          | DECIMAL(10,2) | Platform fee (10%).          |
+| `payment_status`    | VARCHAR(50)   | Success / Failed / Refunded. |
+| `created_at`        | DATETIME      | Payment timestamp.           |
+
+![STRUCTURE](documentation/images/rentit_erd.png)
+
+### Access & Permissions
+- Only item owners and superusers can delete a listing.
+- Superusers can moderate reviews and manage users/items.
+
+## Testing
+
+For all testing, please refer to the [TESTING.md](TESTING.md) 
+
+## Deployment
+
+The live deployed application can be found deployed on [Heroku](rent-it-705ae52973e4.herokuapp.com/).
+
+### Heroku Deployment
+
+This project uses [Heroku](https://www.heroku.com), a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
+
+Deployment steps are as follows, after account setup:
+
+- Select **New** in the top-right corner of your Heroku Dashboard, and select **Create new app** from the dropdown menu.
+- Your app name must be unique, and then choose a region closest to you (EU or USA), and finally, select **Create App**.
+- From the new app **Settings**, click **Reveal Config Vars**, and set your environment variables.
+
+| Key | Value |
+| --- | --- |
+| `DATABASE_URL` | user's own value |
+| `DISABLE_COLLECTSTATIC` | 1 (*this is temporary, and can be removed for the final deployment*) |
+| `SECRET_KEY` | user's own value |
+
+Heroku needs two additional files in order to deploy properly.
+- requirements.txt
+- Procfile
+
+You can install this project's **requirements** (where applicable) using:
+- `pip3 install -r requirements.txt`
+
+If you have your own packages that have been installed, then the requirements file needs updated using:
+- `pip3 freeze --local > requirements.txt`
+
+The **Procfile** can be created with the following command:
+- `echo web: gunicorn app_name.wsgi > Procfile`
+- *replace **app_name** with the name of your primary Django app name; the folder where settings.py is located*
+
+For Heroku deployment, follow these steps to connect your own GitHub repository to the newly created app:
+
+Either:
+- Select **Automatic Deployment** from the Heroku app.
+
+Or:
+- In the Terminal/CLI, connect to Heroku using this command: `heroku login -i`
+- Set the remote for Heroku: `heroku git:remote -a app_name` (replace *app_name* with your app name)
+- After performing the standard Git `add`, `commit`, and `push` to GitHub, you can now type:
+- `git push heroku main`
+
+The project should now be connected and deployed to Heroku!
+
+### Local Deployment
+
+This project can be cloned or forked in order to make a local copy on your own system.
+
+For either method, you will need to install any applicable packages found within the *requirements.txt* file.
+- `pip3 install -r requirements.txt`.
+
+You will need to create a new file called `env.py` at the root-level,
+and include the same environment variables listed above from the Heroku deployment steps.
+
+Sample `env.py` file:
+
+```python
+import os
+
+os.environ.setdefault("CLOUDINARY_URL", "user's own value")
+os.environ.setdefault("DATABASE_URL", "user's own value")
+os.environ.setdefault("SECRET_KEY", "user's own value")
+
+# local environment only (do not include these in production/deployment!)
+os.environ.setdefault("DEBUG", "True")
+```
+
+Once the project is cloned or forked, in order to run it locally, you'll need to follow these steps:
+- Start the Django app: `python3 manage.py runserver`
+- Stop the app once it's loaded: `CTRL+C` or `⌘+C` (Mac)
+- Make any necessary migrations: `python3 manage.py makemigrations`
+- Migrate the data to the database: `python3 manage.py migrate`
+- Create a superuser: `python3 manage.py createsuperuser`
+- Load fixtures (if applicable): `python3 manage.py loaddata file-name.json` (repeat for each file)
+- Everything should be ready now, so run the Django app again: `python3 manage.py runserver`
+
+#### Cloning
+
+You can clone the repository by following these steps:
+
+1. Go to the [GitHub repository](https://github.com/GrzegorzStary/Rent-It)
+2. Locate the Code button above the list of files and click it 
+3. Select if you prefer to clone using HTTPS, SSH, or GitHub CLI and click the copy button to copy the URL to your clipboard
+4. Open Git Bash or Terminal
+5. Change the current working directory to the one where you want the cloned directory
+6. In your IDE Terminal, type the following command to clone my repository:
+	- `git clone https://github.com/GrzegorzStary/Rent-It`
+7. Press Enter to create your local clone.
+
+Alternatively, if using Gitpod, you can click below to create your own workspace using this repository.
+
+[![Open in Gitpod](https://gitpod.io/button/open-in-gitpod.svg)](https://github.com/GrzegorzStary/Rent-It)
+
+Please note that in order to directly open the project in Gitpod, you need to have the browser extension installed.
+A tutorial on how to do that can be found [here](https://www.gitpod.io/docs/configure/user-settings/browser-extension).
+
+#### Forking
+
+By forking the GitHub Repository, we make a copy of the original repository on our GitHub account to view and/or make changes without affecting the original owner's repository.
+You can fork this repository by using the following steps:
+
+1. Log in to GitHub and locate the [GitHub Repository](https://github.com/GrzegorzStary/Rent-It)
+2. At the top of the Repository (not top of page) just above the "Settings" Button on the menu, locate the "Fork" Button.
+3. Once clicked, you should now have a copy of the original repository in your own GitHub account!
+
+### Local VS Deployment
+
+The local version, created on Gitpod, does not have the functionality to send confirmation emails. This is due to the fact that Gitpod blocks the necessary email port required to carry out this operation. Gitpod blocks this port by default due to concerns about email spam and it cannot be changed.
+
+### Media
+
+| Source | Location | Type | Notes |
+| --- | --- | --- | --- |
+| [HubSpot](https://www.hubspot.com/) | entire site | Image / Color pattern| LOGO GENERATOR
+| [Google Fonts](https://fonts.google.com/) | entire site | fonts | Fonts |
+| [Google Image](https://images.google.com) | Carousel image index page | image |
+| [FontAwesome](https://fontawesome.com) | entire site | social media icon | icons
+| [Bootstrap](https://getbootstrap.com) | entire site | styling | styles / forms
+| [PRIVATE COLLECTION]() | Carousel image/ Room Images | image | all images
+
+### Acknowledgements
+
+- Firstly I would like to thank to myself for perstistance and not giving up in creating this project.
+- Big thank you to the Code Institute and my Teacher Tom Cowen for providing me with easy to understand knowledge.
+- Thank you to my mentor Gareth for providing me with important feedback, as well as improvement ideas.
+- Thank to my wife for taking care of our child so that I could focus and make that website happen.
+- Thank you to all the people that found little bit of time in theirs busy lifes to test my website and give me some ideas what could be changed and adjusted.
