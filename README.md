@@ -4,7 +4,7 @@ RENT - IT
 ![MOCKUP](documentation/images/mockup.png)
 
 
-## [CLICK HERE!](https://rent-it-705ae52973e4.herokuapp.com)
+# [CLICK HERE!](https://rent-it-705ae52973e4.herokuapp.com)
 
 
 ## Introduction  
@@ -61,6 +61,16 @@ Our marketing strategy combines targeted social media campaigns, local advertisi
 The development of Rent-It followed Agile principles, ensuring that the project could evolve iteratively with constant feedback and incremental improvements. Instead of building everything at once, the application was divided into smaller deliverables  each representing a core area of functionality (e.g., authentication, rental bag, payments, account management).
 
 [All the User Stories are available here - please click.](https://github.com/users/GrzegorzStary/projects/6d)
+
+## Future Features
+
+#### Note: There are still 5 pending user stories, as Rent-It is currently under active development. These features will be added in future iterations:
+
+- Approve or Reject Rental Requests - Allow item owners to manually confirm or decline rental bookings.
+- Enable Ratings and Reviews - Provide a feedback system where renters can rate items and leave comments.
+- View Platform Activity Analytics - Dashboard for admins to monitor rentals, revenue, and user engagement.
+- Manage Duplicate Listings - Automated or manual detection and removal of duplicate item entries.
+- Leave a Review After Rental - Renters can submit reviews once their rental period has ended.
 
 
 ## UX
@@ -599,6 +609,12 @@ You can fork this repository by using the following steps:
 ### Local VS Deployment
 
 The local version, created on Gitpod, does not have the functionality to send confirmation emails. This is due to the fact that Gitpod blocks the necessary email port required to carry out this operation. Gitpod blocks this port by default due to concerns about email spam and it cannot be changed.
+
+## PROBLEMS DURING DEVELOPMENT
+
+During the development of Rent-It, an issue occurred with the project’s Git history. Initially, around 60 meaningful commits were created, documenting the progress and iterations of the application. However, after commit ~54, the repository became difficult to manage due to branching and code complexity.
+To simplify, I attempted to roll the project back to a cleaner state. In the process, I accidentally deleted the local .git folder and re-downloaded the project files from GitHub. After force-pushing the cleaned code to the main branch, the detailed commit history was overwritten.
+As a result, the current repository only shows around 17 deployment-related commits (automated and less descriptive), while the earlier, more detailed commit history is unfortunately unrecoverable.
 
 ### Media
 
