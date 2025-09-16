@@ -15,8 +15,8 @@ def profile_view(request):
     Displays the user's profile information.
     """
     profile = request.user.profile
-    return render(request, 'profiles/profile.html', {
-        'profile': profile,
+    return render(request, "profiles/profile.html", {
+        "profile": profile,
     })
 
 
@@ -26,19 +26,19 @@ def edit_profile(request):
     Allows the user to edit their profile details.
     """
     profile = request.user.profile
-    if request.method == 'POST':
+    if request.method == "POST":
         form = ProfileForm(request.POST, request.FILES, instance=profile)
         if form.is_valid():
             form.save()
             messages.success(request, "Profile updated successfully!")
-            return redirect('profile')
+            return redirect("profile")
         else:
             messages.error(request, "Please correct the errors below.")
     else:
         form = ProfileForm(instance=profile)
 
-    return render(request, 'profiles/edit_profile.html', {
-        'form': form,
+    return render(request, "profiles/edit_profile.html", {
+        "form": form,
     })
 
 
@@ -47,9 +47,9 @@ def listed_items(request):
     """
     Displays a separate page with all products listed by the logged-in user.
     """
-    items = request.user.products.all()  # Product.user has related_name="products"
-    return render(request, 'profiles/listed_items.html', {
-        'items': items,
+    items = request.user.products.all()
+    return render(request, "profiles/listed_items.html", {
+        "items": items,
     })
 
 
@@ -60,24 +60,27 @@ def rented_items(request):
     Assumes:
       - Order has a FK to Profile named `user_profile`
       - OrderLineItem has related_name="lineitems" back to Order
-      - OrderLineItem has FK `product` Product, and Product has related images via `images`
+      - OrderLineItem has FK `product` Product, and Product has related
+        images via `images`
     """
     profile = request.user.profile
 
     orders = (
-        Order.objects
-        .filter(user_profile=profile)
+        Order.objects.filter(user_profile=profile)
         .prefetch_related(
             Prefetch(
-                'lineitems',
-                queryset=OrderLineItem.objects
-                    .select_related('product', 'order')
-                    .prefetch_related('product__images', 'product__user')
+                "lineitems",
+                queryset=OrderLineItem.objects.select_related(
+                    "product", "order"
+                ).prefetch_related(
+                    "product__images",
+                    "product__user",
+                ),
             )
         )
-        .order_by('-date')
+        .order_by("-date")
     )
 
-    return render(request, 'profiles/rented_items.html', {
-        'orders': orders,
+    return render(request, "profiles/rented_items.html", {
+        "orders": orders,
     })

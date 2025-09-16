@@ -141,20 +141,25 @@ I have used the [PEP8 CI Python Linter](https://pep8ci.herokuapp.com) to validat
 
 | File | Screenshot | Notes |
 | --- | --- | --- |
-| apps.py | ![screenshot]() | Pass: No Errors |
-| forms.py | ![screenshot]() | Pass: No Errors |
-| models.py | ![screenshot]() | Pass: No Errors |
-| views.py | ![screenshot]() | Pass: No Errors |
-| urls.py | ![screenshot]() | Pass: No Errors |
+| admin.py | ![screenshot](documentation/testing/PYTHON_LINTER/profiles/admin.png) | Pass: No Errors |
+| apps.py | ![screenshot](documentation/testing/PYTHON_LINTER/profiles/apps.png) | Pass: No Errors |
+| forms.py | ![screenshot](documentation/testing/PYTHON_LINTER/profiles/forms.png) | Pass: No Errors |
+| models.py | ![screenshot](documentation/testing/PYTHON_LINTER/profiles/models.png) | Pass: No Errors |
+| testing.py | ![screenshot](documentation/testing/PYTHON_LINTER/profiles/tests.png) | Pass: No Errors |
+| urls.py | ![screenshot](documentation/testing/PYTHON_LINTER/profiles/urls.png) | Pass: No Errors |
+| utils.py | ![screenshot](documentation/testing/PYTHON_LINTER/profiles/utils.png) | Pass: No Errors |
+| views.py | ![screenshot](documentation/testing/PYTHON_LINTER/profiles/views.png) | Pass: No Errors |
 
-### Rooms
+### Rent-It
+
+- I did not make any changes to settings.py because the warnings are only style-related (long lines, whitespace, inline comment spacing) and do not affect functionality. Since this file controls critical project configuration (database, AWS, Stripe, etc.), modifying it only for PEP8 compliance could introduce unnecessary risks. It is safer to keep the file as it is, since it already works correctly in development and production.
 
 | File | Screenshot | Notes |
 | --- | --- | --- |
-| apps.py | ![screenshot]() | Pass: No Errors |
-| models.py | ![screenshot]() | Pass: No Errors |
-| urls.py | ![screenshot]() | Pass: No Errors |
-| views.py | ![screenshot]() | Pass: No Errors |
+| asgi.py | ![screenshot](documentation/testing/PYTHON_LINTER/rent_it/asgi.png) | Pass: No Errors |
+| settings.py | ![screenshot](documentation/testing/PYTHON_LINTER/rent_it/settings.png) | Pass: No Errors |
+| urls.py | ![screenshot](documentation/testing/PYTHON_LINTER/rent_it/urls.png) | Pass: No Errors |
+| wsgi.py | ![screenshot](documentation/testing/PYTHON_LINTER/rent_it/wsgi.png) | Pass: No Errors |
 
 ## Browser Compatability
 
