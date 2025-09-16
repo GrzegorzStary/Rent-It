@@ -161,13 +161,25 @@ I have used the [PEP8 CI Python Linter](https://pep8ci.herokuapp.com) to validat
 | urls.py | ![screenshot](documentation/testing/PYTHON_LINTER/rent_it/urls.png) | Pass: No Errors |
 | wsgi.py | ![screenshot](documentation/testing/PYTHON_LINTER/rent_it/wsgi.png) | Pass: No Errors |
 
+### Reservation
+
+| File | Screenshot | Notes |
+| --- | --- | --- |
+| admin.py | ![screenshot](documentation/testing/PYTHON_LINTER/reservation/admin.png) | Pass: No Errors |
+| apps.py | ![screenshot](documentation/testing/PYTHON_LINTER/reservation/apps.png) | Pass: No Errors |
+| context_processors.py | ![screenshot](documentation/testing/PYTHON_LINTER/reservation/contect_processors.png) | Pass: No Errors |
+| models.py | ![screenshot](documentation/testing/PYTHON_LINTER/reservation/models.png) | Pass: No Errors |
+| tests.py | ![screenshot](documentation/testing/PYTHON_LINTER/reservation/tests.png) | Pass: No Errors |
+| urls.py | ![screenshot](documentation/testing/PYTHON_LINTER/reservation/urls.png) | Pass: No Errors |
+| views.py | ![screenshot](documentation/testing/PYTHON_LINTER/reservation/views.png) | Pass: No Errors |
+
 ## Browser Compatability
 
 I have tested my site on different browsers to check for any compatability issues.
 
 | Browser | Screenshot | Notes |
 | --- | --- | --- |
-| Chrome | ![screenshot]() | Works as expected |
+| Chrome | ![screenshot](documentation/testing/BROWSER_COMPATABILITY/chrome.png) | Works as expected |
 | Safari | ![screenshot]() | Works as expected |
 | Firefox | ![screenshot]() | Works as expected |
 | Tor | ![screenshot]() | Works as expected |

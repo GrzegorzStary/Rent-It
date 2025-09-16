@@ -10,6 +10,7 @@ from django.contrib.auth.decorators import login_required
 
 DATE_FMT = "%Y-%m-%d"
 
+
 def _parse_duration_from_dates(start_date, end_date):
     try:
         s = datetime.strptime(start_date, "%d/%m/%Y").date()
@@ -19,6 +20,7 @@ def _parse_duration_from_dates(start_date, end_date):
     except Exception as e:
         print("DATE PARSE ERROR >>>", e)
         return 1
+
 
 @login_required
 def view_bag(request):
@@ -42,10 +44,10 @@ def view_bag(request):
 
         subtotal = float(product.price) * int(duration)
 
-        user_reservation = {
-            "start_date": start_date,
-            "end_date": end_date,
-        } if start_date and end_date else None
+        user_reservation = (
+            {"start_date": start_date, "end_date": end_date}
+            if start_date and end_date else None
+        )
 
         bag_items.append({
             'item_id': item_id,
@@ -74,6 +76,7 @@ def view_bag(request):
 
     return render(request, 'reservation/reservation.html', context)
 
+
 @login_required
 def add_to_bag(request, item_id):
     product = get_object_or_404(Product, pk=item_id)
@@ -99,12 +102,14 @@ def add_to_bag(request, item_id):
 
     messages.success(
         request,
-        f'Added or updated {product.name} in your rental bag for {duration} day(s).'
+        f'Added or updated {product.name} in your rental bag '
+        f'for {duration} day(s).'
     )
 
     request.session['bag'] = bag
     request.session.modified = True
     return redirect(redirect_url)
+
 
 @login_required
 def adjust_bag(request, item_id):
@@ -128,11 +133,15 @@ def adjust_bag(request, item_id):
         "duration": duration,
     }
 
-    messages.success(request, f'Updated {product.name} rental duration to {duration} day(s).')
+    messages.success(
+        request,
+        f'Updated {product.name} rental duration to {duration} day(s).'
+    )
 
     request.session['bag'] = bag
     request.session.modified = True
     return redirect(reverse('reservation:view_bag'))
+
 
 @login_required
 @require_POST
@@ -142,7 +151,10 @@ def remove_from_bag(request, item_id):
         bag = request.session.get('bag', {})
         bag.pop(str(item_id), None)
         request.session['bag'] = bag
-        messages.success(request, f'Removed {product.name} from your rental bag.')
+        messages.success(
+            request,
+            f'Removed {product.name} from your rental bag.'
+        )
         return HttpResponse(status=200)
     except Exception as e:
         messages.error(request, f'Error removing item: {e}')

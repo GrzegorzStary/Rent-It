@@ -5,6 +5,7 @@ from items.models import Product
 
 FEE_RATE = Decimal("0.10")  # 10% fee
 
+
 def cart_context(request):
     """
     Checkout contents available globally.
@@ -12,10 +13,10 @@ def cart_context(request):
     bag = request.session.get('bag', {})
     checkout = request.session.get('checkout', {})
 
-    # BAG 
+    # BAG
     bag_items = []
-    bag_total = Decimal("0.00") 
-    bag_deposit_total = Decimal("0.00")    
+    bag_total = Decimal("0.00")
+    bag_deposit_total = Decimal("0.00")
     bag_product_count = 0
 
     for item_id, item_data in bag.items():
@@ -30,7 +31,7 @@ def cart_context(request):
         else:
             start_date = item_data.get("start_date")
             end_date = item_data.get("end_date")
-            
+
             try:
                 if start_date and end_date:
                     start = datetime.strptime(start_date, "%d/%m/%Y")
@@ -42,11 +43,11 @@ def cart_context(request):
                 duration = 1
 
         base = product.price * Decimal(duration)
-        fee = (base * FEE_RATE)
-        subtotal = base + fee    
+        fee = base * FEE_RATE
+        subtotal = base + fee
 
         bag_total += subtotal
-        bag_deposit_total += (product.deposit or Decimal("0.00"))
+        bag_deposit_total += product.deposit or Decimal("0.00")
         bag_product_count += 1
 
         bag_items.append({
@@ -62,7 +63,7 @@ def cart_context(request):
 
     bag_grand_total = (bag_total + bag_deposit_total).quantize(Decimal("0.01"))
 
-    # CHECKOUT 
+    # CHECKOUT
     checkout_items = []
     checkout_total = Decimal("0.00")
     deposit_total = Decimal("0.00")
@@ -88,10 +89,16 @@ def cart_context(request):
             'subtotal': subtotal,
             'deposit': deposit,
             'user': product.user,
-            'image': product.images.first().image.url if product.images.exists() else None,
+            'image': (
+                product.images.first().image.url
+                if product.images.exists()
+                else None
+            ),
         })
 
-    checkout_grand_total = (checkout_total + deposit_total).quantize(Decimal("0.01"))
+    checkout_grand_total = (checkout_total + deposit_total).quantize(
+        Decimal("0.01")
+    )
 
     context = {
         # BAG
@@ -107,8 +114,8 @@ def cart_context(request):
         'checkout_grand_total': checkout_grand_total,
         'checkout_product_count': checkout_product_count,
 
+        # Unified total
         'grand_total': bag_grand_total or checkout_grand_total,
-}
-
+    }
 
     return context
