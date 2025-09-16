@@ -102,22 +102,28 @@ I have used the [PEP8 CI Python Linter](https://pep8ci.herokuapp.com) to validat
 
 | File | Screenshot | Notes |
 | --- | --- | --- |
-| admin.py | ![screenshot]() | Pass: No Errors |
-| apps.py | ![screenshot]() | Pass: No Errors |
-| forms.py| ![screenshot]() | Pass: No Errors |
-| models.py | ![screenshot]() | Pass: No Errors |
-| urls.py | ![screenshot]() | Pass: No Errors |
-| views.py | ![screenshot]() | Pass: No Errors |
+| admin.py | ![screenshot](documentation/testing/PYTHON_LINTER/checkout/admin.png) | Pass: No Errors |
+| apps.py | ![screenshot](documentation/testing/PYTHON_LINTER/checkout/apps.png) | Pass: No Errors |
+| checkout_context.py | ![screenshot](documentation/testing/PYTHON_LINTER/checkout/checkout_context.png) | Pass: No Errors |
+| forms.py| ![screenshot](documentation/testing/PYTHON_LINTER/checkout/forms.png) | Pass: No Errors |
+| models.py | ![screenshot](documentation/testing/PYTHON_LINTER/checkout/models.png) | Pass: No Errors |
+| signals.py | ![screenshot](documentation/testing/PYTHON_LINTER/checkout/signals.png) | Pass: No Errors |
+| tests.py | ![screenshot](documentation/testing/PYTHON_LINTER/checkout/tests.png) | Pass: No Errors |
+| urls.py| ![screenshot](documentation/testing/PYTHON_LINTER/checkout/urls.png) | Pass: No Errors |
+| views.py | ![screenshot](documentation/testing/PYTHON_LINTER/checkout/views.png) | Pass: No Errors |
+| webhook_handler.py | ![screenshot](documentation/testing/PYTHON_LINTER/checkout/webhook_handler.png) | Pass: No Errors |
+| webhooks.py | ![screenshot](documentation/testing/PYTHON_LINTER/checkout/webhooks.png) | Pass: No Errors |
 
-### Hotel
+### Home
 
 | File | Screenshot | Notes |
 | --- | --- | --- |
-| asgi.py | ![screenshot]() | Pass: No Errors |
-| settings.py | ![screenshot]() | Pass: No Errors |
-| urls.py | ![screenshot]() | Pass: No Errors |
-| views.py | ![screenshot]() | Pass: No Errors |
-| wsgi.py | ![screenshot]() | Pass: No Errors |
+| admin.py | ![screenshot](documentation/testing/PYTHON_LINTER/home/admin.png) | Pass: No Errors |
+| apps.py | ![screenshot](documentation/testing/PYTHON_LINTER/home/apps.png) | Pass: No Errors |
+| models.py | ![screenshot](documentation/testing/PYTHON_LINTER/home/models.png) | Pass: No Errors |
+| tests.py | ![screenshot](documentation/testing/PYTHON_LINTER/home/tests.png) | Pass: No Errors |
+| urls.py | ![screenshot](documentation/testing/PYTHON_LINTER/home/urls.png) | Pass: No Errors |
+| views.py | ![screenshot](documentation/testing/PYTHON_LINTER/home/views.png) | Pass: No Errors |
 
 ### Reservation
 
