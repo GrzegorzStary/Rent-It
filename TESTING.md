@@ -23,7 +23,11 @@ I used the [HTML W3C Validator](https://validator.w3.org) to validate my HTML fi
 
 I used the [CSS Jigsaw Validator](https://jigsaw.w3.org/css-validator) to validate my CSS files.
 
-![screenshot]()
+#### GENERAL CSS
+![screenshot](documentation/testing/CSS_VALIDATOR/css_general.png)
+
+#### CHECKOUT CSS
+![screenshot](documentation/testing/CSS_VALIDATOR/css_checkout.png)
 
 ## Python
 
