@@ -98,7 +98,7 @@ Explanation: This is correct ES6 object property syntax, but JSLint sometimes fl
 
 I have used the [PEP8 CI Python Linter](https://pep8ci.herokuapp.com) to validate my Python files.
 
-### Booking
+### Checkout
 
 | File | Screenshot | Notes |
 | --- | --- | --- |

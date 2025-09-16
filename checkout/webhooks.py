@@ -3,7 +3,7 @@ from django.conf import settings
 from django.views.decorators.http import require_POST
 from django.views.decorators.csrf import csrf_exempt
 
-from .webhook_handler import StripeWH_Handler 
+from .webhook_handler import StripeWH_Handler
 import stripe
 
 
@@ -22,7 +22,9 @@ def webhook(request):
         return HttpResponse(status=400)
 
     try:
-        event = stripe.Webhook.construct_event(payload, sig_header, wh_secret)
+        event = stripe.Webhook.construct_event(
+            payload, sig_header, wh_secret
+        )
     except ValueError:
         return HttpResponse(status=400)
     except stripe.error.SignatureVerificationError:

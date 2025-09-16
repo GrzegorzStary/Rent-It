@@ -10,5 +10,5 @@ class CheckoutConfig(AppConfig):
         """
         Load signal handlers when the app is ready.
         """
-        
-        from checkout import signals  
+
+        from checkout import signals
