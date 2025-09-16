@@ -59,6 +59,41 @@ I used the [CSS Jigsaw Validator](https://jigsaw.w3.org/css-validator) to valida
 #### CHECKOUT CSS
 ![screenshot](documentation/testing/CSS_VALIDATOR/css_checkout.png)
 
+## JavaScript
+
+I have used the [JS LINT](https://www.jslint.com/) to validate my JavaScript files.
+
+### JavaScript - Linting (JSLint)
+When running my files through JSLint, a few warnings appeared across files:
+
+- “Expected '{' and instead saw 'return'”
+Cause: I use single-line return statements (e.g. if (!errorDiv) return;).
+Explanation: This is valid ES6 syntax but JSLint prefers full block statements ({}).
+- “Expected ';' and instead saw ','”
+Cause: I declare multiple variables in one line (e.g. let stripePublicKey, clientSecret;).
+- Explanation: Valid in ES6+, but JSLint enforces one declaration per line.
+“Unexpected ': style'”
+- Cause: I pass an object property { style: style } to Stripe Elements.
+Explanation: This is correct ES6 object property syntax, but JSLint sometimes flags it.
+
+### Why I kept the code as it is? 
+- These warnings are stylistic only, not runtime errors.
+- The code executes correctly in all modern browsers.
+- They appear because JSLint has stricter/older style rules and limited ES6+ support.
+
+| File | Screenshot | Notes |
+| --- | --- | --- |
+| Card Index | ![screenshot](documentation/testing/JS_LINTER/card_index.png) | Pass: No Errors |
+| Edit Profile | ![screenshot](documentation/testing/JS_LINTER/edit_profile.png) | Pass: No Errors |
+| Image Preview | ![screenshot](documentation/testing/JS_LINTER/image_review.png) | Pass: No Errors |
+| Item Removal | ![screenshot](documentation/testing/JS_LINTER/item_removal.png) | Pass: No Errors |
+| Items List | ![screenshot](documentation/testing/JS_LINTER/items_list.png) | Pass: No Errors |
+| Listed Items Toggle | ![screenshot](documentation/testing/JS_LINTER/listed_items_toggle.png) | Pass: No Errors |
+| Price Calculator | ![screenshot](documentation/testing/JS_LINTER/price_calculator.png) | Pass: No Errors |
+| Stripe | ![screenshot](documentation/testing/JS_LINTER/stripe.png) | Pass: No Errors |
+| Tempus Dominus Init | ![screenshot](documentation/testing/JS_LINTER/tempus_dominus_init.png) | Pass: No Errors |
+| Tempus Dominus Update | ![screenshot](documentation/testing/JS_LINTER/tempus_dominus_update.png) | Pass: No Errors |
+
 ## Python
 
 I have used the [PEP8 CI Python Linter](https://pep8ci.herokuapp.com) to validate my Python files.
