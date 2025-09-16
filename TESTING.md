@@ -2,22 +2,52 @@
 
 I used the [HTML W3C Validator](https://validator.w3.org) to validate my HTML files.
 
+#### Template syntax:
+- Some of the reported errors (e.g., “Bad value {% url ... %} for attribute href” or “Stray doctype”) are not actual code issues. They occur because the validator processes the raw Django template files, which include template tags such as {% load static %} or {% url '...' %}. These tags are not part of standard HTML, so the validator flags them as invalid. Once the templates are rendered by Django, they produce valid HTML output, and those errors disappear.
+
+#### Stray elements:
+- During validation I did notice one genuine issue - a stray <div> tag - which has now been corrected. After fixing this, no further structural issues were found in the rendered pages.
+
+#### Warnings:
+- Some additional warnings remain (such as the recommendation to add lang attributes or metadata improvements). These do not affect functionality but are good practice for accessibility and SEO.
+Why the validator complains about Django
+The W3C validator expects plain, static HTML. Django templates, however, contain server-side directives ({% ... %} and {{ ... }}) which are only resolved at runtime. To the validator, these look like “illegal characters” or “unknown tags.” For accurate validation, the check must be run on the rendered HTML (the source as delivered by the browser), not on the raw template files.
+
 | Page | Screenshot | Notes |
 | --- |--- | --- |
-| Home page signed out | ![screenshot]()| Pass: No Errors |
-| Home page signed in| ![screenshot]()| Pass: No Errors |
-| Login| ![screenshot]()| Pass: No Errors |
-| Logout| ![screenshot]()| Pass: No Errors |
-| Signup| ![screenshot]()| Pass: No Errors |
-| Password reset| ![screenshot]()| Pass: No Errors |
-| Our rooms| ![screenshot]()| Pass: No Errors |
-| Contact| ![screenshot]()| Pass: No Errors |
-| Reviews| ![screenshot]()| Pass: No Errors |
-| About| ![screenshot]()| Pass: No Errors |
-| Add Review| ![screenshot]()| Pass: No Errors |
-| My Booking| ![screenshot]()| Pass: No Errors |
-| Edit Booking| ![screenshot]()| Pass: No Errors |
-| Delete Booking| ![screenshot]()| Pass: No Errors |
+| 403 | ![screenshot](documentation/testing/HTML_VALIDATOR/403.png)| Pass: No Errors |
+| 404 | ![screenshot](documentation/testing/HTML_VALIDATOR/404.png)| Pass: No Errors |
+| 500 | ![screenshot](documentation/testing/HTML_VALIDATOR/500.png)| Pass: No Errors |
+| Base | ![screenshot](documentation/testing/HTML_VALIDATOR/base.png)| Pass: No Errors |
+| Checkout Buttons | ![screenshot](documentation/testing/HTML_VALIDATOR/checkout_buttons.png)| Pass: No Errors |
+| Checkout Success| ![screenshot](documentation/testing/HTML_VALIDATOR/checkout_success.png)| Pass: No Errors |
+| Checkout | ![screenshot](documentation/testing/HTML_VALIDATOR/checkout.png)| Pass: No Errors |
+| Create Listing| ![screenshot](documentation/testing/HTML_VALIDATOR/create_listing.png)| Pass: No Errors |
+| Delete Item | ![screenshot](documentation/testing/HTML_VALIDATOR/delete_item.png)| Pass: No Errors |
+| Duration Form | ![screenshot](documentation/testing/HTML_VALIDATOR/duration_form.png)| Pass: No Errors |
+| Edit Item | ![screenshot](documentation/testing/HTML_VALIDATOR/edit_item.png)| Pass: No Errors |
+| Edit Profile | ![screenshot](documentation/testing/HTML_VALIDATOR/edit_profile.png)| Pass: No Errors |
+| FAQ | ![screenshot](documentation/testing/HTML_VALIDATOR/faq.png)| Pass: No Errors |
+| Footer | ![screenshot](documentation/testing/HTML_VALIDATOR/footer.png)| Pass: No Errors |
+| Header | ![screenshot](documentation/testing/HTML_VALIDATOR/header.png)| Pass: No Errors |
+| Index | ![screenshot](documentation/testing/HTML_VALIDATOR/index.png)| Pass: No Errors |
+| Item Detail| ![screenshot](documentation/testing/HTML_VALIDATOR/item_detail.png)| Pass: No Errors |
+| Items | ![screenshot](documentation/testing/HTML_VALIDATOR/items.png)| Pass: No Errors |
+| Listed Items| ![screenshot](documentation/testing/HTML_VALIDATOR/listed_items.png)| Pass: No Errors |
+| Listed Items Warn | ![screenshot](documentation/testing/HTML_VALIDATOR/listed_items1.png)| Continuation |
+| Login | ![screenshot](documentation/testing/HTML_VALIDATOR/login.png)| Pass: No Errors |
+| Logout | ![screenshot](documentation/testing/HTML_VALIDATOR/logout.png)| Pass: No Errors |
+| Mobile Header| ![screenshot](documentation/testing/HTML_VALIDATOR/mobile_header.png)| Pass: No Errors |
+| Privacy Policy | ![screenshot](documentation/testing/HTML_VALIDATOR/privacy_policy.png)| Pass: No Errors |
+| Product Image | ![screenshot](documentation/testing/HTML_VALIDATOR/product_image.png)| Pass: No Errors |
+| Product Info | ![screenshot](documentation/testing/HTML_VALIDATOR/product_info.png)| Pass: No Errors |
+| Profile | ![screenshot](documentation/testing/HTML_VALIDATOR/profile.png)| Pass: No Errors |
+| Rented Items | ![screenshot](documentation/testing/HTML_VALIDATOR/rented_items.png)| Pass: No Errors |
+| Reservation Total| ![screenshot](documentation/testing/HTML_VALIDATOR/reservation_total.png)| Pass: No Errors |
+| Reservation | ![screenshot](documentation/testing/HTML_VALIDATOR/reservation.png)| Pass: No Errors |
+| Search Results | ![screenshot](documentation/testing/HTML_VALIDATOR/search_results.png)| Pass: No Errors |
+| Sign Up | ![screenshot](documentation/testing/HTML_VALIDATOR/signup.png)| Pass: No Errors |
+| Terms of Service| ![screenshot](documentation/testing/HTML_VALIDATOR/terms_of_service.png)| Pass: No Errors |
 
 ## CSS
 
