@@ -8,7 +8,7 @@ from django.conf import settings
 
 from django_countries.fields import CountryField
 from items.models import Product
-from profiles.models import Profile
+from profiles.models import Profile 
 
 
 class Order(models.Model):
@@ -17,12 +17,12 @@ class Order(models.Model):
     )
     user_profile = models.ForeignKey(
         Profile, on_delete=models.SET_NULL,
-        null=True, blank=True, related_name="orders"
+        null=True, blank=True, related_name='orders'
     )
     full_name = models.CharField(max_length=50)
     email = models.EmailField(max_length=254)
     phone_number = models.CharField(max_length=20)
-    country = CountryField(blank_label="Country *")
+    country = CountryField(blank_label='Country *')
     postcode = models.CharField(max_length=20, null=True, blank=True)
     town_or_city = models.CharField(max_length=40)
     street_address1 = models.CharField(max_length=80)
@@ -53,20 +53,19 @@ class Order(models.Model):
     )
 
     original_checkout = models.TextField(
-        default="",
-        help_text="Snapshot of the checkout session at the time of order",
+        default='', help_text="Snapshot of the checkout session at the time of order"
     )
-    stripe_pid = models.CharField(max_length=254, default="")
+    stripe_pid = models.CharField(max_length=254, default='')
 
     STATUS_CHOICES = [
-        ("pending", "Pending"),
-        ("confirmed", "Confirmed"),
-        ("in_use", "In Use"),
-        ("returned", "Returned"),
-        ("cancelled", "Cancelled"),
+        ('pending', 'Pending'),
+        ('confirmed', 'Confirmed'),
+        ('in_use', 'In Use'),
+        ('returned', 'Returned'),
+        ('cancelled', 'Cancelled'),
     ]
     order_status = models.CharField(
-        max_length=20, choices=STATUS_CHOICES, default="pending"
+        max_length=20, choices=STATUS_CHOICES, default='pending'
     )
 
     notes = models.TextField(blank=True, null=True)
@@ -80,16 +79,16 @@ class Order(models.Model):
         Update grand total each time a line item is added or removed.
         """
         self.order_total = self.lineitems.aggregate(
-            Sum("lineitem_total")
-        )["lineitem_total__sum"] or Decimal("0.00")
+            Sum('lineitem_total')
+        )['lineitem_total__sum'] or Decimal('0.00')
 
         total = self.order_total
 
         if self.delivery_cost:
             total += self.delivery_cost
 
-        total += (self.deposit_total or Decimal("0.00"))
-        total += (self.site_fee or Decimal("0.00"))
+        total += (self.deposit_total or Decimal('0.00'))
+        total += (self.site_fee or Decimal('0.00'))
 
         self.grand_total = total
         self.save()
@@ -105,7 +104,7 @@ class Order(models.Model):
 
 class OrderLineItem(models.Model):
     order = models.ForeignKey(
-        Order, on_delete=models.CASCADE, related_name="lineitems"
+        Order, on_delete=models.CASCADE, related_name='lineitems'
     )
     product = models.ForeignKey(
         Product, on_delete=models.CASCADE
@@ -128,15 +127,14 @@ class OrderLineItem(models.Model):
         and update order totals.
         """
         if not self.rental_duration:
-            self.rental_duration = (
-                self.end_date - self.start_date
-            ).days or 1
+            self.rental_duration = (self.end_date - self.start_date).days or 1
 
-        price = (
-            Decimal(str(self.product.price))
-            if self.product.price
-            else Decimal("0.00")
-        )
-        self.lineitem_total = (
-            price * Decimal(self.rental_duration)
-        ).quantize(Decimal("0.01"))
+        price = Decimal(str(self.product.price)) if self.product.price else Decimal('0.00')
+        self.lineitem_total = (price * Decimal(self.rental_duration)).quantize(Decimal('0.01'))
+
+        super().save(*args, **kwargs)
+        self.order.update_total()
+
+    def __str__(self):
+        return f'{self.product.name} on order {self.order.order_number}'
+    

@@ -27,18 +27,13 @@ from home.views import home
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    path('accounts/', include('allauth.urls')),
-    path('home/', include('home.urls'), name='home_urls'),
-    path('', home, name='index'),
-    path(
-        'checkout/',
-        include(('checkout.urls', 'checkout'), namespace='checkout'),
-    ),
-    path('profile/', include('profiles.urls'), name='profiles_urls'),
-    path('items/', include('items.urls'), name='items_urls'),
-    path('reservation/', include('reservation.urls')),
-] + static(
-    settings.MEDIA_URL,
-    document_root=settings.MEDIA_ROOT,
-)
+    path("admin/", admin.site.urls),
+    path("accounts/", include("allauth.urls")),
+    path("home/", include("home.urls")),
+    path("", home, name="index"),
+    path("checkout/", include("checkout.urls")),
+    path("profile/", include("profiles.urls")),
+    path("items/", include("items.urls")),
+    path("reservation/", include("reservation.urls")),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

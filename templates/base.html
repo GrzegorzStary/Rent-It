@@ -8,7 +8,6 @@
     <!-- CSRF Token for AJAX -->
     <meta name="csrf-token" content="{{ csrf_token }}">
 
-
     <!-- SEO -->
     <meta name="description" content="RentIt - Your go-to platform for renting everything you need.">
     <meta name="keywords" content="rent, rental, services, products, RentIt">
@@ -19,24 +18,25 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{% static 'images/fav32x32.ico' %}">
     <link rel="apple-touch-icon" sizes="60x60" href="{% static 'images/fav60x60.ico' %}">
 
-    <!-- CSS: Bootstrap first Tempus Dominus CSS second, then my custom -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
-        integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@v6.7.7/dist/css/tempus-dominus.min.css"
-        rel="stylesheet">
+    <!-- CSS: Bootstrap first, Tempus Dominus second, then custom -->
+    <link rel="stylesheet" 
+          href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" 
+          crossorigin="anonymous">
+
+    <link rel="stylesheet" 
+          href="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@v6.7.7/dist/css/tempus-dominus.min.css">
 
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
 
-
-    {% block extra_css %}
-    {% endblock %}
+    {% block extra_css %}{% endblock %}
 
     {% block corejs %}
-    <!-- Font Awesome -->
+    <!-- Font Awesome Kit -->
     <script src="https://kit.fontawesome.com/369ae4821b.js" crossorigin="anonymous"></script>
-    <!-- Font Awesome CDN -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-        integrity="sha512-..." crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Optional fallback CDN -->
+    <link rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" 
+          crossorigin="anonymous" />
     <!-- Stripe -->
     <script src="https://js.stripe.com/v3/"></script>
     {% endblock %}
@@ -44,7 +44,6 @@
     <!-- Title -->
     <title>RentIt | Your Extra Income{% block title %}{% endblock %}</title>
 </head>
-
 
 <body>
     <!-- HEADER / NAV BAR -->
@@ -54,20 +53,16 @@
 
     <!-- MAIN CONTENT -->
     <main>
-        {% block content %}
-        {% endblock %}
+        {% block content %}{% endblock %}
     </main>
 
     <!-- FOOTER SECTION -->
     {% include 'includes/footer.html' %}
-    {% block onload_js %}
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q"
-        crossorigin="anonymous"></script>
+    {% block onload_js %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/gh/Eonasdan/tempus-dominus@v6.7.7/dist/js/tempus-dominus.min.js"></script>
     {% endblock %}
 </body>
-
 </html>

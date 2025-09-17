@@ -38,7 +38,6 @@
         <hr>
         <h6 class="mb-3">Items rented & pickup contacts</h6>
 
-        {# If your related_name differs, use order.orderlineitem_set.all instead #}
         {% for item in order.lineitems.all %}
         {% with owner=item.product.user %}
         <div class="py-3 border-bottom">
