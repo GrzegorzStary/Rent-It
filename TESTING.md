@@ -177,28 +177,52 @@ I have used the [PEP8 CI Python Linter](https://pep8ci.herokuapp.com) to validat
 
 I have tested my site on different browsers to check for any compatability issues.
 
+#### Firefox & Tor Browser Display Issues
+
+- During testing, the site initially failed to load styles and scripts in Firefox and Tor. This was caused by incorrect Subresource Integrity (SRI) hashes on Bootstrap and Font Awesome CDN links, which Firefox strictly enforces, and by blocked telemetry requests from Stripe.
+
+- Fix: Removed or replaced the broken integrity attributes with correct values, ensuring all resources load over HTTPS. Stripe telemetry errors were confirmed as non critical (payments still work) and documented. After these adjustments, the site displays consistently across Chrome, Safari, Firefox, and Tor.
+
 | Browser | Screenshot | Notes |
 | --- | --- | --- |
 | Chrome | ![screenshot](documentation/testing/BROWSER_COMPATABILITY/chrome.png) | Works as expected |
-| Safari | ![screenshot]() | Works as expected |
-| Firefox | ![screenshot]() | Works as expected |
-| Tor | ![screenshot]() | Works as expected |
+| Safari | ![screenshot](documentation/testing/BROWSER_COMPATABILITY/safari.png) | Works as expected |
+
+### ERRORS
+| Browser | Screenshot | Notes |
+| --- | --- | --- |
+| Tor / Firefox | ![screenshot](documentation/testing/BROWSER_COMPATABILITY/tor_err.png) | DISPLAY ERROR |
+| Tor / Firefox | ![screenshot](documentation/testing/BROWSER_COMPATABILITY/tor_err2.png) | DISPLAY ERROR |
+| Firefox | ![screenshot](documentation/testing/BROWSER_COMPATABILITY/firefox.png) | Works as expected |
+| Tor | ![screenshot](documentation/testing/BROWSER_COMPATABILITY/tor.png) | Works as expected |
 
 ## Responsiveness
 
 I have tested my site on different devices and screen sizes to check for any responsiveness problems.
 
-### GENERAL RESPONSIVENESS
+### GENERAL RESPONSIVENESS MOBILE (S) - 320px
 | Device | Screen |Screenshot | Notes |
 | --- | --- | --- | --- |
-| Mobile (Devtools)| Home page | ![screenshot]() | Works as expected |
-| Mobile (Devtools)| Our Rooms | ![screenshot]() | Works as expected |
-| Mobile (Devtools)| Contact Us | ![screenshot]() | Works as expected |
-| Mobile (Devtools)| Reviews | ![screenshot]() | Works as expected |
-| Mobile (Devtools)| About | ![screenshot]() | Works as expected |
-| Mobile (Devtools)| Add Review | ![screenshot]() | Works as expected |
-| Mobile (Devtools)| Book Now | ![screenshot]() | Works as expected |
-| Mobile (Devtools)| Your Booking | ![screenshot]() | Works as expected |
+| Mobile (Devtools)| Home Page | ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/home.png) | Works as expected |
+| Mobile (Devtools)| Item Detail | ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/item_detail.png) | Works as expected |
+| Mobile (Devtools)| Rental Bag | ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/rental_bag.png) | Works as expected |
+| Mobile (Devtools)| Checkout | ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/Checkout.png) | Works as expected |
+| Mobile (Devtools)| Checkout lower | ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/checkout_lower.png) | Works as expected |
+| Mobile (Devtools)| Spinner | ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/spinner.png) | Works as expected |
+| Mobile (Devtools)| Confirmation | ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/confirmation.png) | Works as expected |
+| Mobile (Devtools)| Confirmation lower | ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/confirmation_lower.png) | Works as expected |
+| Mobile (Devtools)| Rented Items | ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/rented_items.png) | Works as expected |
+| Mobile (Devtools)| Your Listed Items | ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/listed_items.png) | Works as expected |
+| Mobile (Devtools)| Create Listing | ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/create_listing.png) | Works as expected |
+| Mobile (Devtools)| Edit Profile | ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/edit_profile.png) | Works as expected |
+| Mobile (Devtools)| Edit Profile lower | ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/edit_profile_lower.png) | Works as expected |
+| Mobile (Devtools)| Privacy Policy | ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/pp.png) | Works as expected |
+| Mobile (Devtools)| terms of Service | ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/tos.png) | Works as expected |
+| Mobile (Devtools)| FAQ | ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/faq.png) | Works as expected |
+| Mobile (Devtools)| Sign Out| ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/logout.png) | Works as expected |
+| Mobile (Devtools)| Filtered Distance Items | ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/items.png) | Works as expected |
+| Mobile (Devtools)| Filtered Distence Items lower | ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/items_lower.png) | Works as expected |
+
 
 ### Samsung Galaxy Tab 4
 | Device | Screen |Screenshot | Notes |
