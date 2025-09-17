@@ -224,16 +224,30 @@ I have tested my site on different devices and screen sizes to check for any res
 | Mobile (Devtools)| Filtered Distence Items lower | ![screenshot](documentation/testing/RESPONSIVENESS/general_mobile/items_lower.png) | Works as expected |
 
 
-### Samsung Galaxy Tab 4
+### GENERAL RESPONSIVENESS TABLET - 768px
 | Device | Screen |Screenshot | Notes |
 | --- | --- | --- | --- |
-| Samsung Galaxy Tab 4 (Devtools)| Home page | ![screenshot]() | Works as expected |
-| Samsung Galaxy Tab 4 (Devtools)| Our Rooms | ![screenshot]() | Works as expected |
-| Samsung Galaxy Tab 4 (Devtools)| Contact Us | ![screenshot]() | Works as expected |
-| Samsung Galaxy Tab 4 (Devtools)| Reviews | ![screenshot]() | Works as expected |
-| Samsung Galaxy Tab 4 (Devtools)| Add Review | ![screenshot]() | Works as expected |
-| Samsung Galaxy Tab 4 (Devtools)| Edit Booking | ![screenshot]() | Works as expected |
-| Samsung Galaxy Tab 4 (Devtools)| Delete Booking | ![screenshot]() | Works as expected |
+| Mobile (Devtools)| Home Page | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/home.png) | Works as expected |
+| Mobile (Devtools)| Item Detail | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/item_detail.png) | Works as expected |
+| Mobile (Devtools)| Item Detail Picker | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/item_detail_date.png) | Works as expected |
+| Mobile (Devtools)| Item Detail Calc | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/item_detal_calc.png) | Works as expected |
+| Mobile (Devtools)| Rental Bag | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/rental_bag.png) | Works as expected |
+| Mobile (Devtools)| Checkout | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/checkout.png) | Works as expected |
+| Mobile (Devtools)| Checkout lower | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/checkout_lower.png) | Works as expected |
+| Mobile (Devtools)| Spinner | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/spinner.png) | Works as expected |
+| Mobile (Devtools)| Confirmation | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/confirmation.png) | Works as expected |
+| Mobile (Devtools)| Confirmation lower | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/confirmation_lower.png) | Works as expected |
+| Mobile (Devtools)| Your Rentals | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/your_rentals.png) | Works as expected |
+| Mobile (Devtools)| Edit Profile | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/edit_user.png) | Works as expected |
+| Mobile (Devtools)| Edit Profile lower | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/edit_user_lower.png) | Works as expected |
+| Mobile (Devtools)| Privacy Policy | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/pp.png) | Works as expected |
+| Mobile (Devtools)| Terms of Service | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/tos.png) | Works as expected |
+| Mobile (Devtools)| FAQ | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/faq.png) | Works as expected |
+| Mobile (Devtools)| Sign Out| ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/logout.png) | Works as expected |
+| Mobile (Devtools)| Users Profile | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/users_profile.png) | Works as expected |
+| Mobile (Devtools)| Create Listing | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/create_listing.png) | Works as expected |
+| Mobile (Devtools)| Create Listing lower | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/create_listing_lower.png) | Works as expected |
+| Mobile (Devtools)| Your Listed Items | ![screenshot](documentation/testing/RESPONSIVENESS/general_tablet/your_listing.png) | Works as expected |
 
 ### Iphone 13 REAL DEVICE TESTING
 

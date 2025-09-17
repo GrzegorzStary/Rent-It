@@ -7,7 +7,7 @@
 
 {% block content %}
 <div class="overlay">
-  <div class="container">
+  <div>
     <div class="row">
       <div class="col">
         <h2 class="logo-font mt-2 mb-2">Your Rental Bag</h2>
@@ -23,7 +23,7 @@
 
     {% for item in bag_items %}
     <!-- Mobile only -->
-    <div class="row d-block d-sm-none">
+    <div class="row d-block d-md-none">
       <div class="col-12 col-sm-6 mb-2">
         {% include "reservation/product-image.html" %}
       </div>
@@ -45,7 +45,7 @@
     {% endfor %}
 
     <!-- Mobile only -->
-    <div class="d-block d-sm-none">
+    <div class="d-block d-md-none">
       <div class="container-fluid">
         <div class="row gy-3">
           <div class="col-12">
@@ -64,13 +64,13 @@
     </div>
 
     <!-- Tablet and Desktop -->
-    <div class="table-responsive rounded d-none d-sm-block">
+    <div class="table-responsive rounded d-none d-md-block">
       <table class="table table-sm table-borderless">
         <thead class="text-black">
           <tr>
             <th scope="col">Item</th>
             <th scope="col">Details</th>
-            <th scope="col">Price per Day</th>
+            <th scope="col">Price</th>
             <th scope="col">Dates</th>
             <th scope="col">Subtotal</th>
           </tr>

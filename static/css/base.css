@@ -407,12 +407,6 @@ footer {
 
 @media (max-width: 768px) {
     .card {
-        flex: 1 0 calc(50% - 1rem);
-    }
-}
-
-@media (max-width: 576px) {
-    .card {
         flex: 1 0 100%;
     }
 
@@ -431,7 +425,7 @@ footer {
         font-size: 0.9rem;
     }
 
-    /* Edit page mobile tweaks */
+    /* Edit page mobile */
     .image-card {
         flex-wrap: wrap;
     }
