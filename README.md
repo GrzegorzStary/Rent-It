@@ -4,7 +4,7 @@ RENT - IT
 ![MOCKUP](documentation/images/mockup.png)
 
 
-# [CLICK HERE!](https://rent-it-705ae52973e4.herokuapp.com)
+# [CLICK HERE TO VIEW THE PROJECT!](https://rent-it-705ae52973e4.herokuapp.com)
 
 
 ## Introduction  

@@ -253,27 +253,53 @@ I have tested my site on different devices and screen sizes to check for any res
 
 | Device | Screen |Screenshot | Notes |
 | --- | --- | --- | --- |
-| Iphone 13 | Home page | ![screenshot]() | Works as expected |
-| Iphone 13| Our Rooms | ![screenshot]() | Works as expected |
-| Iphone 13| Contact Us | ![screenshot]() | Works as expected |
-| Iphone 13| Reviews | ![screenshot]() | Works as expected |
-| Iphone 13| About | ![screenshot]() | Works as expected |
-| Iphone 13| Add Review | ![screenshot]() | Works as expected |
-| Iphone 13| Your Booking | ![screenshot]() | Works as expected |
-| Iphone 13| Edit Booking | ![screenshot]() | Works as expected |
-| Iphone 13| Delete Booking | ![screenshot]() | Works as expected |
-| Iphone 13| Login | ![screenshot]() | Works as expected |
-| Iphone 13| Logout| ![screenshot]() | Works as expected |
-| Iphone 13| Register | ![screenshot]() | Works as expected |
+| Iphone 13 | Checkout | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/checkout.PNG) | Works as expected |
+| Iphone 13| Checkout lower | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/checkout_lower.PNG) | Works as expected |
+| Iphone 13| Confirmation | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/confirmation.jpg) | Works as expected |
+| Iphone 13| Confirmation lower | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/confirmation_lower.PNG) | Works as expected |
+| Iphone 13| Create listing | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/create_listing.PNG) | Works as expected |
+| Iphone 13| Create listing lower | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/create_listing_lower.PNG) | Works as expected |
+| Iphone 13| Edit profile | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/edit_profile.PNG) | Works as expected |
+| Iphone 13| Edit profile lower | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/edit_profile_lower.PNG) | Works as expected |
+| Iphone 13| FAQ | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/faq.PNG) | Works as expected |
+| Iphone 13| Home | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/home.PNG) | Works as expected |
+| Iphone 13| Item detail| ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/item_detail.PNG) | Works as expected |
+| Iphone 13| Item detail picker | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/item_detail_picker.PNG) | Works as expected |
+| Iphone 13| Item detail calc | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/item_detail_calc.PNG) | Works as expected |
+| Iphone 13| Items | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/items.PNG) | Works as expected |
+| Iphone 13| Listed Items | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/listed_items.PNG) | Works as expected |
+| Iphone 13| Privacy Policy| ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/pp.PNG) | Works as expected |
+| Iphone 13| Logout| ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/logout.PNG) | Works as expected |
+| Iphone 13| Profile | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/profile.PNG) | Works as expected |
+| Iphone 13| Rental bag | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/rental_bag.PNG) | Works as expected |
+| Iphone 13| Rental bag lower | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/rental_bag_lower.PNG) | Works as expected |
+| Iphone 13| Rented Items | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/rented_items.jpg) | Works as expected |
+| Iphone 13| Rented Items | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/rented_items2.jpg) | Works as expected |
+| Iphone 13| Spinner | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/spinner.PNG) | Works as expected |
+| Iphone 13| Terms of Service | ![screenshot](documentation/testing/RESPONSIVENESS/iphone13/tos.PNG) | Works as expected |
 
-### Samsung X Cover Pro 6 REAL DEVCE TESTIING - A few screenshots provided by a friend.
+### MACBOOK PRO M3 MAX 16"
 
 | Device | Screen |Screenshot | Notes |
 | --- | --- | --- | --- |
-| Samsung X Cover Pro 6 | Home page | ![screenshot]() | Works as expected |
-| Samsung X Cover Pro 6| Our Rooms | ![screenshot]() | Works as expected |
-| Samsung X Cover Pro 6| Our Rooms 2 | ![screenshot]() | Works as expected |
-| Samsung X Cover Pro 6| Our Rooms 3 | ![screenshot]() | Works as expected |
+| MACBOOK PRO M3 MAX 16" | Checkout | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/checkout.png) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Checkout lower | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/checkout_lower.png) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Delete Item | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/delete_item.png) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Our Rooms 3 | ![screenshot]() | Works as expected |
+| MACBOOK PRO M3 MAX 16" | Home page | ![screenshot]() | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Our Rooms | ![screenshot]() | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Our Rooms 2 | ![screenshot]() | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Our Rooms 3 | ![screenshot]() | Works as expected |
+| MACBOOK PRO M3 MAX 16" | Home page | ![screenshot]() | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Our Rooms | ![screenshot]() | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Our Rooms 2 | ![screenshot]() | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Our Rooms 3 | ![screenshot]() | Works as expected |
+| MACBOOK PRO M3 MAX 16" | Home page | ![screenshot]() | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Our Rooms | ![screenshot]() | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Our Rooms 2 | ![screenshot]() | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Our Rooms 3 | ![screenshot]() | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Our Rooms 2 | ![screenshot]() | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Our Rooms 3 | ![screenshot]() | Works as expected |
 
 ### Real User Experience Testing. 
 
