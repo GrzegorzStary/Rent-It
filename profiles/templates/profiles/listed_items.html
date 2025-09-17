@@ -17,9 +17,11 @@
     </a>
   </div>
 
+  <!-- Grid -->
   <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 g-lg-4">
     {% for product in items %}
-    <div class="col">
+    
+    <div class="col-10 mx-auto col-sm-6 col-lg-4 col-xl-3">
       <div class="card h-100 rounded-0">
 
         {% if product.images.all %}
@@ -28,20 +30,17 @@
             {% for img in product.images.all %}
             <div class="carousel-item {% if forloop.first %}active{% endif %}">
               <div class="ratio ratio-4x3">
-                <img src="{{ img.image.url }}" alt="{{ product.name }}" class="w-100 h-100 object-fit-contain"
-                  loading="lazy">
+                <img src="{{ img.image.url }}" alt="{{ product.name }}" class="w-100 h-100 object-fit-contain" loading="lazy">
               </div>
             </div>
             {% endfor %}
           </div>
           {% if product.images.all|length > 1 %}
-          <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel{{ product.id }}"
-            data-bs-slide="prev">
+          <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel{{ product.id }}" data-bs-slide="prev">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#productCarousel{{ product.id }}"
-            data-bs-slide="next">
+          <button class="carousel-control-next" type="button" data-bs-target="#productCarousel{{ product.id }}" data-bs-slide="next">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
@@ -49,8 +48,7 @@
         </div>
         {% else %}
         <div class="ratio ratio-4x3">
-          <img src="{% static 'images/noimage.png' %}" alt="{{ product.name }}" class="w-100 h-100 object-fit-contain"
-            loading="lazy">
+          <img src="{% static 'images/noimage.png' %}" alt="{{ product.name }}" class="w-100 h-100 object-fit-contain" loading="lazy">
         </div>
         {% endif %}
 
@@ -58,7 +56,8 @@
           <div class="d-flex justify-content-between align-items-start">
             <h6 class="card-title text-truncate mb-1">
               <a href="{% url 'item_detail' product.id %}" class="text-primary text-decoration-none">
-                {{ product.name }}</a>
+                {{ product.name }}
+              </a>
             </h6>
             {% if product.distance_km %}
             <span class="badge bg-info text-dark ms-2">{{ product.distance_km }} km</span>
@@ -73,7 +72,7 @@
           <form method="post" action="{% url 'toggle_listing' product.id %}" class="m-0 w-100">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.get_full_path }}">
-        
+
             <!-- SWITCH ABOVE -->
             <div class="text-center mb-2">
               <div class="form-check form-switch d-inline-flex align-items-center m-0">
@@ -91,7 +90,7 @@
                 </label>
               </div>
             </div>
-        
+
             <!-- BUTTONS BELOW -->
             <div class="row g-2 align-items-center">
               <div class="col-12 col-md-auto">
@@ -107,7 +106,9 @@
             </div>
           </form>
         </div>
-        
+
+      </div>
+    </div>
     {% empty %}
       <div class="text-center my-5">
         <p class="mb-4 fs-5">No items listed yet.</p>
@@ -116,7 +117,6 @@
         </a>
       </div>
     {% endfor %}
-    </div>
   </div>
 </div>
 {% endblock %}

@@ -43,7 +43,7 @@ Rent-It operates within the growing sharing economy and peer-to-peer rental mark
 Our platform follows a commission-based model, generating profit through a site fee on every transaction. This approach ensures fair pricing for renters, extra income for lenders, and a sustainable revenue stream for Rent-It. Deposits are securely managed to protect owners against potential damages.
 
 ## Marketing
-Our marketing strategy combines targeted social media campaigns, local advertising, and collaborations with content creators in the sustainability and DIY communities. We share engaging content that emphasizes the benefits of renting over buying—saving money, reducing waste, and building community connections. 
+Our marketing strategy combines targeted social media campaigns, local advertising, and collaborations with content creators in the sustainability and DIY communities. We share engaging content that emphasizes the benefits of renting over buying - saving money, reducing waste, and building community connections. 
 
 ## Risks
 - Trust and Reliability: Potential misuse or damages could harm community trust.
