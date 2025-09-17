@@ -282,24 +282,29 @@ I have tested my site on different devices and screen sizes to check for any res
 
 | Device | Screen |Screenshot | Notes |
 | --- | --- | --- | --- |
-| MACBOOK PRO M3 MAX 16" | Checkout | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/checkout.png) | Works as expected |
-| MACBOOK PRO M3 MAX 16"| Checkout lower | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/checkout_lower.png) | Works as expected |
-| MACBOOK PRO M3 MAX 16"| Delete Item | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/delete_item.png) | Works as expected |
-| MACBOOK PRO M3 MAX 16"| Our Rooms 3 | ![screenshot]() | Works as expected |
-| MACBOOK PRO M3 MAX 16" | Home page | ![screenshot]() | Works as expected |
-| MACBOOK PRO M3 MAX 16"| Our Rooms | ![screenshot]() | Works as expected |
-| MACBOOK PRO M3 MAX 16"| Our Rooms 2 | ![screenshot]() | Works as expected |
-| MACBOOK PRO M3 MAX 16"| Our Rooms 3 | ![screenshot]() | Works as expected |
-| MACBOOK PRO M3 MAX 16" | Home page | ![screenshot]() | Works as expected |
-| MACBOOK PRO M3 MAX 16"| Our Rooms | ![screenshot]() | Works as expected |
-| MACBOOK PRO M3 MAX 16"| Our Rooms 2 | ![screenshot]() | Works as expected |
-| MACBOOK PRO M3 MAX 16"| Our Rooms 3 | ![screenshot]() | Works as expected |
-| MACBOOK PRO M3 MAX 16" | Home page | ![screenshot]() | Works as expected |
-| MACBOOK PRO M3 MAX 16"| Our Rooms | ![screenshot]() | Works as expected |
-| MACBOOK PRO M3 MAX 16"| Our Rooms 2 | ![screenshot]() | Works as expected |
-| MACBOOK PRO M3 MAX 16"| Our Rooms 3 | ![screenshot]() | Works as expected |
-| MACBOOK PRO M3 MAX 16"| Our Rooms 2 | ![screenshot]() | Works as expected |
-| MACBOOK PRO M3 MAX 16"| Our Rooms 3 | ![screenshot]() | Works as expected |
+| MACBOOK PRO M3 MAX 16" | Checkout | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/checkout.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Checkout lower | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/checkout_lower.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Confirmation | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/confirmation.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Create Listing | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/create_listing.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16" | Delete Item | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/delete_item.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Edit Item | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/edit_item.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Edit Item lower | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/edit_item_lower.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Edit Profile | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/edit_profile.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16" | FAQ | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/faq.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Home | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/home.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Item Detail | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/item_detail.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Item Detail Picker | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/item_detail_picker.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16" | Item Detail Calc | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/item_detail_calc.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Items | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/items.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Listed Items | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/listed_items.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Privacy Policy | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/pp.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Profile | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/profile.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Rental Bag | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/rental_bag.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Rented Items | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/rented_items.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Search | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/search.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Spinner | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/spinner.JPG) | Works as expected |
+| MACBOOK PRO M3 MAX 16"| Tos | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/tos.JPG) | Works as expected |
+
 
 ### Real User Experience Testing. 
 
