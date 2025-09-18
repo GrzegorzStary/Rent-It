@@ -6,6 +6,28 @@ RENT - IT
 
 # [CLICK HERE TO VIEW THE PROJECT!](https://rent-it-705ae52973e4.herokuapp.com)
 
+### Important:
+To get the most out of the site, please register and then head over to your profile to fill in your details.
+Make sure you use a valid address within 60 miles of:
+```
+Boothferry Rd, Goole DN14 6BB.
+```
+- All items are currently located around this postcode.
+- If you enter your real postcode but it’s outside this radius, the site may show no results.
+- Also, please consider adding your own items for listing! 
+The more genuine listings we have, the better the future marketplace will be, not just my dummy items.
+
+#### If you’d like to try renting an item on the site, please use the following dummy card details:
+
+- Card Number: 4242 4242 4242 4242
+- Expiry Date: 04/26
+- CVC: 424
+- ZIP: 24242
+
+#### In short: 4242 4242 4242 4242 04/26 424 24242
+
+These are Stripe test card details, so no real money is charged.
+
 
 ## Introduction  
 
@@ -13,7 +35,7 @@ RENT-IT is a modern rental marketplace designed for individuals who want easy ac
 The platform enables users to list their products for rent and allows others to discover and book them through a seamless reservation system.  
 
 With integrated date pickers, transparent pricing, security deposits, and a robust Stripe powered payment gateway, Rent-It ensures a reliable and user-friendly experience.  
-Whether you’re renting out tools, electronics, or household essentials, RENT-IT makes sharing resources simple, secure, and convenient.  
+Whether you’re renting out tools, electronics, or household essentials, RENT-IT makes sharing resources simple, secure, and convenient.
 
 ## Objective
 
@@ -544,6 +566,265 @@ Or:
 - `git push heroku main`
 
 The project should now be connected and deployed to Heroku!
+
+### Google Mail Setup
+
+To enable email notifications (order confirmations, password resets, etc.) Rent-It is configured to use Gmail SMTP. Follow these steps to set up your Gmail account and integrate it with the project:
+
+#### Create / Use a Gmail account
+This account will act as the sender for Rent-It emails.
+
+#### Enable 2-Step Verification
+- Log in to Gmail
+- Navigate to:
+Settings → Other Google Account Settings → Security
+- Turn on 2-Step Verification
+
+#### Generate an App Password
+- After 2FA is enabled, go to:
+- Security → App Passwords
+- Select Other (Custom name) → enter e.g. RentIt
+- Click Create
+- Copy the 16-digit password provided (you’ll need it for Heroku).
+
+#### Configure Django email backend
+- In settings.py:
+```python
+if 'DEVELOPMENT' in os.environ:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+    DEFAULT_FROM_EMAIL = 'rentit@example.com'
+else:
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_USE_TLS = True
+    EMAIL_PORT = 587
+    EMAIL_HOST = 'smtp.gmail.com'
+    EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
+    DEFAULT_FROM_EMAIL = os.environ.get('EMAIL_HOST_USER')
+```
+
+#### Set Heroku Config Vars
+
+- In your Heroku dashboard, add the following under Settings → Config Vars:
+
+```ini
+EMAIL_HOST_USER = your_gmail_address@gmail.com
+EMAIL_HOST_PASS = your_16_digit_app_password
+```
+
+### AWS S3 Bucket Config
+
+ Rent-It uses Amazon Web Services (AWS S3) to store and serve static and media files (CSS, JS, images, product photos). Follow the steps below to configure AWS for your project:
+
+1. Setup AWS Account & S3 Bucket
+- Log in to your AWS account.
+- Create a new S3 Bucket → name it the same as your Heroku app (e.g., rent-it-static).
+- Choose the AWS region closest to your location.
+- Block Public Access → uncheck "Block all public access".
+- Confirm that the bucket will be public (required for hosting static files).
+- Object Ownership → set to ACLs Enabled → Bucket owner preferred.
+- In Properties tab, enable Static Website Hosting and set:
+```
+Index document: index.html
+Error document: error.html
+```
+- In Permissions → CORS configuration, paste the following:
+
+```json
+[
+  {
+    "AllowedHeaders": ["Authorization"],
+    "AllowedMethods": ["GET"],
+    "AllowedOrigins": ["*"],
+    "ExposeHeaders": []
+  }
+]
+```
+
+- Copy your bucket ARN string (used for bucket policy).
+
+2. S3 Bucket Policy
+In Bucket Policy tab, click Policy Generator and create a policy:
+- Policy Type: S3 Bucket Policy
+- Effect: Allow
+- Principal: *
+- Actions: GetObject
+- Resource: arn:aws:s3:::bucket-name/*
+
+Paste the generated JSON into the Bucket Policy Editor. Example:
+
+```json
+{
+  "Id": "Policy1234567890",
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "Stmt1234567890",
+      "Action": ["s3:GetObject"],
+      "Effect": "Allow",
+      "Resource": "arn:aws:s3:::rent-it-static/*",
+      "Principal": "*"
+    }
+  ]
+}
+```
+
+- Make sure /* is added at the end of the Resource key.
+Save the policy.
+In Access Control List (ACL) → Edit → enable List for Everyone (Public Access) → accept warning.
+
+3. AWS IAM Setup
+- Go to IAM (Identity & Access Management).
+- Create a new User Group → e.g., rent-it-group.
+- Attach policy → AmazonS3FullAccess.
+- Create a new Policy with the following JSON (replace bucket name):
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Action": "s3:*",
+      "Resource": [
+        "arn:aws:s3:::rent-it-static",
+        "arn:aws:s3:::rent-it-static/*"
+      ]
+    }
+  ]
+}
+```
+
+- Review → name it rent-it-policy → create policy.
+- Attach the policy to your group.
+- Create a new User → e.g., rent-it-user → Programmatic access.
+- Add the user to your group.
+- Download the .csv file with Access Key ID and Secret Access Key.
+
+These values will be added to Heroku Config Vars:
+
+```ini
+AWS_ACCESS_KEY_ID = <your access key id>
+AWS_SECRET_ACCESS_KEY = <your secret access key>
+```
+
+4. Media Folder Setup
+- In Heroku Config Vars, remove DISABLE_COLLECTSTATIC.
+- In AWS S3 bucket, create a media folder.
+- Upload project images → set permissions to public read access.
+
+5. Install Dependencies
+In your local environment:
+
+```bash
+pip install boto3
+pip install django-storages
+```
+
+Update INSTALLED_APPS in settings.py:
+```python
+INSTALLED_APPS = [
+    ...
+    'storages',
+]
+```
+
+6. Django AWS Configuration
+Add the following to settings.py:
+
+```python
+if 'USE_AWS' in os.environ:
+    # Cache Control
+    AWS_S3_OBJECT_PARAMETERS = {
+        'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+        'CacheControl': 'max-age=9460800',
+    }
+
+    # Bucket Config
+    AWS_STORAGE_BUCKET_NAME = 'rent-it-static'
+    AWS_S3_REGION_NAME = 'eu-west-1'  # update to your region
+    AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+
+    # Static & Media
+    STATICFILES_STORAGE = 'custom_storages.StaticStorage'
+    STATICFILES_LOCATION = 'static'
+    DEFAULT_FILE_STORAGE = 'custom_storages.MediaStorage'
+    MEDIAFILES_LOCATION = 'media'
+
+    # Override URLs in production
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATICFILES_LOCATION}/'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{MEDIAFILES_LOCATION}/'
+```
+7. Custom Storage Classes
+Create a file custom_storages.py in your project root:
+
+```python
+from django.conf import settings
+from storages.backends.s3boto3 import S3Boto3Storage
+
+class StaticStorage(S3Boto3Storage):
+    location = settings.STATICFILES_LOCATION
+
+class MediaStorage(S3Boto3Storage):
+    location = settings.MEDIAFILES_LOCATION
+```
+Rent-It is now configured to serve static and media files via AWS S3 in production.
+
+### Stripe Config
+
+Rent-It uses Stripe to securely handle online payments. Follow the steps below to configure Stripe in your project:
+
+1. Create a Stripe Account
+- Go to Stripe and create a free account.
+- Log in to your Stripe Dashboard.
+
+2. Get Your API Keys
+- In the Dashboard → Developers → API Keys.
+- Copy the following test keys:
+```
+STRIPE_PUBLIC_KEY
+STRIPE_SECRET_KEY
+```
+
+3. Add Keys to Your Project
+Add them to your env.py file locally:
+
+```python
+os.environ.setdefault("STRIPE_PUBLIC_KEY", "your_public_key_here")
+os.environ.setdefault("STRIPE_SECRET_KEY", "your_secret_key_here")
+```
+
+In settings.py, connect via environment variables:
+
+```python
+STRIPE_PUBLIC_KEY = os.environ.get("STRIPE_PUBLIC_KEY")
+STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
+```
+
+4. Configure Stripe Webhooks
+Webhooks act as a failsafe in case a customer closes the browser before payment is fully authorised.
+- In Stripe Dashboard → Developers → Webhooks → Add Endpoint
+- Set endpoint URL:
+
+```ruby
+https://your-heroku-app-name.herokuapp.com/checkout/wh/
+```
+- Choose Receive all events → Add Endpoint.
+
+5. Add Webhook Secret
+- Stripe will generate a Webhook Signing Secret.
+- Copy this secret and add it to your env.py:
+
+```python
+os.environ.setdefault("STRIPE_WH_SECRET", "your_webhook_secret_here")
+```
+- Connect in settings.py:
+```python
+STRIPE_WH_SECRET = os.environ.get("STRIPE_WH_SECRET")
+```
+Rent-It is now fully connected to Stripe for handling payments in production and securely verifying events via webhooks.
 
 ### Local Deployment
 
