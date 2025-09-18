@@ -9,17 +9,17 @@
 {% endblock head_title %}
 
 {% block content %}
-<div class="container">
+<div class="container" role="main" aria-label="Sign up page">
     <div class="row justify-content-center mt-5 mb-5">
-        <div class="col-lg-6 col-md-8 col-sm-12 p-5 shadow-sm rounded-0 signup-card">
+        <div class="col-lg-6 col-md-8 col-sm-12 p-5 shadow-sm rounded-0 signup-card" role="region" aria-label="Sign up form container">
 
-            <h1 class="fw-bold mb-3 text-center fs-1 signup-title">
+            <h1 class="fw-bold mb-3 text-center fs-1 signup-title" aria-label="Create Account heading">
                 {% trans "Create Account" %}
             </h1>
 
             <p class="text-center mb-4 fs-6 signup-subtext">
                 {% trans "Already have an account?" %}
-                <a href="{{ login_url }}" class="fw-semibold signup-link">
+                <a href="{{ login_url }}" class="fw-semibold signup-link" aria-label="Go to sign in page">
                     {% trans "Sign in" %}
                 </a>.
             </p>
@@ -36,7 +36,7 @@
                 </label>
                 {{ field|add_class:"form-control form-control-lg rounded-0" }}
                 {% if field.errors %}
-                <div class="text-danger small mt-1">
+                <div class="text-danger small mt-1" role="alert" aria-label="Error message">
                     {{ field.errors }}
                 </div>
                 {% endif %}
@@ -47,7 +47,7 @@
 
             {% slot actions %}
             <div class="d-grid mb-4">
-                <button type="submit" class="btn btn-outline-primary btn-lg text-uppercase fw-bold py-2">
+                <button type="submit" class="btn btn-outline-primary btn-lg text-uppercase fw-bold py-2" aria-label="Submit sign up form">
                     {% trans "Sign Up" %}
                 </button>
             </div>
@@ -59,18 +59,18 @@
             <div class="mb-3">
                 <hr>
             </div>
-            <div class="d-flex flex-column gap-3">
+            <div class="d-flex flex-column gap-3" role="region" aria-label="Social signup options">
                 <!-- Google Button -->
                 <a href="{% provider_login_url 'google' process='signup' %}"
-                    class="btn btn-outline-primary btn-lg d-flex align-items-center justify-content-center gap-2">
-                    <i class="fab fa-google social-icon"></i>
+                    class="btn btn-outline-primary btn-lg d-flex align-items-center justify-content-center gap-2" aria-label="Sign up with Google account">
+                    <i class="fab fa-google social-icon" aria-hidden="true"></i>
                     <span class="fw-semibold">Sign up with Google</span>
                 </a>
 
                 <!-- GitHub Button -->
                 <a href="{% provider_login_url 'github' process='signup' %}"
-                    class="btn btn-outline-primary btn-lg d-flex align-items-center justify-content-center gap-2">
-                    <i class="fab fa-github social-icon"></i>
+                    class="btn btn-outline-primary btn-lg d-flex align-items-center justify-content-center gap-2" aria-label="Sign up with GitHub account">
+                    <i class="fab fa-github social-icon" aria-hidden="true"></i>
                     <span class="fw-semibold">Sign up with GitHub</span>
                 </a>
             </div>
@@ -79,7 +79,7 @@
             {% if PASSKEY_SIGNUP_ENABLED %}
             <hr class="my-4">
             <div class="d-grid">
-                <a href="{{ signup_by_passkey_url }}" class="btn btn-outline-primary btn-lg fw-bold py-2 rounded-0">
+                <a href="{{ signup_by_passkey_url }}" class="btn btn-outline-primary btn-lg fw-bold py-2 rounded-0" aria-label="Sign up using a passkey">
                     {% trans "Sign up using a passkey" %}
                 </a>
             </div>

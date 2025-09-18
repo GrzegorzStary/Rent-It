@@ -3,42 +3,42 @@
 {% load account %}
 {% load socialaccount %}
 
-<ul class="list-inline d-flex justify-content-between align-items-center d-lg-none w-100 px-3 pt-2 mb-1">
+<ul class="list-inline d-flex justify-content-between align-items-center d-lg-none w-100 px-3 pt-2 mb-1" role="menubar" aria-label="Mobile navigation bar">
 
   <!-- Logo -->
-  <li class="list-inline-item">
-    <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}">
+  <li class="list-inline-item" role="none">
+    <a class="navbar-brand d-flex align-items-center" href="{% url 'index' %}" role="menuitem" aria-label="Go to Rent-It homepage">
       <img src="{% static 'images/rent_it_nav_logo.webp' %}" alt="Rent It Logo" width="40" height="40" class="me-1">
       <span class="fw-bold fs-4">Rent-It</span>
     </a>
   </li>
 
   <!-- Account -->
-  <li class="list-inline-item dropdown">
-    <a class="nav-link text-black" href="#" id="user-options" data-bs-toggle="dropdown" aria-expanded="false">
+  <li class="list-inline-item dropdown" role="none">
+    <a class="nav-link text-black" href="#" id="user-options" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true" role="menuitem" aria-label="Account menu">
       <div class="text-center">
-        <i class="fas fa-user fa-lg"></i>
+        <i class="fas fa-user fa-lg" aria-hidden="true"></i>
         <p class="my-0 small">Account</p>
       </div>
     </a>
-    <div class="dropdown-menu dropdown-menu-end border-0" aria-labelledby="user-options">
+    <div class="dropdown-menu dropdown-menu-end border-0" aria-labelledby="user-options" role="menu" aria-label="Account options">
       {% if request.user.is_authenticated %}
-      <a class="dropdown-item" href="{% url 'items' %}">Items</a>
-      <hr class="dropdown-divider">
-      <a class="dropdown-item" href="{% url 'profile' %}">My Profile</a>
-      <a class="dropdown-item" href="{% url 'account_logout' %}">Logout</a>
+      <a class="dropdown-item" href="{% url 'items' %}" role="menuitem" aria-label="View items">Items</a>
+      <hr class="dropdown-divider" aria-hidden="true">
+      <a class="dropdown-item" href="{% url 'profile' %}" role="menuitem" aria-label="View your profile">My Profile</a>
+      <a class="dropdown-item" href="{% url 'account_logout' %}" role="menuitem" aria-label="Logout">Logout</a>
       {% else %}
-      <a class="dropdown-item" href="{% url 'account_signup' %}">Register</a>
-      <a class="dropdown-item" href="{% url 'account_login' %}">Login</a>
+      <a class="dropdown-item" href="{% url 'account_signup' %}" role="menuitem" aria-label="Register">Register</a>
+      <a class="dropdown-item" href="{% url 'account_login' %}" role="menuitem" aria-label="Login">Login</a>
       {% endif %}
     </div>
   </li>
 
   <!-- Cart -->
-  <li class="list-inline-item">
-    <a class="nav-link {% if grand_total %}text-primary fw-bold{% else %}text-black{% endif %}" href="{% url 'reservation:view_bag' %}">
+  <li class="list-inline-item" role="none">
+    <a class="nav-link {% if grand_total %}text-primary fw-bold{% else %}text-black{% endif %}" href="{% url 'reservation:view_bag' %}" role="menuitem" aria-label="View your cart. Current total {% if bag_grand_total %}£{{ bag_grand_total|floatformat:2 }}{% else %}£0.00{% endif %}">
       <div class="text-center">
-        <i class="fas fa-shopping-bag fa-lg"></i>
+        <i class="fas fa-shopping-bag fa-lg" aria-hidden="true"></i>
         <p class="my-0 small">
           {% if bag_grand_total %}
           £{{ bag_grand_total|floatformat:2 }}
@@ -50,10 +50,10 @@
     </a>
   </li>
 </ul>
+
 <div class="d-lg-none w-100 px-3 pb-2">
-  <form class="mobile-search-bar d-flex align-items-center" method="get" action="{% url 'search' %}">
-    <input class="form-control me-2 rounded-1 flex-grow-1" type="text" name="q" placeholder="Search..."
-      aria-label="Search">
-    <button class="btn btn-outline-primary" type="submit">Search</button>
+  <form class="mobile-search-bar d-flex align-items-center" method="get" action="{% url 'search' %}" role="search" aria-label="Mobile search form">
+    <input class="form-control me-2 rounded-1 flex-grow-1" type="text" name="q" placeholder="Search..." aria-label="Search for items">
+    <button class="btn btn-outline-primary" type="submit" aria-label="Submit search">Search</button>
   </form>
 </div>

@@ -3,12 +3,12 @@
 {% if item.product.images.all|length %}
 {% with unique=item.item_id|default:forloop.counter %}
 {% with cid="miniCarousel-"|add:item.product.id|stringformat:"s"|add:"-"|add:unique|stringformat:"s" %}
-<div class="product-card carousel">
-    <div id="{{ cid }}" class="carousel slide" data-bs-ride="carousel">
+<div class="product-card carousel" role="region" aria-label="Image carousel for {{ item.product.name }}">
+    <div id="{{ cid }}" class="carousel slide" data-bs-ride="carousel" aria-roledescription="carousel" aria-label="Product images for {{ item.product.name }}">
         <div class="carousel-inner bag-carousel-inner">
             {% for img in item.product.images.all %}
-            <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                <img src="{{ img.image.url }}" alt="{{ item.product.name }}" class="d-block w-100 bag-carousel-img">
+            <div class="carousel-item {% if forloop.first %}active{% endif %}" role="group" aria-roledescription="slide" aria-label="Image {{ forloop.counter }} of {{ item.product.images.all|length }}">
+                <img src="{{ img.image.url }}" alt="{{ item.product.name }} image {{ forloop.counter }}" class="d-block w-100 bag-carousel-img">
             </div>
             {% endfor %}
         </div>
@@ -17,5 +17,5 @@
 {% endwith %}
 {% endwith %}
 {% else %}
-<img src="{{ MEDIA_URL }}noimage.png" alt="No image" class="img-fluid bag-carousel-img">
+<img src="{{ MEDIA_URL }}noimage.png" alt="No image available for {{ item.product.name }}" class="img-fluid bag-carousel-img">
 {% endif %}

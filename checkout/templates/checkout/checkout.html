@@ -16,23 +16,23 @@
 {% endblock %}
 
 {% block content %}
-<div id="loading-overlay"></div>
-<div class="loading-spinner">
+<div id="loading-overlay" aria-hidden="true"></div>
+<div class="loading-spinner" role="status" aria-label="Loading">
     <i class="fas fa-spinner fa-spin"></i>
 </div>
 
 <div class="container">
     <div class="row px-3">
         <div class="col">
-            <h2 class="logo-font mb-4">Checkout</h2>
+            <h2 class="logo-font mb-4" aria-label="Checkout Page">Checkout</h2>
         </div>
     </div>
 
     <div class="row">
         <!-- Order Summary -->
-        <div class="col-12 col-lg-6 order-lg-last mb-5">
-            <p class="text-muted">Order Summary ({{ checkout_product_count }})</p>
-            <div class="row">
+        <div class="col-12 col-lg-6 order-lg-last mb-5" aria-labelledby="order-summary-heading">
+            <p id="order-summary-heading" class="text-muted">Order Summary ({{ checkout_product_count }})</p>
+            <div class="row" aria-hidden="true">
                 <div class="col-7 offset-2">
                     <p class="mb-1 mt-0 small text-muted">Item</p>
                 </div>
@@ -41,12 +41,12 @@
                 </div>
             </div>
             {% for item in checkout_items %}
-            <div class="row mb-3">
+            <div class="row mb-3" role="group" aria-label="Order Item {{ forloop.counter }}">
                 <div class="col-2">
-                    <a href="{% url 'item_detail' item.product.id %}">
+                    <a href="{% url 'item_detail' item.product.id %}" aria-label="View details for {{ item.product.name }}">
                         {% if item.product.images.exists %}
                         <img src="{{ item.product.images.first.image.url }}" class="img-fluid"
-                            alt="{{ item.product.name }}">
+                             alt="{{ item.product.name }}">
                         {% else %}
                         <img class="img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="No image">
                         {% endif %}
@@ -65,7 +65,7 @@
             </div>
             {% endfor %}
             <hr class="my-0">
-            <div class="row text-black text-right">
+            <div class="row text-black text-right" aria-label="Order totals">
                 <div class="col-7 offset-2">
                     <p class="my-0">Rental Total:</p>
                     <p class="my-0">Deposit Total:</p>
@@ -85,80 +85,80 @@
 
         <!-- Checkout Form -->
         <div class="col-12 col-lg-6">
-            <p class="text-muted px-3">Please fill out the form below to complete your rental</p>
-            <form action="{% url 'checkout' %}" method="POST" id="payment-form">
+            <p class="text-muted px-3" id="form-instructions">Please fill out the form below to complete your rental</p>
+            <form action="{% url 'checkout' %}" method="POST" id="payment-form" aria-describedby="form-instructions">
                 {% csrf_token %}
 
-                <fieldset class="rounded px-3 mb-5">
-                    <legend class="fieldset-label small text-black px-2 w-auto">Your Details</legend>
-                    {{ order_form.full_name | as_crispy_field }}
-                    {{ order_form.email | as_crispy_field }}
+                <fieldset class="rounded px-3 mb-5" aria-labelledby="legend-details">
+                    <legend id="legend-details" class="fieldset-label small text-black px-2 w-auto">Your Details</legend>
+                    {{ order_form.full_name|as_crispy_field }}
+                    {{ order_form.email|as_crispy_field }}
                 </fieldset>
 
-                <fieldset class="rounded px-3 mb-5">
-                    <legend class="fieldset-label small text-black px-2 w-auto">Delivery / Pickup</legend>
-                    {{ order_form.phone_number | as_crispy_field }}
-                    {{ order_form.street_address1 | as_crispy_field }}
-                    {{ order_form.street_address2 | as_crispy_field }}
-                    {{ order_form.town_or_city | as_crispy_field }}
-                    {{ order_form.postcode | as_crispy_field }}
-                    {{ order_form.county | as_crispy_field }}
-                    {{ order_form.country | as_crispy_field }}
-                    <div class="form-check form-check-inline float-right mr-0">
+                <fieldset class="rounded px-3 mb-5" aria-labelledby="legend-delivery">
+                    <legend id="legend-delivery" class="fieldset-label small text-black px-2 w-auto">Delivery / Pickup</legend>
+                    {{ order_form.phone_number|as_crispy_field }}
+                    {{ order_form.street_address1|as_crispy_field }}
+                    {{ order_form.street_address2|as_crispy_field }}
+                    {{ order_form.town_or_city|as_crispy_field }}
+                    {{ order_form.postcode|as_crispy_field }}
+                    {{ order_form.county|as_crispy_field }}
+                    {{ order_form.country|as_crispy_field }}
+
+                    <div class="form-check mt-3">
                         {% if user.is_authenticated %}
-                        <label class="form-check-label" for="id-save-info">
-                            Save this delivery information to my profile
-                        </label>
-                        <input class="form-check-input ml-2 mr-0" type="checkbox" id="id-save-info" name="save-info"
-                            checked>
+                        <input class="form-check-input" type="checkbox" id="id-save-info" name="save-info" checked aria-labrel="Save this information to my profile checkbox">
+                            <p>Save this delivery information to my profile</p>
                         {% else %}
-                        <label class="form-check-label" for="id-save-info">
+                        <p class="small mb-0">
                             <a class="text-info" href="{% url 'account_signup' %}">Create an account</a> or
                             <a class="text-info" href="{% url 'account_login' %}">login</a> to save your details
-                        </label>
+                        </p>
                         {% endif %}
                     </div>
                 </fieldset>
 
-                <legend class="fieldset-label small text-black px-2 w-auto">Payment</legend>
-                <fieldset class="px-3">
-                    {% csrf_token %}
+                <legend class="fieldset-label small text-black px-2 w-auto" id="legend-payment">Payment</legend>
+                <fieldset class="px-3" aria-labelledby="legend-payment">
                     <!-- Stripe Card Element mount point -->
-                    <div id="card-element" class="StripeElement"></div>
+                    <div id="card-element" class="StripeElement" role="region" aria-label="Credit or debit card input field"></div>
 
                     <!-- Used to display form errors -->
-                    <div class="mb-3 text-danger" id="card-errors" role="alert"></div>
+                    <div class="mb-3 text-danger" id="card-errors" role="alert" aria-live="assertive"></div>
                     <input type="hidden" value="{{ client_secret }}" name="client_secret">
                 </fieldset>
 
-                <div class="submit-button text-right mt-5 mb-2">
+                <div class="submit-button text-right mt-5 mb-2" role="group" aria-label="Submit order actions">
                     <!-- Mobile only layout -->
                     <div class="d-flex flex-column d-sm-none gap-3 px-3">
-                        <a href="{% url 'reservation:view_bag' %}" class="btn btn-outline-secondary w-100">
+                        <a href="{% url 'reservation:view_bag' %}" class="btn btn-outline-secondary w-100" aria-label="Adjust your checkout">
                             <span class="icon"><i class="fas fa-chevron-left"></i></span>
                             <span>Adjust Checkout</span>
                         </a>
-                        <button id="submit-button" class="btn btn-outline-primary w-100">
+                        <button id="submit-button" class="btn btn-outline-primary w-100" aria-label="Complete your order securely">
                             <span>Complete Order</span>
                             <span class="icon"><i class="fas fa-lock"></i></span>
                         </button>
-                        <p class="small text-danger my-0 mt-2"> <span class="icon"><i
-                                    class="fas fa-exclamation-circle"></i></span> <span>Your card will be charged
-                                <strong>£{{ checkout_grand_total|floatformat:2 }}</strong></span> </p>
+                        <p class="small text-danger my-0 mt-2">
+                            <span class="icon"><i class="fas fa-exclamation-circle"></i></span>
+                            <span>Your card will be charged <strong>£{{ checkout_grand_total|floatformat:2 }}</strong></span>
+                        </p>
                     </div>
 
                     <!-- Tablet & Desktop layout -->
                     <div class="d-none d-sm-block px-3">
-                        <a href="{% url 'reservation:view_bag' %}" class="btn btn-outline-secondary rounded-0">
+                        <a href="{% url 'reservation:view_bag' %}" class="btn btn-outline-secondary rounded-0" aria-label="Adjust your checkout">
                             <span class="icon"><i class="fas fa-chevron-left"></i></span>
                             <span>Adjust Checkout</span>
-                        </a> <button id="submit-button" class="btn btn-outline-primary rounded-0">
+                        </a>
+                        <button id="submit-button" class="btn btn-outline-primary rounded-0" aria-label="Complete your order securely">
                             <span>Complete Order</span>
                             <span class="icon"><i class="fas fa-lock"></i></span>
                         </button>
-                        <p class="small text-danger my-0 mt-2"> <span class="icon"><i
-                                    class="fas fa-exclamation-circle"></i></span> <span>Your card will be charged
-                                <strong>£{{ checkout_grand_total|floatformat:2 }}</strong></span> </p>
+                        <p class="small text-danger my-0 mt-2">
+                            <span class="icon"><i class="fas fa-exclamation-circle"></i></span>
+                            <span>Your card will be charged <strong>£{{ checkout_grand_total|floatformat:2 }}</strong></span>
+                        </p>
                     </div>
                 </div>
             </form>

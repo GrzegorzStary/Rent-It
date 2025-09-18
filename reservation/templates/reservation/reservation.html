@@ -6,11 +6,11 @@
 {% block title %} - Rental Bag{% endblock %}
 
 {% block content %}
-<div class="overlay">
+<div class="overlay" role="main" aria-label="Rental bag page">
   <div>
     <div class="row">
       <div class="col">
-        <h2 class="logo-font mt-2 mb-2">Your Rental Bag</h2>
+        <h2 class="logo-font mt-2 mb-2" aria-label="Your Rental Bag heading">Your Rental Bag</h2>
       </div>
     </div>
 
@@ -23,7 +23,7 @@
 
     {% for item in bag_items %}
     <!-- Mobile only -->
-    <div class="row d-block d-md-none">
+    <div class="row d-block d-md-none" role="region" aria-label="Rental item {{ forloop.counter }}">
       <div class="col-12 col-sm-6 mb-2">
         {% include "reservation/product-image.html" %}
       </div>
@@ -31,8 +31,8 @@
         {% include "reservation/product-info.html" %}
       </div>
       <div class="col-12 col-sm-6 order-sm-last">
-        <p class="my-0">Price per day: £{{ item.product.price }}</p>
-        <p class="my-0">Subtotal: £ {% calc_subtotal item.product.price item.duration 0 %}</p>
+        <p class="my-0" aria-label="Price per day">Price per day: £{{ item.product.price }}</p>
+        <p class="my-0" aria-label="Subtotal">Subtotal: £ {% calc_subtotal item.product.price item.duration 0 %}</p>
       </div>
       <br><br><br>
       <div class="col-12 col-sm-6">
@@ -45,17 +45,17 @@
     {% endfor %}
 
     <!-- Mobile only -->
-    <div class="d-block d-md-none">
+    <div class="d-block d-md-none" role="region" aria-label="Order summary and checkout">
       <div class="container-fluid">
         <div class="row gy-3">
           <div class="col-12">
             <!-- Totals -->
-            <div class="card-body p-3">
+            <div class="card-body p-3" role="region" aria-label="Reservation totals">
               {% include "reservation/reservation_total.html" %}
             </div>
             <div class="row"><div class="col"><hr></div></div>
             <!-- Checkout buttons -->
-            <div class="d-grid gap-2 mb-3">
+            <div class="d-grid gap-2 mb-3" role="region" aria-label="Checkout actions">
               {% include "reservation/checkout-buttons.html" %}
             </div>
           </div>
@@ -64,7 +64,7 @@
     </div>
 
     <!-- Tablet and Desktop -->
-    <div class="table-responsive rounded d-none d-md-block">
+    <div class="table-responsive rounded d-none d-md-block" role="region" aria-label="Rental items table">
       <table class="table table-sm table-borderless">
         <thead class="text-black">
           <tr>
@@ -77,7 +77,7 @@
         </thead>
 
         {% for item in bag_items %}
-        <tr>
+        <tr aria-label="Rental item {{ forloop.counter }}">
           <td class="p-3 w-25">
             {% include "reservation/product-image.html" with item=item uid=forloop.counter %}
           </td>
@@ -86,33 +86,33 @@
             {% include "reservation/product-info.html" %}
           </td>
           <td class="py-3">
-            <p class="my-0">£{{ item.product.price }}</p>
+            <p class="my-0" aria-label="Price per day">£{{ item.product.price }}</p>
           </td>
           <td class="py-3 w-25">
             {% include "reservation/duration-form.html" with row=item uid="d" %}
           </td>
           <td class="py-3">
-            <p>£ {% calc_subtotal item.product.price item.duration 0 %}</p>
+            <p aria-label="Subtotal">£ {% calc_subtotal item.product.price item.duration 0 %}</p>
           </td>
         </tr>
         {% endfor %}
 
         <tr>
-          <td colspan="5" class="pt-5 text-right">
+          <td colspan="5" class="pt-5 text-right" role="region" aria-label="Reservation totals">
             {% include "reservation/reservation_total.html" %}
           </td>
         </tr>
         <tr>
-          <td colspan="5" class="text-right">
+          <td colspan="5" class="text-right" role="region" aria-label="Checkout actions">
             {% include "reservation/checkout-buttons.html" %}
           </td>
         </tr>
       </table>
     </div>
     {% else %}
-    <p class="lead mb-5">Your rental bag is empty.</p>
-    <a href="{% url 'items' %}" class="btn btn-outline-secondary rounded-0 text-uppercase mb-3 mt-3 px-3">
-      <span class="icon"><i class="fas fa-chevron-left"></i></span>
+    <p class="lead mb-5" role="alert" aria-label="Empty bag message">Your rental bag is empty.</p>
+    <a href="{% url 'items' %}" class="btn btn-outline-secondary rounded-0 text-uppercase mb-3 mt-3 px-3" aria-label="Go back to items page">
+      <span class="icon"><i class="fas fa-chevron-left" aria-hidden="true"></i></span>
       <span class="text-uppercase">Keep Browsing</span>
     </a>
     {% endif %}

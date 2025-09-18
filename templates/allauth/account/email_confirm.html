@@ -9,36 +9,36 @@
 {% endblock head_title %}
 
 {% block content %}
-<div class="container">
+<div class="container" role="main" aria-label="Confirm email address page">
     <div class="row justify-content-center mt-5 mb-5">
-        <div class="col-lg-6 col-md-8 col-sm-12 p-5 shadow-sm rounded-0 signup-card">
+        <div class="col-lg-6 col-md-8 col-sm-12 p-5 shadow-sm rounded-0 signup-card" role="region" aria-label="Confirm email container">
 
-            <h1 class="fw-bold mb-3 text-center fs-1 signup-title">
+            <h1 class="fw-bold mb-3 text-center fs-1 signup-title" aria-label="Confirm Email Address heading">
                 {% trans "Confirm Email Address" %}
             </h1>
 
             {% if confirmation %}
             {% user_display confirmation.email_address.user as user_display %}
             {% if can_confirm %}
-            <p class="text-center mb-4 fs-6 signup-subtext">
+            <p class="text-center mb-4 fs-6 signup-subtext" aria-label="Confirmation instructions">
                 {% blocktrans with confirmation.email_address.email as email %}
-                Please confirm that <a href="mailto:{{ email }}" class="signup-link">{{ email }}</a> is an email address
+                Please confirm that <a href="mailto:{{ email }}" class="signup-link" aria-label="Email link to {{ email }}">{{ email }}</a> is an email address
                 for user {{ user_display }}.
                 {% endblocktrans %}
             </p>
 
             {% url 'account_confirm_email' confirmation.key as action_url %}
-            <form method="post" action="{{ action_url }}">
+            <form method="post" action="{{ action_url }}" aria-label="Confirm email form">
                 {% csrf_token %}
                 {{ redirect_field }}
                 <div class="d-grid">
-                    <button type="submit" class="btn btn-primary btn-lg text-uppercase fw-bold py-2 rounded-0">
+                    <button type="submit" class="btn btn-primary btn-lg text-uppercase fw-bold py-2 rounded-0" aria-label="Confirm email address button">
                         {% trans "Confirm" %}
                     </button>
                 </div>
             </form>
             {% else %}
-            <p class="text-center text-danger fs-6 signup-subtext">
+            <p class="text-center text-danger fs-6 signup-subtext" role="alert" aria-label="Email already confirmed error">
                 {% blocktrans with confirmation.email_address.email as email %}
                 Unable to confirm {{ email }} because it is already confirmed by a different account.
                 {% endblocktrans %}
@@ -46,10 +46,10 @@
             {% endif %}
             {% else %}
             {% url 'account_email' as email_url %}
-            <p class="text-center text-danger fs-6 signup-subtext">
+            <p class="text-center text-danger fs-6 signup-subtext" role="alert" aria-label="Expired or invalid confirmation link message">
                 {% blocktrans %}
                 This email confirmation link expired or is invalid. Please
-                <a href="{{ email_url }}" class="signup-link">issue a new email confirmation request</a>.
+                <a href="{{ email_url }}" class="signup-link" aria-label="Request new email confirmation link">issue a new email confirmation request</a>.
                 {% endblocktrans %}
             </p>
             {% endif %}

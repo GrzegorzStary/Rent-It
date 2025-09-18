@@ -28,27 +28,27 @@ class OrderForm(forms.ModelForm):
             "delivery_cost": "0.00",
         }
 
-        if "notes" in self.fields:
-            self.fields["notes"].required = False
-        if "street_address2" in self.fields:
-            self.fields["street_address2"].required = False
-        if "delivery_cost" in self.fields:
-            self.fields["delivery_cost"].required = False
+        # Make optional fields not required
+        self.fields["notes"].required = False
+        self.fields["street_address2"].required = False
+        self.fields["delivery_cost"].required = False
 
+        # Autofocus on the first field
         if "full_name" in self.fields:
             self.fields["full_name"].widget.attrs["autofocus"] = True
 
         for name, field in self.fields.items():
+            # Add placeholder text (optional, keeps form user-friendly)
             if name != "country":
                 ph = placeholders.get(name, "")
-                if field.required and name not in (
-                    "notes", "street_address2", "delivery_cost"
-                ):
+                if field.required and name not in ("notes", "street_address2", "delivery_cost"):
                     ph += " *"
                 field.widget.attrs["placeholder"] = ph
 
+            # Apply Bootstrap / custom classes
             css = field.widget.attrs.get("class", "")
-            field.widget.attrs["class"] = (
-                css + " stripe-style-input form-control"
-            ).strip()
-            field.label = False
+            field.widget.attrs["class"] = (css + " stripe-style-input form-control").strip()
+
+            # Classic labels: show them normally
+            field.label = placeholders.get(name, name.replace("_", " ").title())
+            field.label_suffix = ""  # removes colon

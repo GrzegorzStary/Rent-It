@@ -4,16 +4,16 @@
 {% block title %} - Items{% endblock %}
 
 {% block content %}
-<div class="container my-3">
+<div class="container my-3" role="region" aria-label="Items list page">
 
     {% if user.is_authenticated %}
-    <form method="get" class="row g-2 align-items-center mb-3">
+    <form method="get" class="row g-2 align-items-center mb-3" role="search" aria-label="Filter items by distance">
         <div class="col-auto">
             <label for="max_km" class="col-form-label">Max distance (km)</label>
         </div>
         <div class="col-auto">
             <input type="number" id="max_km" name="max_km" class="form-control" min="1" max="99"
-                value="{{ max_km|default:5 }}">
+                value="{{ max_km|default:5 }}" aria-label="Maximum distance in kilometers">
         </div>
         {% if search_term %}
         <input type="hidden" name="q" value="{{ search_term }}">
@@ -22,15 +22,16 @@
         <input type="hidden" name="sort" value="{{ current_sorting }}">
         {% endif %}
         <div class="col-auto">
-            <button type="submit" class="btn btn-outline-primary text-uppercase">
-                <i class="fa-solid fa-location-dot me-2"></i> Near Me
+            <button type="submit" class="btn btn-outline-primary text-uppercase" aria-label="Show items near me">
+                <i class="fa-solid fa-location-dot me-2" aria-hidden="true"></i> Near Me
             </button>
         </div>
         {% if radius_active %}
         <div class="col-auto">
             <a class="btn btn-outline-secondary text-uppercase"
-                href="{% url 'items' %}{% if search_term or current_sorting %}?{% endif %}{% if search_term %}q={{ search_term }}{% endif %}{% if search_term and current_sorting %}&{% endif %}{% if current_sorting and current_sorting != 'None_None' %}sort={{ current_sorting }}{% endif %}">
-                <i class="fa-solid fa-xmark me-2"></i> Clear
+                href="{% url 'items' %}{% if search_term or current_sorting %}?{% endif %}{% if search_term %}q={{ search_term }}{% endif %}{% if search_term and current_sorting %}&{% endif %}{% if current_sorting and current_sorting != 'None_None' %}sort={{ current_sorting }}{% endif %}"
+                aria-label="Clear distance filter">
+                <i class="fa-solid fa-xmark me-2" aria-hidden="true"></i> Clear
             </a>
         </div>
         {% endif %}
@@ -38,32 +39,32 @@
     {% endif %}
 
     {% if radius_active %}
-    <p class="text-muted small mb-2">Showing items within {{ max_km }} km of your postcode.</p>
+    <p class="text-muted small mb-2" aria-live="polite">Showing items within {{ max_km }} km of your postcode.</p>
     {% endif %}
 
-    <div class="card-container d-flex flex-wrap justify-content-center gap-3 px-3 rounded-0">
+    <div class="card-container d-flex flex-wrap justify-content-center gap-3 px-3 rounded-0" role="list" aria-label="Available items">
         {% for product in products %}
-        <a href="{% url 'item_detail' product.id %}" class="product-card-link border-0 text-decoration-none">
+        <a href="{% url 'item_detail' product.id %}" class="product-card-link border-0 text-decoration-none" role="listitem" aria-label="View details for {{ product.name }}">
             <div class="card product-card rounded-0">
 
                 {% if product.images.all %}
-                <div id="productCarousel{{ product.id }}" class="carousel slide">
+                <div id="productCarousel{{ product.id }}" class="carousel slide" aria-label="Image carousel for {{ product.name }}">
                     <div class="carousel-inner">
                         {% for img in product.images.all %}
                         <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                            <img src="{{ img.image.url }}" class="card-img-top img-fluid" alt="{{ product.name }}">
+                            <img src="{{ img.image.url }}" class="card-img-top img-fluid" alt="{{ product.name }} image {{ forloop.counter }}">
                         </div>
                         {% endfor %}
                     </div>
 
                     {% if product.images.all|length > 1 %}
                     <button class="carousel-control-prev" type="button"
-                        data-bs-target="#productCarousel{{ product.id }}" data-bs-slide="prev">
+                        data-bs-target="#productCarousel{{ product.id }}" data-bs-slide="prev" aria-label="Previous image for {{ product.name }}">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
                     <button class="carousel-control-next" type="button"
-                        data-bs-target="#productCarousel{{ product.id }}" data-bs-slide="next">
+                        data-bs-target="#productCarousel{{ product.id }}" data-bs-slide="next" aria-label="Next image for {{ product.name }}">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
@@ -79,11 +80,11 @@
 
                         <!-- Distance badge -->
                         {% if product.distance_km %}
-                        <span class="badge bg-info text-dark ms-2">{{ product.distance_km }} km</span>
+                        <span class="badge bg-info text-dark ms-2" aria-label="Distance {{ product.distance_km }} kilometers">{{ product.distance_km }} km</span>
                         {% endif %}
                     </div>
 
-                    <p class="card-text text-muted mb-1">£{{ product.price }}</p>
+                    <p class="card-text text-muted mb-1" aria-label="Price £{{ product.price }}">£{{ product.price }}</p>
 
                     <p class="card-text small text-truncate mt-1">{{ product.description }}</p>
                 </div>

@@ -4,25 +4,25 @@
 {% block title %} - Edit Item{% endblock %}
 
 {% block content %}
-<div class="container mt-4 rounded-0">
-  <h1 class="rounded-0">Edit Item: {{ item.name }}</h1>
+<div class="container mt-4 rounded-0" role="region" aria-label="Edit item form">
+  <h1 class="rounded-0" aria-label="Edit item {{ item.name }}">Edit Item: {{ item.name }}</h1>
 
-  <form method="post" enctype="multipart/form-data" class="edit-item-form rounded-0">
+  <form method="post" enctype="multipart/form-data" class="edit-item-form rounded-0" aria-label="Form to edit item {{ item.name }}">
     {% csrf_token %}
 
     <div class="rounded-0">
       {{ form.as_p }}
     </div>
 
-    <h4 class="rounded-0">Existing Images</h4>
-    <div class="existing-images rounded-0">
+    <h4 class="rounded-0" id="existing-images-heading">Existing Images</h4>
+    <div class="existing-images rounded-0" role="region" aria-labelledby="existing-images-heading">
       {% if existing_images %}
       {% for img in existing_images %}
-      <div class="image-card rounded-0">
+      <div class="image-card rounded-0" role="group" aria-label="Existing image {{ forloop.counter }}">
         <div class="thumb-wrap rounded-0">
-          <img src="{{ img.image.url }}" alt="Image {{ forloop.counter }}" class="image-thumb rounded-0">
+          <img src="{{ img.image.url }}" alt="Existing image {{ forloop.counter }}" class="image-thumb rounded-0">
         </div>
-        <a href="{% url 'delete_image' img.id %}" class="btn btn-outline-danger btn-sm delete-btn rounded-0">
+        <a href="{% url 'delete_image' img.id %}" class="btn btn-outline-danger btn-sm delete-btn rounded-0" aria-label="Delete image {{ forloop.counter }}">
           Delete <i class="fa-solid fa-xmark ms-2" aria-hidden="true"></i>
         </a>
       </div>
@@ -32,18 +32,18 @@
       {% endif %}
     </div>
 
-    <h4 class="rounded-0">Add More Images</h4>
-    <input type="file" name="images" id="id_images" multiple class="form-control rounded-0">
+    <h4 class="rounded-0" id="add-images-heading">Add More Images</h4>
+    <input type="file" name="images" id="id_images" multiple class="form-control rounded-0" aria-labelledby="add-images-heading">
 
-    <div class="new-image-preview rounded-0">
+    <div class="new-image-preview rounded-0" role="region" aria-label="Preview of newly added image">
       <img id="image-preview" src="" alt="New image preview" class="rounded-0">
     </div>
 
-    <a href="{% url 'user_profile' %}" class="btn btn-outline-secondary mt-3 rounded-0">
+    <a href="{% url 'user_profile' %}" class="btn btn-outline-secondary mt-3 rounded-0" aria-label="Cancel and go back to profile">
       <i class="fa-solid fa-chevron-left me-2" aria-hidden="true"></i>
       Cancel
     </a>
-    <button type="submit" class="btn btn-outline-primary mt-3 rounded-0">
+    <button type="submit" class="btn btn-outline-primary mt-3 rounded-0" aria-label="Save changes to item {{ item.name }}">
       Save Changes <i class="fa-solid fa-floppy-disk ms-2" aria-hidden="true"></i>
     </button>
 

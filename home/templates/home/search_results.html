@@ -4,38 +4,39 @@
 {% block title %} - Search Results{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-    <h2 class="mb-4">Search results for "{{ query }}"</h2>
+<div class="container mt-4" role="region" aria-label="Search results section">
+    <h2 class="mb-4" aria-label="Search results heading">Search results for "{{ query }}"</h2>
 
     {% if results %}
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mb-5 d-flex justify-content-center">
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4 mb-5 d-flex justify-content-center" role="list" aria-label="Search results list">
         {% for product in results %}
-        <div class="col">
+        <div class="col" role="listitem" aria-label="Product {{ product.name }}">
             <div class="card h-100 shadow-sm border-0 rounded-0">
-                <a href="{% url 'item_detail' product.id %}">
+                <a href="{% url 'item_detail' product.id %}" aria-label="View details for {{ product.name }}">
                     {% if product.images.all|length > 0 %}
                         <img src="{{ product.images.all.0.image.url }}" class="card-img-top rounded-top"
-                             alt="{{ product.name }}">
+                             alt="{{ product.name }} image">
                     {% else %}
                         <img src="{% static 'images/noimage.png' %}" class="card-img-top rounded-top"
-                             alt="{{ product.name }}">
+                             alt="No image available for {{ product.name }}">
                     {% endif %}
                 </a>
                 <div class="card-body d-flex flex-column">
                     <p class="mb-0 fw-bold">
                         {{ product.name }}
                         {% if product.viewer_distance_km %}
-                            <span class="badge bg-info text-dark ms-2">
-                                <i class="fa-solid fa-location-dot me-1"></i>{{ product.viewer_distance_km }} km
+                            <span class="badge bg-info text-dark ms-2" aria-label="Distance {{ product.viewer_distance_km }} kilometers">
+                                <i class="fa-solid fa-location-dot me-1" aria-hidden="true"></i>{{ product.viewer_distance_km }} km
                             </span>
                         {% endif %}
                     </p>
                     <p class="card-text text-muted">{{ product.description|truncatewords:20 }}</p>
                     <div class="mt-auto">
-                        <p class="mb-1 text-success fw-bold">£{{ product.price }}</p>
+                        <p class="mb-1 text-success fw-bold" aria-label="Price £{{ product.price }}">£{{ product.price }}</p>
                         <br>
                         <a href="{% url 'item_detail' product.id %}"
-                           class="btn btn-outline-primary btn-sm mt-2">
+                           class="btn btn-outline-primary btn-sm mt-2"
+                           aria-label="View item {{ product.name }}">
                            View Item
                         </a>
                     </div>
@@ -45,7 +46,7 @@
         {% endfor %}
     </div>
     {% else %}
-        <p>No items found.</p>
+        <p aria-live="polite">No items found.</p>
     {% endif %}
 </div>
 {% endblock %}

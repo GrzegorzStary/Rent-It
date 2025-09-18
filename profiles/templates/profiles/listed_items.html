@@ -4,42 +4,42 @@
 {% block title %} - Listed Items{% endblock %}
 
 {% block content %}
-<div class="container my-3">
-  <h1 class="mb-3">Your Listed Items</h1>
+<div class="container my-3" role="region" aria-label="Listed items page">
+  <h1 class="mb-3" aria-label="Your listed items heading">Your Listed Items</h1>
 
   <!-- Go Back Button -->
   <div class="d-flex flex-wrap gap-2 mb-3">
-    <a href="{% url 'user_profile' %}" class="btn btn-outline-secondary">
+    <a href="{% url 'user_profile' %}" class="btn btn-outline-secondary" aria-label="Go back to your profile">
       <span class="icon">
-        <i class="fas fa-chevron-left"></i>
+        <i class="fas fa-chevron-left" aria-hidden="true"></i>
       </span>
       <span class="text-uppercase">Go back</span>
     </a>
   </div>
 
-  <div class="row g-3 g-lg-4">
+  <div class="row g-3 g-lg-4" role="list" aria-label="List of your products">
     {% for product in items %}
-    <div class="col-12 col-md-6 col-lg-3">
+    <div class="col-12 col-md-6 col-lg-3" role="listitem" aria-label="Product {{ product.name }}">
       <div class="card h-100 rounded-0">
 
         {% if product.images.all %}
-        <div id="productCarousel{{ product.id }}" class="carousel slide">
+        <div id="productCarousel{{ product.id }}" class="carousel slide" aria-label="Image carousel for {{ product.name }}">
           <div class="carousel-inner">
             {% for img in product.images.all %}
             <div class="carousel-item {% if forloop.first %}active{% endif %}">
               <div class="ratio ratio-4x3">
-                <img src="{{ img.image.url }}" alt="{{ product.name }}"
+                <img src="{{ img.image.url }}" alt="{{ product.name }} image {{ forloop.counter }}"
                      class="w-100 h-100 object-fit-contain" loading="lazy">
               </div>
             </div>
             {% endfor %}
           </div>
           {% if product.images.all|length > 1 %}
-          <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel{{ product.id }}" data-bs-slide="prev">
+          <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel{{ product.id }}" data-bs-slide="prev" aria-label="Previous image of {{ product.name }}">
             <span class="carousel-control-prev-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Previous</span>
           </button>
-          <button class="carousel-control-next" type="button" data-bs-target="#productCarousel{{ product.id }}" data-bs-slide="next">
+          <button class="carousel-control-next" type="button" data-bs-target="#productCarousel{{ product.id }}" data-bs-slide="next" aria-label="Next image of {{ product.name }}">
             <span class="carousel-control-next-icon" aria-hidden="true"></span>
             <span class="visually-hidden">Next</span>
           </button>
@@ -47,7 +47,7 @@
         </div>
         {% else %}
         <div class="ratio ratio-4x3">
-          <img src="{% static 'images/noimage.png' %}" alt="{{ product.name }}"
+          <img src="{% static 'images/noimage.png' %}" alt="No image available for {{ product.name }}"
                class="w-100 h-100 object-fit-contain" loading="lazy">
         </div>
         {% endif %}
@@ -55,21 +55,21 @@
         <div class="card-body">
           <div class="d-flex justify-content-between align-items-start">
             <h6 class="card-title text-truncate mb-1">
-              <a href="{% url 'item_detail' product.id %}" class="text-primary text-decoration-none">
+              <a href="{% url 'item_detail' product.id %}" class="text-primary text-decoration-none" aria-label="Open details for {{ product.name }}">
                 {{ product.name }}
               </a>
             </h6>
             {% if product.distance_km %}
-            <span class="badge bg-info text-dark ms-2">{{ product.distance_km }} km</span>
+            <span class="badge bg-info text-dark ms-2" aria-label="Distance {{ product.distance_km }} kilometers">{{ product.distance_km }} km</span>
             {% endif %}
           </div>
 
-          <p class="card-text text-muted mb-1">£{{ product.price }}</p>
+          <p class="card-text text-muted mb-1" aria-label="Price £{{ product.price }}">£{{ product.price }}</p>
           <p class="card-text small text-truncate mt-1">{{ product.description }}</p>
         </div>
 
-        <div class="card-footer bg-white">
-          <form method="post" action="{% url 'toggle_listing' product.id %}" class="m-0 w-100">
+        <div class="card-footer bg-white" role="region" aria-label="Manage product {{ product.name }}">
+          <form method="post" action="{% url 'toggle_listing' product.id %}" class="m-0 w-100" aria-label="Listing visibility form for {{ product.name }}">
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.get_full_path }}">
 
@@ -80,7 +80,8 @@
                        id="toggle-{{ product.id }}"
                        name="is_listed"
                        {% if product.is_listed %}checked{% endif %}
-                       onchange="this.form.submit()">
+                       onchange="this.form.submit()"
+                       aria-label="Toggle visibility for {{ product.name }}">
                 <label class="form-check-label ms-2" for="toggle-{{ product.id }}">
                   {% if product.is_listed %}
                     Visible to renters
@@ -92,15 +93,15 @@
             </div>
 
             <!-- Buttons -->
-            <div class="row g-2 align-items-center">
+            <div class="row g-2 align-items-center" role="group" aria-label="Actions for {{ product.name }}">
               <div class="col-12 col-md-auto">
-                <a href="{% url 'edit_item' product.id %}" class="btn btn-sm btn-outline-secondary w-100">
-                  <i class="fa-solid fa-pen-to-square me-1"></i> Edit
+                <a href="{% url 'edit_item' product.id %}" class="btn btn-sm btn-outline-secondary w-100" aria-label="Edit {{ product.name }}">
+                  <i class="fa-solid fa-pen-to-square me-1" aria-hidden="true"></i> Edit
                 </a>
               </div>
               <div class="col-12 col-md-auto ms-md-auto text-md-end">
-                <a href="{% url 'item_detail' product.id %}" class="btn btn-sm btn-outline-primary w-100">
-                  Open <i class="fa-solid fa-up-right-from-square ms-1"></i>
+                <a href="{% url 'item_detail' product.id %}" class="btn btn-sm btn-outline-primary w-100" aria-label="Open {{ product.name }} details">
+                  Open <i class="fa-solid fa-up-right-from-square ms-1" aria-hidden="true"></i>
                 </a>
               </div>
             </div>
@@ -111,8 +112,8 @@
     {% empty %}
     <div class="text-center my-5">
       <p class="mb-4 fs-5">No items listed yet.</p>
-      <a href="{% url 'create_listing' %}" class="btn btn-outline-primary">
-        <i class="fa-solid fa-square-plus me-2"></i> Create your first listing!
+      <a href="{% url 'create_listing' %}" class="btn btn-outline-primary" aria-label="Create your first listing">
+        <i class="fa-solid fa-square-plus me-2" aria-hidden="true"></i> Create your first listing!
       </a>
     </div>
     {% endfor %}

@@ -3,15 +3,15 @@
 
 {% block content %}
 <!-- Custom 500 page -->
-<div class="d-flex flex-column align-items-center text-center my-5">
-    <h1>500 Internal Server Error</h1>
-    <p>Oops! Something went wrong on our end. Please try again later.</p>
+<div class="d-flex flex-column align-items-center text-center my-5" role="region" aria-label="500 Internal Server Error page">
+    <h1 aria-label="500 Internal Server Error heading">500 Internal Server Error</h1>
+    <p aria-label="Something went wrong message">Oops! Something went wrong on our end. Please try again later.</p>
 
     <!-- Go Back Button -->
     <div class="d-flex flex-wrap gap-2 mt-3">
-        <a href="{% url 'index' %}" class="btn btn-outline-secondary">
+        <a href="{% url 'index' %}" class="btn btn-outline-secondary" aria-label="Go back to homepage">
             <span class="icon">
-                <i class="fas fa-chevron-left"></i>
+                <i class="fas fa-chevron-left" aria-hidden="true"></i>
             </span>
             <span class="text-uppercase">Go back</span>
         </a>

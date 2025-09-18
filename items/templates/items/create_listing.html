@@ -5,28 +5,28 @@
 
 {% block content %}
 <div class="container mt-4 mb-5">
-  <h1 class="mb-4">Create a Listing</h1>
+  <h1 class="mb-4" aria-label="Create a new product listing">Create a Listing</h1>
 
-  <form method="post" enctype="multipart/form-data" class="create-item-form">
+  <form method="post" enctype="multipart/form-data" class="create-item-form" aria-label="Create listing form">
     {% csrf_token %}
 
     {{ form.as_p }}
 
-    <h4 class="mt-4">Upload Images</h4>
-    <input type="file" name="images" id="id_images" multiple>
+    <h4 class="mt-4" id="upload-images-heading">Upload Images</h4>
+    <input type="file" name="images" id="id_images" multiple aria-labelledby="upload-images-heading">
 
-    <div class="new-image-preview mt-3 mb-4">
+    <div class="new-image-preview mt-3 mb-4" role="region" aria-label="Preview of uploaded image">
       <img id="image-preview" src="" alt="Image preview">
     </div>
 
-    <div class="d-flex flex-wrap gap-2">
-      <a href="{% url 'user_profile' %}" class="btn btn-outline-secondary">
+    <div class="d-flex flex-wrap gap-2" role="group" aria-label="Form actions">
+      <a href="{% url 'user_profile' %}" class="btn btn-outline-secondary" aria-label="Go back to your profile">
         <span class="icon">
           <i class="fas fa-chevron-left"></i>
         </span>
         <span class="text-uppercase">Go back</span>
       </a>
-      <button type="submit" class="btn btn-outline-primary">
+      <button type="submit" class="btn btn-outline-primary" aria-label="Submit and create listing">
         CREATE LISTING
         <span class="icon">
           <i class="fas fa-square-plus"></i>

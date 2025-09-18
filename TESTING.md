@@ -334,44 +334,60 @@ I have tested my site on different devices and screen sizes to check for any res
 
 ### Real User Experience Testing. 
 
-To complete real-world testing, I shared my website with a few older people who have basic computer experience.
+Real World Testing - Older User
+-To complete real-world testing, I shared the website with an older user who has only basic computer experience. Their assigned task was to:
 
-![photo]()
-![photo]()
-![photo]()
-![photo]()
-![photo]()
-![photo]()
+- Create a new account
+- Update their profile details
+- Find a product to rent
+- Proceed through the rental flow up to checkout
+- Complete the payment step using a dummy card
 
-I also asked one of my guests to review the website for me.
+### EXTRA – User Did Not Understand English
 
-![photo]()
+![photo](documentation/testing/REAL_USER_TESTING/person1/1.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person1/2.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person1/3.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person1/4.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person1/5.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person1/6.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person1/7.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person1/8.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person1/9.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person1/10.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person1/11.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person1/12.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person1/13.png)
 
-There was also one user experience story at the very beginning of testing.
+### Second Tester
 
-The story went as follows:
-My original idea for the main button in the center of the carousel was to redirect potential guests to the booking section as quickly as possible. So, the button was labeled BOOK NOW!
+The second person who tested the website was my wife. I gave her a simple end-to-end task to verify the core rental flow:
 
-Later on, a person who was exploring the website told my wife that they would prefer to first see the rooms we have available. That would provide a better experience for them.
+- Find a product
+- Select rental dates
+- Confirm that the calculated price was correct
+- Navigate to the checkout page
+- Complete the payment process
 
-This is why I changed the BOOK NOW button to OUR ROOMS!
-Now, the user is redirected to the available rooms section, where they can view the options and book the one they like.
+- Next Task - Profile & Rentals
 
-I thought this was a good idea, so I made the changes on the website accordingly.
+The next task for my wife was to log into her profile and test the user account features:
 
-Below is the evidence of the user experience feedback, as well as my wife's confirmation that the website has been updated accordingly.
+- Access the profile dashboard
+- Manage her own product listing visibility (toggle between visible/hidden)
+- Check her active rentals
+- Verify the rental details, including the location where she would need to go to pick up the item.
 
-![photo]()
-
-The last person who tested my website was my classmate David. Please see below for some screenshots of the website, along with his feedback.
-
-![screenshot]()
-![signup]()
-![signin]()
-![signout]()
-![booking]()
-![reservation]()
-![delete]()
+![photo](documentation/testing/REAL_USER_TESTING/person2/1.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person2/2.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person2/3.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person2/4.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person2/5.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person2/6.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person2/7.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person2/8.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person2/9.JPG)
+![photo](documentation/testing/REAL_USER_TESTING/person2/10.png)
 
 ## Lighthouse
 

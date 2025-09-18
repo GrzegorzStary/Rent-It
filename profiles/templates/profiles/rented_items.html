@@ -6,10 +6,10 @@
 {% endblock %}
 
 {% block page_header %}
-<div class="container header-container">
+<div class="container header-container" role="region" aria-label="My Rentals page header">
   <div class="row">
     <div class="col">
-      <h1 class="logo-font mt-4">My Rentals</h1>
+      <h1 class="logo-font mt-4" aria-label="My Rentals heading">My Rentals</h1>
       <p class="text-muted mb-0">All orders you have placed.</p>
     </div>
   </div>
@@ -17,14 +17,14 @@
 {% endblock %}
 
 {% block content %}
-<div class="overlay"></div>
-<div class="container my-5">
+<div class="overlay" aria-hidden="true"></div>
+<div class="container my-5" role="region" aria-label="My Rentals content">
 
   <!-- Go Back Button -->
   <div class="d-flex flex-wrap gap-2 mb-4">
-    <a href="{% url 'user_profile' %}" class="btn btn-outline-secondary">
+    <a href="{% url 'user_profile' %}" class="btn btn-outline-secondary" aria-label="Go back to profile">
       <span class="icon">
-        <i class="fas fa-chevron-left"></i>
+        <i class="fas fa-chevron-left" aria-hidden="true"></i>
       </span>
       <span class="text-uppercase">Go back</span>
     </a>
@@ -32,15 +32,15 @@
 
   {% if orders %}
   {% for order in orders %}
-  <div class="border rounded p-4 shadow-sm mb-4">
+  <div class="border rounded p-4 shadow-sm mb-4" role="region" aria-label="Order {{ order.order_number }}">
     <div class="d-flex justify-content-between align-items-center flex-wrap">
       <div>
         <div class="small text-muted">Order number</div>
-        <div class="fw-semibold">{{ order.order_number }}</div>
+        <div class="fw-semibold" aria-label="Order number {{ order.order_number }}">{{ order.order_number }}</div>
       </div>
       <div class="text-md-end mt-2 mt-md-0">
         <div class="small text-muted">Date</div>
-        <div>{{ order.date }}</div>
+        <div aria-label="Order date {{ order.date }}">{{ order.date }}</div>
       </div>
     </div>
 
@@ -48,36 +48,36 @@
 
     {% for item in order.lineitems.all %}
     {% with product=item.product owner=item.product.user %}
-    <div class="row g-3 align-items-start py-2">
+    <div class="row g-3 align-items-start py-2" role="group" aria-label="Rented item {{ product.name }}">
       <div class="col-12 col-md-7">
         <div class="d-flex gap-3">
           <div style="width:80px; min-width:80px;">
             {% if product.images.exists %}
-            <img src="{{ product.images.first.image.url }}" class="img-fluid rounded" alt="{{ product.name }}">
+            <img src="{{ product.images.first.image.url }}" class="img-fluid rounded" alt="{{ product.name }} image">
             {% else %}
-            <img src="{{ MEDIA_URL }}noimage.png" class="img-fluid rounded" alt="{{ product.name }}">
+            <img src="{{ MEDIA_URL }}noimage.png" class="img-fluid rounded" alt="No image available for {{ product.name }}">
             {% endif %}
           </div>
           <div>
-            <div class="fw-semibold">{{ product.name }}</div>
-            <div class="small text-muted">
+            <div class="fw-semibold" aria-label="Product name {{ product.name }}">{{ product.name }}</div>
+            <div class="small text-muted" aria-label="Rental dates from {{ item.start_date|date:'d/m/Y' }} to {{ item.end_date|date:'d/m/Y' }}">
               From <strong>{{ item.start_date|date:"d/m/Y" }}</strong>
               to <strong>{{ item.end_date|date:"d/m/Y" }}</strong>
               ({{ item.rental_duration }} day{{ item.rental_duration|pluralize }})
             </div>
-            <div class="small">Price/day: £{{ product.price }}</div>
+            <div class="small" aria-label="Price per day £{{ product.price }}">Price/day: £{{ product.price }}</div>
           </div>
         </div>
       </div>
-      <div class="col-12 col-md-5 text-md-end">
+      <div class="col-12 col-md-5 text-md-end" role="region" aria-label="Pickup contact details for {{ product.name }}">
         <div class="small text-muted mb-1">Pickup from</div>
-        <div class="fw-semibold">{{ owner.get_full_name|default:owner.username }}</div>
-        {% if owner.email %}<div class="small">Email: {{ owner.email }}</div>{% endif %}
+        <div class="fw-semibold" aria-label="Owner {{ owner.get_full_name|default:owner.username }}">{{ owner.get_full_name|default:owner.username }}</div>
+        {% if owner.email %}<div class="small" aria-label="Owner email {{ owner.email }}">Email: {{ owner.email }}</div>{% endif %}
         {% if owner.profile %}
         {% if owner.profile.phone_number %}
-        <div class="small">Phone: {{ owner.profile.phone_number }}</div>
+        <div class="small" aria-label="Owner phone {{ owner.profile.phone_number }}">Phone: {{ owner.profile.phone_number }}</div>
         {% endif %}
-        <div class="small">
+        <div class="small" aria-label="Owner address">
           Address:
           {% if owner.profile.house_number %}{{ owner.profile.house_number }} {% endif %}
           {% if owner.profile.street_name %}{{ owner.profile.street_name }}{% endif %}
@@ -85,7 +85,7 @@
           {% if owner.profile.postal_code %}, {{ owner.profile.postal_code }}{% endif %}
         </div>
         {% endif %}
-        <div class="mt-2 fw-semibold">Line total: £{{ item.lineitem_total }}</div>
+        <div class="mt-2 fw-semibold" aria-label="Line total £{{ item.lineitem_total }}">Line total: £{{ item.lineitem_total }}</div>
       </div>
     </div>
     {% endwith %}
@@ -97,30 +97,30 @@
 
     <hr class="my-3">
 
-    <div class="row">
+    <div class="row" role="group" aria-label="Order totals">
       <div class="col-7 text-muted">Rental total</div>
-      <div class="col-5 text-end">£{{ order.order_total|floatformat:2 }}</div>
+      <div class="col-5 text-end" aria-label="Rental total £{{ order.order_total|floatformat:2 }}">£{{ order.order_total|floatformat:2 }}</div>
     </div>
     <div class="row">
       <div class="col-7 text-muted">Deposit total</div>
-      <div class="col-5 text-end">£{{ order.deposit_total|floatformat:2 }}</div>
+      <div class="col-5 text-end" aria-label="Deposit total £{{ order.deposit_total|floatformat:2 }}">£{{ order.deposit_total|floatformat:2 }}</div>
     </div>
     <div class="row">
       <div class="col-7 text-muted">Site fee (10%)</div>
-      <div class="col-5 text-end">£{{ order.site_fee|floatformat:2 }}</div>
+      <div class="col-5 text-end" aria-label="Site fee £{{ order.site_fee|floatformat:2 }}">£{{ order.site_fee|floatformat:2 }}</div>
     </div>
     <div class="row">
       <div class="col-7 text-muted">Delivery</div>
-      <div class="col-5 text-end">£{{ order.delivery_cost|default_if_none:"0.00"|floatformat:2 }}</div>
+      <div class="col-5 text-end" aria-label="Delivery cost £{{ order.delivery_cost|default_if_none:'0.00'|floatformat:2 }}">£{{ order.delivery_cost|default_if_none:"0.00"|floatformat:2 }}</div>
     </div>
     <div class="row border-top mt-2 pt-2">
       <div class="col-7 fw-semibold">Grand total</div>
-      <div class="col-5 text-end fw-semibold">£{{ order.grand_total|floatformat:2 }}</div>
+      <div class="col-5 text-end fw-semibold" aria-label="Grand total £{{ order.grand_total|floatformat:2 }}">£{{ order.grand_total|floatformat:2 }}</div>
     </div>
   </div>
   {% endfor %}
   {% else %}
-  <div class="text-center py-5 text-muted">You do not have any rentals yet.</div>
+  <div class="text-center py-5 text-muted" aria-live="polite">You do not have any rentals yet.</div>
   {% endif %}
 </div>
 {% endblock %}

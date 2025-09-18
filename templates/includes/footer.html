@@ -1,7 +1,7 @@
 {% load static %}
 
-<footer>
-    <div class="social-icons">
+<footer role="contentinfo" aria-label="Website footer">
+    <div class="social-icons" role="navigation" aria-label="Social media links">
         <a class="fab fa-github social-icon" href="https://github.com/GrzegorzStary" target="_blank"
             rel="noopener noreferrer" aria-label="GitHub profile link - opens in new tab">
         </a>
@@ -20,10 +20,9 @@
     </div>
 
     <p>&copy; 2025 RentIt. All rights reserved.</p>
-    <p>
-        <a href="{% url 'privacy_policy' %}">Privacy Policy</a> |
-        <a href="{% url 'terms_of_service' %}">Terms of Service</a> |
-        <a href="{% url 'faq' %}">FAQ</a>
+    <p role="navigation" aria-label="Footer navigation links">
+        <a href="{% url 'privacy_policy' %}" aria-label="Privacy Policy page">Privacy Policy</a> |
+        <a href="{% url 'terms_of_service' %}" aria-label="Terms of Service page">Terms of Service</a> |
+        <a href="{% url 'faq' %}" aria-label="Frequently Asked Questions page">FAQ</a>
     </p>
-    </div>
 </footer>

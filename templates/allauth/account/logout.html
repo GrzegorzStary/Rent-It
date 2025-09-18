@@ -7,15 +7,15 @@
 {% endblock head_title %}
 
 {% block content %}
-<div class="container">
+<div class="container" role="main" aria-label="Sign out page">
     <div class="row justify-content-center mt-5 mb-5">
-        <div class="col-lg-6 col-md-8 col-sm-12 p-5 shadow-sm rounded-0 signup-card">
+        <div class="col-lg-6 col-md-8 col-sm-12 p-5 shadow-sm rounded-0 signup-card" role="region" aria-label="Sign out confirmation">
 
-            <h1 class="fw-bold mb-3 text-center fs-1 signup-title">
+            <h1 class="fw-bold mb-3 text-center fs-1 signup-title" aria-label="Sign out heading">
                 {% trans "Sign Out" %}
             </h1>
 
-            <p class="text-center mb-4 fs-5 signup-subtext">
+            <p class="text-center mb-4 fs-5 signup-subtext" aria-label="Confirmation message">
                 {% trans "Are you sure you want to sign out?" %}
             </p>
 
@@ -27,7 +27,7 @@
             {% endslot %}
             {% slot actions %}
             <div class="d-grid">
-                <button type="submit" class="btn btn-outline-primary btn-lg text-uppercase fw-bold py-2">
+                <button type="submit" class="btn btn-outline-primary btn-lg text-uppercase fw-bold py-2" aria-label="Confirm sign out">
                     {% trans "Sign Out" %}
                 </button>
             </div>

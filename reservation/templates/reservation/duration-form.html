@@ -14,9 +14,9 @@
       data-td-target-toggle="nearest">
       <input id="start-date-{{ ctx.item_id }}-{{ uid }}" name="start_date" type="text" class="form-control"
         value="{{ ctx.start_date }}" autocomplete="off"
-        data-td-target="#start-date-picker-{{ ctx.item_id }}-{{ uid }}" />
+        data-td-target="#start-date-picker-{{ ctx.item_id }}-{{ uid }}" aria-label="Start date picker"/>
       <span class="input-group-text" data-td-target="#start-date-picker-{{ ctx.item_id }}-{{ uid }}"
-        data-td-toggle="datetimepicker">
+        data-td-toggle="datetimepicker" aria-label="Start date picker">
         <i class="fa fa-calendar"></i>
       </span>
     </div>
@@ -28,9 +28,9 @@
     <div class="input-group" id="end-date-picker-{{ ctx.item_id }}-{{ uid }}" data-td-target-input="nearest"
       data-td-target-toggle="nearest">
       <input id="end-date-{{ ctx.item_id }}-{{ uid }}" name="end_date" type="text" class="form-control"
-        value="{{ ctx.end_date }}" autocomplete="off" data-td-target="#end-date-picker-{{ ctx.item_id }}-{{ uid }}" />
+        value="{{ ctx.end_date }}" autocomplete="off" data-td-target="#end-date-picker-{{ ctx.item_id }}-{{ uid }}" aria-label="End date picker"/>
       <span class="input-group-text" data-td-target="#end-date-picker-{{ ctx.item_id }}-{{ uid }}"
-        data-td-toggle="datetimepicker">
+        data-td-toggle="datetimepicker" aria-label="End date picker">
         <i class="fa fa-calendar"></i>
       </span>
     </div>
@@ -39,23 +39,23 @@
 
   <!-- Tablet & Desktop inline layout -->
   <div class="d-none d-sm-flex align-items-center gap-2 text-nowrap mt-2">
-    <button class="btn btn-outline-warning" type="submit" name="update">
+    <button class="btn btn-outline-warning" type="submit" name="update" aria-label="Update dates">
       <i class="fas fa-chevron-up"></i> Update
     </button>
     <button id="remove_desktop_{{ ctx.item_id }}" class="btn btn-outline-danger remove-item" type="button"
-      data-item="{{ ctx.item_id }}">
+      data-item="{{ ctx.item_id }}" aria-label="Remove item from bag">
       Remove <i class="fas fa-trash-alt"></i>
     </button>
   </div>
 
   <!-- Phones only buttons -->
   <div class="d-flex justify-content-between d-sm-none mt-3">
-    <button class="btn btn-outline-warning me-2 flex-fill" type="submit" name="update">
+    <button class="btn btn-outline-warning me-2 flex-fill" type="submit" name="update" aria-label="Update dates">
       <i class="fas fa-chevron-up"></i> Update
     </button>
     <div class="mx-2"></div>
     <button id="remove_{{ ctx.item_id }}" class="btn btn-outline-danger remove-item ms-2 flex-fill" type="button"
-      data-item="{{ ctx.item_id }}">
+      data-item="{{ ctx.item_id }}" aria-label="Remove item from bag">
       Remove <i class="fas fa-trash-alt"></i>
     </button>
   </div>

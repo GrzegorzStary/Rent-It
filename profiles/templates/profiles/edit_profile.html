@@ -9,24 +9,24 @@
 {% block title %} - Edit Profile{% endblock %}
 
 {% block content %}
-<div class="container py-5">
+<div class="container py-5" role="region" aria-label="Edit profile page">
   <div class="row justify-content-center">
     <div class="col-12">
-      <h2 class="px-3 text-center">Edit your profile</h2>
+      <h2 class="px-3 text-center" aria-label="Edit your profile heading">Edit your profile</h2>
       <!-- Card centered -->
       <div class="card-header bg-white border-0 py-3 text-center"></div>
 
       <div class="card-body">
-        <form method="post" enctype="multipart/form-data" novalidate>
+        <form method="post" enctype="multipart/form-data" novalidate aria-label="Edit profile form">
           {% csrf_token %}
 
           <div class="vstack gap-4">
 
             <!-- Avatar + upload -->
-            <div class="text-center">
+            <div class="text-center" role="region" aria-label="Profile picture upload section">
               <div class="rounded-circle-edit overflow-hidden border border-4 bg-light shadow-sm mb-3 mx-auto">
                 {% if form.instance.profile_picture %}
-                <img src="{{ form.instance.profile_picture.url }}" alt="Profile picture"
+                <img src="{{ form.instance.profile_picture.url }}" alt="Current profile picture"
                   class="img-fluid-edit w-100 h-100">
                 {% else %}
                 <img src="{% static 'images/no_image_human.png' %}" alt="Default profile picture"
@@ -38,7 +38,7 @@
                 <label for="id_profile_picture" class="form-label">Profile picture</label>
                 {{ form.profile_picture|add_class:"form-control form-control-lg" }}
                 {% if form.profile_picture.errors %}
-                <div class="invalid-feedback d-block">{{ form.profile_picture.errors }}</div>
+                <div class="invalid-feedback d-block" aria-live="polite">{{ form.profile_picture.errors }}</div>
                 {% endif %}
                 {% if form.profile_picture.help_text %}
                 <div class="form-text">{{ form.profile_picture.help_text }}</div>
@@ -47,14 +47,14 @@
             </div>
 
             <!-- All fields centered -->
-            <div class="div-edit mx-auto w-100">
+            <div class="div-edit mx-auto w-100" role="region" aria-label="Profile details fields">
               {% for field in form %}
               {% if field.name != 'profile_picture' %}
               <div class="mb-3">
                 <label for="{{ field.id_for_label }}" class="form-label">{{ field.label }}</label>
                 {{ field|add_class:"form-control form-control-lg" }}
                 {% if field.errors %}
-                <div class="invalid-feedback d-block">{{ field.errors }}</div>
+                <div class="invalid-feedback d-block" aria-live="polite">{{ field.errors }}</div>
                 {% endif %}
                 {% if field.help_text %}
                 <div class="form-text">{{ field.help_text }}</div>
@@ -63,16 +63,16 @@
               {% endif %}
               {% endfor %}
 
-              <div class="d-flex flex-wrap gap-2 pt-2 justify-content-center">
-                <a href="{% url 'profile' %}" class="btn btn-outline-secondary rounded-0 btn-lg text-uppercase mt-3">
+              <div class="d-flex flex-wrap gap-2 pt-2 justify-content-center" role="group" aria-label="Profile form actions">
+                <a href="{% url 'profile' %}" class="btn btn-outline-secondary rounded-0 btn-lg text-uppercase mt-3" aria-label="Cancel and return to profile">
                   <span class="icon">
-                    <i class="fas fa-trash"></i>
+                    <i class="fas fa-trash" aria-hidden="true"></i>
                   </span>
                   <span class="text-uppercase">Cancel</span>
                 </a>
-                <button type="submit" class="btn btn-outline-primary rounded-0 btn-lg text-uppercase mt-3 mb">Save
-                  changes!
-                  <i class="fa fa-floppy-disk"></i>
+                <button type="submit" class="btn btn-outline-primary rounded-0 btn-lg text-uppercase mt-3 mb" aria-label="Save profile changes">
+                  Save changes!
+                  <i class="fa fa-floppy-disk" aria-hidden="true"></i>
                 </button>
               </div>
             </div>
