@@ -443,54 +443,41 @@ Key interactive components (buttons, forms, navigation) have aria-labels and rol
 
 ## Manual Testing
 
-I have thoroughly tested each aspect of the website as shown below.
-
-| **Feature**            | **User Action**                       | **Expected Result**                                                                                            | **Pass/Fail** | **Comments** |
-| ------------------- | ------------------------------------- | -------------------------------------------------------------------------------------------------------------- | ------------- | ------------ |
-| **Navbar**          |                                       |                                                                                                                |               |              |
-|                     | Click on Logo                         | Redirects to the Home page                                                                                     | Pass          |              |
-|                     | Click on Home link                    | Redirects to the Home page                                                                                     | Pass          |              |
-|                     | Click on Our Room link                | Redirects to the Our Room page                                                                                 | Pass          |              |
-|                     | Click on Contact link                 | Redirects to the Contact Form page                                                                             | Pass          |              |
-|                     | Click on Reviews link                 | Redirects to the Reviews page                                                                                  | Pass          |              |
-|                     | Click on About link                   | Redirects to the About page                                                                                    | Pass          |              |
-|                     | Click on Add Review link              | Redirects to the Login page if the user is **not** authenticated; otherwise, redirects to the Add Review page  | Pass          |              |
-|                     | Click on My Bookings link             | Redirects to the Login page if the user is **not** authenticated; otherwise, redirects to the My Bookings page | Pass          |              |
-|                     | Click on Login link                   | Redirects the user to the Login screen                                                                         | Pass          |              |
-|                     | Click on Register link                | Redirects the user to the Registration screen                                                                  | Pass          |              |
-|                     | Click on Logout link                  | Redirects the user to a confirmation screen                                                                    | Pass          |              |
-| **Footer**          |                                       |                                                                                                                |               |              |
-|                     | Click on GITHUB ICON                  | Redirects to the GitHub page, opens in a new tab                                                               | Pass          |              |
-|                     | Click on LINKEDIN ICON                | Redirects to the LinkedIn page, opens in a new tab                                                             | Pass          |              |
-|                     | Click on FACEBOOK ICON                | Redirects to the Facebook page, opens in a new tab                                                             | Pass          |              |
-|                     | Click on INSTAGRAM ICON               | Redirects to the Instagram page, opens in a new tab                                                            | Pass          |              |
-| **OUR ROOM BUTTON** |                                       |                                                                                                                |               |              |
-|                     | Click on OUR ROOM button              | Redirects to the Our Room page                                                                                 | Pass          |              |
-|                     | Scroll to see our rooms               | Page presents a range of room types                                                                            | Pass          |              |
-| **BOOK NOW BUTTON** |                                       |                                                                                                                |               |              |
-|                     | Click on BOOK NOW button              | Redirects to the booking form                                                                                  | Pass          |              |
-|                     | Scroll to see the form                | Form is visible and ready to be filled                                                                         | Pass          |              |
-|                     | Click RESERVE button                  | After submitting the form, the user is redirected to My Bookings                                               | Pass          |              |
-| **Your Bookings**   |                                       |                                                                                                                |               |              |
-|                     | Select a booking from the table       | User selects a booking of interest                                                                             | Pass          |              |
-|                     | Click EDIT button                     | User is redirected to the Edit form                                                                            | Pass          |              |
-|                     | Update your booking                   | User makes changes and clicks **Update Booking**                                                               | Pass          |              |
-|                     | Redirected back to MY BOOKINGS        | User sees the updated booking details                                                                          | Pass          |              |
-|                     | Click DELETE                          | User is redirected to the Confirmation page                                                                    | Pass          |              |
-|                     | Click CONFIRM button                  | Cancellation confirmed, user is redirected to MY BOOKINGS                                                      | Pass          |              |
-|                     | Click BOOK NOW again                  | User can repeat the booking process                                                                            | Pass          |              |
-| **Contact**         |                                       |                                                                                                                |               |              |
-|                     | Fill the Contact Us form              | Form is filled with valid details                                                                              | Pass          |              |
-|                     | Click SEND! button                    | Message is sent, and a confirmation message is shown                                                           | Pass          |              |
-| **Registration**    |                                       |                                                                                                                |               |              |
-|                     | Input valid email, username, password | Fields are completed correctly                                                                                 | Pass          |              |
-|                     | Click Sign-Up button                  | Account is created, user is redirected to the Home page                                                        | Pass          |              |
-**Login**           |                                       |                                                                                                                |               |              |
-|                     | Click on Login button                 | Form appears; user fills in login credentials                                                                  | Pass          |              |
-|                     | Click on Login button again           | Account is logged in                                                                                           | Pass          |              |
-| **Logout**          |                                       |                                                                                                                |               |              |
-|                     | Click on Logout button                | User is redirected to the confirmation page                                                                    | Pass          |              |
-|                     | Click on Logout button again          | Account is logged out                                                                                          | Pass          |              |
+| **Feature** | **User Action** | **Expected Result** | **Pass/Fail** | **Comments** |
+|-------------|-----------------|---------------------|---------------|--------------|
+| **Navbar – Home** | Click "Rent-It" logo or Home link | Redirects to home page | Pass | Works as expected |
+| **Navbar – Browse Items** | Click link | Opens items listing page | Pass | Shows item cards with images, name, price |
+| **Navbar – My Items** | Click link | Shows user’s listed items | Pass | Displays items with edit/delete options |
+| **Navbar – My Reservations** | Click link | Shows user’s reservations | Pass | Displays bookings with correct details |
+| **Navbar – Profile** | Click link | Opens profile page | Pass | Info editable |
+| **Navbar – Logout** | Click logout | Logs out user | Pass | Redirects to homepage |
+| **Footer Links** | Click Terms/Privacy/FAQ | Opens correct page | Pass | Minor contrast issues |
+| **Home Page Load** | Visit | Hero with search form | Pass | Loads search fields for tool, location, date |
+| **Search Tools** | Enter keyword and submit | Shows filtered results | Pass | Returns relevant items |
+| **Filter by Category** | Select category | Results update | Pass | Items narrowed correctly |
+| **Location Filter** | Search by location | Filters results nearby | Pass | Map pins correct |
+| **Items Map** | View map on results | Pins show item locations | Pass | Clickable markers, works with Google Maps |
+| **Item Detail** | Open an item page | Shows description, price, owner | Pass | Clean layout with details |
+| **Date Picker** | Select start/end dates | Valid dates accepted | Pass | Prevents invalid ranges |
+| **Reserve Item** | Click Reserve after dates | Goes to Stripe checkout | Pass | Stripe checkout loads securely |
+| **Stripe Payment** | Pay with test card | Booking confirmed | Pass | Appears in My Reservations |
+| **Profile – View/Edit** | Change name/address | Saves changes | Pass | Updates persist |
+| **My Items – Edit** | Edit listing | Updates item | Pass | Reflected in listings |
+| **My Items – Delete** | Delete listing | Should remove everywhere | Pass | Note: Remains in browse until refresh |
+| **Add Item** | Submit new item with image | Creates listing | Pass | Tags worked |
+| **Add Item – Validation** | Leave fields empty | Shows error | Pass | Proper error messages |
+| **Contact Form** | Submit valid form | Sends message | Pass | Confirmation shown |
+| **Contact Form – Validation** | Leave blank/invalid email | Shows error | Pass | Inline validation works |
+| **Responsive Layout** | Test on mobile | Navbar collapses, no scroll | Pass | Works as expected |
+| **Accessibility – Alt Text** | Inspect images/icons | All should have alt | Pass | Works as expected |
+| **Accessibility – Form Labels** | Check login form | Inputs should be labeled | Pass | Works as expected |
+| **Accessibility – Keyboard Nav** | Tab through site | All reachable | Pass | Focus visible, minor datepicker issue |
+| **Auth – Register** | Sign up with email | Account created | Pass | Works, password rules enforced |
+| **Auth – Duplicate** | Register same email | Should error | Pass | Shows “Email already registered” |
+| **Auth – Login** | Valid credentials | Logs in | Pass | User greeted by name |
+| **Auth – Wrong PW** | Invalid login | Error shown | Pass | Proper feedback |
+| **Auth – Google Login** | OAuth with Google | Should log in | Pass | Works as expected |
+| **Auth – GitHub Login** | OAuth with GitHub | Logs in | Pass | Worked as expected |
 
 ## User Stories
 
