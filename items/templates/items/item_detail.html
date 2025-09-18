@@ -7,39 +7,45 @@
 <div class="overlay"></div>
 <div class="container-fluid">
     <div class="row">
+        <!-- LEFT COLUMN: Images -->
         <div class="col-12 col-md-6 col-lg-4 offset-lg-2">
             <div class="image-container my-5">
-                {% if product.images.all %}
+                {% if product.images.all|length %}
+                <!-- Carousel -->
                 <div id="productCarousel" class="carousel slide" data-bs-ride="carousel">
                     <div class="carousel-inner">
                         {% for img in product.images.all %}
                         <div class="carousel-item {% if forloop.first %}active{% endif %}">
                             <a href="{{ img.image.url }}" target="_blank">
-                                <img src="{{ img.image.url }}" class="d-block w-100 card-img-top img-fluid"
-                                    alt="{{ product.name }}">
+                                <img src="{{ img.image.url }}" 
+                                     class="d-block w-100 card-img-top img-fluid"
+                                     alt="{{ product.name }}">
                             </a>
                         </div>
                         {% endfor %}
                     </div>
-                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel"
-                        data-bs-slide="prev">
+
+                    {% if product.images.all|length > 1 %}
+                    <button class="carousel-control-prev" type="button" data-bs-target="#productCarousel" data-bs-slide="prev">
                         <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Previous</span>
                     </button>
-                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel"
-                        data-bs-slide="next">
+                    <button class="carousel-control-next" type="button" data-bs-target="#productCarousel" data-bs-slide="next">
                         <span class="carousel-control-next-icon" aria-hidden="true"></span>
                         <span class="visually-hidden">Next</span>
                     </button>
+                    {% endif %}
                 </div>
                 {% else %}
-                <a href="#">
-                    <img class="card-img-top img-fluid" src="{{ MEDIA_URL }}noimage.png" alt="{{ product.name }}">
-                </a>
+                <!-- No image fallback -->
+                <img src="{% static 'images/noimage.png' %}" 
+                     class="d-block w-100 card-img-top img-fluid"
+                     alt="No image available for {{ product.name }}">
                 {% endif %}
             </div>
         </div>
 
+        <!-- RIGHT COLUMN: Product details -->
         <div class="col-12 col-md-6 col-lg-4">
             <div class="product-details-container mb-5 mt-md-5">
                 <p class="mb-0">
@@ -69,6 +75,7 @@
 
                 <p class="mt-3">{{ product.description }}</p>
 
+                <!-- Reservation Form -->
                 <form method="post" action="{% url 'reservation:add_to_bag' product.id %}">
                     {% csrf_token %}
                     <input type="hidden" name="redirect_url" value="{% url 'reservation:view_bag' %}">
@@ -81,15 +88,14 @@
                             <p class="mt-3"><strong>Reservation Dates:</strong></p>
 
                             <!-- Start Date Picker -->
-                            <!-- Start Date Picker -->
                             <div class="mb-3">
                                 <label for="start-date-detail" class="form-label">Start Date:</label>
                                 <div class="input-group" id="start-date-picker-detail">
                                     <input id="start-date-detail" name="start_date" type="text" class="form-control"
-                                        data-td-target="#start-date-picker-detail" data-td-toggle="datetimepicker"
-                                        autocomplete="off" />
+                                           data-td-target="#start-date-picker-detail" data-td-toggle="datetimepicker"
+                                           autocomplete="off" />
                                     <span class="input-group-text" data-td-target="#start-date-picker-detail"
-                                        data-td-toggle="datetimepicker">
+                                          data-td-toggle="datetimepicker">
                                         <i class="fa fa-calendar"></i>
                                     </span>
                                 </div>
@@ -100,15 +106,16 @@
                                 <label for="end-date-detail" class="form-label">End Date:</label>
                                 <div class="input-group" id="end-date-picker-detail">
                                     <input id="end-date-detail" name="end_date" type="text" class="form-control"
-                                        data-td-target="#end-date-picker-detail" data-td-toggle="datetimepicker"
-                                        autocomplete="off" />
+                                           data-td-target="#end-date-picker-detail" data-td-toggle="datetimepicker"
+                                           autocomplete="off" />
                                     <span class="input-group-text" data-td-target="#end-date-picker-detail"
-                                        data-td-toggle="datetimepicker">
+                                          data-td-toggle="datetimepicker">
                                         <i class="fa fa-calendar"></i>
                                     </span>
                                 </div>
                             </div>
 
+                            <!-- Price breakdown -->
                             <div id="price-breakdown" class="mt-3">
                                 <p>Select dates to see the price breakdown.</p>
                             </div>
@@ -127,7 +134,6 @@
                                     <i class="fas fa-shopping-bag"></i>
                                 </span>
                             </button>
-                            </a>
                         </div>
                     </div>
                 </form>
