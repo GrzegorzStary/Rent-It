@@ -483,41 +483,41 @@ Key interactive components (buttons, forms, navigation) have aria-labels and rol
 
 Each user story has been fulfilled.
 
-### First-time User
-
 | User Story | Screenshot |
 | --- | --- |
-| As a first-time user, I want to know where the condo hotel is located. | ![screenshot]() |
-| As a first-time user, I want to see room prices and availability. | ![screenshot](documentation/images/user_stories/first_time/first_user2.1.png), ![screenshot]()|
-| As a first-time user, I want to understand what experiences and services the condo hotel provides. | ![screenshot](), ![screenshot]() |
-| As a first-time user, I want to view real photos of the rooms and facilities. | ![screenshot]() |
-| As a first time user, I want to see real peoples reviews. | ![screenshot]() |
-| As a first time user I want easly navigate to booking section and create a booking. | ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot]() |
-
-### Returning User
-
-| User Story | Screenshot |
-| --- | --- |
-| As a returning user, I want to quickly view the hotel’s location and nearby points of interest. | ![screenshot]() |
-| As a returning user, I want an easy way to contact the hotel for questions or updates to my booking. | ![screenshot]()|
-| As a returning user, I want to find and follow the condo hotel on social media to stay updated on news and special offers. | ![screenshot]() |
-| As a returning user, I want to find my booking. | ![screenshot](), ![screenshot]() |
-| As a returning user, I want to edit or delete the booking. | ![screenshot](), ![screenshot]() |
-| As a returning user, I want to leave the honest review about my stay. | ![screenshot](), ![screenshot](), ![screenshot]() |
+| As a renter, I want to see total price including deposit, so I know the full cost.| ![screenshot]() |
+| As a renter, I want to pay securely via Stripe, so I can complete my booking.| ![screenshot](), ![screenshot]()|
+| As a user, I want to search by keyword and location, so I can find items near me. | ![screenshot](), ![screenshot]() |
+| As a user, I want to upload images for my listing, so that others can see what they’re renting. | ![screenshot]() |
+| As a user, I want to set a rental price per day, so I can earn income from my item. | ![screenshot]() |
+| As a renter, I want to choose rental dates, so I can reserve the item I want. | ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot]() |
+| As a renter, I want to see my active and past rentals, so I can track my history. | ![screenshot]() |
+| As a user, I want to edit my profile info, so that I can update contact details or location. | ![screenshot]()|
+| As a user, I want to reset my password, so that I can recover account access. | ![screenshot]() |
+| As a user, I want to browse listings by category, so I can find what I need easily. | ![screenshot](), ![screenshot]() |
+| As a user, I want to view an item detail page, so I can learn more before renting. | ![screenshot](), ![screenshot]() |
+| As a user, I want to sign up and log in, so that I can access my account. | ![screenshot](), ![screenshot](), ![screenshot]() |
+| As a user, I want to list an item for rent, so that others can view and book it. | ![screenshot](), ![screenshot](), ![screenshot]() |
+| As a user, I want to set a security deposit, so I can reduce the risk of damage. | ![screenshot](), ![screenshot](), ![screenshot]() |
+| As a user, I want to receive email confirmations, so I know when bookings are made. | ![screenshot](), ![screenshot](), ![screenshot]() |
 
 ### Site Owner
 
 | User Story | Screenshot |
 | --- | --- |
-| As the site owner, I want to significantly reduce admin time by making essential information easily accessible on the website. | ![screenshot](), ![screenshot](), ![screenshot]() |
-| As the site owner, I want users to recognize and trust STARY CONDOHOTEL as a reliable and professional accommodation provider. | ![screenshot]()|
-| As the site owner, I want users to be able to contact us easily for inquiries, support, or special requests. | ![screenshot]()|
-| As the site owner, I want to capture new business opportunities through the contact form and store user data securely. | ![screenshot]() |
-| As the site owner, I want users to view high-quality images and videos that accurately represent the rooms, facilities, and surroundings. | ![screenshot](), ![screenshot]() |
-| As the site owner, I want users to easily find our location through an interactive map or clear directions. | ![screenshot]() |
-| As the site owner, I want to see guests reservations. | ![screenshot]() |
-| As the site owner, I want to edit or delete guests reviews. | ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot]() |
-| As the site owner, I want to see messages that potential guests left by using our contact form. | ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot]() |
+| As an owner, I want to see all rentals for my listed items, so I can prepare item. | ![screenshot](), ![screenshot](), ![screenshot]() |
+| As the site owner, I want to show personalised dashboards, so users can manage their activity easily. | ![screenshot]()|
+| As the site owner, I want to provide a clear and accessible FAQ and Terms & Conditions page, so that users understand their responsibilities and avoid misunderstandings. | ![screenshot]()|
+| As the site owner, I want to delete inappropriate listings, so the site stays safe. | ![screenshot]() |
+| As the site owner, I want to limit duplicate or spam accounts, so that the community remains safe and trustworthy. | ![screenshot](), ![screenshot]() |
+| As the site owner, I want to support a wide variety of item types and categories, so that the platform appeals to diverse users. | ![screenshot]() |
+| As the site owner, I want to ensure secure user authentication, so that only verified users can list or rent items. | ![screenshot]() |
+| As the site owner, I want to moderate listings, so that I can remove inappropriate or fraudulent content from the platform. | ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot]() |
+| As the site owner, I want to collect rental commissions via Stripe, so that I can generate revenue from the platform. | ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot]() |
+| As the site owner, I want to allow users to browse listings without logging in, so that casual visitors are more likely to sign up. | ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot]() |
+| As the site owner, I want to send automatic email confirmations, so users are informed about bookings and payments. | ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot]() |
+| As the site owner, I want to store images on AWS S3, so media loads fast and doesn't slow down the server. | ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot]() |
+| As the site owner, I want to make the site mobile-friendly, so users can browse and book rentals on the go. | ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot]() |
 
 ### BUGS
 
