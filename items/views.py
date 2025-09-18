@@ -305,7 +305,7 @@ def create_listing(request):
             for f in files:
                 ProductImage.objects.create(product=product, image=f)
             messages.success(request, "Listing created!")
-            return redirect("item_detail", pk=product.pk)
+            return redirect("listed_items")
         else:
             messages.error(request, "Please correct the errors below.")
     else:
