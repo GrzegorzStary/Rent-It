@@ -519,23 +519,37 @@ Each user story has been fulfilled.
 | As the site owner, I want to store images on AWS S3, so media loads fast and doesn't slow down the server. | ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot]() |
 | As the site owner, I want to make the site mobile-friendly, so users can browse and book rentals on the go. | ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot]() |
 
-### BUGS
+### Notable Bugs and Problems Encountered
 
-Throughout the development process, I encountered numerous bugs in my code. While it would be difficult to detail all of them here, I will highlight a few notable examples.
+Throughout the development of Rent-It, a wide range of bugs were identified and fixed. While it is impossible to list them all, the most interesting and challenging ones included:
 
-- Reservation Form Validation: Prevented users from selecting a check-in date in the past or a check-out date earlier than the check-in.
+- **Stripe Card Element Not Rendering:**  
+  At one stage the Stripe card input failed to load, showing `ERR_CONNECTION_REFUSED`. This was traced to a browser/network issue blocking Stripe’s CDN. Switching script sources and cleaning up the Stripe integration resolved it.
 
-- Tab Title Formatting: Standardized tab title structure across all pages by adding a missing " - " (dash and space).
-About Page Layout: Corrected a custom CSS class error that caused the button to stick to the footer.
+- **Session Data & Checkout Totals:**  
+  Checkout initially only displayed one item with incorrect totals. The issue was caused by how session data was populated in the reservation views. Adjustments were made to ensure multiple items and deposits calculated correctly.
 
-- Form Layout: Fixed a typo that caused the submit button to align left instead of remaining centered.
-Responsive Navigation: Repaired a broken Bootstrap link that prevented the hamburger menu from functioning on smaller screens.
+- **Image Carousel Bugs:**  
+  Product image carousels sometimes displayed incorrectly (only working on mobile but not on desktop, or Safari scaling problems). Fixes included unique carousel IDs per item and refined CSS (object-fit, aspect-ratio) to ensure consistent display.
 
-- My Booking View Layout: Fixed layout issues for small screens to ensure proper responsiveness.
+- **Template Context Errors:**  
+  Emails to item owners originally failed with `VariableDoesNotExist` because the template expected `item.product` while only `product` was passed in context. Updating templates to use the correct variables fixed the issue.
 
-- 404 Page Display: Resolved an issue that prevented the custom 404 page from displaying correctly.
+- **Profile Validation Gaps:**  
+  Profile editing allowed blank required fields (like last name). Additional validation was added to enforce proper data integrity.
 
-- Review Template Image: Corrected the image source reference to use the appropriate variable in the review template.
+- **OAuth Social Login:**  
+  While GitHub logins worked, Google login returned errors due to a misconfigured redirect URI. This highlighted the importance of correct OAuth setup across providers.
+
+- **Static & Media on AWS:**  
+  Setting up AWS S3 and linking with Heroku caused multiple issues with permissions and missing files. Correct bucket configuration (ACLs, policies, static/media separation) resolved this.
+
+- **Accessibility and Contrast Warnings:**  
+  Automated audits flagged low-contrast footer links and missing ARIA labels. While some design choices were kept for branding, ARIA labeling was improved to make the site screen reader friendly.
+
+These challenges helped shape Rent-It into a more stable and user friendly application. 
+Each bug provided valuable learning, particularly around 
+**session handling, third-party integrations (Stripe, AWS, OAuth), and accessibility best practices**.
 
   THERE ARE NO OTHER BUGS I AM AWARE OF
 
