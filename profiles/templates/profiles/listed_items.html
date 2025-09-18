@@ -17,11 +17,9 @@
     </a>
   </div>
 
-  <!-- Grid -->
-  <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 g-3 g-lg-4">
+  <div class="row g-3 g-lg-4">
     {% for product in items %}
-    
-    <div class="col-10 mx-auto col-sm-6 col-lg-4 col-xl-3">
+    <div class="col-12 col-md-6 col-lg-3">
       <div class="card h-100 rounded-0">
 
         {% if product.images.all %}
@@ -30,7 +28,8 @@
             {% for img in product.images.all %}
             <div class="carousel-item {% if forloop.first %}active{% endif %}">
               <div class="ratio ratio-4x3">
-                <img src="{{ img.image.url }}" alt="{{ product.name }}" class="w-100 h-100 object-fit-contain" loading="lazy">
+                <img src="{{ img.image.url }}" alt="{{ product.name }}"
+                     class="w-100 h-100 object-fit-contain" loading="lazy">
               </div>
             </div>
             {% endfor %}
@@ -48,7 +47,8 @@
         </div>
         {% else %}
         <div class="ratio ratio-4x3">
-          <img src="{% static 'images/noimage.png' %}" alt="{{ product.name }}" class="w-100 h-100 object-fit-contain" loading="lazy">
+          <img src="{% static 'images/noimage.png' %}" alt="{{ product.name }}"
+               class="w-100 h-100 object-fit-contain" loading="lazy">
         </div>
         {% endif %}
 
@@ -73,7 +73,7 @@
             {% csrf_token %}
             <input type="hidden" name="next" value="{{ request.get_full_path }}">
 
-            <!-- SWITCH ABOVE -->
+            <!-- Switch -->
             <div class="text-center mb-2">
               <div class="form-check form-switch d-inline-flex align-items-center m-0">
                 <input class="form-check-input" type="checkbox"
@@ -91,31 +91,30 @@
               </div>
             </div>
 
-            <!-- BUTTONS BELOW -->
+            <!-- Buttons -->
             <div class="row g-2 align-items-center">
               <div class="col-12 col-md-auto">
                 <a href="{% url 'edit_item' product.id %}" class="btn btn-sm btn-outline-secondary w-100">
-                  <i class="fa-solid fa-pen-to-square me-1" aria-hidden="true"></i> Edit
+                  <i class="fa-solid fa-pen-to-square me-1"></i> Edit
                 </a>
               </div>
               <div class="col-12 col-md-auto ms-md-auto text-md-end">
                 <a href="{% url 'item_detail' product.id %}" class="btn btn-sm btn-outline-primary w-100">
-                  Open <i class="fa-solid fa-up-right-from-square ms-1" aria-hidden="true"></i>
+                  Open <i class="fa-solid fa-up-right-from-square ms-1"></i>
                 </a>
               </div>
             </div>
           </form>
         </div>
-
       </div>
     </div>
     {% empty %}
-      <div class="text-center my-5">
-        <p class="mb-4 fs-5">No items listed yet.</p>
-        <a href="{% url 'create_listing' %}" class="btn btn-outline-primary">
-          <i class="fa-solid fa-square-plus me-2"></i> Create your first listing!
-        </a>
-      </div>
+    <div class="text-center my-5">
+      <p class="mb-4 fs-5">No items listed yet.</p>
+      <a href="{% url 'create_listing' %}" class="btn btn-outline-primary">
+        <i class="fa-solid fa-square-plus me-2"></i> Create your first listing!
+      </a>
+    </div>
     {% endfor %}
   </div>
 </div>
