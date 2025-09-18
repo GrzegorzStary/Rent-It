@@ -305,6 +305,32 @@ I have tested my site on different devices and screen sizes to check for any res
 | MACBOOK PRO M3 MAX 16"| Spinner | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/spinner.JPG) | Works as expected |
 | MACBOOK PRO M3 MAX 16"| Tos | ![screenshot](documentation/testing/RESPONSIVENESS/macbook_pro/tos.JPG) | Works as expected |
 
+### SAMSUNG TAB A9+
+
+| Device | Screen |Screenshot | Notes |
+| --- | --- | --- | --- |
+| SAMSUNG TAB A9+ | Checkout | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Checkout.jpg) | Works as expected |
+| SAMSUNG TAB A9+| Checkout lower | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Checkout_lower.jpg) | Works as expected |
+| SAMSUNG TAB A9+| Confirmation | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Confirmation.jpg) | Works as expected |
+| SAMSUNG TAB A9+| Create Listing | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Create_LISTING.jpg) | Works as expected |
+| SAMSUNG TAB A9+ | Delete Item | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Delete_item.jpg) | Works as expected |
+| SAMSUNG TAB A9+| Edit Item | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Edit_item.jpg) | Works as expected |
+| SAMSUNG TAB A9+| Edit Profile | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Edit_profile.jpg) | Works as expected |
+| SAMSUNG TAB A9+| Edit Profile lower | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Edit_profile_lower.jpg) | Works as expected |
+| SAMSUNG TAB A9+ | FAQ | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Faq.jpg) | Works as expected |
+| SAMSUNG TAB A9+| Home | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Home.jpg) | Works as expected |
+| SAMSUNG TAB A9+| Item Detail | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Item_detail.jpg) | Works as expected |
+| SAMSUNG TAB A9+| Item Detail Picker | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Item_detail_picker.jpg) | Works as expected |
+| SAMSUNG TAB A9+ | Item Detail Calc | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Item_detail_calc.jpg) | Works as expected |
+| SAMSUNG TAB A9+| Items | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Items.jpg) | Works as expected |
+| SAMSUNG TAB A9+| Listed Items | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Your_listing.jpg) | Works as expected |
+| SAMSUNG TAB A9+| Privacy Policy | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Pp.jpg) | Works as expected |
+| SAMSUNG TAB A9+| Profile | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Your_profile.jpg) | Works as expected |
+| SAMSUNG TAB A9+| Rental Bag | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Remtal_bag.jpg) | Works as expected |
+| SAMSUNG TAB A9+| Rented Items | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Rented_items.jpg) | Works as expected |
+| SAMSUNG TAB A9+| Search | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Search.jpg) | Works as expected |
+| SAMSUNG TAB A9+| Spinner | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Spinner.jpg) | Works as expected |
+| SAMSUNG TAB A9+| Tos | ![screenshot](documentation/testing/RESPONSIVENESS/samsung_tab_a9_plus/Tos.jpg) | Works as expected |
 
 ### Real User Experience Testing. 
 

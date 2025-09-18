@@ -28,6 +28,7 @@ The more genuine listings we have, the better the future marketplace will be, no
 
 These are Stripe test card details, so no real money is charged.
 
+### Enjoy exploring the site!
 
 ## Introduction  
 
