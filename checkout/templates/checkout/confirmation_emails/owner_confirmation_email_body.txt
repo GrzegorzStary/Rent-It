@@ -1,6 +1,6 @@
-Hello {{ item.product.user.get_full_name|default:item.product.user.username }},
+Hello {{ product.user.get_full_name|default:product.user.username }},
 
-Good news — your item has been rented on Rent-It.
+Good news - your item has been rented on Rent-It.
 
 Order Number: {{ order.order_number }}
 Order Date: {{ order.date|date:"d/m/Y H:i" }}
@@ -11,8 +11,8 @@ Renter
 - Phone: {{ order.phone_number }}
 
 Rented Item
-- {{ item.product.name }}
-- Rental period: {{ item.start_date|date:"d/m/Y" }} to {{ item.end_date|date:"d/m/Y" }} ({{ item.rental_duration }} day{{ item.rental_duration|pluralize }})
+- {{ product.name }}
+- Rental period: {{ order.start_date|date:"d/m/Y" }} to {{ order.end_date|date:"d/m/Y" }} ({{ order.rental_duration }} day{{ order.rental_duration|pluralize }})
 
 Where your item will be (collection / drop-off address)
 {{ order.street_address1 }}{% if order.street_address2 %}, {{ order.street_address2 }}{% endif %}
