@@ -59,6 +59,24 @@ The scope of Rent-It covers item discovery, secure reservations and payments, re
 ## User Experience
 We prioritize an elegant, intuitive user interface featuring a clean, modern design with responsive layouts that work seamlessly across devices. Users can effortlessly browse categories, filter search results by location or availability, add items to their rental bag, securely complete reservations with Stripe, and manage their accounts. All rental prices are transparent, with deposits and service fees clearly displayed before checkout, ensuring there are no hidden costs.
 
+## Accessibility Statement
+Rent-It is committed to providing a platform that is usable and accessible to as many people as possible, regardless of ability.
+
+#### Measures Implemented
+- ARIA Labels: 
+The site is extensively ARIA-labelled, allowing screen readers to correctly interpret and announce key elements (navigation, buttons, forms, and checkout).
+
+- Keyboard Navigation: 
+All interactive elements can be reached and activated using only the keyboard.
+- Consistent Layout: Pages follow a consistent structure, making it easier for users to predict and understand navigation patterns.
+- Form Support: Form fields include clear labels, error messages, and aria-descriptions to assist users with cognitive or visual impairments.
+
+#### Known Limitations
+- Footer Contrast: Links in the footer (FAQ, Privacy Policy, Terms of Service) use colours that fall slightly below the WCAG minimum contrast ratio. They remain readable and have been kept to maintain brand identity.
+
+#### Commitment
+We aim to continually improve accessibility and welcome feedback. If you encounter any issues while using Rent-It, please contact us so we can work towards a solution.
+
 ## Market
 Rent-It operates within the growing sharing economy and peer-to-peer rental market, targeting individuals who prefer access over ownership. This includes people who need tools, electronics, or household items for temporary use, as well as owners who want to monetize underused belongings. By focusing on trust, security, and convenience, Rent-It distinguishes itself from generic marketplaces by offering a streamlined rental-first platform.
 

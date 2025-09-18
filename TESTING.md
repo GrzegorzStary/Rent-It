@@ -417,17 +417,29 @@ No action is required on the project side, and this behaviour is expected when i
 
 I tested my deployed project using the WAVE evaluation tool to assess accessibility.
 
-All pages flagged a contrast issue related to the orange button with white text. While this does not meet standard contrast requirements, the button contains large text and is prominently sized. As it aligns with our established design patterns, we have decided to retain this styling.
+- Accessibility testing flagged minor contrast issues in the footer links (FAQ, Privacy Policy, Terms of Service). 
+While these links technically fall below the recommended WCAG contrast ratio, they remain legible due to the surrounding design, consistent font size, and clear spacing. As this colour scheme aligns with the established Rent-It branding, the decision was made to retain this styling.
+
+#### On the positive side, Rent-It places a strong emphasis on inclusivity:
+
+- The site is massively ARIA-labelled, ensuring screen readers can interpret and announce elements correctly.
+Key interactive components (buttons, forms, navigation) have aria-labels and role attributes for improved accessibility.
+
+#### This means that even users with disabilities can successfully navigate and benefit from the platform - from browsing items to listing items and completing the checkout flow, potentially improving their living standard due to extra income stream.
 
 | TOOL | Screen |Screenshot | 
 | --- | --- | --- | 
-| WAVE | Home page | ![screenshot]() |
-| WAVE | Our Rooms | ![screenshot]() | 
-| WAVE | Contact Us | ![screenshot]() | 
-| WAVE | Reviews | ![screenshot]() |
-| WAVE | About | ![screenshot]() |
-| WAVE | Add Review | ![screenshot]() | 
-| WAVE | Logout| ![screenshot]() |
+| WAVE | Home | ![screenshot](documentation/testing/WAVE_EVALUATION/home.png) |
+| WAVE | Items | ![screenshot](documentation/testing/WAVE_EVALUATION/items.png) | 
+| WAVE | Item detail | ![screenshot](documentation/testing/WAVE_EVALUATION/item_detail.png) | 
+| WAVE | Rental bag | ![screenshot](documentation/testing/WAVE_EVALUATION/rental_bag.png) |
+| WAVE | Checkout | ![screenshot](documentation/testing/WAVE_EVALUATION/checkout.png) |
+| WAVE | Checkout error | ![screenshot](documentation/testing/WAVE_EVALUATION/checkout_err.png) | 
+| WAVE | Confirmation| ![screenshot](documentation/testing/WAVE_EVALUATION/confirmation.png) |
+| WAVE | Edit profile | ![screenshot](documentation/testing/WAVE_EVALUATION/edit_profile.png) |
+| WAVE | Create listing | ![screenshot](documentation/testing/WAVE_EVALUATION/create_listing.png) |
+| WAVE | Your listing | ![screenshot](documentation/testing/WAVE_EVALUATION/your_listing.png) | 
+| WAVE | Your Rentals| ![screenshot](documentation/testing/WAVE_EVALUATION/your_rentals.png) |
 
 ## Manual Testing
 
