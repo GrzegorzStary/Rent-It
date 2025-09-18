@@ -393,14 +393,23 @@ The next task for my wife was to log into her profile and test the user account 
 
 I've tested my deployed project using the Lighthouse tool to check for issues.
 
+- During testing with performance and best practice auditing tools the overall Best Practice score was slightly reduced across all pages. 
+This is caused by third-party cookies automatically injected by Stripe.
+These cookies are essential for secure payment functionality and are beyond the control of the application. 
+No action is required on the project side, and this behaviour is expected when integrating Stripe.
+
+- The performance score was slightly reduced across several pages due to the use of large image files (particularly product images). While these images display correctly and maintain good visual quality, they increase page load times and impact Lighthouse performance results.
+
 | Page | Size | Screenshot | Notes |
 | --- | --- | --- | --- |
-| Home | Desktop | ![screenshot]() | n/a |
-| Our Room | Desktop | ![screenshot]() | Small performance issue |
-| Contact| Desktop | ![screenshot]() | Best Practices due to 3rd party cookies (google maps) |
-| Reviews | Desktop | ![screenshot]() | n/a |
-| Add Review | Desktop | ![screenshot]() | n/a |
-| Bookings | Desktop | ![screenshot]() | n/a |
+| Home | Desktop | ![screenshot](documentation/testing/LIGHTHOUSE/home.png) | Lower performance due to large images |
+| Items | Desktop | ![screenshot](documentation/testing/LIGHTHOUSE/item.png) | n/a |
+| Item detail| Desktop | ![screenshot](documentation/testing/LIGHTHOUSE/item_detail.png) | n/a |
+| Rental bag | Desktop | ![screenshot](documentation/testing/LIGHTHOUSE/rental_bag.png) | n/a |
+| Rented Items | Desktop | ![screenshot](documentation/testing/LIGHTHOUSE/rented_items.png) | n/a |
+| Checkout | Desktop | ![screenshot](documentation/testing/LIGHTHOUSE/checkout.png) | n/a |
+| Listed Items | Desktop | ![screenshot](documentation/testing/LIGHTHOUSE/listed_items.png) | n/a |
+| Profile | Desktop | ![screenshot](documentation/testing/LIGHTHOUSE/profile.png) | n/a |
 
 
 
