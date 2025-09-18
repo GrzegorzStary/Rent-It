@@ -1,1 +1,1 @@
-THIS IS CONFIRMATION EMAIL TO RENTER
+Rent-It Confirmation for Rental Number {{ order.order_number }}

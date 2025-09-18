@@ -1,1 +1,47 @@
-THIS IS CONFIRMATION EMAIL TITLE FOR THE RENTER
+Hello {{ order.full_name }},
+
+Thank you for renting with Rent-It!
+Here are the details of your rental:
+
+Rental Number: {{ order.order_number }}
+Rental Date: {{ order.date|date:"d/m/Y H:i" }}
+
+Items Rented & Pickup Details:
+{% for item in order.lineitems.all %}
+- {{ item.product.name }}
+  From {{ item.start_date|date:"d/m/Y" }} to {{ item.end_date|date:"d/m/Y" }} ({{ item.rental_duration }} day{{ item.rental_duration|pluralize }})
+  Price per day: £{{ item.product.price }}
+  Line total: £{{ item.lineitem_total }}
+
+  Pickup from:
+  {{ item.product.user.get_full_name|default:item.product.user.username }}
+  Email: {{ item.product.user.email }}{% if item.product.user.profile and item.product.user.profile.phone_number %}
+  Phone: {{ item.product.user.profile.phone_number }}{% endif %}{% if item.product.user.profile %}
+  Address:
+  {% with p=item.product.user.profile %}
+  {% if p.house_number or p.street_name or p.city or p.postal_code or p.country %}
+  {{ p.house_number }}{% if p.house_number and p.street_name %} {% endif %}{{ p.street_name }}
+  {% if p.city %}{{ p.city }}{% endif %}{% if p.postal_code %}{% if p.city %}, {% endif %}{{ p.postal_code }}{% endif %}{% if p.country %}, {{ p.country }}{% endif %}
+  {% else %}
+  (The owner will share the pickup address directly with you.)
+  {% endif %}
+  {% endwith %}{% else %}
+  (The owner will share the pickup address directly with you.)
+  {% endif %}
+
+{% endfor %}
+
+Payment Summary:
+- Rental Total: £{{ order.order_total }}
+- Deposit Total: £{{ order.deposit_total }}
+- Site Fee: £{{ order.site_fee }}
+- Delivery: £{{ order.delivery_cost|default:"0.00" }}
+- Grand Total: £{{ order.grand_total }}
+
+If you have any questions, simply reply to this email or contact us at {{ contact_email }}.
+Please coordinate pickup with the owner using the details above.
+
+Thanks again for choosing Rent-It — enjoy your rental!
+
+Best regards,
+The Rent-It Team
