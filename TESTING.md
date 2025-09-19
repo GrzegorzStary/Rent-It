@@ -497,7 +497,7 @@ Each user story has been fulfilled.
 
 | User Story | Screenshot |
 | --- | --- |
-| As a renter, I want to see total price including deposit, so I know the full cost.| ![screenshot]() |
+| As a renter, I want to see total price including deposit, so I know the full cost.| ![screenshot](documentation/testing/USER_STORIES/renter_stories/1/1.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/1/2.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/1/3.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/1/4.png) |
 | As a renter, I want to pay securely via Stripe, so I can complete my booking.| ![screenshot](), ![screenshot]()|
 | As a user, I want to search by keyword and location, so I can find items near me. | ![screenshot](), ![screenshot]() |
 | As a user, I want to upload images for my listing, so that others can see what they’re renting. | ![screenshot]() |
