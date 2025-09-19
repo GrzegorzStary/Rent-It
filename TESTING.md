@@ -498,12 +498,12 @@ Each user story has been fulfilled.
 | User Story | Screenshot |
 | --- | --- |
 | As a renter, I want to see total price including deposit, so I know the full cost.| ![screenshot](documentation/testing/USER_STORIES/renter_stories/1/1.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/1/2.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/1/3.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/1/4.png) |
-| As a renter, I want to pay securely via Stripe, so I can complete my booking.| ![screenshot](), ![screenshot]()|
-| As a user, I want to search by keyword and location, so I can find items near me. | ![screenshot](), ![screenshot]() |
-| As a user, I want to upload images for my listing, so that others can see what they’re renting. | ![screenshot]() |
-| As a user, I want to set a rental price per day, so I can earn income from my item. | ![screenshot]() |
-| As a renter, I want to choose rental dates, so I can reserve the item I want. | ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot]() |
-| As a renter, I want to see my active and past rentals, so I can track my history. | ![screenshot]() |
+| As a renter, I want to pay securely via Stripe, so I can complete my booking.| ![screenshot](documentation/testing/USER_STORIES/renter_stories/2/5.png), ![screenshot](documentation/testing/USER_STORIES/renter_stories/2/6.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/2/7.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/2/8.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/2/9.png) |
+| As a user, I want to search by keyword and location, so I can find items near me. | ![screenshot](documentation/testing/USER_STORIES/renter_stories/1/1.png), ![screenshot](documentation/testing/USER_STORIES/renter_stories/3/13.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/3/10.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/3/12.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/3/11.png)|
+| As a user, I want to upload images for my listing, so that others can see what they’re renting. | ![screenshot](documentation/testing/USER_STORIES/renter_stories/4/14.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/4/15.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/4/16.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/4/17.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/4/18.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/4/19.png)|
+| As a user, I want to set a rental price per day, so I can earn income from my item. | ![screenshot](documentation/testing/USER_STORIES/renter_stories/5/20.png) |
+| As a renter, I want to choose rental dates, so I can reserve the item I want. | ![screenshot](documentation/testing/USER_STORIES/renter_stories/1/3.png) |
+| As a renter, I want to see my active and past rentals, so I can track my history. | ![screenshot]() ![screenshot]()|
 | As a user, I want to edit my profile info, so that I can update contact details or location. | ![screenshot]()|
 | As a user, I want to reset my password, so that I can recover account access. | ![screenshot]() |
 | As a user, I want to browse listings by category, so I can find what I need easily. | ![screenshot](), ![screenshot]() |
