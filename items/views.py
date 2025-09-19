@@ -48,7 +48,7 @@ def bbox_around(lat, lng, km):
 def items_view(request):
     query = None
     sort = request.GET.get("sort")
-    max_km_param = request.GET.get("max_km")  # e.g. max_km=10
+    max_km_param = request.GET.get("max_km")  # max_km=10
     radius_enabled = False
     user_lat = user_lng = None
 

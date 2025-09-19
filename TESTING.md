@@ -3,7 +3,7 @@
 I used the [HTML W3C Validator](https://validator.w3.org) to validate my HTML files.
 
 #### Template syntax:
-- Some of the reported errors (e.g., “Bad value {% url ... %} for attribute href” or “Stray doctype”) are not actual code issues. They occur because the validator processes the raw Django template files, which include template tags such as {% load static %} or {% url '...' %}. These tags are not part of standard HTML, so the validator flags them as invalid. Once the templates are rendered by Django, they produce valid HTML output, and those errors disappear.
+- Some of the reported errors (“Bad value {% url ... %} for attribute href” or “Stray doctype”) are not actual code issues. They occur because the validator processes the raw Django template files, which include template tags such as {% load static %} or {% url '...' %}. These tags are not part of standard HTML, so the validator flags them as invalid. Once the templates are rendered by Django, they produce valid HTML output, and those errors disappear.
 
 #### Stray elements:
 - During validation I did notice one genuine issue - a stray <div> tag - which has now been corrected. After fixing this, no further structural issues were found in the rendered pages.
@@ -67,10 +67,10 @@ I have used the [JS LINT](https://www.jslint.com/) to validate my JavaScript fil
 When running my files through JSLint, a few warnings appeared across files:
 
 - “Expected '{' and instead saw 'return'”
-Cause: I use single-line return statements (e.g. if (!errorDiv) return;).
+Cause: I use single-line return statements (if (!errorDiv) return;).
 Explanation: This is valid ES6 syntax but JSLint prefers full block statements ({}).
 - “Expected ';' and instead saw ','”
-Cause: I declare multiple variables in one line (e.g. let stripePublicKey, clientSecret;).
+Cause: I declare multiple variables in one line (let stripePublicKey, clientSecret;).
 - Explanation: Valid in ES6+, but JSLint enforces one declaration per line.
 “Unexpected ': style'”
 - Cause: I pass an object property { style: style } to Stripe Elements.
@@ -152,7 +152,7 @@ I have used the [PEP8 CI Python Linter](https://pep8ci.herokuapp.com) to validat
 
 ### Rent-It
 
-- I did not make any changes to settings.py because the warnings are only style-related (long lines, whitespace, inline comment spacing) and do not affect functionality. Since this file controls critical project configuration (database, AWS, Stripe, etc.), modifying it only for PEP8 compliance could introduce unnecessary risks. It is safer to keep the file as it is, since it already works correctly in development and production.
+- I did not make any changes to settings.py because the warnings are only style related (long lines, whitespace, inline comment spacing) and do not affect functionality. Since this file controls critical project configuration (database, AWS, Stripe, etc.), modifying it only for PEP8 compliance could introduce unnecessary risks. It is safer to keep the file as it is, since it already works correctly in development and production.
 
 | File | Screenshot | Notes |
 | --- | --- | --- |
@@ -335,7 +335,7 @@ I have tested my site on different devices and screen sizes to check for any res
 ### Real User Experience Testing. 
 
 Real World Testing - Older User
--To complete real-world testing, I shared the website with an older user who has only basic computer experience. Their assigned task was to:
+-To complete real world testing, I shared the website with an older user who has only basic computer experience. Their assigned task was to:
 
 - Create a new account
 - Update their profile details
@@ -478,6 +478,18 @@ Key interactive components (buttons, forms, navigation) have aria-labels and rol
 | **Auth – Wrong PW** | Invalid login | Error shown | Pass | Proper feedback |
 | **Auth – Google Login** | OAuth with Google | Should log in | Pass | Works as expected |
 | **Auth – GitHub Login** | OAuth with GitHub | Logs in | Pass | Worked as expected |
+
+### Postcodes.io Testing
+The Postcodes.io API powers the location based search in Rent-It. To ensure the feature worked correctly, I carried out the following manual and functional tests:
+
+| **Test**                                     | **User Action**                                           | **Expected Result**                                                          | **Pass/Fail** | **Comments**                               |
+| -------------------------------------------- | --------------------------------------------------------- | ---------------------------------------------------------------------------- | ------------- | ------------------------------------------ |
+| Enter a valid UK postcode (`SW1A 1AA`) | User searches for items with a valid postcode             | API returns correct latitude/longitude, items displayed within chosen radius | Pass          | Verified against Google Maps for accuracy  |
+| Enter an invalid postcode (`ZZ99 9ZZ`) | User enters invalid postcode                              | API returns error, system displays validation message                        | Pass          | Error handled gracefully with feedback     |
+| Leave postcode field empty                   | User submits search without postcode                      | No API call is made, system prompts for valid postcode                       | Pass          | Prevented unnecessary API calls            |
+| Change search radius (5, 10, 25 km)       | User adjusts distance filter                              | Items displayed update correctly based on Haversine calculation              | Pass          | Checked against known distances            |
+| Compare distance results manually            | Measured distance between two postcodes using Google Maps | Distances calculated by Rent-It closely match Google Maps distances          | Pass          | Confirms Haversine + Postcodes.io accuracy |
+
 
 ## User Stories
 

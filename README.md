@@ -40,7 +40,7 @@ Whether you’re renting out tools, electronics, or household essentials, RENT-I
 
 ## Objective
 
-Our objective is to provide a sophisticated yet user friendly rental marketplace for people who need temporary access to everyday items. By focusing on high-quality listings, transparent pricing, and secure transactions, we aim to become the go to platform for anyone looking to save money, reduce waste, and enjoy the convenience of renting instead of buying.
+Our objective is to provide a sophisticated yet user friendly rental marketplace for people who need temporary access to everyday items. By focusing on high quality listings, transparent pricing, and secure transactions, we aim to become the go to platform for anyone looking to save money, reduce waste, and enjoy the convenience of renting instead of buying.
 
 ## Audience
 
@@ -48,7 +48,7 @@ Our primary audience consists of individuals who prefer the flexibility of renti
 
 ## Solution
 
-Rent-It centralizes everything needed for a smooth rental experience comprehensive item listings, easy date-based reservations, transparent pricing, and secure checkout into one platform. By leveraging modern web technologies, the platform ensures consistent performance, user security, and seamless navigation across all devices.
+Rent-It centralizes everything needed for a smooth rental experience comprehensive item listings, easy date based reservations, transparent pricing, and secure checkout into one platform. By leveraging modern web technologies, the platform ensures consistent performance, user security, and seamless navigation across all devices.
 
 ## Scope
 
@@ -64,7 +64,7 @@ Rent-It is committed to providing a platform that is usable and accessible to as
 
 #### Measures Implemented
 - ARIA Labels: 
-The site is extensively ARIA-labelled, allowing screen readers to correctly interpret and announce key elements (navigation, buttons, forms, and checkout).
+The site is extensively ARIA labelled, allowing screen readers to correctly interpret and announce key elements (navigation, buttons, forms, and checkout).
 
 - Keyboard Navigation: 
 All interactive elements can be reached and activated using only the keyboard.
@@ -78,13 +78,13 @@ All interactive elements can be reached and activated using only the keyboard.
 We aim to continually improve accessibility and welcome feedback. If you encounter any issues while using Rent-It, please contact us so we can work towards a solution.
 
 ## Market
-Rent-It operates within the growing sharing economy and peer-to-peer rental market, targeting individuals who prefer access over ownership. This includes people who need tools, electronics, or household items for temporary use, as well as owners who want to monetize underused belongings. By focusing on trust, security, and convenience, Rent-It distinguishes itself from generic marketplaces by offering a streamlined rental-first platform.
+Rent-It operates within the growing sharing economy and peer to peer rental market, targeting individuals who prefer access over ownership. This includes people who need tools, electronics, or household items for temporary use, as well as owners who want to monetize underused belongings. By focusing on trust, security, and convenience, Rent-It distinguishes itself from generic marketplaces by offering a streamlined rental-first platform.
 
 ## Revenue Model
-Our platform follows a commission-based model, generating profit through a site fee on every transaction. This approach ensures fair pricing for renters, extra income for lenders, and a sustainable revenue stream for Rent-It. Deposits are securely managed to protect owners against potential damages.
+Our platform follows a commission based model, generating profit through a site fee on every transaction. This approach ensures fair pricing for renters, extra income for lenders, and a sustainable revenue stream for Rent-It. Deposits are securely managed to protect owners against potential damages.
 
 ## Marketing
-Our marketing strategy combines targeted social media campaigns, local advertising, and collaborations with content creators in the sustainability and DIY communities. We share engaging content that emphasizes the benefits of renting over buying - saving money, reducing waste, and building community connections. 
+Our marketing strategy combines targeted social media campaigns, local advertising, and collaborations with content creators in the sustainability and DIY communities. We share engaging content that emphasizes the benefits of renting over buying, saving money, reducing waste, and building community connections. 
 
 ## Risks
 - Trust and Reliability: Potential misuse or damages could harm community trust.
@@ -93,15 +93,41 @@ Our marketing strategy combines targeted social media campaigns, local advertisi
 -  Regulatory Changes: Shifts in consumer rights, insurance, or rental regulations may impact operations.
 
 ## Growth Opportunities
-- Expanded Categories: Introduce rentals for larger items (e.g. vehicles, equipment) or niche markets (e.g. photography gear).
+- Expanded Categories: Introduce rentals for larger items for example vehicles or niche markets (photography gear).
 - Partnerships: Collaborate with local businesses and repair shops to offer verified, high-quality rentals.
-- Premium Services: Provide insurance add-ons, delivery/pick-up options, or subscription-based membership benefits.
+- Premium Services: Provide insurance add-ons, delivery/pick-up options, or subscription based membership benefits.
 
 ## Agile Methodology User Stories
 
 The development of Rent-It followed Agile principles, ensuring that the project could evolve iteratively with constant feedback and incremental improvements. Instead of building everything at once, the application was divided into smaller deliverables  each representing a core area of functionality (e.g., authentication, rental bag, payments, account management).
 
 [All the User Stories are available here - please click.](https://github.com/users/GrzegorzStary/projects/6d)
+
+## Postcodes.io Integration
+Rent-It uses the Postcodes.io API to support its location based search and filtering feature. 
+This allows users to find rental items close to their own postcode.
+#### Purpose
+- Convert a user’s entered postcode into latitude and longitude coordinates.
+- Validate that the postcode is genuine and within the UK.
+- Enable distance calculations between the user’s location and the item’s location using the Haversine formula.
+
+#### How It Works?
+- A user enters their postcode when searching for rental items.
+- Rent-It queries the Postcodes.io API to fetch the postcode’s geographic coordinates.
+- The system calculates the distance between the user and each item.
+- Results are filtered to only display items within the user’s chosen distance range.
+
+#### Why Postcodes.io?
+- Free and open source, no API keys or authentication required.
+- Provides accurate and up to date data for all UK postcodes.
+- Ideal for academic and medium scale projects without the cost of premium APIs like Google Distance Matrix.
+
+#### Limitations
+Works only for UK postcodes.
+If international expansion is required, additional API keys (Google Maps API, OpenCage) would need to be added as environment variables in Heroku Config Vars.
+
+#### Future Improvements
+In the future, this feature could be extended to support international postcodes by integrating services such as the Google Maps API or OpenCage Geocoder, allowing Rent-It to expand beyond the UK market.
 
 ## Future Features
 
@@ -596,13 +622,13 @@ This account will act as the sender for Rent-It emails.
 #### Enable 2-Step Verification
 - Log in to Gmail
 - Navigate to:
-Settings → Other Google Account Settings → Security
+Settings - Other Google Account Settings - Security
 - Turn on 2-Step Verification
 
 #### Generate an App Password
 - After 2FA is enabled, go to:
-- Security → App Passwords
-- Select Other (Custom name) → enter e.g. RentIt
+- Security - App Passwords
+- Select Other (Custom name) - enter e.g. RentIt
 - Click Create
 - Copy the 16-digit password provided (you’ll need it for Heroku).
 
@@ -624,7 +650,7 @@ else:
 
 #### Set Heroku Config Vars
 
-- In your Heroku dashboard, add the following under Settings → Config Vars:
+- In your Heroku dashboard, add the following under Settings - Config Vars:
 
 ```ini
 EMAIL_HOST_USER = your_gmail_address@gmail.com
@@ -637,17 +663,17 @@ EMAIL_HOST_PASS = your_16_digit_app_password
 
 1. Setup AWS Account & S3 Bucket
 - Log in to your AWS account.
-- Create a new S3 Bucket → name it the same as your Heroku app (e.g., rent-it-static).
+- Create a new S3 Bucket → name it the same as your Heroku app for example rent-it-static.
 - Choose the AWS region closest to your location.
 - Block Public Access → uncheck "Block all public access".
 - Confirm that the bucket will be public (required for hosting static files).
-- Object Ownership → set to ACLs Enabled → Bucket owner preferred.
+- Object Ownership - set to ACLs Enabled - Bucket owner preferred.
 - In Properties tab, enable Static Website Hosting and set:
 ```
 Index document: index.html
 Error document: error.html
 ```
-- In Permissions → CORS configuration, paste the following:
+- In Permissions - CORS configuration, paste the following:
 
 ```json
 [
@@ -690,12 +716,12 @@ Paste the generated JSON into the Bucket Policy Editor. Example:
 
 - Make sure /* is added at the end of the Resource key.
 Save the policy.
-In Access Control List (ACL) → Edit → enable List for Everyone (Public Access) → accept warning.
+In Access Control List (ACL) - Edit - enable List for Everyone (Public Access) - accept warning.
 
 3. AWS IAM Setup
 - Go to IAM (Identity & Access Management).
-- Create a new User Group → e.g., rent-it-group.
-- Attach policy → AmazonS3FullAccess.
+- Create a new User Group - e.g., rent-it-group.
+- Attach policy - AmazonS3FullAccess.
 - Create a new Policy with the following JSON (replace bucket name):
 
 ```json
@@ -716,7 +742,7 @@ In Access Control List (ACL) → Edit → enable List for Everyone (Public Acces
 
 - Review → name it rent-it-policy → create policy.
 - Attach the policy to your group.
-- Create a new User → e.g., rent-it-user → Programmatic access.
+- Create a new User - e.g., rent-it-user - Programmatic access.
 - Add the user to your group.
 - Download the .csv file with Access Key ID and Secret Access Key.
 
@@ -800,7 +826,7 @@ Rent-It uses Stripe to securely handle online payments. Follow the steps below t
 - Log in to your Stripe Dashboard.
 
 2. Get Your API Keys
-- In the Dashboard → Developers → API Keys.
+- In the Dashboard - Developers - API Keys.
 - Copy the following test keys:
 ```
 STRIPE_PUBLIC_KEY
@@ -824,13 +850,13 @@ STRIPE_SECRET_KEY = os.environ.get("STRIPE_SECRET_KEY")
 
 4. Configure Stripe Webhooks
 Webhooks act as a failsafe in case a customer closes the browser before payment is fully authorised.
-- In Stripe Dashboard → Developers → Webhooks → Add Endpoint
+- In Stripe Dashboard - Developers - Webhooks - Add Endpoint
 - Set endpoint URL:
 
 ```ruby
 https://your-heroku-app-name.herokuapp.com/checkout/wh/
 ```
-- Choose Receive all events → Add Endpoint.
+- Choose Receive all events - Add Endpoint.
 
 5. Add Webhook Secret
 - Stripe will generate a Webhook Signing Secret.
@@ -925,7 +951,7 @@ As a result, the current repository only shows around 17 deployment-related comm
 | [Google Image](https://images.google.com) | Carousel image index page | image |
 | [FontAwesome](https://fontawesome.com) | entire site | social media icon | icons
 | [Bootstrap](https://getbootstrap.com) | entire site | styling | styles / forms
-| [PRIVATE COLLECTION]() | Carousel image/ Room Images | image | all images
+| [PRIVATE COLLECTION]() | Carousel images | image | all images
 
 ### Acknowledgements
 
