@@ -506,12 +506,11 @@ Each user story has been fulfilled.
 | As a renter, I want to see my active and past rentals, so I can track my history. | ![screenshot](documentation/testing/USER_STORIES/renter_stories/6/21.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/6/22.png)|
 | As a user, I want to edit my profile info, so that I can update contact details or location. | ![screenshot](documentation/testing/USER_STORIES/renter_stories/7/23.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/7/24.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/7/25.png)|
 | As a user, I want to reset my password, so that I can recover account access. | ![screenshot](documentation/testing/USER_STORIES/renter_stories/8/26.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/8/27.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/8/28.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/8/29.png)|
-| As a user, I want to browse listings by category, so I can find what I need easily. | ![screenshot](), ![screenshot]() |
-| As a user, I want to view an item detail page, so I can learn more before renting. | ![screenshot](), ![screenshot]() |
-| As a user, I want to sign up and log in, so that I can access my account. | ![screenshot](), ![screenshot](), ![screenshot]() |
-| As a user, I want to list an item for rent, so that others can view and book it. | ![screenshot](), ![screenshot](), ![screenshot]() |
-| As a user, I want to set a security deposit, so I can reduce the risk of damage. | ![screenshot](), ![screenshot](), ![screenshot]() |
-| As a user, I want to receive email confirmations, so I know when bookings are made. | ![screenshot](), ![screenshot](), ![screenshot]() |
+| As a user, I want to view an item detail page, so I can learn more before renting. | ![screenshot](documentation/testing/USER_STORIES/renter_stories/1/1.png), ![screenshot](documentation/testing/USER_STORIES/renter_stories/1/2.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/9/30.png)|
+| As a user, I want to sign up and log in, so that I can access my account. | ![screenshot](documentation/testing/USER_STORIES/renter_stories/10/31.png), ![screenshot](documentation/testing/USER_STORIES/renter_stories/10/32.png), ![screenshot](documentation/testing/USER_STORIES/renter_stories/10/33.png) |
+| As a user, I want to list an item for rent, so that others can view and book it. | ![screenshot](documentation/testing/USER_STORIES/renter_stories/4/14.png), ![screenshot](documentation/testing/USER_STORIES/renter_stories/4/15.png), ![screenshot](documentation/testing/USER_STORIES/renter_stories/4/16.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/4/17.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/4/18.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/4/19.png)|
+| As a user, I want to set a security deposit, so I can reduce the risk of damage. | ![screenshot](documentation/testing/USER_STORIES/renter_stories/11/34.png)|
+| As a user, I want to receive email confirmations, so I know when bookings are made. | ![screenshot](documentation/testing/USER_STORIES/renter_stories/12/35.png)|
 
 ### Site Owner
 
