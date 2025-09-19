@@ -503,9 +503,9 @@ Each user story has been fulfilled.
 | As a user, I want to upload images for my listing, so that others can see what they’re renting. | ![screenshot](documentation/testing/USER_STORIES/renter_stories/4/14.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/4/15.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/4/16.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/4/17.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/4/18.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/4/19.png)|
 | As a user, I want to set a rental price per day, so I can earn income from my item. | ![screenshot](documentation/testing/USER_STORIES/renter_stories/5/20.png) |
 | As a renter, I want to choose rental dates, so I can reserve the item I want. | ![screenshot](documentation/testing/USER_STORIES/renter_stories/1/3.png) |
-| As a renter, I want to see my active and past rentals, so I can track my history. | ![screenshot]() ![screenshot]()|
-| As a user, I want to edit my profile info, so that I can update contact details or location. | ![screenshot]()|
-| As a user, I want to reset my password, so that I can recover account access. | ![screenshot]() |
+| As a renter, I want to see my active and past rentals, so I can track my history. | ![screenshot](documentation/testing/USER_STORIES/renter_stories/6/21.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/6/22.png)|
+| As a user, I want to edit my profile info, so that I can update contact details or location. | ![screenshot](documentation/testing/USER_STORIES/renter_stories/7/23.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/7/24.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/7/25.png)|
+| As a user, I want to reset my password, so that I can recover account access. | ![screenshot](documentation/testing/USER_STORIES/renter_stories/8/26.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/8/27.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/8/28.png) ![screenshot](documentation/testing/USER_STORIES/renter_stories/8/29.png)|
 | As a user, I want to browse listings by category, so I can find what I need easily. | ![screenshot](), ![screenshot]() |
 | As a user, I want to view an item detail page, so I can learn more before renting. | ![screenshot](), ![screenshot]() |
 | As a user, I want to sign up and log in, so that I can access my account. | ![screenshot](), ![screenshot](), ![screenshot]() |

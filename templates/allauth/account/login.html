@@ -68,6 +68,13 @@
                         {% trans "Sign In" %}
                     </button>
                 </div>
+
+                <!-- Forgot password link -->
+                <div class="text-center mb-4">
+                    <a href="{% url 'account_reset_password' %}" class="signup-link">
+                        {% trans "Forgot your password?" %}
+                    </a>
+                </div>
                 {% endslot %}
             {% endelement %}
             {% endif %}
