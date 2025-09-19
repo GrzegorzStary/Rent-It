@@ -516,19 +516,16 @@ Each user story has been fulfilled.
 
 | User Story | Screenshot |
 | --- | --- |
-| As an owner, I want to see all rentals for my listed items, so I can prepare item. | ![screenshot](), ![screenshot](), ![screenshot]() |
-| As the site owner, I want to show personalised dashboards, so users can manage their activity easily. | ![screenshot]()|
-| As the site owner, I want to provide a clear and accessible FAQ and Terms & Conditions page, so that users understand their responsibilities and avoid misunderstandings. | ![screenshot]()|
-| As the site owner, I want to delete inappropriate listings, so the site stays safe. | ![screenshot]() |
-| As the site owner, I want to limit duplicate or spam accounts, so that the community remains safe and trustworthy. | ![screenshot](), ![screenshot]() |
-| As the site owner, I want to support a wide variety of item types and categories, so that the platform appeals to diverse users. | ![screenshot]() |
-| As the site owner, I want to ensure secure user authentication, so that only verified users can list or rent items. | ![screenshot]() |
-| As the site owner, I want to moderate listings, so that I can remove inappropriate or fraudulent content from the platform. | ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot]() |
-| As the site owner, I want to collect rental commissions via Stripe, so that I can generate revenue from the platform. | ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot]() |
-| As the site owner, I want to allow users to browse listings without logging in, so that casual visitors are more likely to sign up. | ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot]() |
-| As the site owner, I want to send automatic email confirmations, so users are informed about bookings and payments. | ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot]() |
-| As the site owner, I want to store images on AWS S3, so media loads fast and doesn't slow down the server. | ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot]() |
-| As the site owner, I want to make the site mobile-friendly, so users can browse and book rentals on the go. | ![screenshot](), ![screenshot](), ![screenshot](), ![screenshot]() |
+| As an owner, I want to see all rentals for listed items. | ![screenshot](documentation/testing/USER_STORIES/owner_stories/1/1.png), ![screenshot](documentation/testing/USER_STORIES/owner_stories/1/2.png)|
+| As the site owner, I want to show personalised dashboards, so users can manage their activity easily. | ![screenshot](documentation/testing/USER_STORIES/owner_stories/2/3.png) ![screenshot](documentation/testing/USER_STORIES/owner_stories/2/4.png)|
+| As the site owner, I want to provide a clear and accessible FAQ and Terms & Conditions page, so that users understand their responsibilities and avoid misunderstandings. | ![screenshot](documentation/testing/USER_STORIES/owner_stories/3/5.png) ![screenshot](documentation/testing/USER_STORIES/owner_stories/3/6.png)|
+| As the site owner, I want to delete inappropriate listings, so the site stays safe. | ![screenshot](documentation/testing/USER_STORIES/owner_stories/4/7.png) ![screenshot](documentation/testing/USER_STORIES/owner_stories/4/8.png) ![screenshot](documentation/testing/USER_STORIES/owner_stories/4/9.png) ![screenshot](documentation/testing/USER_STORIES/owner_stories/4/10.png) ![screenshot](documentation/testing/USER_STORIES/owner_stories/4/11.png) ![screenshot](documentation/testing/USER_STORIES/owner_stories/4/12.png) ![screenshot](documentation/testing/USER_STORIES/owner_stories/4/13.png) ![screenshot](documentation/testing/USER_STORIES/owner_stories/4/14.png)|
+| As the site owner, I want to limit duplicate or spam accounts, so that the community remains safe and trustworthy. | ![screenshot](documentation/testing/USER_STORIES/owner_stories/5/15.png), ![screenshot](documentation/testing/USER_STORIES/owner_stories/5/16.png) |
+| As the site owner, I want to ensure secure user authentication, so that only verified users can list or rent items. | ![screenshot](documentation/testing/USER_STORIES/owner_stories/6/17.png) ![screenshot](documentation/testing/USER_STORIES/owner_stories/6/18.png) |
+| As the site owner, I want to moderate accounts, so that I can remove users from the platform. | ![screenshot](documentation/testing/USER_STORIES/owner_stories/7/19.png), ![screenshot](documentation/testing/USER_STORIES/owner_stories/7/20.png), ![screenshot](documentation/testing/USER_STORIES/owner_stories/7/21.png), ![screenshot](documentation/testing/USER_STORIES/owner_stories/7/22.png) ![screenshot](documentation/testing/USER_STORIES/owner_stories/7/23.png) ![screenshot](documentation/testing/USER_STORIES/owner_stories/7/24.png)|
+| As the site owner, I want to collect rental commissions via Stripe, so that I can generate revenue from the platform. | ![screenshot](documentation/testing/USER_STORIES/owner_stories/8/25.png) ![screenshot](documentation/testing/USER_STORIES/owner_stories/8/26.png) ![screenshot](documentation/testing/USER_STORIES/owner_stories/8/27.png)|
+| As the site owner, I want to send automatic email confirmations, so users are informed about bookings and payments. | ![screenshot](documentation/testing/USER_STORIES/renter_stories/12/35.png)|
+| As the site owner, I want to store images on AWS S3, so media loads fast and doesn't slow down the server. | ![screenshot](documentation/testing/USER_STORIES/owner_stories/9/28.png)|
 
 ### Notable Bugs and Problems Encountered
 
