@@ -20,7 +20,7 @@ The more genuine listings we have, the better the future marketplace will be, no
 #### If you’d like to try renting an item on the site, please use the following dummy card details:
 
 - Card Number: 4242 4242 4242 4242
-- Expiry Date: 04/26
+- Expiry Date: 04/27
 - CVC: 424
 - ZIP: 24242
 
